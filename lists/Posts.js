@@ -13,7 +13,7 @@ module.exports = {
     area: { label: "地區", type: Relationship, many: false, ref: 'Area' },
     start_date: { label: "起始日期", type: DateTime },
     end_date: { label: "結束日期", type: DateTime },
-    contact_details: { label: "聯絡人", type: Text},
+    contact_details: { label: "聯絡人", type: Relationship, many: false, ref: 'Contact_detail' },
     links: { label: "相關連結", type: Text},
     memberships: { label: "memberships", type: Relationship, many: false, ref: 'Memberships' },
     //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},

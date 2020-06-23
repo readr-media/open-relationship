@@ -11,7 +11,7 @@ module.exports = {
     classification: { label: "classification", type: Text},
     parent: { label: "parent", type: Relationship, many: false, ref: 'Area' },
     geometry: { label: "geometry", type: Text},
-    memberships: { label: "memberships", type: Relationship, many: false, ref: 'Memberships' },
+    memberships: { label: "memberships", type: Relationship, many: false, ref: 'Membership' },
     organizations: { label: "組織", type: Relationship, many: true, ref: 'Organization' },
     posts: { label: "posts", type: Text},
     children: { label: "children", type: Relationship, many: true, ref: 'Area' },

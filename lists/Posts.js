@@ -15,7 +15,7 @@ module.exports = {
     end_date: { label: "結束日期", type: DateTime },
     contact_details: { label: "聯絡人", type: Relationship, many: false, ref: 'Contact_detail' },
     links: { label: "相關連結", type: Text},
-    memberships: { label: "memberships", type: Relationship, many: false, ref: 'Memberships' },
+    memberships: { label: "memberships", type: Relationship, many: false, ref: 'Membership' },
     //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
   },
   /*

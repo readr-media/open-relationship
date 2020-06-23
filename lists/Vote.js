@@ -12,7 +12,7 @@ module.exports = {
     group: { label: "群組", type: Text},
     role: { label: "role", type: Text},
     weight: { label: "weight", type: Text},
-    pair: { label: "搭檔", type: Relationship, many: false, ref: 'People' },
+    pair: { label: "搭檔", type: Relationship, many: false, ref: 'Ppl' },
     //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
   },
   /*

@@ -1,12 +1,12 @@
 const { Keystone } = require('@keystonejs/keystone');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
-//const { Select, Text, Checkbox, Password, Relationship, Integer, DateTime, Float } = require('@keystonejs/fields');
+const { Select, Text, Checkbox, Password, Relationship, Integer, DateTime, Float } = require('@keystonejs/fields');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { atTracking } = require('@keystonejs/list-plugins');
 const initialiseData = require('./initial-data');
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
-//const { access } = require('./lists/Permission.js');
+const { access } = require('./lists/Permission.js');
 const PROJECT_NAME = "open relationship";
 const keystone = new Keystone({
   name: PROJECT_NAME,

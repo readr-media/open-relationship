@@ -30,12 +30,11 @@ keystone.createList('User', {
   plural: "使用者",
   fields: {
     name: { label: "姓名", type: Text, isRequired: true },
-    phone: { label: "電話", type: Text, isRequired: true },
     email: {
       type: Text,
       isUnique: true,
     },
-    role: { type: Select, options: 'admin, sales, executor, planner' },
+    role: { type: Select, options: 'admin, user' },
     password: {
       type: Password,
     },

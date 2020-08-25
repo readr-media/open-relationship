@@ -3,10 +3,10 @@ const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/f
 const { atTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  label: "投票",
-  plural: "投票",
+  label: "選舉",
+  plural: "選舉",
   fields: {
-    vote_event: { label: "投票活動", type: Text, isRequired: true},
+    vote_event: { label: "選舉活動", type: Text, isRequired: true},
     voter: { label: "voter", type: Text},
     option: { label: "選項", type: Text},
     group: { label: "群組", type: Text},

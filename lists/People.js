@@ -7,9 +7,9 @@ module.exports = {
   plural: "人物",
   fields: {
     name: { label: "姓名", type: Text, isRequired: true},
-    other_name: { label: "其他名稱", type: Text},
+    alternative_name: { label: "其他名字", type: Text},
+    former_name: { label: "其他名稱", type: Text},
     identifiers: { label: "identifiers", type: Text},
-    given_name: { label: "given_name", type: Text},
     email: { label: "email", type: Text},
     gender: { label: "性別", type: Text},
     birth_date: { label: "生日", type: DateTime },

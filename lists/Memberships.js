@@ -3,8 +3,8 @@ const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/f
 const { atTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  label: "成員",
-  plural: "成員",
+  //label: "成員",
+  //plural: "成員",
   fields: {
     label: { label: "名稱", type: Text, isRequired: true},
     role: { label: "職稱", type: Text},
@@ -15,7 +15,7 @@ module.exports = {
     area: { label: "地區", type: Relationship, many: false, ref: 'Area' },
     start_date: { label: "起始日期", type: DateTime },
     end_date: { label: "結束日期", type: DateTime },
-    contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
+    //contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
     links: { label: "相關連結", type: Text},
     //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
   },

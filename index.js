@@ -1,60 +1,69 @@
 const { Keystone } = require('@keystonejs/keystone');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
-const { Select, Text, Checkbox, Password, Relationship, Integer, DateTime, Float } = require('@keystonejs/fields');
+const { Text, Checkbox, Password } = require('@keystonejs/fields');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
-const { atTracking } = require('@keystonejs/list-plugins');
 const initialiseData = require('./initial-data');
+
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
-const { access } = require('./lists/Permission.js');
-const PROJECT_NAME = "open relationship";
+const PROJECT_NAME = 'openrelation';
+const adapterConfig = { mongoUri: 'mongodb://localhost/openrelation' };
+
+
 const keystone = new Keystone({
-  name: PROJECT_NAME,
-  adapter: new Adapter(),
-  onConnect: initialiseData,
+  adapter: new Adapter(adapterConfig),
+  onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData,
 });
-/*
+
+// Access control functions
+const userIsAdmin = ({ authentication: { item: user } }) => Boolean(user && user.isAdmin);
+const userOwnsItem = ({ authentication: { item: user } }) => {
+  if (!user) {
+    return false;
+  }
+
+  // Instead of a boolean, you can return a GraphQL query:
+  // https://www.keystonejs.com/api/access-control#graphqlwhere
+  return { id: user.id };
+};
+
 const userIsAdminOrOwner = auth => {
   const isAdmin = access.userIsAdmin(auth);
   const isOwner = access.userOwnsItem(auth);
   return isAdmin ? isAdmin : isOwner;
 };
-*/
-const status_options = [
-  { value: 'active', label: "active" },
-  { value: 'inactive', label: "inactive" },
-];
-const everyone = ({ authentication: { item: user } }) => Boolean(user);
+
+const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
+
 keystone.createList('User', {
-  label: "使用者",
-  plural: "使用者",
   fields: {
-    name: { label: "姓名", type: Text, isRequired: true },
+    name: { type: Text },
     email: {
       type: Text,
       isUnique: true,
     },
-    role: { type: Select, options: 'admin, user' },
+    isAdmin: {
+      type: Checkbox,
+      // Field-level access controls
+      // Here, we set more restrictive field access so a non-admin cannot make themselves admin.
+      access: {
+        update: access.userIsAdmin,
+      },
+    },
     password: {
       type: Password,
     },
-    user_status: { label: "狀態", type: Select, options: status_options, isRequired: true},
   },
+  // List-level access controls
   access: {
-    read: access.userIsAdmin,
-    update: access.userIsAdmin,
+    read: access.userIsAdminOrOwner,
+    update: access.userIsAdminOrOwner,
     create: access.userIsAdmin,
     delete: access.userIsAdmin,
     auth: true,
   },
-  plugins: [
-    atTracking({
-      createdAtField: "createAt",
-      updatedAtField: "updateAt",
-      format: "YYYY/MM/DD h:mm A",
-    }),
-  ],
 });
+
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
   list: 'User',
@@ -65,37 +74,32 @@ module.exports = {
   apps: [
     new GraphQLApp(),
     new AdminUIApp({
+      name: PROJECT_NAME,
       enableDefaultRoute: true,
-	  authStrategy,
+      authStrategy,
     }),
   ],
 };
-//models
+
 const AreaSchema = require('./lists/Area.js');
-const MembershipSchema = require('./lists/Memberships.js');
-const PositionSchema = require('./lists/Posts.js');
 const PeopleSchema = require('./lists/People.js');
+const OrganizationSchema = require('./lists/Organizations.js');
 const People_relationSchema = require('./lists/People_relation.js');
 const People_organizationSchema = require('./lists/People_relation.js');
 const Organization_relationSchema = require('./lists/Organization_relation.js');
-const CountSchema = require('./lists/Count.js');
 const EventSchema = require('./lists/Events.js');
-const VoteSchema = require('./lists/Vote.js');
-const Vote_eventSchema = require('./lists/Vote_event.js');
-const Contact_detailSchema = require('./lists/Contact_detail.js');
+const PositionSchema = require('./lists/Posts.js');
+const MembershipSchema = require('./lists/Memberships.js');
+const CountSchema = require('./lists/Count.js');
 const MotionSchema = require('./lists/Motions.js');
-const OrganizationSchema = require('./lists/Organizations.js');
 keystone.createList('Area', AreaSchema);
-keystone.createList('Membership', MembershipSchema);
-keystone.createList('Post', PositionSchema);
 keystone.createList('ppl', PeopleSchema);
+keystone.createList('Organization', OrganizationSchema);
 keystone.createList('People_relation', People_relationSchema);
 keystone.createList('People_organization', People_organizationSchema);
 keystone.createList('Organization_relation', Organization_relationSchema);
-keystone.createList('Count', CountSchema);
 keystone.createList('Event', EventSchema);
-keystone.createList('Vote', VoteSchema);
-keystone.createList('Vote_event', Vote_eventSchema);
-keystone.createList('Contact_detail', Contact_detailSchema);
+keystone.createList('Post', PositionSchema);
+keystone.createList('Membership', MembershipSchema);
+keystone.createList('Count', CountSchema);
 keystone.createList('Motion', MotionSchema);
-keystone.createList('Organization', OrganizationSchema);

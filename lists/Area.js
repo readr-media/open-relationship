@@ -3,15 +3,15 @@ const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/f
 const { atTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  label: "地區",
-  plural: "地區",
+  //label: "地區",
+  //plural: "地區",
   fields: {
     name: { label: "名稱", type: Text, isRequired: true},
     identifiers: { label: "identifiers", type: Text},
     classification: { label: "classification", type: Text},
     parent: { label: "parent", type: Relationship, many: false, ref: 'Area' },
     geometry: { label: "geometry", type: Text},
-    memberships: { label: "memberships", type: Relationship, many: false, ref: 'Membership' },
+    //memberships: { label: "memberships", type: Relationship, many: false, ref: 'Membership' },
     organizations: { label: "組織", type: Relationship, many: true, ref: 'Organization' },
     posts: { label: "posts", type: Text},
     children: { label: "children", type: Relationship, many: true, ref: 'Area' },

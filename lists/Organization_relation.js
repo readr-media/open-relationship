@@ -3,8 +3,8 @@ const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/f
 const { atTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  label: "組織（企業）依附關係",
-  plural: "組織（企業）依附關係",
+  //label: "組織（企業）依附關係",
+  //plural: "組織（企業）依附關係",
   fields: {
     people1: { label: "組織", type: Relationship, many: false, ref: 'Organization' },
     people2: { label: "組織", type: Relationship, many: false, ref: 'Organization' },

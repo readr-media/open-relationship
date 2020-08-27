@@ -3,8 +3,8 @@ const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/f
 const { atTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  label: "事件",
-  plural: "事件",
+  //label: "事件",
+  //plural: "事件",
   fields: {
     name: { label: "名稱", type: Text, isRequired: true},
     description: { label: "敘述", type: Text},

@@ -3,8 +3,8 @@ const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/f
 const { atTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  label: "人物",
-  plural: "人物",
+  //label: "人物",
+  //plural: "人物",
   fields: {
     name: { label: "姓名", type: Text, isRequired: true},
     alternative_name: { label: "其他名字", type: Text},
@@ -18,12 +18,12 @@ module.exports = {
     summary: { label: "生平綱要", type: Text},
     biography: { label: "生平", type: Text},
     national_identity: { label: "national_identity", type: Text},
-    contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
+    //contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
     links: { label: "相關連結", type: Text},
-    memberships: { label: "memberships", type: Relationship, many: true, ref: 'Membership' },
-    motions: { label: "行動", type: Relationship, many: true, ref: 'Motion' },
-    speeches: { label: "speeches", type: Text},
-    votes: { label: "選舉", type: Relationship, many: true, ref: 'Vote' },
+    //memberships: { label: "memberships", type: Relationship, many: true, ref: 'Membership' },
+    //motions: { label: "行動", type: Relationship, many: true, ref: 'Motion' },
+    //speeches: { label: "speeches", type: Text},
+    //votes: { label: "選舉", type: Relationship, many: true, ref: 'Vote' },
     //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
   },
   /*

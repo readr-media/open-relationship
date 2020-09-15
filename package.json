@@ -12,7 +12,8 @@
     "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
     "build": "cross-env NODE_ENV=production keystone build",
     "start": "cross-env NODE_ENV=production keystone start",
-    "create-tables": "cross-env keystone create-tables"
+    "create-tables": "cross-env keystone create-tables",
+    "migrate": "cross-env CREATE_TABLES=true keystone upgrade-relationships --migration"
   },
   "repository": "https://github.com/keystonejs/keystone/tree/master/packages/create-keystone-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone",

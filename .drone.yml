@@ -35,7 +35,7 @@ pipeline:
       # - cp ../configs/openwarehouse/dev/gcskeyfile.json ./configs/gcskeyfile.json
     when:
       event: [push]
-      branch: [dev]
+      branch: [dev, master]
 
   buildCmsThenPublish:
     image: plugins/gcr

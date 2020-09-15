@@ -6,7 +6,7 @@ const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const initialiseData = require('./initial-data');
 
 const { KnexAdapter: Adapter } = require('@keystonejs/adapter-knex');
-const { app, database } = require('./configs/config')
+const { app, database, session } = require('./configs/config')
 
 const PROJECT_NAME = app.applicationName;
 const adapterConfig = {
@@ -20,6 +20,12 @@ const adapterConfig = {
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
   onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData,
+  cookieSecret: session.cookieSecret,
+  cookie: {
+    // If it's explicitly configured to use insecure cookies, overwrite the default setting.
+    // Anything else will be fallback to the default of true in production.
+    secure: session.secure === false ? false : process.env.NODE_ENV === 'production',
+  },
 });
 
 // Access control functions

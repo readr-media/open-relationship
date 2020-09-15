@@ -5,10 +5,17 @@ const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const initialiseData = require('./initial-data');
 
-const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
-const PROJECT_NAME = 'openrelation';
-const adapterConfig = { mongoUri: 'mongodb://localhost/openrelation' };
+const { KnexAdapter: Adapter } = require('@keystonejs/adapter-knex');
+const { app, database } = require('./configs/config')
 
+const PROJECT_NAME = app.applicationName;
+const adapterConfig = {
+  dropDatabase: app.dropDatabase,
+  knexOptions: {
+    client: 'postgres',
+    connection: `postgresql://${database.acc}:${database.pass}@${database.host}/${database.db}`,
+  }
+};
 
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),

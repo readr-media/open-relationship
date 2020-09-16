@@ -94,19 +94,21 @@ module.exports = {
   ],
 };
 
-const AreaSchema = require('./lists/Area.js');
-const PeopleSchema = require('./lists/People.js');
-const OrganizationSchema = require('./lists/Organizations.js');
-const People_relationSchema = require('./lists/People_relation.js');
-const People_organizationSchema = require('./lists/People_relation.js');
-const Organization_relationSchema = require('./lists/Organization_relation.js');
-const EventSchema = require('./lists/Events.js');
-const PositionSchema = require('./lists/Posts.js');
-const MembershipSchema = require('./lists/Memberships.js');
-const CountSchema = require('./lists/Count.js');
-const MotionSchema = require('./lists/Motions.js');
+const AreaSchema = require('./lists/Area');
+const PeopleSchema = require('./lists/People');
+const ContactDetailSchema = require('./lists/Contact_detail');
+const OrganizationSchema = require('./lists/Organizations');
+const People_relationSchema = require('./lists/People_relation');
+const People_organizationSchema = require('./lists/People_relation');
+const Organization_relationSchema = require('./lists/Organization_relation');
+const EventSchema = require('./lists/Events');
+const PositionSchema = require('./lists/Posts');
+const MembershipSchema = require('./lists/Memberships');
+const CountSchema = require('./lists/Count');
+const MotionSchema = require('./lists/Motions');
 keystone.createList('Area', AreaSchema);
-keystone.createList('ppl', PeopleSchema);
+keystone.createList('People', PeopleSchema);
+keystone.createList('Contact_detail', ContactDetailSchema);
 keystone.createList('Organization', OrganizationSchema);
 keystone.createList('People_relation', People_relationSchema);
 keystone.createList('People_organization', People_organizationSchema);

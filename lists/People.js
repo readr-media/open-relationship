@@ -1,45 +1,32 @@
 //const { access } = require('./Permission.js');
-const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/fields');
-const { atTracking } = require('@keystonejs/list-plugins');
+const { Select, Text, Relationship, DateTime, Integer, Virtual } = require('@keystonejs/fields');
+const { atTracking, byTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
-  //label: "人物",
-  //plural: "人物",
   fields: {
-    name: { label: "姓名", type: Text, isRequired: true},
-    alternative_name: { label: "其他名字", type: Text},
-    former_name: { label: "其他名稱", type: Text},
-    identifiers: { label: "identifiers", type: Text},
-    email: { label: "email", type: Text},
-    gender: { label: "性別", type: Text},
-    birth_date: { label: "生日", type: DateTime },
-    death_date: { label: "death_date", type: DateTime },
-    image: { label: "照片網址", type: Text},
-    summary: { label: "生平綱要", type: Text},
-    biography: { label: "生平", type: Text},
-    national_identity: { label: "national_identity", type: Text},
-    //contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
-    links: { label: "相關連結", type: Text},
-    //memberships: { label: "memberships", type: Relationship, many: true, ref: 'Membership' },
-    //motions: { label: "行動", type: Relationship, many: true, ref: 'Motion' },
-    //speeches: { label: "speeches", type: Text},
-    //votes: { label: "選舉", type: Relationship, many: true, ref: 'Vote' },
-    //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
+    name: { label: "姓名", type: Text, isRequired: true },
+    alternative: { label: "別名", type: Text },
+    other_names: { label: "舊名", type: Text },
+    identifiers: { label: "ID", type: Text },
+    email: { label: "電子信箱", type: Text },
+    gender: { label: "生理性別", type: Text },
+    birth_date: { label: "出生日期", type: DateTime },
+    death_date: { label: "死亡日期", type: DateTime },
+    image: { label: "大頭照", type: Text },
+    summary: { label: "一句話描寫這個人", type: Text },
+    biography: { label: "詳細生平", type: Text },
+    national_identity: { label: "國籍", type: Text },
+    contact_details: { label: "聯絡方式", type: Relationship, many: false, ref: 'Contact_detail' },
+    links: { label: "相關連結", type: Text },
+    source: { label: "來源", type: Text },
+    mapping: {
+      type: Virtual,
+      resolver: item => `${item.name} ${item.birth_date}`,
+    }
   },
-  /*
-  access: {
-    read: access.everyone,
-    update: access.userIsExecutor,
-    create: access.userIsExecutor,
-    delete: access.userIsAdmin,
-    auth: true,
-  },
-  */
   plugins: [
-	atTracking({
-	  createdAtField: "createAt",
-	  updatedAtField: "updateAt",
-	  format: "YYYY/MM/DD h:mm A",
-	}),
+    atTracking(),
+    byTracking(),
   ],
+  plural: "Peoples"
 };

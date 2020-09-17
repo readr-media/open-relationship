@@ -1,4 +1,4 @@
-const { Text, DateTime, Virtual } = require('@keystonejs/fields');
+const { Text, Virtual } = require('@keystonejs/fields');
 const { atTracking, byTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {

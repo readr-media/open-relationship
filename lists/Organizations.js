@@ -8,8 +8,6 @@ module.exports = {
     other_names: { label: "組織舊名", type: Text },
     identifiers: { label: "統一編號", type: Text },
     classification: { label: "組織類型", type: Text },
-    parent: { label: "上層組織", type: Relationship, many: false, ref: 'Organization' },
-    children: { label: "附屬組織", type: Relationship, many: true, ref: 'Organization' },
     area: { label: "組織地區", type: Text },
     abstract: { label: "一句話描述該組織", type: Text },
     description: { label: "組織詳細介紹", type: Text },

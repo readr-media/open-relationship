@@ -18,15 +18,10 @@ module.exports = {
     links: { label: "網站", type: Text },
     address: { label: "組織稅籍登記地址", type: Text },
     source: { label: "來源", type: Text },
-    mapping: {
-      label: "組織名稱+地址",
-      type: Virtual,
-      resolver: item => `${item.name}+${item.address}`,
-    }
   },
   plugins: [
     atTracking(),
     byTracking(),
   ],
-  labelField: "mapping",
+  labelResolver: item => `${item.name}+${item.address}`,
 };

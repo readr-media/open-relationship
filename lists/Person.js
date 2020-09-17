@@ -18,15 +18,11 @@ module.exports = {
     contact_details: { label: "聯絡方式", type: Text, isMultiline: true },
     links: { label: "網站", type: Text },
     source: { label: "資料來源", type: Text },
-    mapping: {
-      label: "姓名+出生日期",
-      type: Virtual,
-      resolver: item => `${item.name}+${item.birth_date}`,
-    }
   },
   plugins: [
     atTracking(),
     byTracking(),
   ],
-  labelField: "mapping",
+  labelResolver: item => `${item.name}+${item.birth_date}`,
+  plural: "Persons",
 };

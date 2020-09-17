@@ -96,7 +96,7 @@ module.exports = {
 
 const AreaSchema = require('./lists/Area');
 const PeopleSchema = require('./lists/People');
-const ContactDetailSchema = require('./lists/Contact_detail');
+// const ContactDetailSchema = require('./lists/Contact_detail');
 const OrganizationSchema = require('./lists/Organizations');
 const People_relationSchema = require('./lists/People_relation');
 const People_organizationSchema = require('./lists/People_relation');
@@ -108,7 +108,7 @@ const CountSchema = require('./lists/Count');
 const MotionSchema = require('./lists/Motions');
 keystone.createList('Area', AreaSchema);
 keystone.createList('People', PeopleSchema);
-keystone.createList('Contact_detail', ContactDetailSchema);
+// keystone.createList('Contact_detail', ContactDetailSchema);
 keystone.createList('Organization', OrganizationSchema);
 keystone.createList('People_relation', People_relationSchema);
 keystone.createList('People_organization', People_organizationSchema);

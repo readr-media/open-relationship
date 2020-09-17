@@ -1,5 +1,4 @@
-//const { access } = require('./Permission.js');
-const { Select, Text, Relationship, DateTime, Integer, Virtual } = require('@keystonejs/fields');
+const { Text, DateTime, Virtual } = require('@keystonejs/fields');
 const { atTracking, byTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
@@ -14,19 +13,21 @@ module.exports = {
     death_date: { label: "死亡日期", type: DateTime },
     image: { label: "大頭照", type: Text },
     summary: { label: "一句話描寫這個人", type: Text },
-    biography: { label: "詳細生平", type: Text },
+    biography: { label: "詳細生平", type: Text, isMultiline: true },
     national_identity: { label: "國籍", type: Text },
-    contact_details: { label: "聯絡方式", type: Relationship, many: false, ref: 'Contact_detail' },
-    links: { label: "相關連結", type: Text },
+    contact_details: { label: "聯絡方式", type: Text, isMultiline: true },
+    links: { label: "網站", type: Text },
     source: { label: "來源", type: Text },
     mapping: {
+      label: "姓名+出生日期",
       type: Virtual,
-      resolver: item => `${item.name} ${item.birth_date}`,
+      resolver: item => `${item.name}+${item.birth_date}`,
     }
   },
   plugins: [
     atTracking(),
     byTracking(),
   ],
-  plural: "Peoples"
+  plural: "Peoples",
+  labelField: "mapping",
 };

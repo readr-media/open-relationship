@@ -8,7 +8,7 @@ module.exports = {
   fields: {
     label: { label: "名稱", type: Text, isRequired: true },
     role: { label: "職稱", type: Text },
-    member: { label: "成員", type: Relationship, many: false, ref: 'People' },
+    member: { label: "成員", type: Relationship, many: false, ref: 'Person' },
     organization: { label: "組織", type: Relationship, many: false, ref: 'Organization' },
     posts: { label: "職稱", type: Relationship, many: false, ref: 'Post' },
     on_behalf_of_id: { label: "on_behalf_of_id", type: Text },

@@ -107,7 +107,7 @@ const MembershipSchema = require('./lists/Memberships');
 const CountSchema = require('./lists/Count');
 const MotionSchema = require('./lists/Motions');
 keystone.createList('Area', AreaSchema);
-keystone.createList('People', PersonSchema);
+keystone.createList('Person', PersonSchema);
 // keystone.createList('Contact_detail', ContactDetailSchema);
 keystone.createList('Organization', OrganizationSchema);
 keystone.createList('People_relation', Person_relationSchema);

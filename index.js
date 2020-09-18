@@ -100,6 +100,7 @@ module.exports = {
       buildDir: "dist",
       modules: ["bootstrap-vue/nuxt"], //equal to nuxt.config.js
       telemetry: false,
+      plugins: [{ src: "~/plugins/vue-tagsinput", mode: "client" }],
     }),
   ],
 };

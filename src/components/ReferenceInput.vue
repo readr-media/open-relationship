@@ -8,7 +8,8 @@
       <VoerroTagsInput
         element-id="tags"
         v-model="selectedTags"
-        :typeahead="true"
+        typeahead="true"
+        placeholder="新增關係"
       />
     </span>
   </div>

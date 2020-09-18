@@ -1,10 +1,10 @@
-const { Text, Virtual, Select } = require('@keystonejs/fields');
-const { atTracking, byTracking } = require('@keystonejs/list-plugins');
+const { Text, Select, CalendarDay } = require("@keystonejs/fields");
+const { atTracking, byTracking } = require("@keystonejs/list-plugins");
 
 const gender_options = [
-  { value: 'F', label: "女" },
-  { value: 'M', label: "男" },
-  { value: 'NA', label: " " },
+  { value: "F", label: "女" },
+  { value: "M", label: "男" },
+  { value: "NA", label: " " },
 ];
 
 module.exports = {
@@ -14,9 +14,15 @@ module.exports = {
     other_names: { label: "舊名", type: Text },
     identifiers: { label: "ID", type: Text },
     email: { label: "電子信箱", type: Text },
-    gender: { label: "生理性別", type: Select, options: gender_options, default: 'NA' },
-    birth_date: { label: "出生日期", type: Text },
-    death_date: { label: "死亡日期", type: Text },
+    gender: {
+      label: "生理性別",
+      type: Select,
+      options: gender_options,
+      default: "NA",
+      dataType: "string",
+    },
+    birth_date: { label: "出生日期", type: CalendarDay },
+    death_date: { label: "死亡日期", type: CalendarDay },
     image: { label: "大頭照", type: Text },
     summary: { label: "一句話描寫這個人", type: Text },
     biography: { label: "詳細生平", type: Text, isMultiline: true },
@@ -25,10 +31,7 @@ module.exports = {
     links: { label: "網站", type: Text },
     source: { label: "資料來源", type: Text },
   },
-  plugins: [
-    atTracking(),
-    byTracking(),
-  ],
-  labelResolver: item => `${item.name}+${item.birth_date}`,
+  plugins: [atTracking(), byTracking()],
+  labelResolver: (item) => `${item.name}+${item.birth_date}`,
   plural: "Persons",
 };

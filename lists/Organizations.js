@@ -1,14 +1,14 @@
-const { Text, Relationship, Select, Virtual } = require('@keystonejs/fields');
-const { atTracking, byTracking } = require('@keystonejs/list-plugins');
+const { Text, Relationship, Select, Virtual } = require("@keystonejs/fields");
+const { atTracking, byTracking } = require("@keystonejs/list-plugins");
 
 const classification_options = [
-  { value: 'company', label: "公司企業" },
-  { value: 'party', label: "政黨" },
-  { value: 'gov', label: "政府" },
-  { value: 'ngo', label: "非政府組織" },
-  { value: 'npo', label: "非營利組織" },
-  { value: 'community', label: "社會團體" },
-  { value: 'other', label: "其他" },
+  { value: "company", label: "公司企業" },
+  { value: "party", label: "政黨" },
+  { value: "gov", label: "政府" },
+  { value: "ngo", label: "非政府組織" },
+  { value: "npo", label: "非營利組織" },
+  { value: "community", label: "社會團體" },
+  { value: "other", label: "其他" },
 ];
 
 module.exports = {
@@ -17,7 +17,12 @@ module.exports = {
     alternative: { label: "組織別名", type: Text },
     other_names: { label: "組織舊名", type: Text },
     identifiers: { label: "統一編號", type: Text },
-    classification: { label: "組織類型", type: Select, options: classification_options },
+    classification: {
+      label: "組織類型",
+      type: Select,
+      options: classification_options,
+      dataType: "string",
+    },
     area: { label: "組織地區", type: Text },
     abstract: { label: "一句話描述該組織", type: Text },
     description: { label: "組織詳細介紹", type: Text },
@@ -29,9 +34,6 @@ module.exports = {
     address: { label: "組織稅籍登記地址", type: Text },
     source: { label: "來源", type: Text },
   },
-  plugins: [
-    atTracking(),
-    byTracking(),
-  ],
-  labelResolver: item => `${item.name}+${item.address}`,
+  plugins: [atTracking(), byTracking()],
+  labelResolver: (item) => `${item.name}+${item.address}`,
 };

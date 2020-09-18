@@ -1,4 +1,4 @@
-const { Text, Select } = require("@keystonejs/fields");
+const { Text, Select, CalendarDay } = require("@keystonejs/fields");
 const { atTracking, byTracking } = require("@keystonejs/list-plugins");
 
 const classification_options = [

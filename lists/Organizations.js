@@ -7,7 +7,6 @@ const classification_options = [
   { value: 'gov', label: "政府" },
   { value: 'ngo', label: "非政府組織" },
   { value: 'npo', label: "非營利組織" },
-  { value: 'npo', label: "非營利組織" },
   { value: 'community', label: "社會團體" },
   { value: 'other', label: "其他" },
 ];

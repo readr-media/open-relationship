@@ -1,0 +1,17 @@
+#__nuxt {
+  width: 100%;
+}
+
+.section-title {
+  width: 800px;
+  height: 29px;
+  font-family: PingFangTC;
+  font-size: 21px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 50px auto 30px;
+}

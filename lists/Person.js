@@ -1,4 +1,4 @@
-const { Text, Virtual } = require('@keystonejs/fields');
+const { Text, Virtual, Select } = require('@keystonejs/fields');
 const { atTracking, byTracking } = require('@keystonejs/list-plugins');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     other_names: { label: "舊名", type: Text },
     identifiers: { label: "ID", type: Text },
     email: { label: "電子信箱", type: Text },
-    gender: { label: "生理性別", type: Text },
+    gender: { label: "生理性別", type: Select, options: 'F, M, NA', default: 'NA' },
     birth_date: { label: "出生日期", type: Text },
     death_date: { label: "死亡日期", type: Text },
     image: { label: "大頭照", type: Text },

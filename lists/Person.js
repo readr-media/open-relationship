@@ -1,5 +1,11 @@
-const { Text, CalendarDay } = require('@keystonejs/fields');
-const { atTracking, byTracking } = require('@keystonejs/list-plugins');
+const { Text, Select, CalendarDay } = require("@keystonejs/fields");
+const { atTracking, byTracking } = require("@keystonejs/list-plugins");
+
+const gender_options = [
+  { value: "F", label: "女" },
+  { value: "M", label: "男" },
+  { value: "NA", label: " " },
+];
 
 module.exports = {
   fields: {
@@ -8,7 +14,13 @@ module.exports = {
     other_names: { label: "舊名", type: Text },
     identifiers: { label: "ID", type: Text },
     email: { label: "電子信箱", type: Text },
-    gender: { label: "生理性別", type: Text },
+    gender: {
+      label: "生理性別",
+      type: Select,
+      options: gender_options,
+      default: "NA",
+      dataType: "string",
+    },
     birth_date: { label: "出生日期", type: CalendarDay },
     death_date: { label: "死亡日期", type: CalendarDay },
     image: { label: "大頭照", type: Text },
@@ -19,10 +31,7 @@ module.exports = {
     links: { label: "網站", type: Text },
     source: { label: "資料來源", type: Text },
   },
-  plugins: [
-    atTracking(),
-    byTracking(),
-  ],
-  labelResolver: item => `${item.name}+${item.birth_date}`,
+  plugins: [atTracking(), byTracking()],
+  labelResolver: (item) => `${item.name}+${item.birth_date}`,
   plural: "Persons",
 };

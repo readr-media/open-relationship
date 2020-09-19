@@ -56,6 +56,7 @@ export default {
 <style lang="scss" scoped>
 #Relation {
   height: 430px;
+  width: 100%;
   background-color: #102c34;
 
   display: flex;

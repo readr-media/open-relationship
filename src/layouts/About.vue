@@ -18,6 +18,7 @@ export default {};
 <style lang="scss" scoped>
 #About {
   height: 330px;
+  width: 100%;
   background-color: #ebebeb;
 
   display: flex;

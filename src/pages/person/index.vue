@@ -1,32 +1,16 @@
 <template>
-  <div class="pplPage container main-container">
-    <h1>新增人物資料表單</h1>
-    <p>
-      這是新增台灣政商人物資料的表單 歡迎大家花費 5-10 分鐘的時間幫忙填寫資料
-      如果有任何問題 歡迎來信 readr@readr.tw 或是私訊粉專
-      https://www.facebook.com/readr.tw/ 我們會有專人為你解答 謝謝你的參與！
-    </p>
+  <div id="Page-Person">
+    <FormHero :title="hero.title" :content="hero.content" type="create" />
+    <div class="fieldContainer">
+      ＊為必填欄位
+      <form action v-on:submit.prevent="checkForm">
+        <FieldBlock
+          v-for="field in character"
+          :key="field.label"
+          :field="field"
+        />
 
-    <form action v-on:submit.prevent="checkForm">
-      <div v-for="field in character" :key="field.label" class="fieldBlock">
-        <h5>{{ field.label }}</h5>
-        <p>{{ field.info }}</p>
-
-        <div v-if="field.inputStatus.type == 'radio'" class="inputWrapper">
-          <span v-for="radio in field.inputStatus.multi" :key="radio.label">
-            <input
-              type="radio"
-              :value="radio.value"
-              v-model="field.value"
-            /><label>{{ radio.label }}</label>
-          </span>
-        </div>
-
-        <div v-else class="inputWrapper">
-          <input :type="field.inputStatus.type" v-model="field.value" />
-        </div>
-      </div>
-
+        <!-- 
       <div class="fieldBlock">
         <h5>協作者的資料與心得</h5>
         <p>
@@ -49,20 +33,37 @@
           rows="10"
           v-model="editor.feedback"
         ></textarea>
-      </div>
-      <b-button type="submit">送出</b-button>
-    </form>
+      </div> -->
+        <h5>協作者的資料與心得</h5>
+        <p>
+          以下欄位皆選填，請自由填答，
+          我們會拿你的資料做什麼、你有什麼好處、我們不會亂來
+          blablablabinbinbapsushinomidorikurasushisushiro
+        </p>
+        <CollaborateFieldBlock collaborate="collaborate" />
+        <b-button type="submit">送出</b-button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import FormHero from "../../components/FormHero";
+import FieldBlock from "../../components/FieldBlock";
+import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
+
 import { graphql } from "../../../graphQL/graphql.util";
 import { ADD_PERSON } from "../../../graphQL/graphql.types";
 
 export default {
   data() {
     return {
+      hero: {
+        title: "新增人物資料表單",
+        content: "台灣政商人物資料",
+        type: "create",
+      },
       character: {
         name: {
           label: "人物的姓名",
@@ -161,7 +162,7 @@ export default {
           inputStatus: { type: "text" },
         },
       },
-      editor: {
+      collaborate: {
         name: "",
         email: "",
         feedback: "",
@@ -197,8 +198,8 @@ export default {
         identifiers: other_names.identifiers,
         email: email.value,
         gender: gender.value,
-        birth_date: birth_date.value.length ? birth_date.value.length : null,
-        death_date: death_date.value.length ? eath_date.value : null,
+        birth_date: birth_date.value.length ? birth_date.value : null,
+        death_date: death_date.value.length ? death_date.value : null,
         image: image.value,
         summary: summary.value,
         biography: biography.value,
@@ -213,14 +214,22 @@ export default {
       this.$router.push("/");
     },
   },
+
+  components: {
+    FormHero,
+    FieldBlock,
+    CollaborateFieldBlock,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.fieldBlock {
-  padding: 20px;
-  margin: 29px auto;
-  border: 1px solid #756060;
-  box-sizing: border-box;
+#Page-Person {
+  background-color: #ebebeb;
+}
+
+.fieldContainer {
+  width: 800px;
+  margin: 50px auto 0;
 }
 </style>

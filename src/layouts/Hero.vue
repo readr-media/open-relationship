@@ -1,7 +1,10 @@
 <template>
   <div id="Hero">
     <div id="Hero-background">
-      <img src="../images/hands.png" alt="" srcset="" />
+      <picture>
+        <source srcset="../images/bgSmall.png" media="(max-width:530px)" />
+        <img src="../images/hands.png" alt="" srcset="" />
+      </picture>
     </div>
     <div id="Hero-rectangle">
       <div id="Hero-rectangle-title">
@@ -22,74 +25,98 @@
 </template>
 
 <script>
-import heroBackground from "../images/hands.png";
 export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
 #Hero {
   width: 100%;
-  height: 675px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-}
-#Hero-background {
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: white;
-  img {
+
+  #Hero-background {
+    z-index: 0;
+    // position: absolute;
+    // top: 0;
     height: 100%;
+    width: 100%;
+    background: white;
+    img {
+      width: 100%;
+    }
   }
-}
 
-#Hero-rectangle {
-  z-index: 1;
-  width: 700px;
-  height: 480px;
-  background-color: #102c34;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  #Hero-rectangle-title {
+  #Hero-rectangle {
+    z-index: 1;
     width: 700px;
-    height: 56px;
-    font-family: PingFangTC;
-    font-size: 40px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
-    .text-style-1 {
-      color: #ed8c4a;
+    height: 480px;
+    background-color: #102c34;
+
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #Hero-rectangle-title {
+      width: 700px;
+      height: 56px;
+      font-family: PingFangTC;
+      font-size: 40px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+      .text-style-1 {
+        color: #ed8c4a;
+      }
+      .text-style-2 {
+        color: #63c1e2;
+      }
     }
-    .text-style-2 {
-      color: #63c1e2;
+
+    #Hero-rectangle-content {
+      width: 495px;
+      height: 256px;
+      font-family: PingFangTC;
+      font-size: 16px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 2;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
     }
   }
 
-  #Hero-rectangle-content {
-    width: 495px;
-    height: 256px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
+  @include atSmall {
+    height: 568px;
+    #Hero-background {
+      position: relative;
+    }
+    #Hero-rectangle {
+      #Hero-rectangle-title {
+        position: absolute;
+        top: 187px;
+        font-size: 30px;
+        width: 215px;
+        height: 170px;
+        background-color: #102c34;
+      }
+      #Hero-rectangle-content {
+        max-width: 280px;
+      }
+    }
   }
 }
 </style>

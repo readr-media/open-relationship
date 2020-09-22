@@ -29,44 +29,5 @@ export default {
 </script>
 
 <style lang="scss">
-.FieldBlock {
-  margin: 10px auto;
-  padding: 20px 50px;
-  background-color: #ffffff;
-
-  .FieldBlock-title {
-    width: 700px;
-    height: 29px;
-    font-family: PingFangTC;
-    font-size: 21px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000000;
-  }
-
-  .FieldBlock-info {
-    width: 700px;
-    height: 28px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.75;
-    letter-spacing: normal;
-    text-align: justify;
-  }
-
-  .input-single {
-    width: 100%;
-    border: none;
-    border-bottom: 1px lightgray solid;
-    &:focus {
-      outline: none;
-    }
-  }
-}
+@import "../styles/FieldBlock.scss";
 </style>

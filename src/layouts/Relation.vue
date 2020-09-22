@@ -39,8 +39,8 @@ export default {
         },
       ],
       varifySectionList: [
-        { id: 1, title: "驗證人物", route: "/people" },
-        { id: 2, title: "驗證組織", route: "/organization" },
+        { id: 1, title: "驗證人物", route: "/person-varify" },
+        { id: 2, title: "驗證組織", route: "/organization-varify" },
         { id: 3, title: "驗證人物關係", route: "/people_relation" },
         { id: 4, title: "驗證組織關係", route: "/organization_relation" },
         { id: 5, title: "驗證人物組織關係", route: "/people_organization" },

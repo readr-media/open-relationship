@@ -13,9 +13,10 @@
     </div>
     <div id="FormHero-content">
       <p>
-        這是新增{{ content }}的表單<br />歡迎大家花費 5-10
-        分鐘的時間幫忙填寫資料 <br />如果有任何問題 <br />歡迎來信
-        readr@readr.tw 或是私訊粉專https://www.facebook.com/readr.tw/
+        這是{{ type == "create" ? "新增" : "驗證"
+        }}{{ content }}的表單<br />歡迎大家花費 5-10 分鐘的時間幫忙填寫資料
+        <br />如果有任何問題 <br />歡迎來信 readr@readr.tw
+        或是私訊粉專https://www.facebook.com/readr.tw/
         <br />我們會有專人為你解答 <br />謝謝你的參與！
       </p>
     </div>

@@ -65,7 +65,7 @@ pipeline:
       event: [push]
       branch: [dev]
   
-  getCmsMasterConfig:
+  getCmsProdConfig:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
     secrets: [google_credentials]
     commands:
@@ -114,7 +114,7 @@ pipeline:
     when:
       branch: [dev, master]
 
-  finishSlack:
+  finishDevSlack:
     image: plugins/slack
     channel: jenkins
     secrets: [slack_webhook]
@@ -123,11 +123,29 @@ pipeline:
     when:
       status: [success, failure]
       event: [push]
-      branch: [dev, master]
+      branch: [dev]
     template: >
       {{#success build.status}}
         *success* ${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
         Check out our new <http://or-dev.readr.tw/admin|Open Relationship DEV>.
+      {{else}}
+        Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed.
+      {{/success}}
+
+  finishProdSlack:
+    image: plugins/slack
+    channel: jenkins
+    secrets: [slack_webhook]
+    username: drone
+    icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
+    when:
+      status: [success, failure]
+      event: [push]
+      branch: [master]
+    template: >
+      {{#success build.status}}
+        *success* ${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
+        Check out our new <http://or-dev.readr.tw/admin|Open Relationship Prod>.
       {{else}}
         Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed.
       {{/success}}

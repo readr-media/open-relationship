@@ -10,7 +10,7 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 3000
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment

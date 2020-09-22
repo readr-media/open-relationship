@@ -4,7 +4,7 @@
     打＊的欄位不需經過驗證
     <div class="fieldContainer">
       <form action v-on:submit.prevent="checkForm">
-        <VarifyFieldBlock
+        <FieldBlockVarify
           v-for="field in character"
           :key="field.label"
           :field="field"
@@ -17,7 +17,7 @@
 
 <script>
 import FormHero from "../../components/FormHero";
-import VarifyFieldBlock from "../../components/VarifyFieldBlock";
+import FieldBlockVarify from "../../components/FieldBlockVarify";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 
 export default {
@@ -134,7 +134,7 @@ export default {
     };
   },
   components: {
-    VarifyFieldBlock,
+    FieldBlockVarify,
     FormHero,
     CollaborateFieldBlock,
   },

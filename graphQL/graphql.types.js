@@ -1,5 +1,29 @@
+export const FETCH_PERSONS = `
+query{
+  allPersons{
+    id
+    name
+          alternative
+          other_names
+          identifiers
+          email
+          gender
+          birth_date
+          death_date
+          image
+          summary
+          biography
+          national_identity
+          contact_details
+          links
+          source
+  }
+}
+`;
+
 export const ADD_PERSON = `
-mutation createPerson(  $name: String!,
+mutation createPerson(  $id:String
+                        $name: String!,
                         $alternative:String,
                         $other_names:String,
                         $identifiers:String
@@ -19,6 +43,7 @@ mutation createPerson(  $name: String!,
              
   ) {
     createPerson(data: {  name:$name,
+                          id:$id
                           alternative:$alternative,
                           other_names:$other_names,
                           identifiers:$identifiers
@@ -35,6 +60,7 @@ mutation createPerson(  $name: String!,
                           source:$source
                 
     }) {
+          id
           name
           alternative
           other_names
@@ -54,6 +80,7 @@ mutation createPerson(  $name: String!,
   }
 }
 `;
+
 // $birth_date:String,$death_date:String,$image:String,$summary:String,$biography:String,$national_identity:String,
 // birth_date:$birth_date,death_date:$death_date,image:$image,summary:$summary,biography:$biography,national_identity:$national_identity
 

@@ -8,4 +8,8 @@ export const mutations = {
   SET_PERSON_LIST: (state, fetchedList) => {
     state.personList = fetchedList;
   },
+
+  SET_TARGET_PERSON: (state, targetPerson) => {
+    state.targetPerson = targetPerson;
+  },
 };

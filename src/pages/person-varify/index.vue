@@ -2,15 +2,15 @@
   <div id="Page-Person-varify" class="Form-Page">
     <FormHero :title="hero.title" :content="hero.content" type="varify" />
     <div class="fieldContainer">
-      <button @click="handler">Click</button>
       打＊的欄位不需經過驗證
       <form action v-on:submit.prevent="checkForm">
-        <VarifyFieldBlock
+        <FieldBlock
           v-for="field in character"
           :key="field.label"
           :field="field"
+          type="varify"
         />
-        <b-button type="submit">送出</b-button>
+        <Button title="送出" fitDiv="true" round="true" type="varify" />
       </form>
     </div>
   </div>
@@ -18,17 +18,16 @@
 
 <script>
 import FormHero from "../../components/FormHero";
-import VarifyFieldBlock from "../../components/VarifyFieldBlock";
+import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
+import Button from "../../components/Button";
+
+import { UPDATE_PERSON } from "../../../graphQL/graphql.types";
 
 export default {
-  methods: {
-    handler() {
-      this.$store.dispatch("fetchPersonList");
-    },
-  },
   data() {
     return {
+      personId: 0,
       hero: {
         title: "驗證人物資料表單",
         content: "台灣政商人物資料",
@@ -38,14 +37,14 @@ export default {
         name: {
           label: "人物的姓名",
           info: "作答示範：原住民名字中間使用半形空格，例：Walis Nokan",
-          value: "呂理詣",
+          value: "",
           inputStatus: { type: "text" },
           readOnly: true,
         },
         alternative: {
           label: "人物是否有其他名字",
           info: "",
-          value: "禮義",
+          value: "",
           inputStatus: { type: "text" },
         },
         other_names: {
@@ -63,7 +62,7 @@ export default {
         gender: {
           label: "人物的生理性別",
           info: "",
-          value: "男",
+          value: "",
           inputStatus: {
             type: "radio",
             multi: [
@@ -75,7 +74,7 @@ export default {
         email: {
           label: "人物的電子信箱",
           info: "作答示範：readr123@gmail.com",
-          value: "xmage211120@gmail.com",
+          value: "",
           inputStatus: { type: "text" },
         },
         birth_date: {
@@ -99,25 +98,25 @@ export default {
         summary: {
           label: "一句話描寫這個人",
           info: "",
-          value: "宅男",
+          value: "",
           inputStatus: { type: "text" },
         },
         biography: {
           label: "詳細生平",
           info: "",
-          value: "以前是宅男音樂人 現在是宅男工程師",
+          value: "",
           inputStatus: { type: "text" },
         },
         national_identity: {
           label: "國籍",
           info: "",
-          value: "台灣",
+          value: "",
           inputStatus: { type: "text" },
         },
         contact_details: {
           label: "聯絡方式",
           info: "",
-          value: "才不告訴膩咧",
+          value: "",
           inputStatus: { type: "text" },
         },
         links: {
@@ -129,7 +128,7 @@ export default {
         source: {
           label: "資料來源",
           info: "",
-          value: "本人",
+          value: "",
           inputStatus: { type: "text" },
         },
       },
@@ -140,17 +139,45 @@ export default {
       },
     };
   },
+  methods: {
+    async checkForm() {
+      // Greet and redirect to home
+      await graphqlHandler(UPDATE_PERSON, {
+        payload: this.character,
+        id: this.personId,
+      });
+      alert("感謝您的幫助！");
+      this.$router.push("/");
+    },
+  },
   components: {
-    VarifyFieldBlock,
+    FieldBlock,
     FormHero,
     CollaborateFieldBlock,
+    Button,
+  },
+
+  async mounted() {
+    await this.$store.dispatch("fetchPersonList");
+    const targetPerson = this.$store.getters.getRandomPerson;
+
+    this.personId = targetPerson.id;
+    this.character.name.value = targetPerson.name;
+    this.character.alternative.value = targetPerson.alternative;
+    this.character.other_names.value = targetPerson.other_names;
+    this.character.identifiers.value = targetPerson.identifiers;
+    this.character.gender.value = targetPerson.gender;
+    this.character.email.value = targetPerson.email;
+    this.character.birth_date.value = targetPerson.birth_date;
+    this.character.death_date.value = targetPerson.death_date;
+    this.character.image.value = targetPerson.image;
+    this.character.summary.value = targetPerson.summary;
+    this.character.biography.value = targetPerson.biography;
+    this.character.national_identity.value = targetPerson.national_identity;
+    this.character.contact_details.value = targetPerson.contact_details;
+    this.character.links.value = targetPerson.links;
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.fieldContainer {
-  width: 800px;
-  margin: 50px auto 0;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -96,9 +96,9 @@ module.exports = {
       authStrategy,
     }),
     new NuxtApp({
+      //equal to nuxt.config.js
       srcDir: "src",
       buildDir: "dist",
-      modules: ["bootstrap-vue/nuxt"], //equal to nuxt.config.js
       telemetry: false,
       plugins: [{ src: "~/plugins/vue-tagsinput", mode: "client" }],
       css: ["~styles/global.style.css"],

@@ -16,7 +16,7 @@
           blablablabinbinbapsushinomidorikurasushisushiro
         </p>
         <CollaborateFieldBlock collaborate="collaborate" />
-        <b-button type="submit">送出</b-button>
+        <Button title="送出" fitDiv="true" round="true" type="create" />
       </form>
     </div>
   </div>
@@ -27,6 +27,7 @@ import axios from "axios";
 import FormHero from "../../components/FormHero";
 import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
+import Button from "../../components/Button";
 
 import { graphql } from "../../../graphQL/graphql.util";
 import { ADD_ORGANIZATION } from "../../../graphQL/graphql.types";
@@ -195,6 +196,7 @@ export default {
     FormHero,
     FieldBlock,
     CollaborateFieldBlock,
+    Button,
   },
 };
 </script>

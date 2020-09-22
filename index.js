@@ -1,29 +1,39 @@
-const { Keystone } = require('@keystonejs/keystone');
-const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
-const { Text, Checkbox, Password } = require('@keystonejs/fields');
-const { GraphQLApp } = require('@keystonejs/app-graphql');
-const { AdminUIApp } = require('@keystonejs/app-admin-ui');
-const initialiseData = require('./initial-data');
+const { Keystone } = require("@keystonejs/keystone");
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
+const { Text, Checkbox, Password } = require("@keystonejs/fields");
+const { GraphQLApp } = require("@keystonejs/app-graphql");
+const { AdminUIApp } = require("@keystonejs/app-admin-ui");
+const { NuxtApp } = require("@keystonejs/app-nuxt");
 
-const { KnexAdapter: Adapter } = require('@keystonejs/adapter-knex');
-const { app, database } = require('./configs/config')
+const initialiseData = require("./initial-data");
+
+const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
+const { app, database, session } = require("./configs/config");
 
 const PROJECT_NAME = app.applicationName;
 const adapterConfig = {
   dropDatabase: app.dropDatabase,
   knexOptions: {
-    client: 'postgres',
+    client: "postgres",
     connection: `postgresql://${database.acc}:${database.pass}@${database.host}/${database.db}`,
-  }
+  },
 };
 
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
-  onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  cookieSecret: session.cookieSecret,
+  cookie: {
+    // If it's explicitly configured to use insecure cookies, overwrite the default setting.
+    // Anything else will be fallback to the default of true in production.
+    secure:
+      session.secure === false ? false : process.env.NODE_ENV === "production",
+  },
 });
 
 // Access control functions
-const userIsAdmin = ({ authentication: { item: user } }) => Boolean(user && user.isAdmin);
+const userIsAdmin = ({ authentication: { item: user } }) =>
+  Boolean(user && user.isAdmin);
 const userOwnsItem = ({ authentication: { item: user } }) => {
   if (!user) {
     return false;
@@ -34,7 +44,7 @@ const userOwnsItem = ({ authentication: { item: user } }) => {
   return { id: user.id };
 };
 
-const userIsAdminOrOwner = auth => {
+const userIsAdminOrOwner = (auth) => {
   const isAdmin = access.userIsAdmin(auth);
   const isOwner = access.userOwnsItem(auth);
   return isAdmin ? isAdmin : isOwner;
@@ -42,7 +52,7 @@ const userIsAdminOrOwner = auth => {
 
 const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
 
-keystone.createList('User', {
+keystone.createList("User", {
   fields: {
     name: { type: Text },
     email: {
@@ -73,7 +83,7 @@ keystone.createList('User', {
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
-  list: 'User',
+  list: "User",
 });
 
 module.exports = {
@@ -82,31 +92,43 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
-      enableDefaultRoute: true,
+      enableDefaultRoute: false,
       authStrategy,
+    }),
+    new NuxtApp({
+      srcDir: "src",
+      buildDir: "dist",
+      modules: ["bootstrap-vue/nuxt"], //equal to nuxt.config.js
+      telemetry: false,
+      plugins: [{ src: "~/plugins/vue-tagsinput", mode: "client" }],
+      css: ["~styles/global.style.css"],
     }),
   ],
 };
 
-const AreaSchema = require('./lists/Area.js');
-const PeopleSchema = require('./lists/People.js');
-const OrganizationSchema = require('./lists/Organizations.js');
-const People_relationSchema = require('./lists/People_relation.js');
-const People_organizationSchema = require('./lists/People_relation.js');
-const Organization_relationSchema = require('./lists/Organization_relation.js');
-const EventSchema = require('./lists/Events.js');
-const PositionSchema = require('./lists/Posts.js');
-const MembershipSchema = require('./lists/Memberships.js');
-const CountSchema = require('./lists/Count.js');
-const MotionSchema = require('./lists/Motions.js');
-keystone.createList('Area', AreaSchema);
-keystone.createList('ppl', PeopleSchema);
-keystone.createList('Organization', OrganizationSchema);
-keystone.createList('People_relation', People_relationSchema);
-keystone.createList('People_organization', People_organizationSchema);
-keystone.createList('Organization_relation', Organization_relationSchema);
-keystone.createList('Event', EventSchema);
-keystone.createList('Post', PositionSchema);
-keystone.createList('Membership', MembershipSchema);
-keystone.createList('Count', CountSchema);
-keystone.createList('Motion', MotionSchema);
+const AreaSchema = require("./lists/Area");
+const PersonSchema = require("./lists/Person");
+// const ContactDetailSchema = require('./lists/Contact_detail');
+const OrganizationSchema = require("./lists/Organizations");
+const Person_relationSchema = require("./lists/Person_relation");
+const Person_organizationSchema = require("./lists/Person_organization");
+const Person_publicationSchema = require("./lists/Person_publication");
+const Organization_relationSchema = require("./lists/Organization_relation");
+const EventSchema = require("./lists/Events");
+const PositionSchema = require("./lists/Posts");
+const MembershipSchema = require("./lists/Memberships");
+const CountSchema = require("./lists/Count");
+const MotionSchema = require("./lists/Motions");
+keystone.createList("Area", AreaSchema);
+keystone.createList("Person", PersonSchema);
+// keystone.createList('Contact_detail', ContactDetailSchema);
+keystone.createList("Organization", OrganizationSchema);
+keystone.createList("Person_relation", Person_relationSchema);
+keystone.createList("Person_organization", Person_organizationSchema);
+keystone.createList("Person_publication", Person_publicationSchema);
+keystone.createList("Organization_relation", Organization_relationSchema);
+keystone.createList("Event", EventSchema);
+keystone.createList("Post", PositionSchema);
+keystone.createList("Membership", MembershipSchema);
+keystone.createList("Count", CountSchema);
+keystone.createList("Motion", MotionSchema);

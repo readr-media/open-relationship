@@ -1,47 +1,39 @@
-//const { access } = require('./Permission.js');
-const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/fields');
-const { atTracking } = require('@keystonejs/list-plugins');
+const { Text, Select, CalendarDay } = require("@keystonejs/fields");
+const { atTracking, byTracking } = require("@keystonejs/list-plugins");
+
+const classification_options = [
+  { value: "company", label: "公司企業" },
+  { value: "party", label: "政黨" },
+  { value: "gov", label: "政府" },
+  { value: "ngo", label: "非政府組織" },
+  { value: "npo", label: "非營利組織" },
+  { value: "community", label: "社會團體" },
+  { value: "other", label: "其他" },
+];
 
 module.exports = {
-  //label: "組織/機構",
-  //plural: "組織/機構",
   fields: {
-    name: { label: "名稱", type: Text, isRequired: true},
-    alternate_name: { label: "其他名稱", type: Text},
-    identifiers: { label: "ID（統編）", type: Text},
-    classification: { label: "類型", type: Text},
-    parent: { label: "上層組織", type: Relationship, many: false, ref: 'Organization' },
-    children: { label: "附屬組織", type: Relationship, many: false, ref: 'Organization' },
-    //area: { label: "地區", type: Relationship, many: false, ref: 'Area' },
-    abstract: { label: "概述", type: Text},
-    description: { label: "描述", type: Text},
-    founding_date: { label: "成立日期", type: Text},
-    dissolution_date: { label: "解散日期", type: Text},
-    image: { label: "照片連結", type: Text},
-    contact_details: { label: "聯絡人", type: Text},
-    links: { label: "相關連結", type: Text},
-    //memberships: { label: "成員", type: Relationship, many: true, ref: 'Membership' },
-    //posts: { label: "posts", type: Relationship, many: true, ref: 'Post' },
-    //motions: { label: "發起活動", type: Relationship, many: true, ref: 'Motion' },
-    speeches: { label: "相關演說", type: Text},
-    //vote_events: { label: "選舉/投票", type: Relationship, many: true, ref: 'Vote_event' },
-    //votes: { label: "votes", type: Relationship, many: true, ref: 'Vote' },
-    //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
+    name: { label: "組織名稱", type: Text, isRequired: true },
+    alternative: { label: "組織別名", type: Text },
+    other_names: { label: "組織舊名", type: Text },
+    identifiers: { label: "統一編號", type: Text },
+    classification: {
+      label: "組織類型",
+      type: Select,
+      options: classification_options,
+      dataType: "string",
+    },
+    area: { label: "組織地區", type: Text },
+    abstract: { label: "一句話描述該組織", type: Text },
+    description: { label: "組織詳細介紹", type: Text },
+    founding_date: { label: "創立時間", type: CalendarDay },
+    dissolution_date: { label: "解散時間", type: CalendarDay },
+    image: { label: "圖像", type: Text },
+    contact_details: { label: "聯絡方式", type: Text },
+    links: { label: "網站", type: Text },
+    address: { label: "組織稅籍登記地址", type: Text },
+    source: { label: "來源", type: Text },
   },
-  /*
-  access: {
-    read: access.everyone,
-    update: access.userIsExecutor,
-    create: access.userIsExecutor,
-    delete: access.userIsAdmin,
-    auth: true,
-  },
-  */
-  plugins: [
-	atTracking({
-	  createdAtField: "createAt",
-	  updatedAtField: "updateAt",
-	  format: "YYYY/MM/DD h:mm A",
-	}),
-  ],
+  plugins: [atTracking(), byTracking()],
+  labelResolver: (item) => `${item.name}+${item.address}`,
 };

@@ -19,31 +19,41 @@ export const graphql = async (query, variables = {}) => {
     });
 };
 
-// // 如果今天要將object中的項目個別取出並作為變數
-// const list = {
-//   name: "Liyi",
-//   age: 30,
-//   gender: "male",
-// };
-// // ES6可以用以下手法destructure出來
-// const { name, age, gender } = list;
-// 然而若該物件的形式改成：
-// const list = {
-//   name:{
-//     id:1,
-//     value: "Liyi",
-//   },
-//   age: {
-//     id:2,
-//     value: 30,
-//   },
-//   gender: {
-//     id:3,
-//     value: "male",
-//   },
-// };
-
-// const { name, age, gender } = list;
-// console.log(name);
-
-// 此時仍希望得到狀況一的destructure結果
+export const graphqlHandler = async (query, targetData) => {
+  // destructure character field
+  const {
+    name,
+    alternative,
+    other_names,
+    identifiers,
+    email,
+    gender,
+    birth_date,
+    death_date,
+    image,
+    summary,
+    biography,
+    national_identity,
+    contact_details,
+    links,
+    source,
+  } = targetData;
+  // commit to graphQL
+  await graphql(query, {
+    name: name.value,
+    alternative: alternative.value,
+    other_names: other_names.value,
+    identifiers: other_names.identifiers,
+    email: email.value,
+    gender: gender.value,
+    birth_date: birth_date.value.length ? birth_date.value : null,
+    death_date: death_date.value.length ? death_date.value : null,
+    image: image.value,
+    summary: summary.value,
+    biography: biography.value,
+    national_identity: national_identity.value,
+    contact_details: contact_details.value,
+    links: links.value,
+    source: source.value,
+  });
+};

@@ -22,9 +22,12 @@ import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
 
+import { UPDATE_PERSON } from "../../../graphQL/graphql.types";
+
 export default {
   data() {
     return {
+      personId: 0,
       hero: {
         title: "驗證人物資料表單",
         content: "台灣政商人物資料",
@@ -136,6 +139,17 @@ export default {
       },
     };
   },
+  methods: {
+    async checkForm() {
+      // Greet and redirect to home
+      await graphqlHandler(UPDATE_PERSON, {
+        payload: this.character,
+        id: this.personId,
+      });
+      alert("感謝您的幫助！");
+      this.$router.push("/");
+    },
+  },
   components: {
     FieldBlock,
     FormHero,
@@ -146,8 +160,8 @@ export default {
   async mounted() {
     await this.$store.dispatch("fetchPersonList");
     const targetPerson = this.$store.getters.getRandomPerson;
-    console.log(this.character);
 
+    this.personId = targetPerson.id;
     this.character.name.value = targetPerson.name;
     this.character.alternative.value = targetPerson.alternative;
     this.character.other_names.value = targetPerson.other_names;

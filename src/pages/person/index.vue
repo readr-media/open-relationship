@@ -35,7 +35,7 @@ import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
 
-import { graphql } from "../../../graphQL/graphql.util";
+import { graphqlHandler } from "../../../graphQL/graphql.util";
 import { ADD_PERSON } from "../../../graphQL/graphql.types";
 
 export default {
@@ -154,44 +154,8 @@ export default {
   },
   methods: {
     async checkForm() {
-      // destructure character field
-      const {
-        name,
-        alternative,
-        other_names,
-        identifiers,
-        email,
-        gender,
-        birth_date,
-        death_date,
-        image,
-        summary,
-        biography,
-        national_identity,
-        contact_details,
-        links,
-        source,
-      } = this.character;
-      // commit to graphQL
-      await graphql(ADD_PERSON, {
-        name: name.value,
-        alternative: alternative.value,
-        other_names: other_names.value,
-        identifiers: other_names.identifiers,
-        email: email.value,
-        gender: gender.value,
-        birth_date: birth_date.value.length ? birth_date.value : null,
-        death_date: death_date.value.length ? death_date.value : null,
-        image: image.value,
-        summary: summary.value,
-        biography: biography.value,
-        national_identity: national_identity.value,
-        contact_details: contact_details.value,
-        links: links.value,
-        source: source.value,
-      });
-
       // Greet and redirect to home
+      await graphqlHandler(ADD_PERSON, this.character);
       alert("感謝您的幫助！");
       this.$router.push("/");
     },

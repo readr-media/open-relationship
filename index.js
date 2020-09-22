@@ -102,6 +102,7 @@ module.exports = {
       telemetry: false,
       plugins: [{ src: "~/plugins/vue-tagsinput", mode: "client" }],
       css: ["~styles/global.style.css"],
+      store: ["~store"],
     }),
   ],
 };

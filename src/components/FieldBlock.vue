@@ -11,6 +11,34 @@
         >
       </span>
     </div>
+    <!-- handle textarea -->
+    <div v-else-if="field.inputStatus.type == 'textarea'" class="inputWrapper">
+      <textarea
+        name=""
+        class="textarea"
+        v-model="field.value"
+        id=""
+        cols="80"
+        rows="10"
+      ></textarea>
+    </div>
+
+    <!-- handle date -->
+    <div v-else-if="field.inputStatus.type == 'date'" class="inputWrapper">
+      <!-- <Datepicker
+        v-model="field.value"
+        format="yyyy-MM-dd "
+        class="input-single"
+        placeholder="輸入日期"
+        calendar-button-icon="fa fa-calendar"
+      /> -->
+      <input
+        :type="field.inputStatus.type"
+        v-model="field.value"
+        class="input-single"
+      />
+    </div>
+
     <!-- handle single input -->
     <div v-else class="inputWrapper">
       <input

@@ -34,6 +34,7 @@
     "express": "^4.17.1",
     "node-sass": "^4.14.1",
     "nuxt": "^2.14.4",
-    "sass-loader": "^10.0.2"
+    "sass-loader": "^10.0.2",
+    "vuejs-datepicker": "^1.6.2"
   }
 }

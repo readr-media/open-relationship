@@ -72,8 +72,8 @@ export default {
           inputStatus: {
             type: "radio",
             multi: [
-              { label: "男", value: "male" },
-              { label: "女", value: "female" },
+              { label: "男", value: "男" },
+              { label: "女", value: "女" },
             ],
           },
         },
@@ -111,7 +111,7 @@ export default {
           label: "詳細生平",
           info: "",
           value: "",
-          inputStatus: { type: "text" },
+          inputStatus: { type: "textarea" },
         },
         national_identity: {
           label: "國籍",
@@ -165,7 +165,6 @@ export default {
         links,
         source,
       } = this.character;
-
       // commit to graphQL
       await graphql(ADD_PERSON, {
         name: name.value,

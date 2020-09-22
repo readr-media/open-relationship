@@ -2,6 +2,7 @@
   <div id="Page-Person-varify" class="Form-Page">
     <FormHero :title="hero.title" :content="hero.content" type="varify" />
     <div class="fieldContainer">
+      <button @click="handler">Click</button>
       打＊的欄位不需經過驗證
       <form action v-on:submit.prevent="checkForm">
         <VarifyFieldBlock
@@ -21,6 +22,11 @@ import VarifyFieldBlock from "../../components/VarifyFieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 
 export default {
+  methods: {
+    handler() {
+      this.$store.dispatch("fetchPersonList");
+    },
+  },
   data() {
     return {
       hero: {
@@ -57,19 +63,19 @@ export default {
         gender: {
           label: "人物的生理性別",
           info: "",
-          value: "male",
+          value: "男",
           inputStatus: {
             type: "radio",
             multi: [
-              { label: "男", value: "male" },
-              { label: "女", value: "female" },
+              { label: "男", value: "男" },
+              { label: "女", value: "女" },
             ],
           },
         },
         email: {
           label: "人物的電子信箱",
           info: "作答示範：readr123@gmail.com",
-          value: "",
+          value: "xmage211120@gmail.com",
           inputStatus: { type: "text" },
         },
         birth_date: {
@@ -93,25 +99,25 @@ export default {
         summary: {
           label: "一句話描寫這個人",
           info: "",
-          value: "",
+          value: "宅男",
           inputStatus: { type: "text" },
         },
         biography: {
           label: "詳細生平",
           info: "",
-          value: "",
+          value: "以前是宅男音樂人 現在是宅男工程師",
           inputStatus: { type: "text" },
         },
         national_identity: {
           label: "國籍",
           info: "",
-          value: "",
+          value: "台灣",
           inputStatus: { type: "text" },
         },
         contact_details: {
           label: "聯絡方式",
           info: "",
-          value: "",
+          value: "才不告訴膩咧",
           inputStatus: { type: "text" },
         },
         links: {
@@ -123,7 +129,7 @@ export default {
         source: {
           label: "資料來源",
           info: "",
-          value: "",
+          value: "本人",
           inputStatus: { type: "text" },
         },
       },
@@ -142,4 +148,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fieldContainer {
+  width: 800px;
+  margin: 50px auto 0;
+}
+</style>

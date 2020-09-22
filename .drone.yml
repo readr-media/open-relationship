@@ -35,7 +35,7 @@ pipeline:
       # - cp ../configs/openwarehouse/dev/gcskeyfile.json ./configs/gcskeyfile.json
     when:
       event: [push]
-      branch: [dev, master]
+      branch: [dev]
 
   buildCmsThenPublish:
     image: plugins/gcr
@@ -46,7 +46,7 @@ pipeline:
     secrets: [google_credentials]
     when:
       event: [push]
-      branch: [dev, master]
+      branch: [dev]
 
   deployCmsDev:
     image: nytimes/drone-gke
@@ -64,6 +64,44 @@ pipeline:
     when:
       event: [push]
       branch: [dev]
+  
+  getCmsProdConfig:
+    image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
+    secrets: [google_credentials]
+    commands:
+      - gcloud source repos clone configs ../configs
+      - cp ../configs/openwarehouse/prod/open-relationship/config.js ./configs/config.js
+    when:
+      event: [push]
+      branch: [master]
+
+  buildProdCmsThenPublish:
+    image: plugins/gcr
+    repo: mirrormedia-1470651750304/${DRONE_REPO_NAME}
+    tag: ${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}_prod_cms
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    secrets: [google_credentials]
+    when:
+      event: [push]
+      branch: [master]
+
+  deployCmsProd:
+    image: nytimes/drone-gke
+    region: asia-east1
+    cluster: readr-prod
+    namespace: default
+    verbose: true
+    secrets:
+      - source: google_credentials
+        target: token
+    vars:
+      image: gcr.io/mirrormedia-1470651750304/${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}_prod_cms
+      app: ${DRONE_REPO_NAME}-cms
+      tier: backend
+    when:
+      event: [push]
+      branch: [master]
 
   rebuildCache:
     image: drillster/drone-volume-cache
@@ -76,7 +114,7 @@ pipeline:
     when:
       branch: [dev, master]
 
-  finishSlack:
+  finishDevSlack:
     image: plugins/slack
     channel: jenkins
     secrets: [slack_webhook]
@@ -85,11 +123,29 @@ pipeline:
     when:
       status: [success, failure]
       event: [push]
-      branch: [dev, master]
+      branch: [dev]
     template: >
       {{#success build.status}}
         *success* ${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
         Check out our new <http://or-dev.readr.tw/admin|Open Relationship DEV>.
+      {{else}}
+        Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed.
+      {{/success}}
+
+  finishProdSlack:
+    image: plugins/slack
+    channel: jenkins
+    secrets: [slack_webhook]
+    username: drone
+    icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
+    when:
+      status: [success, failure]
+      event: [push]
+      branch: [master]
+    template: >
+      {{#success build.status}}
+        *success* ${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
+        Check out our new <http://or-dev.readr.tw/admin|Open Relationship Prod>.
       {{else}}
         Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed.
       {{/success}}

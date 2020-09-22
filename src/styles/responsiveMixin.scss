@@ -1,0 +1,36 @@
+//先針對media queries的width設為變數
+
+$atSmall: 530px;
+$atMedium: 800px;
+$atLarge: 1200px;
+$atSuperLarge: 1500px;
+
+/*把變數帶入mixin中，此mixin只就單純把media queries寫到我的mixin中，
+並且使用我上面設立的變數來調動media queries的width*/
+
+//手機
+@mixin atSmall() {
+  @media all and (max-width: $atSmall) {
+    @content;
+  }
+}
+
+//平板
+@mixin atMedium() {
+  @media all and (max-width: $atMedium) {
+    @content;
+  }
+}
+
+//電腦
+@mixin atLarge() {
+  @media all and (max-width: $atLarge) {
+    @content;
+  }
+}
+
+@mixin atSuperLarge() {
+  @media all and (max-width: $atSuperLarge) {
+    @content;
+  }
+}

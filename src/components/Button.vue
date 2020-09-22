@@ -36,6 +36,10 @@ export default {
   border: none;
 
   padding: 0 29px;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .inactive {

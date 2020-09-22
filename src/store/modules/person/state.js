@@ -1,4 +1,5 @@
 export const state = {
   loadingStatus: "notLoading",
-  personList: ["YOYO"],
+  personList: [""],
+  targetPerson: {},
 };

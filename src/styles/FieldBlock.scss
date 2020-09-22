@@ -1,5 +1,11 @@
+.fieldContainer {
+  width: 800px;
+  margin: 50px auto 0;
+}
+
 .FieldBlock {
-  margin: 10px auto;
+  box-sizing: border-box;
+  margin: 10px auto 20px;
   padding: 20px 50px;
   background-color: #ffffff;
   // background-color: red;
@@ -20,13 +26,13 @@
     flex-direction: row;
     align-items: center;
 
-    margin-bottom: 10px;
+    margin: 0 0 10px 10px;
 
-    h5 {
-      margin: 0 0 0 10px;
+    .create-star {
+      color: #ed8c4a;
+      margin: 0;
     }
-
-    .star {
+    .varify-star {
       color: #63c1e2;
       margin: 0;
     }
@@ -39,22 +45,55 @@
   .FieldBlock-info {
     width: 700px;
     height: 28px;
+    font-family: PingFangTC;
     font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
     line-height: 1.75;
     letter-spacing: normal;
     text-align: justify;
+    color: #4a4a4a;
+
+    margin: 0 auto 25px;
   }
 
-  .input-single {
-    width: 100%;
+  .inputWrapper-radio {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 10px;
+    .radio-wrap {
+      margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      input {
+        margin: 0;
+      }
+    }
   }
 
-  input {
-    // width: 100%;
-    border: none;
-    border-bottom: 1px lightgray solid;
-    &:focus {
-      outline: none;
+  .inputWrapper-single {
+    input {
+      width: 100%;
+      // width: 100%;
+      border: none;
+      height: 28px;
+      font-family: PingFangTC;
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.75;
+      letter-spacing: normal;
+      text-align: justify;
+      color: #000000;
+
+      border-bottom: 1px lightgray solid;
+      margin-bottom: 24px;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }

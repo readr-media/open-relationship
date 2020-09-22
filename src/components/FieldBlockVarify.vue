@@ -1,10 +1,10 @@
 <template>
-  <div v-if="field.value.length" class="FieldBlock VarifyFieldBlock">
+  <div class="FieldBlock FieldBlockVarify">
     <!-- handle title list decoration if read only -->
     <div class="FieldBlock-title">
       <div class="FieldBlock-title-decoration">
         <h5 v-if="field.readOnly" class="star">＊</h5>
-        <input v-else type="checkbox" disabled="true" />
+        <!-- <input v-else type="checkbox" disabled="true" /> -->
       </div>
       {{ field.label }}
     </div>
@@ -49,7 +49,7 @@ export default {
   margin: 50px auto 0;
 }
 
-.VarifyFieldBlock {
+.FieldBlockVarify {
   .FieldBlock-value {
     height: 29px;
 

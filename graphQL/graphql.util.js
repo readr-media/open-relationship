@@ -11,12 +11,10 @@ export const graphql = async (query, variables = {}) => {
   })
     .then((result) => {
       console.log("Upload success");
-      console.log(result);
       return result.json();
     })
     .catch((error) => {
       console.log("Upload failed");
-      console.log(error);
       return error.message;
     });
 };

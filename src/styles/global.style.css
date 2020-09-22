@@ -1,5 +1,11 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #__nuxt {
   width: 100%;
+  font-family: PingFangTC;
 }
 
 .section-title {

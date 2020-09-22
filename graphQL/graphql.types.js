@@ -1,3 +1,25 @@
+export const FETCH_PERSONS = `
+query{
+  allPersons{
+    name
+          alternative
+          other_names
+          identifiers
+          email
+          gender
+          birth_date
+          death_date
+          image
+          summary
+          biography
+          national_identity
+          contact_details
+          links
+          source
+  }
+}
+`;
+
 export const ADD_PERSON = `
 mutation createPerson(  $name: String!,
                         $alternative:String,

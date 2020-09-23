@@ -96,9 +96,7 @@ export default {
         variables: await moveFormToGqlVariable(this.character),
       });
 
-      // await graphqlHandler(ADD_PERSON, this.character);
-      alert("感謝您的幫助！");
-      this.$router.push("/");
+      this.$router.push("/thanks");
     },
   },
 

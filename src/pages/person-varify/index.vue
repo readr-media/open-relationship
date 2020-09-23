@@ -111,8 +111,7 @@ export default {
         },
       });
 
-      alert("感謝您的幫助！");
-      this.$router.push("/");
+      this.$router.push("/thanks");
     },
   },
 };

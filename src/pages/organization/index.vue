@@ -60,8 +60,7 @@ export default {
       });
       // Greet and redirect to home
 
-      alert("感謝您的幫助！");
-      this.$router.push("/");
+      this.$router.push("/thanks");
     },
   },
   components: {

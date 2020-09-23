@@ -28,117 +28,23 @@ import FormHero from "../../components/FormHero";
 import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
+import { organizationFields } from "../../fields/organizationFields";
 
-import { graphql } from "../../../graphQL/graphql.util";
-import { ADD_ORGANIZATION } from "../../../graphQL/graphql.types";
+import { graphql } from "../../graphQL/graphql.util";
+import { ADD_ORGANIZATION } from "../../graphQL/graphql.types";
+
+import { moveFormToGqlVariable } from "../../graphQL/organizationFormHandler";
 
 export default {
   data() {
     return {
+      organizationId: 0,
       hero: {
         title: "新增組織資料表單",
         content: "台灣政商組織資料",
         type: "create",
       },
-      organization: {
-        name: {
-          label: "組織名稱",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        alternative: {
-          label: "組織別名",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        other_names: {
-          label: "組織舊名",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        identifiers: {
-          label: "統一編號",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        classification: {
-          label: "組織類型",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        area: {
-          label: "組織地區",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        abstract: {
-          label: "一句話描述該組織",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        description: {
-          label: "組織詳細介紹",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        founding_date: {
-          label: "創立時間",
-          info: "",
-          value: "",
-          inputStatus: { type: "date" },
-        },
-        dissolution_date: {
-          label: "解散時間",
-          info: "",
-          value: "",
-          inputStatus: { type: "date" },
-        },
-        image: {
-          label: "圖像",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        contact_details: {
-          label: "聯絡方式",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        links: {
-          label: "網站",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        address: {
-          label: "組織稅籍登記地址",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        source: {
-          label: "來源",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
-        },
-        //area: { label: "地區", type: Relationship, many: false, ref: 'Area' },
-        //memberships: { label: "成員", type: Relationship, many: true, ref: 'Membership' },
-        //posts: { label: "posts", type: Relationship, many: true, ref: 'Post' },
-        //motions: { label: "發起活動", type: Relationship, many: true, ref: 'Motion' },
-        //vote_events: { label: "選舉/投票", type: Relationship, many: true, ref: 'Vote_event' },
-        //votes: { label: "votes", type: Relationship, many: true, ref: 'Vote' },
-        //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
-      },
+      organization: organizationFields,
       collaborate: {
         name: "",
         email: "",
@@ -148,44 +54,10 @@ export default {
   },
   methods: {
     async checkForm() {
-      // destructure character field
-      const {
-        name,
-        alternative,
-        other_names,
-        identifiers,
-        classification,
-        area,
-        abstract,
-        description,
-        founding_date,
-        dissolution_date,
-        image,
-        contact_details,
-        links,
-        address,
-        source,
-      } = this.organization;
-
-      // commit to graphQL
-      await graphql(ADD_ORGANIZATION, {
-        name: name.value,
-        alternative: alternative.value,
-        other_names: other_names.value,
-        identifiers: identifiers.value,
-        classification: classification.value,
-        area: area.value,
-        abstract: abstract.value,
-        description: description.value,
-        founding_date: founding_date.value,
-        dissolution_date: dissolution_date.value,
-        image: image.value,
-        contact_details: contact_details.value,
-        links: links.value,
-        address: address.value,
-        source: source.value,
+      this.$apollo.mutate({
+        mutation: ADD_ORGANIZATION,
+        variables: moveFormToGqlVariable(this.organization),
       });
-
       // Greet and redirect to home
 
       alert("感謝您的幫助！");
@@ -197,6 +69,16 @@ export default {
     FieldBlock,
     CollaborateFieldBlock,
     Button,
+  },
+
+  async mounted() {
+    // vuex獲取所有用戶資料
+    await this.$store.dispatch("fetchOrganizationList");
+    // 獲取隨機資料
+    const targetOrganization = this.$store.getters.getRandomOrganization;
+    // Put fetched Random person‘s data to form
+    this.organizationId = targetPerson.id;
+    moveGqlToForm(this.character, targetPerson);
   },
 };
 </script>

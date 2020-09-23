@@ -4,12 +4,7 @@
     <div class="fieldContainer">
       打＊的欄位不需經過驗證
       <form action v-on:submit.prevent="checkForm">
-        <FieldBlock
-          v-for="field in character"
-          :key="field.label"
-          :field="field"
-          type="varify"
-        />
+        <FieldBlock v-for="field in character" :key="field.label" :field="field" type="varify" />
         <Button title="送出" fitDiv="true" round="true" type="varify" />
       </form>
     </div>
@@ -24,6 +19,7 @@ import Button from "../../components/Button";
 
 import { UPDATE_PERSON } from "../../../graphQL/graphql.types";
 
+import gql from "graphql-tag";
 export default {
   data() {
     return {
@@ -142,12 +138,92 @@ export default {
   methods: {
     async checkForm() {
       // Greet and redirect to home
-      await graphqlHandler(UPDATE_PERSON, {
-        payload: this.character,
-        id: this.personId,
+      // await graphqlHandler(UPDATE_PERSON, {
+      //   payload: this.character,
+      //   id: this.personId,
+      // });
+
+      this.$apollo.mutate({
+        mutation: gql`
+          mutation(
+            $id: ID!
+            $name: String!
+            $alternative: String
+            $other_names: String
+            $identifiers: String
+            $email: String
+            $gender: String
+            $birth_date: String
+            $death_date: String
+            $image: String
+            $summary: String
+            $biography: String
+            $national_identity: String
+            $contact_details: String
+            $links: String
+            $source: String
+          ) {
+            updatePerson(
+              id: $id
+              data: {
+                name: $name
+                alternative: $alternative
+                other_names: $other_names
+                identifiers: $identifiers
+                email: $email
+                gender: $gender
+                birth_date: $birth_date
+                death_date: $death_date
+                image: $image
+                summary: $summary
+                biography: $biography
+                national_identity: $national_identity
+                contact_details: $contact_details
+                links: $links
+                source: $source
+              }
+            ) {
+              id
+              name
+              alternative
+              other_names
+              identifiers
+              email
+              gender
+              birth_date
+              death_date
+              image
+              summary
+              biography
+              national_identity
+              contact_details
+              links
+              source
+            }
+          }
+        `,
+        variables: {
+          id: this.personId,
+          name: this.character.name.value,
+          alternative: this.character.alternative.value,
+          other_names: this.character.other_names.value,
+          identifiers: this.character.identifiers.value,
+          email: this.character.email.value,
+          gender: this.character.gender.value,
+          birth_date: this.character.birth_date.value,
+          death_date: this.character.death_date.value,
+          image: this.character.image.value,
+          summary: this.character.summary.value,
+          biography: this.character.biography.value,
+          national_identity: this.character.national_identity.value,
+          contact_details: this.character.contact_details.value,
+          links: this.character.links.value,
+          source: this.character.source.value,
+        },
       });
+
       alert("感謝您的幫助！");
-      this.$router.push("/");
+      // this.$router.push("/");
     },
   },
   components: {

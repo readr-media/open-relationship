@@ -128,6 +128,8 @@ const PositionSchema = require("./lists/Posts");
 const MembershipSchema = require("./lists/Memberships");
 const CountSchema = require("./lists/Count");
 const MotionSchema = require("./lists/Motions");
+const CollaborateSchema = require("./lists/Collaborate");
+
 keystone.createList("Area", AreaSchema);
 keystone.createList("Person", PersonSchema);
 // keystone.createList('Contact_detail', ContactDetailSchema);
@@ -141,3 +143,4 @@ keystone.createList("Post", PositionSchema);
 keystone.createList("Membership", MembershipSchema);
 keystone.createList("Count", CountSchema);
 keystone.createList("Motion", MotionSchema);
+keystone.createList("Collaborate", CollaborateSchema);

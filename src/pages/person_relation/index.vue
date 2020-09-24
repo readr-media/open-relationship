@@ -56,7 +56,7 @@
 <script>
 import axios from "axios";
 
-import { ADD_PERSON } from "../../graphQL/graphql.types";
+import { ADD_PERSON } from "../../graphQL/query/person";
 import ReferenceInput from "../../components/ReferenceInput";
 
 export default {

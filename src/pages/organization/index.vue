@@ -31,7 +31,7 @@ import Button from "../../components/Button";
 import { organizationFields } from "../../fields/organizationFields";
 
 import { graphql } from "../../graphQL/graphql.util";
-import { ADD_ORGANIZATION } from "../../graphQL/graphql.types";
+import { ADD_ORGANIZATION } from "../../graphQL/query/organization";
 
 import { moveFormToGqlVariable } from "../../graphQL/organizationFormHandler";
 

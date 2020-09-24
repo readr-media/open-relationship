@@ -7,7 +7,7 @@
 
     <div class="FieldBlock-title">你的email address</div>
     <div class="inputWrapper-single">
-      <input type="text" v-model="collaborate.name" />
+      <input type="text" v-model="collaborate.email" />
     </div>
 
     <div class="FieldBlock-title">你的協作心得</div>
@@ -17,7 +17,7 @@
         id=""
         cols="30"
         rows="10"
-        v-model="collaborate.name"
+        v-model="collaborate.feedback"
       ></textarea>
     </div>
   </div>

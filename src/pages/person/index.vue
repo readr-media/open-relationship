@@ -20,7 +20,7 @@
           </p>
         </div>
 
-        <CollaborateFieldBlock collaborate="collaborate" />
+        <CollaborateFieldBlock :collaborate="collaborate" />
 
         <Button title="送出" fitDiv="true" round="true" type="create" />
       </form>
@@ -35,10 +35,11 @@ import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
 
-import { ADD_PERSON } from "../../graphQL/graphql.types";
+import { characterFields } from "../../fields/characterFields";
 
 import gql from "graphql-tag";
-import { characterFields } from "../../fields/characterFields";
+import { ADD_PERSON } from "../../graphQL/query/person";
+import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
 
 import { moveFormToGqlVariable } from "../../graphQL/peopleFormHandler";
 
@@ -74,14 +75,23 @@ export default {
           return;
         }
       }
-      console.log("upload");
-      // this.uploadForm();
+      this.uploadForm();
     },
 
     async uploadForm() {
+      // Upload character form
       this.$apollo.mutate({
         mutation: ADD_PERSON,
         variables: await moveFormToGqlVariable(this.character),
+      });
+      // Update collaborate form
+      this.$apollo.mutate({
+        mutation: ADD_COLLABORATE,
+        variables: {
+          name: this.collaborate.name,
+          email: this.collaborate.email,
+          feedback: this.collaborate.feedback,
+        },
       });
 
       this.$router.push("/thanks");

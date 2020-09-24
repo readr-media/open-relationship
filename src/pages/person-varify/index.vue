@@ -28,7 +28,7 @@ import {
   FETCH_PERSONS_COUNT,
   FETCH_RANDOM_PERSON,
   UPDATE_PERSON,
-} from "../../graphQL/graphql.types";
+} from "../../graphQL/query/person";
 import {
   moveFormToGqlVariable,
   moveGqlToForm,

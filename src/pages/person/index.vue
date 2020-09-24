@@ -43,37 +43,6 @@ import { characterFields } from "../../fields/characterFields";
 import { moveFormToGqlVariable } from "../../graphQL/peopleFormHandler";
 
 export default {
-  // apollo: {
-  //   Person: {
-  //     query: gql`
-  //       query getPerson($id: ID!) {
-  //         Person(where: { id: $id }) {
-  //           id
-  //           name
-  //           alternative
-  //           other_names
-  //           identifiers
-  //           email
-  //           gender
-  //           birth_date
-  //           death_date
-  //           image
-  //           summary
-  //           biography
-  //           national_identity
-  //           contact_details
-  //           links
-  //           source
-  //         }
-  //       }
-  //     `,
-  //     variables() {
-  //       return {
-  //         id: 1,
-  //       };
-  //     },
-  //   },
-  // },
   data() {
     return {
       hero: {
@@ -91,9 +60,21 @@ export default {
   },
   methods: {
     checkForm() {
-      if (this.character.name.value.length) {
+      // check form before upload
+      for (const item of Object.entries(this.character)) {
+        // get form's each field object
+        const field = item[1];
+        // if there's an unedit field ,but required, return
+        if (field.required && field.value == "") {
+          field.formState = false;
+          return;
+        }
+        // if there's an uncorrect field ,reutrn
+        if (field.formState == false) {
+          return;
+        }
       }
-
+      console.log("upload");
       // this.uploadForm();
     },
 

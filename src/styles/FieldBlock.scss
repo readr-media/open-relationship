@@ -103,7 +103,8 @@
   }
 
   .FieldBlock-error {
-    height: 28px;
+    min-height: 28px;
+    width: 100%;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;

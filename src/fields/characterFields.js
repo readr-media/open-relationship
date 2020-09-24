@@ -14,6 +14,7 @@ export const characterFields = {
     info: "",
     value: "",
     inputStatus: { type: "text" },
+
     formState: true,
   },
   other_names: {
@@ -120,8 +121,7 @@ export const characterFields = {
     value: "",
     inputStatus: { type: "text" },
     required: true,
-    verify: ["urlFormat"],
-
+    verify: ["required", "urlFormat"],
     formState: true,
   },
 };

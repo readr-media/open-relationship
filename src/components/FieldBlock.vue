@@ -72,7 +72,9 @@
 
     <!-- error prompt -->
     <div v-if="field.formState == false" class="FieldBlock-error">
-      {{ errorPrompt }}
+      <div v-for="prompt in errorPrompt" :key="prompt">
+        {{ prompt }}
+      </div>
     </div>
   </div>
 </template>
@@ -83,11 +85,11 @@ export default {
   props: ["field", "type"],
   data() {
     return {
-      errorPrompt: "",
+      errorPrompt: [],
     };
   },
   methods: {
-    verifyField(e) {
+    verifyField() {
       //  return if there is no verify needed
       if (!this.field.verify) return;
 
@@ -96,9 +98,8 @@ export default {
         // handle each type of verify
         switch (checkItem) {
           case "required":
-            if (e.target.value == "") {
+            if (this.field.value == "") {
               this.field.formState = false;
-              this.errorPrompt = "錯誤警告-此欄位為必填";
             } else {
               this.field.formState = true;
             }
@@ -109,7 +110,6 @@ export default {
               this.field.formState = true;
             } else {
               this.field.formState = false;
-              this.errorPrompt = "錯誤警告-email格式不正確";
             }
             break;
 
@@ -118,7 +118,6 @@ export default {
               this.field.formState = true;
             } else {
               this.field.formState = false;
-              this.errorPrompt = "錯誤警告-日期格式不正確";
             }
             break;
 
@@ -127,7 +126,6 @@ export default {
               this.field.formState = true;
             } else {
               this.field.formState = false;
-              this.errorPrompt = "錯誤警告-網址格式不正確";
             }
             break;
 
@@ -135,15 +133,30 @@ export default {
             break;
         }
       });
-
-      // if (this.field.required != true) return;
-      // if (e.target.value == "") {
-      //   this.field.formState = false;
-      //   this.errorPrompt = "錯誤警告-此欄位為必填";
-      // } else {
-      //   this.field.formState = true;
-      // }
     },
+  },
+
+  mounted() {
+    // when mounted,initial each field's own error prompt
+    if (!this.field.verify) return;
+    this.field.verify.forEach((checkItem) => {
+      switch (checkItem) {
+        case "required":
+          this.errorPrompt.push("錯誤警告-此欄位為必填");
+          break;
+        case "emailFormat":
+          this.errorPrompt.push("錯誤警告-email格式不正確");
+          break;
+        case "dateFormat":
+          this.errorPrompt.push("錯誤警告-日期格式不正確");
+          break;
+        case "urlFormat":
+          this.errorPrompt.push("錯誤警告-網址格式不正確");
+          break;
+        default:
+          break;
+      }
+    });
   },
 };
 </script>

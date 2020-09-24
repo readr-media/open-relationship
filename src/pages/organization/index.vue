@@ -2,11 +2,13 @@
   <div id="Page-Organization" class="Form-Page">
     <FormHero :title="hero.title" :content="hero.content" type="create" />
     <div class="fieldContainer">
+      <span class="create-star">＊</span>為必填欄位
       <form action v-on:submit.prevent="checkForm">
         <FieldBlock
           v-for="field in organization"
           :key="field.label"
           :field="field"
+          type="create"
         />
 
         <h5>協作者的資料與心得</h5>
@@ -15,7 +17,7 @@
           我們會拿你的資料做什麼、你有什麼好處、我們不會亂來
           blablablabinbinbapsushinomidorikurasushisushiro
         </p>
-        <CollaborateFieldBlock collaborate="collaborate" />
+        <CollaborateFieldBlock :collaborate="collaborate" />
         <Button title="送出" fitDiv="true" round="true" type="create" />
       </form>
     </div>
@@ -30,15 +32,19 @@ import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
 import { organizationFields } from "../../fields/organizationFields";
 
-import { graphql } from "../../graphQL/graphql.util";
 import { ADD_ORGANIZATION } from "../../graphQL/query/organization";
-
+import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
 import { moveFormToGqlVariable } from "../../graphQL/organizationFormHandler";
 
 export default {
+  components: {
+    FormHero,
+    FieldBlock,
+    CollaborateFieldBlock,
+    Button,
+  },
   data() {
     return {
-      organizationId: 0,
       hero: {
         title: "新增組織資料表單",
         content: "台灣政商組織資料",
@@ -53,36 +59,51 @@ export default {
     };
   },
   methods: {
-    async checkForm() {
+    checkForm() {
+      // check form before upload
+      for (const item of Object.entries(this.organization)) {
+        // get form's each field object
+        const field = item[1];
+        // if there's an unedit field ,but required, return
+        if (field.required && field.value == "") {
+          field.formState = false;
+          return;
+        }
+        // if there's an uncorrect field ,reutrn
+        if (field.formState == false) {
+          return;
+        }
+      }
+      this.uploadForm();
+    },
+
+    async uploadForm() {
+      // Upload character form
       this.$apollo.mutate({
         mutation: ADD_ORGANIZATION,
-        variables: moveFormToGqlVariable(this.organization),
+        variables: await moveFormToGqlVariable(this.organization),
       });
-      // Greet and redirect to home
+      // Update collaborate form
+      this.$apollo.mutate({
+        mutation: ADD_COLLABORATE,
+        variables: {
+          name: this.collaborate.name,
+          email: this.collaborate.email,
+          feedback: this.collaborate.feedback,
+        },
+      });
 
       this.$router.push("/thanks");
     },
-  },
-  components: {
-    FormHero,
-    FieldBlock,
-    CollaborateFieldBlock,
-    Button,
-  },
-
-  async mounted() {
-    // vuex獲取所有用戶資料
-    await this.$store.dispatch("fetchOrganizationList");
-    // 獲取隨機資料
-    const targetOrganization = this.$store.getters.getRandomOrganization;
-    // Put fetched Random person‘s data to form
-    this.organizationId = targetPerson.id;
-    moveGqlToForm(this.character, targetPerson);
   },
 };
 </script>
 
 <style lang="scss" scoped>
 #Page-Organization {
+  .create-star {
+    color: #ed8c4a;
+    margin: 0;
+  }
 }
 </style>

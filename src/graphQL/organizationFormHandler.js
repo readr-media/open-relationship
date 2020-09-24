@@ -4,16 +4,16 @@ export const moveFormToGqlVariable = (organization) => {
     alternative,
     other_names,
     identifiers,
-    email,
-    gender,
-    birth_date,
-    death_date,
+    classification,
+    area,
+    abstract,
+    description,
+    founding_date,
+    dissolution_date,
     image,
-    summary,
-    biography,
-    national_identity,
     contact_details,
     links,
+    address,
     source,
   } = organization;
 
@@ -23,53 +23,35 @@ export const moveFormToGqlVariable = (organization) => {
     alternative: alternative.value,
     other_names: other_names.value,
     identifiers: other_names.identifiers,
-    email: email.value,
-    gender: gender.value,
-    birth_date: birth_date.value ? birth_date.value : null,
-    death_date: death_date.value ? death_date.value : null,
+    classification: classification.value,
+    area: area.value,
+    abstract: abstract.value,
+    description: description.value,
+    founding_date: founding_date.value ? founding_date.value : null,
+    dissolution_date: dissolution_date.value ? dissolution_date.value : null,
     image: image.value,
-    summary: summary.value,
-    biography: biography.value,
-    national_identity: national_identity.value,
     contact_details: contact_details.value,
     links: links.value,
+    address: address.value,
     source: source.value,
   };
 };
 
-export const moveGqlToForm = (organization, targetPerson) => {
-  organization.name.value = targetPerson.name;
-  organization.alternative.value = targetPerson.alternative;
-  organization.other_names.value = targetPerson.other_names;
-  organization.identifiers.value = targetPerson.identifiers;
-  organization.gender.value = targetPerson.gender;
-  organization.email.value = targetPerson.email;
-  organization.birth_date.value = targetPerson.birth_date;
-  organization.death_date.value = targetPerson.death_date;
-  organization.image.value = targetPerson.image;
-  organization.summary.value = targetPerson.summary;
-  organization.biography.value = targetPerson.biography;
-  organization.national_identity.value = targetPerson.national_identity;
-  organization.contact_details.value = targetPerson.contact_details;
-  organization.links.value = targetPerson.links;
+export const moveGqlToForm = (organization, target) => {
+  organization.name.value = target.name;
+  organization.alternative.value = target.alternative;
+  organization.other_names.value = target.other_names;
+  organization.identifiers.value = target.identifiers;
+  organization.classification.value = target.classification;
+  organization.area.value = target.area;
+  organization.abstract.value = target.abstract;
+  organization.description.value = target.description;
+  organization.founding_date.value = target.founding_date;
+  organization.dissolution_date.value = target.dissolution_date;
+  organization.image.value = target.image;
+  organization.contact_details.value = target.contact_details;
+  organization.death_date.value = target.death_date;
+  organization.links.value = target.links;
+  organization.address.value = target.address;
+  organization.source.value = target.source;
 };
-
-// name: organization.name.value,
-// alternative: organization.alternative.value,
-// other_names: organization.other_names.value,
-// identifiers: organization.identifiers.value,
-// classification: organization.classification.value,
-// area: organization.area.value,
-// abstract: organization.abstract.value,
-// description: organization.description.value,
-// founding_date: organization.founding_date.value.length
-//   ? founding_date.value
-//   : null,
-// dissolution_date: organization.dissolution_date.value
-//   ? dissolution_date.value
-//   : null,
-// image: organization.image.value,
-// contact_details: organization.contact_details.value,
-// links: organization.links.value,
-// address: organization.address.value,
-// source: organization.source.value,

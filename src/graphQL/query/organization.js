@@ -1,3 +1,5 @@
+import gql from "graphql-tag";
+
 export const FETCH_ORGANIZATIONS = gql`
   query {
     allOrganizations {

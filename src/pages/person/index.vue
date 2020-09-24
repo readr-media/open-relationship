@@ -40,10 +40,15 @@ import { characterFields } from "../../fields/characterFields";
 import gql from "graphql-tag";
 import { ADD_PERSON } from "../../graphQL/query/person";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
-
 import { moveFormToGqlVariable } from "../../graphQL/peopleFormHandler";
 
 export default {
+  components: {
+    FormHero,
+    FieldBlock,
+    CollaborateFieldBlock,
+    Button,
+  },
   data() {
     return {
       hero: {
@@ -97,13 +102,6 @@ export default {
       this.$router.push("/thanks");
     },
   },
-
-  components: {
-    FormHero,
-    FieldBlock,
-    CollaborateFieldBlock,
-    Button,
-  },
 };
 </script>
 
@@ -113,31 +111,6 @@ export default {
   .create-star {
     color: #ed8c4a;
     margin: 0;
-  }
-  .CollaborateFieldInfo {
-    h5 {
-      height: 40px;
-      font-family: PingFangTC;
-      font-size: 28px;
-      font-weight: 500;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      color: #000000;
-    }
-  }
-  p {
-    height: 56px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.75;
-    letter-spacing: normal;
-    text-align: justify;
-    color: #000000;
   }
 }
 </style>

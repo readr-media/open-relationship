@@ -90,7 +90,14 @@ export default {
     };
   },
   methods: {
-    async checkForm() {
+    checkForm() {
+      if (this.character.name.value.length) {
+      }
+
+      // this.uploadForm();
+    },
+
+    async uploadForm() {
       this.$apollo.mutate({
         mutation: ADD_PERSON,
         variables: await moveFormToGqlVariable(this.character),

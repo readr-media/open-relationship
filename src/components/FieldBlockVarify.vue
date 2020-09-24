@@ -1,5 +1,5 @@
 <template>
-  <div class="FieldBlock FieldBlockVarify">
+  <div class="FieldBlock FieldBlockverify">
     <!-- handle title list decoration if read only -->
     <div class="FieldBlock-title">
       <div class="FieldBlock-title-decoration">
@@ -49,7 +49,7 @@ export default {
   margin: 50px auto 0;
 }
 
-.FieldBlockVarify {
+.FieldBlockverify {
   .FieldBlock-value {
     height: 29px;
 

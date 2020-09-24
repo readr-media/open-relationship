@@ -26,15 +26,17 @@
     flex-direction: row;
     align-items: center;
 
-    margin: 0 0 10px 10px;
+    margin: 0 0 10px 0;
 
     .create-star {
       color: #ed8c4a;
       margin: 0;
+      width: 21px;
     }
-    .varify-star {
+    .verify-star {
       color: #63c1e2;
       margin: 0;
+      width: 21px;
     }
   }
 
@@ -90,10 +92,26 @@
       color: #000000;
 
       border-bottom: 1px lightgray solid;
-      margin-bottom: 24px;
       &:focus {
         outline: none;
       }
     }
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  .FieldBlock-error {
+    height: 28px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    text-align: justify;
+    color: #d0021b;
   }
 }

@@ -11,9 +11,9 @@
     </div>
 
     <div class="section-title" id="Relation-title">| 我要驗證資料 |</div>
-    <div class="Relation-btn-container Relation-btn-container-varify ">
+    <div class="Relation-btn-container Relation-btn-container-verify ">
       <RelationButton
-        v-for="createItem in varifySectionList"
+        v-for="createItem in verifySectionList"
         :key="createItem.id"
         :title="createItem.title"
         :to="createItem.route"
@@ -38,9 +38,9 @@ export default {
           route: "/person_organization",
         },
       ],
-      varifySectionList: [
-        { id: 1, title: "驗證人物", route: "/person-varify" },
-        { id: 2, title: "驗證組織", route: "/organization-varify" },
+      verifySectionList: [
+        { id: 1, title: "驗證人物", route: "/person-verify" },
+        { id: 2, title: "驗證組織", route: "/organization-verify" },
         { id: 3, title: "驗證人物關係", route: "/people_relation" },
         { id: 4, title: "驗證組織關係", route: "/organization_relation" },
         { id: 5, title: "驗證人物組織關係", route: "/people_organization" },
@@ -79,7 +79,7 @@ export default {
         }
       }
     }
-    &-varify {
+    &-verify {
       .RelationButton {
         background-color: #63c1e2;
         &:hover {

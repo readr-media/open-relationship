@@ -1,10 +1,10 @@
 <template>
-  <div class="FieldBlock">
+  <div class="FieldBlock" :class="{ fieldError: field.formState == false }">
     <div class="FieldBlock-title">
       <div class="FieldBlock-title-decoration">
         <h5
-          v-if="field.needed"
-          :class="type == 'create' ? 'create-star' : 'varify-star'"
+          v-if="field.required"
+          :class="type == 'create' ? 'create-star' : 'verify-star'"
         >
           ＊
         </h5>
@@ -52,23 +52,106 @@
         class="input-single"
         placeholder="輸入日期"
         calendar-button-icon="fa fa-calendar"
+        changedMonth="(e) => verifyField(e)"
       /> -->
-      <input :type="field.inputStatus.type" v-model="field.value" />
+      <input
+        :type="field.inputStatus.type"
+        v-model="field.value"
+        @change="(e) => verifyField(e)"
+      />
     </div>
 
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
-      <input :type="field.inputStatus.type" v-model="field.value" />
+      <input
+        :type="field.inputStatus.type"
+        v-model="field.value"
+        @change="(e) => verifyField(e)"
+      />
+    </div>
+
+    <!-- error prompt -->
+    <div v-if="field.formState == false" class="FieldBlock-error">
+      {{ errorPrompt }}
     </div>
   </div>
 </template>
 
 <script>
+import { validateEmail, validateDate, validateUrl } from "./fieldVerify";
 export default {
   props: ["field", "type"],
+  data() {
+    return {
+      errorPrompt: "",
+    };
+  },
+  methods: {
+    verifyField(e) {
+      //  return if there is no verify needed
+      if (!this.field.verify) return;
+
+      // handle multiple verify
+      this.field.verify.forEach((checkItem) => {
+        // handle each type of verify
+        switch (checkItem) {
+          case "required":
+            if (e.target.value == "") {
+              this.field.formState = false;
+              this.errorPrompt = "錯誤警告-此欄位為必填";
+            } else {
+              this.field.formState = true;
+            }
+            break;
+
+          case "emailFormat":
+            if (validateEmail(this.field.value) || this.field.value == "") {
+              this.field.formState = true;
+            } else {
+              this.field.formState = false;
+              this.errorPrompt = "錯誤警告-email格式不正確";
+            }
+            break;
+
+          case "dateFormat":
+            if (validateDate(this.field.value) || this.field.value == "") {
+              this.field.formState = true;
+            } else {
+              this.field.formState = false;
+              this.errorPrompt = "錯誤警告-日期格式不正確";
+            }
+            break;
+
+          case "urlFormat":
+            if (validateUrl(this.field.value) || this.field.value == "") {
+              this.field.formState = true;
+            } else {
+              this.field.formState = false;
+              this.errorPrompt = "錯誤警告-網址格式不正確";
+            }
+            break;
+
+          default:
+            break;
+        }
+      });
+
+      // if (this.field.required != true) return;
+      // if (e.target.value == "") {
+      //   this.field.formState = false;
+      //   this.errorPrompt = "錯誤警告-此欄位為必填";
+      // } else {
+      //   this.field.formState = true;
+      // }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 @import "../styles/FieldBlock.scss";
+
+.fieldError {
+  border: solid 3px #d0021b;
+}
 </style>

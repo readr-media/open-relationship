@@ -1,6 +1,6 @@
 <template>
-  <div id="Page-Person-varify" class="Form-Page">
-    <FormHero :title="hero.title" :content="hero.content" type="varify" />
+  <div id="Page-Person-verify" class="Form-Page">
+    <FormHero :title="hero.title" :content="hero.content" type="verify" />
 
     <!-- <div v-if="$apollo.loading">Loading...</div> -->
     <div class="fieldContainer">
@@ -10,9 +10,9 @@
           v-for="field in character"
           :key="field.label"
           :field="field"
-          type="varify"
+          type="verify"
         />
-        <Button title="送出" fitDiv="true" round="true" type="varify" />
+        <Button title="送出" fitDiv="true" round="true" type="verify" />
       </form>
     </div>
   </div>

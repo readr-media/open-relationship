@@ -6,7 +6,7 @@
       fitDiv: fitDiv,
       round: round,
       create: type == 'create',
-      varify: type == 'varify',
+      verify: type == 'verify',
     }"
   >
     <div v-if="btnStatus == 'inactive'" class="Button-text">即將開放</div>
@@ -69,7 +69,7 @@ export default {
   background-color: #ed8c4a;
 }
 
-.varify {
+.verify {
   background-color: #63c1e2;
 }
 </style>

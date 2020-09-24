@@ -1,6 +1,6 @@
 <template>
-  <div id="Page-Person-varify" class="Form-Page">
-    <FormHero :title="hero.title" :content="hero.content" type="varify" />
+  <div id="Page-Person-verify" class="Form-Page">
+    <FormHero :title="hero.title" :content="hero.content" type="verify" />
     打＊的欄位不需經過驗證
     <div class="fieldContainer">
       <form action v-on:submit.prevent="checkForm">
@@ -9,7 +9,7 @@
           :key="field.label"
           :field="field"
         />
-        <Button title="送出" fitDiv="true" round="true" type="varify" />
+        <Button title="送出" fitDiv="true" round="true" type="verify" />
       </form>
     </div>
   </div>

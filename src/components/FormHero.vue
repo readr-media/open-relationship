@@ -5,7 +5,7 @@
     </div>
     <div
       id="FormHero-title"
-      :class="{ create: type == 'create', varify: type == 'varify' }"
+      :class="{ create: type == 'create', verify: type == 'verify' }"
     >
       <div id="FormHero-title-text">
         {{ title }}
@@ -106,7 +106,7 @@ export default {
     background-color: #ed8c4a;
   }
 
-  .varify {
+  .verify {
     background-color: #63c1e2;
   }
 }

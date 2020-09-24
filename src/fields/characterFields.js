@@ -54,7 +54,7 @@ export const characterFields = {
 
   birth_date: {
     label: "出生日期",
-    info: "時間格式：yyyy/mm/dd ，若只知道年份可以只填年份",
+    info: "時間格式：yyyy-mm-dd ，若只知道年份可以只填年份",
     value: "",
     inputStatus: { type: "date" },
     verify: ["dateFormat"],
@@ -63,7 +63,7 @@ export const characterFields = {
   },
   death_date: {
     label: "死亡日期",
-    info: "時間格式：yyyy/mm/dd ，若只知道年份可以只填年份",
+    info: "時間格式：yyyy-mm-dd ，若只知道年份可以只填年份",
     value: "",
     inputStatus: { type: "date" },
     verify: ["dateFormat"],

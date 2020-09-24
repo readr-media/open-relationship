@@ -15,6 +15,9 @@ export function validateDate(dateString) {
   var month = parseInt(parts[1], 10);
   var year = parseInt(parts[0], 10);
 
+  if (isNaN(month)) month = 1;
+  if (isNaN(day)) day = 1;
+
   // Check the ranges of month and year
   if (year < 1000 || year > 3000 || month == 0 || month > 12) return false;
 

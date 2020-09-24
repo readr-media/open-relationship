@@ -60,7 +60,7 @@ export const organizationFields = {
   },
   founding_date: {
     label: "創立時間",
-    info: "時間格式：yyyy/mm/dd ，若只知道年份可以只填年份",
+    info: "時間格式：yyyy-mm-dd ，若只知道年份可以只填年份",
     value: "",
     inputStatus: { type: "date" },
     verify: ["dateFormat"],
@@ -68,7 +68,7 @@ export const organizationFields = {
   },
   dissolution_date: {
     label: "解散時間",
-    info: "時間格式：yyyy/mm/dd ，若只知道年份可以只填年份",
+    info: "時間格式：yyyy-mm-dd ，若只知道年份可以只填年份",
     value: "",
     inputStatus: { type: "date" },
     verify: ["dateFormat"],

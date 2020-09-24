@@ -1,11 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "PingFangTC" !important;
+}
+
 body {
   margin: 0;
   padding: 0;
 }
+html,
+body {
+  text-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
+}
 
 #__nuxt {
   width: 100%;
-  font-family: PingFangTC;
 }
 
 .section-title {

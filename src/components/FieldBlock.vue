@@ -58,6 +58,7 @@
         :type="field.inputStatus.type"
         v-model="field.value"
         @change="(e) => verifyField(e)"
+        placeholder="yyyy-mm-dd"
       />
     </div>
 

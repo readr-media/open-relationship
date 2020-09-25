@@ -42,7 +42,7 @@ export default {
 
   display: flex;
   flex-direction: column;
-  margin: 76px 20px 20px;
+  margin: 76px 0 20px;
   position: relative;
 
   .PrecessCard-number {
@@ -87,6 +87,7 @@ export default {
 
   @include atSmall {
     max-width: 380px;
+    margin: 76px 20px 20px;
   }
   @include atMedium {
     max-width: 300px;

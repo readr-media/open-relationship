@@ -58,6 +58,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 #Process {
   // height: 770px;
   width: 100%;
@@ -73,9 +75,25 @@ export default {
     width: 100%;
     margin: auto;
     display: flex;
-    flex-direction: columns;
+    flex-direction: column;
     flex-wrap: wrap;
-    // align-content: center;
+    align-content: center;
+  }
+
+  @include atMedium {
+    padding: 50px;
+    #Process-cardContainer {
+      flex-direction: row;
+      width: 700px;
+    }
+  }
+
+  @include atLarge {
+    // padding: 50px;
+    #Process-cardContainer {
+      flex-direction: row;
+      width: 840px;
+    }
   }
 }
 </style>

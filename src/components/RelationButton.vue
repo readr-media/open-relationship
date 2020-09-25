@@ -11,8 +11,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 .RelationButton {
   width: 100%;
+  // max-width: auto;
+
   border-radius: 42px;
   padding: 10px 0;
   margin-bottom: 30px;
@@ -34,5 +38,12 @@ export default {
   // margin: 0 15px;
   cursor: pointer;
   text-decoration: none;
+
+  @include atLarge {
+    width: 170px;
+    padding: 26px 22px;
+    height: 80px;
+    margin-bottom: 50px;
+  }
 }
 </style>

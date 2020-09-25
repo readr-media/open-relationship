@@ -17,11 +17,15 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 #Intro {
   width: 100%;
   height: 100vh;
 
   background-color: #102c34;
+
+  padding: 72px 20px;
 
   display: flex;
   flex-direction: column;
@@ -40,6 +44,10 @@ export default {};
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+  }
+
+  @include atMedium {
+    display: none;
   }
 }
 </style>

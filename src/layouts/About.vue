@@ -21,6 +21,8 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 #About {
   width: 100%;
   background-color: #ebebeb;
@@ -48,6 +50,23 @@ export default {};
     letter-spacing: normal;
     text-align: justify;
     color: #000000;
+  }
+
+  @include atSmall {
+    padding: 50px 115px;
+    #About-content {
+      width: 400px;
+    }
+  }
+  @include atMedium {
+    #About-content {
+      width: 600px;
+    }
+  }
+  @include atLarge {
+    #About-content {
+      width: 800px;
+    }
   }
 }
 </style>

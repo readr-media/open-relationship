@@ -1,9 +1,10 @@
 //先針對media queries的width設為變數
 
-$atSmall: 530px;
-$atMedium: 800px;
-$atLarge: 1200px;
-$atSuperLarge: 1500px;
+$atSmall: 480px;
+$atMedium: 760px;
+$atLarge: 960px;
+$atSuperLarge: 1200px;
+$atUltraLarge: 1800px;
 
 /*把變數帶入mixin中，此mixin只就單純把media queries寫到我的mixin中，
 並且使用我上面設立的變數來調動media queries的width*/
@@ -31,6 +32,12 @@ $atSuperLarge: 1500px;
 
 @mixin atSuperLarge() {
   @media all and (min-width: $atSuperLarge) {
+    @content;
+  }
+}
+
+@mixin atUltraLarge() {
+  @media all and (min-width: $atUltraLarge) {
     @content;
   }
 }

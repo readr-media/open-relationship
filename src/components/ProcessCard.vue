@@ -34,13 +34,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 .ProcessCard {
   width: 100%;
   background-color: #ffffff;
 
   display: flex;
   flex-direction: column;
-  margin: 76px auto 20px;
+  margin: 76px 20px 20px;
   position: relative;
 
   .PrecessCard-number {
@@ -81,6 +83,16 @@ export default {
     letter-spacing: normal;
     color: #000000;
     margin: 0 25px 23px;
+  }
+
+  @include atSmall {
+    max-width: 380px;
+  }
+  @include atMedium {
+    max-width: 300px;
+  }
+  @include atLarge {
+    max-width: 380px;
   }
 }
 </style>

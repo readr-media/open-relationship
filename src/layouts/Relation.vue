@@ -54,11 +54,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 #Relation {
   // height: 430px;
+  padding: 40px 20px 16px;
   width: 100%;
   background-color: #102c34;
-  padding: 40px 20px 16px;
 
   display: flex;
   flex-direction: column;
@@ -89,6 +91,16 @@ export default {
           background-color: #63c0e2e1;
         }
       }
+    }
+  }
+
+  @include atLarge {
+    padding: 50px 115px;
+    justify-content: center;
+    .Relation-btn-container {
+      flex-direction: row;
+      justify-content: space-around;
+      max-width: 1200px;
     }
   }
 }

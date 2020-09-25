@@ -4,3 +4,4 @@ import Datepicker from "vuejs-datepicker";
 
 Vue.component("VoerroTagsInput", VoerroTagsInput);
 Vue.component("Datepicker", Datepicker);
+1;

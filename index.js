@@ -108,8 +108,17 @@ module.exports = {
         clientConfigs: {
           default: {
             httpEndpoint: "http://localhost:3000/admin/api/",
+            // httpEndpoint:'https://or-dev.readr.tw/admin/api'
           },
         },
+      },
+      head: {
+        // titleTemplate: '%s - Nuxt.js',
+        meta: [
+          { charset: "utf-8" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          // { hid: 'description', name: 'description', content: 'Meta description' }
+        ],
       },
     }),
   ],

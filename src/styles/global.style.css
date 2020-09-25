@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "PingFangTC" !important;
+  font-family: "PingFang TC" !important;
 }
 
 body {
@@ -19,13 +19,13 @@ body {
 }
 
 .section-title {
-  width: 800px;
+  width: 100%;
   height: 29px;
   font-size: 21px;
   font-weight: 600;
   letter-spacing: 1px;
   text-align: center;
-  margin: 50px auto 30px;
+  margin: 0 auto 20px;
 }
 
 .Form-Page {

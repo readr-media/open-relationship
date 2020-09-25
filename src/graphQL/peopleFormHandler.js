@@ -3,7 +3,6 @@ export const moveFormToGqlVariable = (character) => {
     name,
     alternative,
     other_names,
-    identifiers,
     email,
     gender,
     birth_date,
@@ -22,7 +21,6 @@ export const moveFormToGqlVariable = (character) => {
     name: name.value,
     alternative: alternative.value,
     other_names: other_names.value,
-    identifiers: other_names.identifiers,
     email: email.value,
     gender: gender.value,
     birth_date: birth_date.value ? birth_date.value : null,
@@ -41,7 +39,6 @@ export const moveGqlToForm = (character, targetPerson) => {
   character.name.value = targetPerson.name;
   character.alternative.value = targetPerson.alternative;
   character.other_names.value = targetPerson.other_names;
-  character.identifiers.value = targetPerson.identifiers;
   character.gender.value = targetPerson.gender;
   character.email.value = targetPerson.email;
   character.birth_date.value = targetPerson.birth_date;

@@ -75,6 +75,8 @@ export default {
         }
       }
       this.uploadForm();
+      this.clearForm(this.organization);
+      this.$router.push("/thanks");
     },
 
     async uploadForm() {
@@ -92,8 +94,13 @@ export default {
           feedback: this.collaborate.feedback,
         },
       });
-
-      this.$router.push("/thanks");
+    },
+    clearForm(form) {
+      for (const item of Object.entries(form)) {
+        // get form's each field object
+        const field = item[1];
+        field.value = "";
+      }
     },
   },
 };

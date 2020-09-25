@@ -89,7 +89,7 @@ export const characterFields = {
     label: "詳細生平",
     info: "",
     value: "",
-    inputStatus: { type: "text" },
+    inputStatus: { type: "textarea" },
     formState: true,
   },
   national_identity: {

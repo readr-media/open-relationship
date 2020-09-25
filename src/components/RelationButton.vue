@@ -12,11 +12,12 @@ export default {
 
 <style lang="scss" scoped>
 .RelationButton {
-  width: 170px;
-  height: 80px;
+  width: 100%;
   border-radius: 42px;
+  padding: 10px 0;
+  margin-bottom: 30px;
 
-  font-family: PingFangTC;
+  font-family: PingFang TC;
   font-size: 21px;
   font-weight: 500;
   font-stretch: normal;
@@ -30,7 +31,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 
-  margin: 0 15px;
+  // margin: 0 15px;
   cursor: pointer;
   text-decoration: none;
 }

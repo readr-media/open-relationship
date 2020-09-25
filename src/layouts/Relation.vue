@@ -1,6 +1,6 @@
 <template>
   <div id="Relation">
-    <div class="section-title" id="Relation-title">| 我要新增資料 |</div>
+    <div class="section-title Relation-title">| 我要新增資料 |</div>
     <div class="Relation-btn-container Relation-btn-container-create">
       <RelationButton
         v-for="createItem in createSectionList"
@@ -10,7 +10,7 @@
       />
     </div>
 
-    <div class="section-title" id="Relation-title">| 我要驗證資料 |</div>
+    <div class="section-title Relation-title">| 我要驗證資料 |</div>
     <div class="Relation-btn-container Relation-btn-container-verify ">
       <RelationButton
         v-for="createItem in verifySectionList"
@@ -55,21 +55,24 @@ export default {
 
 <style lang="scss" scoped>
 #Relation {
-  height: 430px;
+  // height: 430px;
   width: 100%;
   background-color: #102c34;
+  padding: 40px 20px 16px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  #Relation-title {
+  .Relation-title {
     color: #ffffff;
+    margin-bottom: 33px;
   }
 
   .Relation-btn-container {
+    width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     &-create {
       .RelationButton {

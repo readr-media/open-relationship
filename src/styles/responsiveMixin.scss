@@ -10,27 +10,27 @@ $atSuperLarge: 1500px;
 
 //手機
 @mixin atSmall() {
-  @media all and (max-width: $atSmall) {
+  @media all and (min-width: $atSmall) {
     @content;
   }
 }
 
 //平板
 @mixin atMedium() {
-  @media all and (max-width: $atMedium) {
+  @media all and (min-width: $atMedium) {
     @content;
   }
 }
 
 //電腦
 @mixin atLarge() {
-  @media all and (max-width: $atLarge) {
+  @media all and (min-width: $atLarge) {
     @content;
   }
 }
 
 @mixin atSuperLarge() {
-  @media all and (max-width: $atSuperLarge) {
+  @media all and (min-width: $atSuperLarge) {
     @content;
   }
 }

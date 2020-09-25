@@ -1,6 +1,7 @@
 <template>
   <div class="FieldBlock" :class="{ fieldError: field.formState == false }">
     <div class="FieldBlock-title">
+      {{ field.label }}
       <div class="FieldBlock-title-decoration">
         <h5
           v-if="field.required"
@@ -9,8 +10,6 @@
           ＊
         </h5>
       </div>
-
-      {{ field.label }}
     </div>
     <p v-if="field.info.length > 0" class="FieldBlock-info">{{ field.info }}</p>
 

@@ -35,29 +35,28 @@ export default {
 
 <style lang="scss" scoped>
 .ProcessCard {
-  max-width: 380px;
-  height: 259px;
+  width: 100%;
   background-color: #ffffff;
 
   display: flex;
   flex-direction: column;
-  margin: 86px 21px 0;
+  margin: 76px auto 20px;
   position: relative;
 
   .PrecessCard-number {
     position: absolute;
-    width: 52px;
-    height: 67px;
+    width: 70px;
+    height: 83px;
     // box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     background-color: #ffffff;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: -56px;
+    margin-top: -63px;
     background: none;
   }
 
   .ProcessCard-text-title {
-    width: 380px;
+    // width: 380px;
     height: 29px;
     font-family: PingFangTC;
     font-size: 21px;
@@ -72,9 +71,8 @@ export default {
     margin: 38px auto 10px;
   }
   .ProcessCard-text-content {
-    width: 300px;
-    height: 112px;
-    font-family: PingFangTC;
+    // width: 300px;
+    font-family: PingFang TC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -82,7 +80,7 @@ export default {
     line-height: 1.75;
     letter-spacing: normal;
     color: #000000;
-    margin: 0 auto 20px;
+    margin: 0 25px 23px;
   }
 }
 </style>

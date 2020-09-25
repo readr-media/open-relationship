@@ -59,8 +59,9 @@ export default {
 
 <style lang="scss" scoped>
 #Process {
-  height: 770px;
+  // height: 770px;
   width: 100%;
+  padding: 40px 20px 20px;
   background-color: #ebebeb;
   overflow: auto;
 
@@ -69,7 +70,7 @@ export default {
   }
 
   #Process-cardContainer {
-    width: 844px;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: columns;

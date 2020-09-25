@@ -5,9 +5,9 @@
     <About />
     <Relation />
     <Process />
-    <!-- <Cooperation />
+    <Cooperation />
     <Contact />
-    <Footer />  -->
+    <Footer />
   </div>
 </template>
 

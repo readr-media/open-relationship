@@ -11,14 +11,11 @@
           type="create"
         />
 
-        <h5>協作者的資料與心得</h5>
-        <p>
-          以下欄位皆選填，請自由填答，
-          我們會拿你的資料做什麼、你有什麼好處、我們不會亂來
-          blablablabinbinbapsushinomidorikurasushisushiro
-        </p>
         <CollaborateFieldBlock :collaborate="collaborate" />
-        <Button title="送出" fitDiv="true" round="true" type="create" />
+
+        <div class="btnContainer">
+          <Button title="送出" fitDiv="true" round="true" type="create" />
+        </div>
       </form>
     </div>
   </div>

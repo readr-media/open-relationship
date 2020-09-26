@@ -37,7 +37,7 @@ export default {
 @import "../styles/responsiveMixin.scss";
 
 .ProcessCard {
-  width: 100%;
+  max-width: 100%;
   background-color: #ffffff;
 
   display: flex;

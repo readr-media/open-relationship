@@ -1,8 +1,11 @@
 <template>
   <div id="Page-Person" class="Form-Page">
     <FormHero :title="hero.title" :content="hero.content" type="create" />
+
     <div class="fieldContainer">
-      <span class="create-star">＊</span>為必填欄位
+      <div class="fieldContainer-notation">
+        <span class="create-star">＊</span>為必填欄位
+      </div>
       <form action v-on:submit.prevent="checkForm">
         <FieldBlock
           v-for="field in character"
@@ -11,18 +14,11 @@
           type="create"
         />
 
-        <div class="CollaborateFieldInfo">
-          <h5>協作者的資料與心得</h5>
-          <p>
-            以下欄位皆選填，請自由填答，
-            <br />我們會拿你的資料做什麼、你有什麼好處、我們不會亂來
-            blablablabinbinbapsushinomidorikurasushisushiro
-          </p>
-        </div>
-
         <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <Button title="送出" fitDiv="true" round="true" type="create" />
+        <div class="btnContainer">
+          <Button title="送出" fitDiv="true" round="true" type="create" />
+        </div>
       </form>
     </div>
   </div>
@@ -117,10 +113,8 @@ export default {
 
 <style lang="scss" scoped>
 #Page-Person {
-  background-color: #ebebeb;
-  .create-star {
-    color: #ed8c4a;
-    margin: 0;
-  }
+  width: 100%;
+
+  // background: gold;
 }
 </style>

@@ -57,9 +57,6 @@ export default {
         flex: 1;
       }
     }
-    .changeLine-small {
-      display: none;
-    }
   }
 
   @include atMedium {

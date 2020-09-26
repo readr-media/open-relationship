@@ -32,6 +32,6 @@ body {
   margin: 0 auto 20px;
 }
 
-.Form-Page {
-  background-color: #ebebeb;
+.changeLine-small {
+  display: none;
 }

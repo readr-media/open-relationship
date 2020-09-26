@@ -25,6 +25,7 @@
         >
       </span>
     </div>
+
     <!-- handle textarea -->
     <div
       v-else-if="field.inputStatus.type == 'textarea'"
@@ -32,11 +33,8 @@
     >
       <textarea
         name=""
-        class="textarea"
         v-model="field.value"
-        id=""
-        cols="80"
-        rows="10"
+        class="CollaborateFieldBlock-input"
       ></textarea>
     </div>
 

@@ -73,6 +73,7 @@ export default {
 
   #Process-cardContainer {
     width: 100%;
+    box-sizing: border-box;
     margin: auto;
     display: flex;
     flex-direction: column;

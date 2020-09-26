@@ -1,15 +1,19 @@
 <template>
   <div id="Page-Person-verify" class="Form-Page">
     <FormHero :title="hero.title" :content="hero.content" type="verify" />
-    打＊的欄位不需經過驗證
     <div class="fieldContainer">
+      <div class="fieldContainer-notation">
+        <span class="verify-star">＊</span>為必填欄位
+      </div>
       <form action v-on:submit.prevent="checkForm">
         <FieldBlock
           v-for="field in organization"
           :key="field.label"
           :field="field"
         />
-        <Button title="送出" fitDiv="true" round="true" type="verify" />
+        <div class="btnContainer">
+          <Button title="送出" fitDiv="true" round="true" type="verify" />
+        </div>
       </form>
     </div>
   </div>

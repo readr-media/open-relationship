@@ -16,7 +16,7 @@
         這是{{ type == "create" ? "新增" : "驗證"
         }}{{ content }}的表單<br />歡迎大家花費 5-10 分鐘的時間幫忙填寫資料
         <br />如果有任何問題 <br />歡迎來信 readr@readr.tw
-        或是私訊粉專https://www.facebook.com/readr.tw/
+        <br />或是私訊粉專https://www.facebook.com/readr.tw/
         <br />我們會有專人為你解答 <br />謝謝你的參與！
       </p>
     </div>
@@ -41,16 +41,16 @@ export default {
 <style lang="scss" scoped>
 #FormHero {
   width: 100%;
-  height: 426px;
+  height: 550px;
   background-color: #102c34;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   #FromHero-logo {
-    width: 146px;
-    height: 118px;
-    margin: 15px auto 0;
+    width: 93px;
+    height: 94px;
+    margin: 27px auto;
     img {
       width: 100%;
       height: 100%;
@@ -58,47 +58,41 @@ export default {
   }
 
   #FormHero-title {
-    width: 400px;
     height: 50px;
     border-radius: 31px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 17px auto 20px;
+    margin: 0px auto 20px;
 
     #FormHero-title-text {
-      max-width: 800px;
-      height: 40px;
+      // height: 40px;
       font-size: 28px;
       font-weight: 500;
-      font-family: PingFangTC;
       font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
       text-align: center;
       color: #ffffff;
       letter-spacing: 2px;
+      padding: 5px 18px;
     }
   }
   #FormHero-content {
-    max-width: 800px;
-    height: 162px;
-
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.75;
-    letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
+    width: 270px;
+    height: 294px;
 
     margin: 0 auto 38px;
     p {
       margin: 0;
       width: 100%;
+      font-size: 1rem;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.75;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
     }
   }
 

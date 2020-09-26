@@ -3,7 +3,7 @@
     <div class="CollaborateFieldInfo">
       <h5>協作者的資料與心得</h5>
       <p>
-        以下欄位皆選填，請自由填答，我們會拿你的資料做什麼、你有什麼好處、我們不會亂來blablablab
+        以下欄位皆選填，請自由填答，<br />我們會拿你的資料做什麼、你有什麼好處、我們不會亂來blablablab
       </p>
     </div>
 
@@ -47,6 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/FieldBlock.scss";
+@import "../styles/responsiveMixin.scss";
 
 .CollaborateFieldBlock {
   width: 100%;
@@ -83,6 +84,12 @@ export default {
   }
   &-input {
     margin-bottom: 21px;
+  }
+
+  @include atMedium {
+    .CollaborateFieldInfo {
+      padding: 30px 0 0;
+    }
   }
 }
 </style>

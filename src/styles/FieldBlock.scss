@@ -1,6 +1,57 @@
+@import "../styles/responsiveMixin.scss";
 .Form-Page {
   width: 100%;
   background-color: #ebebeb;
+
+  @include atSmall {
+    .fieldContainer {
+      max-width: 620px;
+      margin: auto;
+      padding: 50px 10px;
+      .FieldBlock {
+        padding: 20px 50px 44px;
+      }
+      .btnContainer {
+        padding: 0;
+        .Button {
+          margin-top: 40px;
+          margin-bottom: 37px;
+        }
+      }
+    }
+  }
+  @include atMedium {
+    .fieldContainer {
+      width: 720px;
+      margin: auto;
+      .FieldBlock {
+        padding: 20px 50px 44px;
+      }
+      .btnContainer {
+        padding: 0;
+        .Button {
+          margin-top: 40px;
+          margin-bottom: 37px;
+        }
+      }
+    }
+  }
+  @include atLarge {
+    .fieldContainer {
+      width: 820px;
+      margin: auto;
+      .FieldBlock {
+        padding: 20px 50px 44px;
+      }
+      .btnContainer {
+        padding: 0;
+        .Button {
+          margin-top: 40px;
+          margin-bottom: 37px;
+        }
+      }
+    }
+  }
 }
 
 .fieldContainer {

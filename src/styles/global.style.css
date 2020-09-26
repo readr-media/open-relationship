@@ -31,3 +31,7 @@ body {
   text-align: center;
   margin: 0 auto 20px;
 }
+
+.changeLine-small {
+  display: none;
+}

@@ -114,7 +114,7 @@ export default {
 <style lang="scss" scoped>
 #Page-Person {
   width: 100%;
-  background-color: #ebebeb;
+
   // background: gold;
 }
 </style>

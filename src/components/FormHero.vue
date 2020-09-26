@@ -1,6 +1,6 @@
 <template>
   <div id="FormHero">
-    <div id="FromHero-logo">
+    <div id="FormHero-logo">
       <img :src="formLogo" alt="" />
     </div>
     <div
@@ -16,7 +16,9 @@
         這是{{ type == "create" ? "新增" : "驗證"
         }}{{ content }}的表單<br />歡迎大家花費 5-10 分鐘的時間幫忙填寫資料
         <br />如果有任何問題 <br />歡迎來信 readr@readr.tw
-        <br />或是私訊粉專https://www.facebook.com/readr.tw/
+        <br
+          class="changeLine-small"
+        />或是私訊粉專https://www.facebook.com/readr.tw/
         <br />我們會有專人為你解答 <br />謝謝你的參與！
       </p>
     </div>
@@ -39,6 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/responsiveMixin.scss";
+
 #FormHero {
   width: 100%;
   height: 550px;
@@ -47,7 +51,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  #FromHero-logo {
+  #FormHero-logo {
     width: 93px;
     height: 94px;
     margin: 27px auto;
@@ -102,6 +106,16 @@ export default {
 
   .verify {
     background-color: #63c1e2;
+  }
+
+  @include atMedium {
+    height: 420px;
+    #FormHero-title {
+      width: 400px;
+    }
+    #FormHero-content {
+      width: 800px;
+    }
   }
 }
 </style>

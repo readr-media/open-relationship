@@ -67,17 +67,6 @@ export default {
     _allPersonsMeta: {
       query: FETCH_PERSONS_COUNT,
     },
-    // Person: {
-    //   query: FETCH_RANDOM_PERSON,
-    //   variables() {
-    //     const count = 4;
-    //     const randomId = getRandomId(count);
-    //     console.log(randomId);
-    //     return {
-    //       id: randomId,
-    //     };
-    //   },
-    // },
   },
 
   async mounted() {

@@ -1,4 +1,4 @@
-import { devideDate } from "../components/fieldVerify";
+import { devideDate, mergeDate } from "../components/fieldVerify";
 export const moveFormToGqlVariable = (character) => {
   const {
     name,
@@ -47,8 +47,16 @@ export const moveGqlToForm = (character, targetPerson) => {
   character.other_names.value = targetPerson.other_names;
   character.gender.value = targetPerson.gender;
   character.email.value = targetPerson.email;
-  character.birth_date.value = targetPerson.birth_date;
-  character.death_date.value = targetPerson.death_date;
+  character.birth_date.value = mergeDate(
+    targetPerson.birth_date_year,
+    targetPerson.birth_date_month,
+    targetPerson.birth_date_day
+  );
+  character.death_date.value = mergeDate(
+    targetPerson.death_date_year,
+    targetPerson.death_date_month,
+    targetPerson.death_date_day
+  );
   character.image.value = targetPerson.image;
   character.summary.value = targetPerson.summary;
   character.biography.value = targetPerson.biography;

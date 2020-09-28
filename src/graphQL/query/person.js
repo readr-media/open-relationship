@@ -149,8 +149,12 @@ export const FETCH_PERSONS = gql`
       identifiers
       email
       gender
-      birth_date
-      death_date
+      birth_date_year
+      birth_date_month
+      birth_date_day
+      death_date_year
+      death_date_month
+      death_date_day
       image
       summary
       biography
@@ -179,8 +183,12 @@ export const FETCH_RANDOM_PERSON = gql`
       identifiers
       email
       gender
-      birth_date
-      death_date
+      birth_date_year
+      birth_date_month
+      birth_date_day
+      death_date_year
+      death_date_month
+      death_date_day
       image
       summary
       biography

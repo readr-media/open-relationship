@@ -1,4 +1,4 @@
-import { devideDate } from "../components/fieldVerify";
+import { devideDate, mergeDate } from "../components/fieldVerify";
 export const moveFormToGqlVariable = (organization) => {
   const {
     name,
@@ -17,8 +17,6 @@ export const moveFormToGqlVariable = (organization) => {
     address,
     source,
   } = organization;
-
-  console.log(dissolution_date.value);
 
   return {
     // put form data to graphql's field
@@ -53,11 +51,18 @@ export const moveGqlToForm = (organization, target) => {
   organization.area.value = target.area;
   organization.abstract.value = target.abstract;
   organization.description.value = target.description;
-  organization.founding_date.value = target.founding_date;
-  organization.dissolution_date.value = target.dissolution_date;
+  organization.founding_date.value = mergeDate(
+    target.founding_date_year,
+    target.founding_date_month,
+    target.founding_date_day
+  );
+  organization.dissolution_date.value = mergeDate(
+    target.dissolution_date_year,
+    target.dissolution_date_month,
+    target.dissolution_date_day
+  );
   organization.image.value = target.image;
   organization.contact_details.value = target.contact_details;
-  organization.death_date.value = target.death_date;
   organization.links.value = target.links;
   organization.address.value = target.address;
   organization.source.value = target.source;

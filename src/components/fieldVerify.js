@@ -71,3 +71,22 @@ export function devideDate(dateString, selection) {
       break;
   }
 }
+
+export function mergeDate(year, month, day) {
+  let dayString = day.toString();
+  let monthString = month.toString();
+  let yearString = year.toString();
+
+  if (month < 10) {
+    monthString = "0" + monthString;
+  }
+
+  if (day < 10) {
+    dayString = "0" + dayString;
+  }
+
+  monthString;
+
+  const result = yearString.concat("-", monthString, "-", dayString);
+  return result;
+}

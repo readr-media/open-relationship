@@ -1,8 +1,11 @@
 export const characterFields = {
   name: {
     label: "姓名",
-    info:
-      "若名字有分隔點，請用全形分隔點「・」 原住民中文名與羅馬拼音之間需要空格 若名字之間有空格，請用半形空格",
+    info: [
+      "若名字有分隔點，請用全形分隔點「・」",
+      "原住民中文名與羅馬拼音之間需要空格",
+      "若名字之間有空格，請用半形空格",
+    ],
     value: "",
     inputStatus: { type: "text" },
     required: true,
@@ -11,7 +14,7 @@ export const characterFields = {
   },
   alternative: {
     label: "別名",
-    info: "",
+    info: [],
     value: "",
     inputStatus: { type: "text" },
 
@@ -19,7 +22,7 @@ export const characterFields = {
   },
   other_names: {
     label: "舊名",
-    info: "",
+    info: [],
     value: "",
     inputStatus: { type: "text" },
     formState: true,
@@ -32,7 +35,7 @@ export const characterFields = {
   // },
   email: {
     label: "電子信箱",
-    info: "作答示範：readr123@gmail.com",
+    info: ["作答示範：readr123@gmail.com"],
     value: "",
     inputStatus: { type: "text" },
     verify: ["emailFormat"],
@@ -40,7 +43,7 @@ export const characterFields = {
   },
   gender: {
     label: "生理性別",
-    info: "單選題：男、女",
+    info: [],
     value: "",
     inputStatus: {
       type: "radio",
@@ -54,7 +57,7 @@ export const characterFields = {
 
   birth_date: {
     label: "出生日期",
-    info: "時間格式：yyyy-mm-dd ，若只知道年份可以只填年份",
+    info: ["時間格式：yyyy-mm-dd ，若只知道年份可以只填年份"],
     value: "",
     inputStatus: { type: "date" },
     verify: ["dateFormat"],
@@ -63,7 +66,7 @@ export const characterFields = {
   },
   death_date: {
     label: "死亡日期",
-    info: "時間格式：yyyy-mm-dd ，若只知道年份可以只填年份",
+    info: ["時間格式：yyyy-mm-dd ，若只知道年份可以只填年份"],
     value: "",
     inputStatus: { type: "date" },
     verify: ["dateFormat"],
@@ -72,7 +75,7 @@ export const characterFields = {
   },
   image: {
     label: "大頭照",
-    info: "",
+    info: ["請貼上圖檔的 url 網址"],
     value: "",
     inputStatus: { type: "text" },
     verify: ["urlFormat"],
@@ -80,35 +83,35 @@ export const characterFields = {
   },
   summary: {
     label: "一句話描寫這個人",
-    info: "",
+    info: [],
     value: "",
     inputStatus: { type: "text" },
     formState: true,
   },
   biography: {
     label: "詳細生平",
-    info: "",
+    info: [],
     value: "",
     inputStatus: { type: "textarea" },
     formState: true,
   },
   national_identity: {
     label: "國籍",
-    info: "",
+    info: [],
     value: "",
     inputStatus: { type: "text" },
     formState: true,
   },
   contact_details: {
     label: "聯絡方式",
-    info: "臺灣臺北市鉛筆路31號 02-1234-5678 john@example.com",
+    info: ["臺灣臺北市鉛筆路31號 02-1234-5678 john@example.com"],
     value: "",
     inputStatus: { type: "text" },
     formState: true,
   },
   links: {
     label: "網站",
-    info: "人物的 wiki 頁面或是官方網站",
+    info: ["人物的 wiki 頁面或是官方網站"],
     value: "",
     inputStatus: { type: "text" },
     verify: ["urlFormat"],
@@ -117,7 +120,7 @@ export const characterFields = {
   },
   source: {
     label: "資料來源",
-    info: "網站連結",
+    info: ["網站連結"],
     value: "",
     inputStatus: { type: "text" },
     required: true,

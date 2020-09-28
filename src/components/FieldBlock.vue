@@ -11,7 +11,11 @@
         </h5>
       </div>
     </div>
-    <p v-if="field.info.length > 0" class="FieldBlock-info">{{ field.info }}</p>
+    <div v-if="field.info.length > 0" class="FieldBlock-info">
+      <div v-for="singleInfo in field.info" :key="singleInfo">
+        {{ singleInfo }}
+      </div>
+    </div>
 
     <!-- handle multi-input just like radio and checkbox -->
     <div v-if="field.inputStatus.type == 'radio'" class="inputWrapper-radio">

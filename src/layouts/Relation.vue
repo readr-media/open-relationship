@@ -99,6 +99,7 @@ export default {
     justify-content: center;
     .Relation-btn-container {
       flex-direction: row;
+      align-items: center;
       justify-content: space-around;
       max-width: 1200px;
     }

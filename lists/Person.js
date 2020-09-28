@@ -1,4 +1,4 @@
-const { Text, Select, CalendarDay } = require("@keystonejs/fields");
+const { Text, Select, CalendarDay, Integer } = require("@keystonejs/fields");
 const { atTracking, byTracking } = require("@keystonejs/list-plugins");
 
 const gender_options = [
@@ -21,8 +21,16 @@ module.exports = {
       default: "NA",
       dataType: "string",
     },
-    birth_date: { label: "出生日期", type: CalendarDay },
-    death_date: { label: "死亡日期", type: CalendarDay },
+    // birth_date: { label: "出生日期", type: CalendarDay },
+    // death_date: { label: "死亡日期", type: CalendarDay },
+    birth_date_year: { label: "出生年", type: Integer },
+    birth_date_month: { label: "出生月", type: Integer },
+    birth_date_day: { label: "出生日", type: Integer },
+
+    death_date_year: { label: "死亡年", type: Integer },
+    death_date_month: { label: "死亡月", type: Integer },
+    death_date_day: { label: "死亡日", type: Integer },
+
     image: { label: "大頭照", type: Text },
     summary: { label: "一句話描寫這個人", type: Text },
     biography: { label: "詳細生平", type: Text, isMultiline: true },

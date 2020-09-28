@@ -1,14 +1,18 @@
 <template>
   <div class="CollaborateFieldBlock">
     <div class="CollaborateFieldInfo">
-      <h5>協作者的資料與心得</h5>
+      <h5>協作者個人資訊</h5>
       <p>
-        以下欄位皆選填，請自由填答，<br />我們會拿你的資料做什麼、你有什麼好處、我們不會亂來blablablab
+        可選擇是否留下你的大名、Email 及心得，並提交問卷
       </p>
     </div>
 
     <div class=" FieldBlock">
-      <div class="FieldBlock-title">你的大名</div>
+      <div class="FieldBlock-title">你的大名（選填）</div>
+      <p class="FieldBlock-info">
+        預計會在專題頁面上放上你的名字，感謝你的協作！
+      </p>
+
       <div class="inputWrapper-single">
         <input
           type="text"
@@ -17,7 +21,9 @@
         />
       </div>
 
-      <div class="FieldBlock-title">你的email address</div>
+      <div class="FieldBlock-title">你的 email（選填）</div>
+      <p class="FieldBlock-info">專題上線時，我們將於第一時間與你分享！</p>
+
       <div class="inputWrapper-single">
         <input
           type="text"
@@ -26,7 +32,9 @@
         />
       </div>
 
-      <div class="FieldBlock-title">你的協作心得</div>
+      <div class="FieldBlock-title">你的協作心得（選填）</div>
+      <p class="FieldBlock-info">你的回饋，是 READr 推動專題的原動力！</p>
+
       <div class="inputWrapper-textarea ">
         <textarea
           name=""

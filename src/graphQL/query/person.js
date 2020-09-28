@@ -8,8 +8,12 @@ export const ADD_PERSON = gql`
     $identifiers: String
     $email: String
     $gender: String
-    $birth_date: String
-    $death_date: String
+    $birth_date_year: Int
+    $birth_date_month: Int
+    $birth_date_day: Int
+    $death_date_year: Int
+    $death_date_month: Int
+    $death_date_day: Int
     $image: String
     $summary: String
     $biography: String
@@ -26,8 +30,12 @@ export const ADD_PERSON = gql`
         identifiers: $identifiers
         email: $email
         gender: $gender
-        birth_date: $birth_date
-        death_date: $death_date
+        birth_date_year: $birth_date_year
+        birth_date_month: $birth_date_month
+        birth_date_day: $birth_date_day
+        death_date_year: $death_date_year
+        death_date_month: $death_date_month
+        death_date_day: $death_date_day
         image: $image
         summary: $summary
         biography: $biography
@@ -43,8 +51,12 @@ export const ADD_PERSON = gql`
       identifiers
       email
       gender
-      birth_date
-      death_date
+      birth_date_year
+      birth_date_month
+      birth_date_day
+      death_date_year
+      death_date_month
+      death_date_day
       image
       summary
       biography
@@ -65,8 +77,12 @@ export const UPDATE_PERSON = gql`
     $identifiers: String
     $email: String
     $gender: String
-    $birth_date: String
-    $death_date: String
+    $birth_date_year: Int
+    $birth_date_month: Int
+    $birth_date_day: Int
+    $death_date_year: Int
+    $death_date_month: Int
+    $death_date_day: Int
     $image: String
     $summary: String
     $biography: String
@@ -84,8 +100,12 @@ export const UPDATE_PERSON = gql`
         identifiers: $identifiers
         email: $email
         gender: $gender
-        birth_date: $birth_date
-        death_date: $death_date
+        birth_date_year: $birth_date_year
+        birth_date_month: $birth_date_month
+        birth_date_day: $birth_date_day
+        death_date_year: $death_date_year
+        death_date_month: $death_date_month
+        death_date_day: $death_date_day
         image: $image
         summary: $summary
         biography: $biography
@@ -102,8 +122,12 @@ export const UPDATE_PERSON = gql`
       identifiers
       email
       gender
-      birth_date
-      death_date
+      birth_date_year
+      birth_date_month
+      birth_date_day
+      death_date_year
+      death_date_month
+      death_date_day
       image
       summary
       biography

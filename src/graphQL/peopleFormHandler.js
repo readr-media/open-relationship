@@ -1,3 +1,4 @@
+import { devideDate } from "../components/fieldVerify";
 export const moveFormToGqlVariable = (character) => {
   const {
     name,
@@ -23,8 +24,13 @@ export const moveFormToGqlVariable = (character) => {
     other_names: other_names.value,
     email: email.value,
     gender: gender.value,
-    birth_date: birth_date.value ? birth_date.value : null,
-    death_date: death_date.value ? death_date.value : null,
+    birth_date_year: devideDate(birth_date.value, "year"),
+    birth_date_month: devideDate(birth_date.value, "month"),
+    birth_date_day: devideDate(birth_date.value, "day"),
+    death_date_year: devideDate(death_date.value, "year"),
+    death_date_month: devideDate(death_date.value, "month"),
+    death_date_day: devideDate(death_date.value, "day"),
+    // death_date: null,
     image: image.value,
     summary: summary.value,
     biography: biography.value,
@@ -50,23 +56,3 @@ export const moveGqlToForm = (character, targetPerson) => {
   character.contact_details.value = targetPerson.contact_details;
   character.links.value = targetPerson.links;
 };
-
-// name: character.name.value,
-// alternative: character.alternative.value,
-// other_names: character.other_names.value,
-// identifiers: character.identifiers.value,
-// classification: character.classification.value,
-// area: character.area.value,
-// abstract: character.abstract.value,
-// description: character.description.value,
-// founding_date: character.founding_date.value.length
-//   ? founding_date.value
-//   : null,
-// dissolution_date: character.dissolution_date.value
-//   ? dissolution_date.value
-//   : null,
-// image: character.image.value,
-// contact_details: character.contact_details.value,
-// links: character.links.value,
-// address: character.address.value,
-// source: character.source.value,

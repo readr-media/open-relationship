@@ -1,6 +1,11 @@
 <template>
   <div id="Page-Person" class="Form-Page">
-    <FormHero :title="hero.title" :content="hero.content" type="create" />
+    <FormHero
+      :title="hero.title"
+      :content="hero.content"
+      :target="hero.target"
+      type="create"
+    />
 
     <div class="fieldContainer">
       <div class="fieldContainer-notation">
@@ -49,7 +54,8 @@ export default {
     return {
       hero: {
         title: "新增人物資料表單",
-        content: "台灣政商人物資料",
+        content: "臺灣政商人物關係資料庫計畫",
+        target: "人物",
         type: "create",
       },
       character: characterFields,

@@ -1,12 +1,20 @@
 <template>
-  <router-link class="RelationButton" :to="to">
-    {{ title }}
+  <router-link
+    class="RelationButton"
+    :to="to"
+    :class="{
+      dark: dark,
+      create: type == 'create',
+      verify: type == 'verify',
+    }"
+  >
+    <span>{{ title }}</span>
   </router-link>
 </template>
 
 <script>
 export default {
-  props: ["title", "to"],
+  props: ["title", "to", "dark", "type"],
 };
 </script>
 
@@ -45,5 +53,23 @@ export default {
     height: 80px;
     margin-bottom: 50px;
   }
+}
+.dark {
+  @include atLarge {
+    width: 170px;
+    padding: 26px 22px;
+    height: auto;
+    margin-bottom: 50px;
+  }
+}
+
+.create {
+  color: #ed8c4a;
+  border: solid 1px #ed8c4a;
+}
+
+.verify {
+  color: #63c1e2;
+  border: solid 1px #63c1e2;
 }
 </style>

@@ -31,8 +31,12 @@ export const ADD_ORGANIZATION = gql`
     $area: String
     $abstract: String
     $description: String
-    $founding_date: String
-    $dissolution_date: String
+    $founding_date_year: Int
+    $founding_date_month: Int
+    $founding_date_day: Int
+    $dissolution_date_year: Int
+    $dissolution_date_month: Int
+    $dissolution_date_day: Int
     $image: String
     $contact_details: String
     $links: String
@@ -49,8 +53,12 @@ export const ADD_ORGANIZATION = gql`
         area: $area
         abstract: $abstract
         description: $description
-        founding_date: $founding_date
-        dissolution_date: $dissolution_date
+        founding_date_year: $founding_date_year
+        founding_date_month: $founding_date_month
+        founding_date_day: $founding_date_day
+        dissolution_date_year: $dissolution_date_year
+        dissolution_date_month: $dissolution_date_month
+        dissolution_date_day: $dissolution_date_day
         image: $image
         contact_details: $contact_details
         links: $links
@@ -65,8 +73,12 @@ export const ADD_ORGANIZATION = gql`
       classification
       abstract
       description
-      founding_date
-      dissolution_date
+      founding_date_year
+      founding_date_month
+      founding_date_day
+      dissolution_date_year
+      dissolution_date_month
+      dissolution_date_day
       image
       contact_details
       links

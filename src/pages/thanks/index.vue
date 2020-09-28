@@ -4,17 +4,29 @@
 
     <div id="thanksPage-title">THANK YOU!</div>
     <div id="thanksPage-content">
-      產生沒有意義的文章，供排版時填充版面用，<br />
-      但不會因為字義而左右版型的判斷。<br />
-      文字、標點符號出現機率大致符合台灣文章習慣。
+      謝謝你的貢獻！ 接下來你可以：
+      <ul>
+        <li>點擊在同一個表單新增下一筆資料</li>
+        <li>
+          去其他表單新增更多資料：
+        </li>
+        <li>去驗證資料：點擊導到專題頁 anchor at 驗證資料列</li>
+        <li>看看現在有哪些公開資料（ 即將開放）</li>
+      </ul>
     </div>
+
+    <!-- <RelationButton to="" title="新增組織" dark="true" type="create" /> -->
     <div id="thanksPage-prompt">{{ seconds }}秒後回到主畫面</div>
   </div>
 </template>
 
 <script>
-import READrLogo from "../../images/READr Logo.svg";
+import READrLogo from "../../images/READrLogo.svg";
+import RelationButton from "../../components/RelationButton";
 export default {
+  components: {
+    RelationButton,
+  },
   data() {
     return {
       READrLogo,
@@ -72,7 +84,7 @@ export default {
 
   &-content {
     width: 800px;
-    height: 84px;
+    // height: 84px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;

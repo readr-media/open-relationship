@@ -10,7 +10,7 @@ export function validateDate(dateString) {
   // Parse the date parts to integers
 
   var parts = dateString.split("-");
-  console.log(parts);
+
   var day = parseInt(parts[2], 10);
   var month = parseInt(parts[1], 10);
   var year = parseInt(parts[0], 10);
@@ -42,4 +42,32 @@ export function validateUrl(str) {
     "i"
   ); // fragment locator
   return !!pattern.test(str);
+}
+
+// Change datetime to 3 interger
+export function devideDate(dateString, selection) {
+  const parts = dateString.split("-");
+  let day = parseInt(parts[2], 10);
+  let month = parseInt(parts[1], 10);
+  let year = parseInt(parts[0], 10);
+
+  switch (selection) {
+    case "year":
+      return year;
+      break;
+
+    case "month":
+      if (isNaN(month)) month = null;
+      return month;
+      break;
+
+    case "day":
+      if (isNaN(day)) day = null;
+      return day;
+      break;
+
+    default:
+      return null;
+      break;
+  }
 }

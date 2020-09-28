@@ -1,4 +1,4 @@
-const { Text, Select, CalendarDay } = require("@keystonejs/fields");
+const { Text, Select, Integer } = require("@keystonejs/fields");
 const { atTracking, byTracking } = require("@keystonejs/list-plugins");
 
 const classification_options = [
@@ -26,8 +26,17 @@ module.exports = {
     area: { label: "組織地區", type: Text },
     abstract: { label: "一句話描述該組織", type: Text },
     description: { label: "組織詳細介紹", type: Text },
-    founding_date: { label: "創立時間", type: CalendarDay },
-    dissolution_date: { label: "解散時間", type: CalendarDay },
+    // founding_date: { label: "創立時間", type: CalendarDay },
+    // dissolution_date: { label: "解散時間", type: CalendarDay },
+
+    founding_date_year: { label: "創立年", type: Integer },
+    founding_date_month: { label: "創立月", type: Integer },
+    founding_date_day: { label: "創立日", type: Integer },
+
+    dissolution_date_year: { label: "解散年", type: Integer },
+    dissolution_date_month: { label: "解散月", type: Integer },
+    dissolution_date_day: { label: "解散日", type: Integer },
+
     image: { label: "圖像", type: Text },
     contact_details: { label: "聯絡方式", type: Text },
     links: { label: "網站", type: Text },

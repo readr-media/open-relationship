@@ -107,8 +107,9 @@ module.exports = {
       apollo: {
         clientConfigs: {
           default: {
-            httpEndpoint: "http://localhost:3000/admin/api/",
-            browserHttpEndpoint: "/admin/api",
+            // httpEndpoint: "http://localhost:3000/admin/api/",
+            // browserHttpEndpoint: "/admin/api",
+            httpEndpoint: "https://or-dev.readr.tw/admin/api",
           },
         },
       },

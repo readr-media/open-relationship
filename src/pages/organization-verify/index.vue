@@ -49,9 +49,11 @@ export default {
     return {
       organizationId: 1,
       hero: {
-        title: "驗證人物資料表單",
-        content: "台灣政商人物資料",
-        type: "create",
+        title: "新增人物資料表單",
+        content: "臺灣政商人物關係資料庫計畫",
+        target: "人物",
+        type: "verify",
+        id: 1,
       },
       organization: organizationFields,
       collaborate: {
@@ -62,34 +64,41 @@ export default {
     };
   },
 
-  apollo: {
-    _allOrganizationsMeta: {
-      query: FETCH_ORGANIZATIONS_COUNT,
-    },
+  async mounted() {
+    await this.fetchOrganizationCount();
   },
 
-  async mounted() {
-    setTimeout(() => {
-      // 利用隨機ID獲取隨機資料
+  methods: {
+    fetchOrganizationCount() {
+      // 1 fetch organization counts
+      this.$apollo.addSmartQuery("_allOrganizationsMeta", {
+        query: FETCH_ORGANIZATIONS_COUNT,
+        update(data) {
+          //2 get random organizationid from result
+          const randomId = getRandomId(data._allOrganizationsMeta.count);
+          if (randomId == 0) return;
+          // 3 fetch random organization
+          this.fetchRandomOrganization(randomId);
+        },
+      });
+      return;
+    },
+    async fetchRandomOrganization(randomId) {
+      // 4 fetch random organization
       this.$apollo.addSmartQuery("Organization", {
         query: FETCH_RANDOM_ORGANIZATION,
         variables() {
-          const count = this._allOrganizationsMeta.count;
-          const randomId = getRandomId(count);
           return {
             id: randomId,
           };
         },
+        update(data) {
+          // 5 set id and move data to form fields
+          this.organizationId = data.Organization.id;
+          moveGqlToForm(this.organization, data.Organization);
+        },
       });
-    }, 500);
-
-    setTimeout(() => {
-      this.organizationId = this._data.Organization.id;
-      moveGqlToForm(this.organization, this._data.Organization);
-    }, 800);
-  },
-
-  methods: {
+    },
     async checkForm() {
       // Post update data to keystone
       this.$apollo.mutate({

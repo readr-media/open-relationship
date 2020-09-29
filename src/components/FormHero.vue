@@ -41,6 +41,8 @@
         readr@readr.tw 或是私訊粉專 https://www.facebook.com/readr.tw 許願！
       </p>
     </div>
+
+    <!-- ----------------------Verify-------------------------------- -->
     <div v-else-if="type == 'verify'" class="FormHero-content">
       <p class="FormHero-content-paragraph">
         請對照「資料來源」裡的資料，驗證欄位內的資料是否正確
@@ -49,27 +51,17 @@
       </p>
 
       <p class="FormHero-content-paragraph">
-        驗證方式
-        <ol>
-          <li>
-            在要驗證欄位中：
-            <ul>
-              <li>留下正確的資料，刪除不正確的資料</li>
-              <li>或是在空白處填入正確資料</li>
-            </ul>
-          </li>
-
-          <li>留下您驗證時的參考資料來源網址</li>
-          <li>驗證完成後選擇是否留下你的個人資料</li>
-        </ol>
+        驗證方式<br />1 在要驗證欄位中：<br />
+        &nbsp; &bull;&nbsp; 留下正確的資料，<br />
+        &nbsp; &bull;&nbsp; 刪除不正確的資料 <br />2 或是在空白處填入正確資料<br />3
+        留下您驗證時的參考資料來源網址 <br />驗證完成後選擇是否留下你的個人資料
       </p>
 
       <p class="FormHero-content-paragraph">
         <br />
 
-        如果有任何問題<br />歡迎來信 readr@readr.tw 或是私訊粉專
-        https://www.facebook.com/readr.tw/
-        <br />我們會有專人為你解答<br />謝謝你的參與！ |
+        如果有任何問題 歡迎來信 readr@readr.tw 或是私訊粉專
+        https://www.facebook.com/readr.tw/ 我們會有專人為你解答 謝謝你的參與！ |
       </p>
     </div>
     <div v-else></div>
@@ -168,7 +160,7 @@ export default {
       font-style: normal;
       line-height: 1.75;
       letter-spacing: normal;
-      text-align: justify;
+      text-align: left;
       color: #ffffff;
     }
   }
@@ -191,10 +183,7 @@ export default {
     }
   }
 
- 
-
-    @include atLarge {
-  
+  @include atLarge {
     .FormHero-content {
       width: 800px;
     }

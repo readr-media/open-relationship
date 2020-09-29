@@ -1,6 +1,12 @@
 <template>
   <div id="Page-Person-verify" class="Form-Page">
-    <FormHero :title="hero.title" :content="hero.content" type="verify" />
+    <FormHero
+      :title="hero.title"
+      :content="hero.content"
+      :target="hero.target"
+      :id="hero.id"
+      type="verify"
+    />
     <div class="fieldContainer">
       <div class="fieldContainer-notation">
         <span class="verify-star">＊</span>為必填欄位
@@ -50,9 +56,11 @@ export default {
     return {
       personId: 1,
       hero: {
-        title: "驗證人物資料表單",
-        content: "台灣政商人物資料",
-        type: "create",
+        title: "新增人物資料表單",
+        content: "臺灣政商人物關係資料庫計畫",
+        target: "人物",
+        type: "verify",
+        id: 1,
       },
       character: characterFields,
 
@@ -63,34 +71,43 @@ export default {
       },
     };
   },
-  apollo: {
-    _allPersonsMeta: {
-      query: FETCH_PERSONS_COUNT,
-    },
-  },
 
   async mounted() {
-    setTimeout(() => {
-      // 利用隨機ID獲取隨機資料
+    await this.fetchPersonCount();
+  },
+
+  methods: {
+    fetchPersonCount() {
+      // 1 fetch person counts
+      this.$apollo.addSmartQuery("_allPersonsMeta", {
+        query: FETCH_PERSONS_COUNT,
+        update(data) {
+          //2 get random personid from result
+          const randomId = getRandomId(data._allPersonsMeta.count);
+          if (randomId == 0) return;
+          // 3 fetch random person
+          this.fetchRandomPerson(randomId);
+        },
+      });
+      return;
+    },
+    async fetchRandomPerson(randomId) {
+      // 4 fetch random person
       this.$apollo.addSmartQuery("Person", {
         query: FETCH_RANDOM_PERSON,
         variables() {
-          const count = this._allPersonsMeta.count;
-          const randomId = getRandomId(count);
           return {
             id: randomId,
           };
         },
+        update(data) {
+          // 5 set id and move data to form fields
+          this.personId = data.Person.id;
+          moveGqlToForm(this.character, data.Person);
+        },
       });
-    }, 500);
+    },
 
-    setTimeout(() => {
-      this.personId = this._data.Person.id;
-      moveGqlToForm(this.character, this._data.Person);
-    }, 800);
-  },
-
-  methods: {
     async checkForm() {
       // Post update data to keystone
       this.$apollo.mutate({

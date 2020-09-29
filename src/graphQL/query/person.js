@@ -139,32 +139,6 @@ export const UPDATE_PERSON = gql`
   }
 `;
 
-export const FETCH_PERSONS = gql`
-  query {
-    allPersons {
-      id
-      name
-      alternative
-      other_names
-      identifiers
-      email
-      gender
-      birth_date_year
-      birth_date_month
-      birth_date_day
-      death_date_year
-      death_date_month
-      death_date_day
-      image
-      summary
-      biography
-      national_identity
-      contact_details
-      links
-      source
-    }
-  }
-`;
 export const FETCH_PERSONS_COUNT = gql`
   query {
     _allPersonsMeta {

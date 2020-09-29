@@ -6,7 +6,7 @@ export const moveFormToGqlVariable = (organization) => {
     other_names,
     identifiers,
     classification,
-    area,
+
     abstract,
     description,
     founding_date,
@@ -25,7 +25,7 @@ export const moveFormToGqlVariable = (organization) => {
     other_names: other_names.value,
     identifiers: other_names.identifiers,
     classification: classification.value,
-    area: area.value,
+
     abstract: abstract.value,
     description: description.value,
     founding_date_year: devideDate(founding_date.value, "year"),
@@ -48,7 +48,7 @@ export const moveGqlToForm = (organization, target) => {
   organization.other_names.value = target.other_names;
   organization.identifiers.value = target.identifiers;
   organization.classification.value = target.classification;
-  organization.area.value = target.area;
+
   organization.abstract.value = target.abstract;
   organization.description.value = target.description;
   organization.founding_date.value = mergeDate(

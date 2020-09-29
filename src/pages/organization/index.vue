@@ -3,6 +3,7 @@
     <FormHero
       :title="hero.title"
       :content="hero.content"
+      :target="hero.target"
       type="create"
       :id="hero.id"
     />
@@ -50,6 +51,7 @@ export default {
       hero: {
         title: "新增組織資料表單",
         content: "台灣政商組織資料",
+        target: "組織",
         type: "create",
         id: 2,
       },

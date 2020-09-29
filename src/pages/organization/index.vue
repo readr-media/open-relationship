@@ -85,7 +85,7 @@ export default {
     },
 
     async uploadForm() {
-      // Upload character form
+      // Upload person form
       this.$apollo.mutate({
         mutation: ADD_ORGANIZATION,
         variables: await moveFormToGqlVariable(this.organization),

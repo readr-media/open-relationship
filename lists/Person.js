@@ -12,7 +12,6 @@ module.exports = {
     name: { label: "姓名", type: Text, isRequired: true },
     alternative: { label: "別名", type: Text },
     other_names: { label: "舊名", type: Text },
-    identifiers: { label: "ID", type: Text },
     email: { label: "電子信箱", type: Text },
     gender: {
       label: "生理性別",
@@ -21,8 +20,6 @@ module.exports = {
       default: "NA",
       dataType: "string",
     },
-    // birth_date: { label: "出生日期", type: CalendarDay },
-    // death_date: { label: "死亡日期", type: CalendarDay },
     birth_date_year: { label: "出生年", type: Integer },
     birth_date_month: { label: "出生月", type: Integer },
     birth_date_day: { label: "出生日", type: Integer },

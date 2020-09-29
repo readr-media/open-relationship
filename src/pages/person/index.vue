@@ -14,7 +14,7 @@
       </div>
       <form action v-on:submit.prevent="checkForm">
         <FieldBlock
-          v-for="field in character"
+          v-for="field in person"
           :key="field.label"
           :field="field"
           type="create"
@@ -37,7 +37,7 @@ import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
 
-import { characterFields } from "../../fields/characterFields";
+import { personFields } from "../../fields/personFields";
 
 import gql from "graphql-tag";
 import { ADD_PERSON } from "../../graphQL/query/person";
@@ -60,7 +60,7 @@ export default {
         type: "create",
         id: 1,
       },
-      character: characterFields,
+      person: personFields,
       collaborate: {
         name: "",
         email: "",
@@ -71,7 +71,7 @@ export default {
   methods: {
     checkForm() {
       // check form before upload
-      for (const item of Object.entries(this.character)) {
+      for (const item of Object.entries(this.person)) {
         // get form's each field object
         const field = item[1];
         // if there's an unedit field ,but required, return
@@ -86,16 +86,16 @@ export default {
       }
 
       this.uploadForm();
-      this.clearForm(this.character);
+      this.clearForm(this.person);
 
       this.$router.push("/thanks");
     },
 
     async uploadForm() {
-      // Upload character form
+      // Upload person form
       this.$apollo.mutate({
         mutation: ADD_PERSON,
-        variables: await moveFormToGqlVariable(this.character),
+        variables: await moveFormToGqlVariable(this.person),
       });
       // Update collaborate form
       this.$apollo.mutate({

@@ -1,4 +1,4 @@
-export const characterFields = {
+export const personFields = {
   name: {
     label: "姓名",
     info: [

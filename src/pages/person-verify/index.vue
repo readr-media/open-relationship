@@ -13,7 +13,7 @@
       </div>
       <form action v-on:submit.prevent="checkForm">
         <FieldBlock
-          v-for="field in character"
+          v-for="field in person"
           :key="field.label"
           :field="field"
           type="verify"
@@ -31,7 +31,7 @@ import FormHero from "../../components/FormHero";
 import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
-import { characterFields } from "../../fields/characterFields";
+import { personFields } from "../../fields/personFields";
 import {
   FETCH_PERSONS_COUNT,
   FETCH_RANDOM_PERSON,
@@ -62,7 +62,7 @@ export default {
         type: "verify",
         id: 1,
       },
-      character: characterFields,
+      person: personFields,
 
       collaborate: {
         name: "",
@@ -103,7 +103,7 @@ export default {
         update(data) {
           // 5 set id and move data to form fields
           this.personId = data.Person.id;
-          moveGqlToForm(this.character, data.Person);
+          moveGqlToForm(this.person, data.Person);
         },
       });
     },
@@ -115,7 +115,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.personId,
-          ...moveFormToGqlVariable(this.character),
+          ...moveFormToGqlVariable(this.person),
         },
       });
 

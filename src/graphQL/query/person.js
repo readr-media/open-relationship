@@ -5,7 +5,6 @@ export const ADD_PERSON = gql`
     $name: String!
     $alternative: String
     $other_names: String
-    $identifiers: String
     $email: String
     $gender: String
     $birth_date_year: Int
@@ -27,7 +26,6 @@ export const ADD_PERSON = gql`
         name: $name
         alternative: $alternative
         other_names: $other_names
-        identifiers: $identifiers
         email: $email
         gender: $gender
         birth_date_year: $birth_date_year
@@ -48,7 +46,6 @@ export const ADD_PERSON = gql`
       name
       alternative
       other_names
-      identifiers
       email
       gender
       birth_date_year
@@ -74,7 +71,6 @@ export const UPDATE_PERSON = gql`
     $name: String!
     $alternative: String
     $other_names: String
-    $identifiers: String
     $email: String
     $gender: String
     $birth_date_year: Int
@@ -97,7 +93,6 @@ export const UPDATE_PERSON = gql`
         name: $name
         alternative: $alternative
         other_names: $other_names
-        identifiers: $identifiers
         email: $email
         gender: $gender
         birth_date_year: $birth_date_year
@@ -119,7 +114,6 @@ export const UPDATE_PERSON = gql`
       name
       alternative
       other_names
-      identifiers
       email
       gender
       birth_date_year
@@ -154,7 +148,6 @@ export const FETCH_RANDOM_PERSON = gql`
       name
       alternative
       other_names
-      identifiers
       email
       gender
       birth_date_year

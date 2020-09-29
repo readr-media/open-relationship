@@ -71,7 +71,7 @@ export default {
   methods: {
     checkForm() {
       // check form before upload
-      for (const item of Object.entries(this.character)) {
+      for (const item of Object.entries(this.person)) {
         // get form's each field object
         const field = item[1];
         // if there's an unedit field ,but required, return
@@ -86,16 +86,16 @@ export default {
       }
 
       this.uploadForm();
-      this.clearForm(this.character);
+      this.clearForm(this.person);
 
       this.$router.push("/thanks");
     },
 
     async uploadForm() {
-      // Upload character form
+      // Upload person form
       this.$apollo.mutate({
         mutation: ADD_PERSON,
-        variables: await moveFormToGqlVariable(this.character),
+        variables: await moveFormToGqlVariable(this.person),
       });
       // Update collaborate form
       this.$apollo.mutate({

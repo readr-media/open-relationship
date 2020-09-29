@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     async checkForm() {
-      // destructure character field
+      // destructure person field
       const {
         name,
         alternative,
@@ -129,7 +129,7 @@ export default {
         contact_details,
         links,
         source,
-      } = this.character;
+      } = this.person;
 
       // commit to graphQL
       await graphql(ADD_PERSON, {

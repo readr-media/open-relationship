@@ -79,15 +79,18 @@
       </div>
     </div>
 
-    <!-- <div class="FieldBlock-verify">
+    <div v-if="type == 'verify'" class="FieldBlock-verify">
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" /><label>資料正確</label>
+        <input type="radio" value="pass" v-model="verifyStatus" /><label
+          >資料正確</label
+        >
       </div>
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" /><label>資料錯誤 正確資料為</label>
-        <input type="text" />
+        <input type="radio" value="fail" v-model="verifyStatus" /><label
+          >資料錯誤</label
+        >
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -98,6 +101,7 @@ export default {
   data() {
     return {
       errorPrompt: [],
+      verifyStatus: "pass",
     };
   },
   methods: {

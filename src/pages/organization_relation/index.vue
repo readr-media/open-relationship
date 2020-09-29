@@ -1,16 +1,20 @@
 <template>
-  <div id="Page-Organization" class="Form-Page">
+  <div id="Page-Person" class="Form-Page">
     <FormHero
       :title="hero.title"
       :content="hero.content"
-      type="create"
+      :target="hero.target"
       :id="hero.id"
+      type="create"
     />
+
     <div class="fieldContainer">
-      <span class="create-star">＊</span>為必填欄位
+      <div class="fieldContainer-notation">
+        <span class="create-star">＊</span>為必填欄位
+      </div>
       <form action v-on:submit.prevent="checkForm">
         <FieldBlock
-          v-for="field in organization"
+          v-for="field in organizationRelation"
           :key="field.label"
           :field="field"
           type="create"
@@ -32,11 +36,13 @@ import FormHero from "../../components/FormHero";
 import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
-import { organizationFields } from "../../fields/organizationFields";
 
-import { ADD_ORGANIZATION } from "../../graphQL/query/organization";
+import { organizationRelationFields } from "../../fields/organizationRelationFields";
+
+import gql from "graphql-tag";
+import { ADD_PERSON } from "../../graphQL/query/person";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
-import { moveFormToGqlVariable } from "../../graphQL/organizationFormHandler";
+import { moveFormToGqlVariable } from "../../graphQL/peopleFormHandler";
 
 export default {
   components: {
@@ -48,12 +54,13 @@ export default {
   data() {
     return {
       hero: {
-        title: "新增組織資料表單",
-        content: "台灣政商組織資料",
+        title: "新增人物資料表單",
+        content: "臺灣政商人物關係資料庫計畫",
+        target: "人物",
         type: "create",
-        id: 2,
+        id: 4,
       },
-      organization: organizationFields,
+      organizationRelation: organizationRelationFields,
       collaborate: {
         name: "",
         email: "",
@@ -64,7 +71,7 @@ export default {
   methods: {
     checkForm() {
       // check form before upload
-      for (const item of Object.entries(this.organization)) {
+      for (const item of Object.entries(this.character)) {
         // get form's each field object
         const field = item[1];
         // if there's an unedit field ,but required, return
@@ -77,16 +84,18 @@ export default {
           return;
         }
       }
+
       this.uploadForm();
-      this.clearForm(this.organization);
+      this.clearForm(this.character);
+
       this.$router.push("/thanks");
     },
 
     async uploadForm() {
       // Upload character form
       this.$apollo.mutate({
-        mutation: ADD_ORGANIZATION,
-        variables: await moveFormToGqlVariable(this.organization),
+        mutation: ADD_PERSON,
+        variables: await moveFormToGqlVariable(this.character),
       });
       // Update collaborate form
       this.$apollo.mutate({
@@ -98,6 +107,7 @@ export default {
         },
       });
     },
+
     clearForm(form) {
       for (const item of Object.entries(form)) {
         // get form's each field object
@@ -110,10 +120,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#Page-Organization {
-  .create-star {
-    color: #ed8c4a;
-    margin: 0;
-  }
+#Page-Person {
+  width: 100%;
+
+  // background: gold;
 }
 </style>

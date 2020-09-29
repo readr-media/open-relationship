@@ -5,43 +5,54 @@
     </div>
     <div
       class="FormHero-title"
-      :class="{ create: type == 'create', verify: type == 'verify' }"
+      :class="{ createTitle: type == 'create', verifyTitle: type == 'verify' }"
     >
       <div class="FormHero-title-text">
         {{ title }}
       </div>
     </div>
     <div v-if="type == 'create'" class="FormHero-content">
-      <div class="FormHero-content-paragraph">
+      <p class="FormHero-content-paragraph">
         「{{ content }}」是由 READr
         發起的開放、開源資料建立計畫，希望能將散落在各處的公開資料，以統一的格式建立成開放資料。
-      </div>
+        <br />
+        <br />
 
-      <div class="FormHero-content-paragraph" :style="{ color: '#ed8c4a' }">
-        新增方式： 請將該{{
-          target
-        }}的資料填入對應的欄位，請確認每一項都為公開資料（在網路上可以搜尋得到），並在資料來源欄位附上網址。
-      </div>
-
-      <div class="FormHero-content-paragraph">
+        <span :style="{ color: '#ed8c4a' }"
+          >新增方式：<br />
+          請將該{{
+            target
+          }}的資料填入對應的欄位，請確認每一項都為公開資料（在網路上可以搜尋得到），並在資料來源欄位附上網址。
+        </span>
+        <br />
+        <br />
         找不到想要的欄位？請參考其他表單：
-      </div>
-      <div class="FormHero-content-paragraph">
+      </p>
+      <RelationButtonContainer
+        type="create"
+        :filterId="id"
+        dark="true"
+        :btnList="createSectionList"
+      />
+
+      <p class="FormHero-content-paragraph">
         以上還是沒有你想要的資料嗎？請參考 READr
         的文章，看看它有沒有在未來即將推出的項目中；如果沒有，歡迎來信
         readr@readr.tw 或是私訊粉專 https://www.facebook.com/readr.tw 許願！
-      </div>
+      </p>
     </div>
     <div v-else-if="type == 'verify'" class="FormHero-content">
-      <div class="FormHero-content-paragraph">
+      <p class="FormHero-content-paragraph">
         請對照「資料來源」裡的資料，驗證欄位內的資料是否正確
-      </div>
+        <br />
+        <br />
+      </p>
 
-      <div class="FormHero-content-paragraph">
+      <p class="FormHero-content-paragraph">
         驗證方式
         <ol>
           <li>
-            1在要驗證欄位中：
+            在要驗證欄位中：
             <ul>
               <li>留下正確的資料，刪除不正確的資料</li>
               <li>或是在空白處填入正確資料</li>
@@ -51,13 +62,15 @@
           <li>留下您驗證時的參考資料來源網址</li>
           <li>驗證完成後選擇是否留下你的個人資料</li>
         </ol>
-      </div>
+      </p>
 
-      <div class="FormHero-content-paragraph">
+      <p class="FormHero-content-paragraph">
+        <br />
+
         如果有任何問題<br />歡迎來信 readr@readr.tw 或是私訊粉專
         https://www.facebook.com/readr.tw/
         <br />我們會有專人為你解答<br />謝謝你的參與！ |
-      </div>
+      </p>
     </div>
     <div v-else></div>
   </div>
@@ -66,15 +79,36 @@
 <script>
 import createLogo from "../images/orange-03.svg";
 import checkLogo from "../images/blue-03.svg";
+import RelationButtonContainer from "../components/RelationButtonContainer";
 
 export default {
-  props: ["title", "content", "target", "type"],
+  components: {
+    RelationButtonContainer,
+  },
+  props: ["title", "content", "target", "type", "id"],
   data() {
     return {
       formLogo: this.type == "create" ? createLogo : checkLogo,
+      createSectionList: [
+        { id: 1, title: "新增人物", route: "/person" },
+        { id: 2, title: "新增組織", route: "/organization" },
+        { id: 3, title: "新增人物關係", route: "/person_relation" },
+        { id: 4, title: "新增組織關係", route: "/organization_relation" },
+        {
+          id: 5,
+          title: "新增人物組織關係",
+          route: "/person_organization",
+        },
+      ],
+      verifySectionList: [
+        { id: 1, title: "驗證人物", route: "/person-verify" },
+        { id: 2, title: "驗證組織", route: "/organization-verify" },
+        { id: 3, title: "驗證人物關係", route: "/people_relation" },
+        { id: 4, title: "驗證組織關係", route: "/organization_relation" },
+        { id: 5, title: "驗證人物組織關係", route: "/people_organization" },
+      ],
     };
   },
-  components: {},
 };
 </script>
 
@@ -139,19 +173,28 @@ export default {
     }
   }
 
-  .create {
+  .createTitle {
     background-color: #ed8c4a;
   }
 
-  .verify {
+  .verifyTitle {
     background-color: #63c1e2;
   }
 
-  @include atMedium {
+  @include atSmall {
     // height: 420px;
     .FormHero-title {
       width: 400px;
     }
+    .FormHero-content {
+      width: 500px;
+    }
+  }
+
+ 
+
+    @include atLarge {
+  
     .FormHero-content {
       width: 800px;
     }

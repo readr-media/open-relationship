@@ -37,13 +37,13 @@ export const organizationFields = {
     inputStatus: { type: "text" },
     formState: true,
   },
-  area: {
-    label: "組織地區",
-    info: [],
-    value: "",
-    inputStatus: { type: "text" },
-    formState: true,
-  },
+  // area: {
+  //   label: "組織地區",
+  //   info: [],
+  //   value: "",
+  //   inputStatus: { type: "text" },
+  //   formState: true,
+  // },
   abstract: {
     label: "一句話描述該組織",
     info: [],
@@ -55,7 +55,7 @@ export const organizationFields = {
     label: "組織詳細介紹",
     info: [],
     value: "",
-    inputStatus: { type: "text" },
+    inputStatus: { type: "textarea" },
     formState: true,
   },
   founding_date: {
@@ -76,7 +76,7 @@ export const organizationFields = {
   },
   image: {
     label: "圖像",
-    info: [],
+    info: ["請貼上圖檔的 url 網址"],
     value: "",
     inputStatus: { type: "text" },
     formState: true,

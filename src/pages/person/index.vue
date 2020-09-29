@@ -4,6 +4,7 @@
       :title="hero.title"
       :content="hero.content"
       :target="hero.target"
+      :id="hero.id"
       type="create"
     />
 
@@ -57,6 +58,7 @@ export default {
         content: "臺灣政商人物關係資料庫計畫",
         target: "人物",
         type: "create",
+        id: 1,
       },
       character: characterFields,
       collaborate: {

@@ -73,9 +73,9 @@ export function devideDate(dateString, selection) {
 }
 
 export function mergeDate(year, month, day) {
-  let dayString = day.toString();
-  let monthString = month.toString();
-  let yearString = year.toString();
+  let dayString = day ? day.toString() : "";
+  let monthString = month ? month.toString() : "";
+  let yearString = year ? year.toString() : "";
 
   if (month < 10) {
     monthString = "0" + monthString;

@@ -104,7 +104,7 @@ export const characterFields = {
   },
   contact_details: {
     label: "聯絡方式",
-    info: ["臺灣臺北市鉛筆路31號 02-1234-5678 john@example.com"],
+    info: ["臺灣臺北市鉛筆路31號", "02-1234-5678", "john@example.com"],
     value: "",
     inputStatus: { type: "text" },
     formState: true,

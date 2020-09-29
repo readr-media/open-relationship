@@ -1,11 +1,13 @@
 <template>
   <router-link
-    class="RelationButton"
     :to="to"
+    class="RelationButton"
     :class="{
-      dark: dark,
-      create: type == 'create',
-      verify: type == 'verify',
+      small: small,
+      darkCreate: dark && type == 'create',
+      darkVerify: dark && type == 'verify',
+      lightCreate: !dark && type == 'create',
+      lightVerify: !dark && type == 'verify',
     }"
   >
     <span>{{ title }}</span>
@@ -14,7 +16,7 @@
 
 <script>
 export default {
-  props: ["title", "to", "dark", "type"],
+  props: ["title", "to", "dark", "type", "small"],
 };
 </script>
 
@@ -23,53 +25,80 @@ export default {
 
 .RelationButton {
   width: 100%;
-  // max-width: auto;
-
   border-radius: 42px;
   padding: 10px 0;
   margin-bottom: 30px;
 
-  font-family: PingFang TC;
-  font-size: 21px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ffffff;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
-  // margin: 0 15px;
   cursor: pointer;
   text-decoration: none;
 
+  span {
+    font-family: PingFang TC;
+    font-size: 21px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
   @include atLarge {
     width: 170px;
-    padding: 26px 22px;
+    padding: 0;
     height: 80px;
     margin-bottom: 50px;
   }
 }
-.dark {
-  @include atLarge {
-    width: 170px;
-    padding: 26px 22px;
-    height: auto;
-    margin-bottom: 50px;
+
+.darkCreate {
+  background: none;
+  border: solid 1px #ed8c4a;
+  span {
+    color: #ed8c4a;
+  }
+}
+.darkVerify {
+  background: none;
+  border: solid 1px #63c1e2;
+  span {
+    color: #63c1e2;
+  }
+}
+.lightCreate {
+  background: #ed8c4a;
+  span {
+    color: #ffffff;
+  }
+}
+.lightVerify {
+  background: #63c1e2;
+  span {
+    color: #ffffff;
   }
 }
 
-.create {
-  color: #ed8c4a;
-  border: solid 1px #ed8c4a;
-}
+.small {
+  width: 150px;
+  border-radius: 42px;
+  padding: 9px 0;
+  margin-bottom: 10px;
+  span {
+    font-family: PingFang TC;
+    font-size: 1rem;
+    font-weight: nomal;
+  }
 
-.verify {
-  color: #63c1e2;
-  border: solid 1px #63c1e2;
+  @include atLarge {
+    width: 150px;
+    padding: 0;
+    height: 40px;
+    margin-bottom: 15px;
+  }
 }
 </style>

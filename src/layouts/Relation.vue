@@ -1,29 +1,25 @@
 <template>
   <div id="Relation">
     <div class="section-title Relation-title">| 我要新增資料 |</div>
-    <div class="Relation-btn-container Relation-btn-container-create">
-      <RelationButton
-        v-for="createItem in createSectionList"
-        :key="createItem.id"
-        :title="createItem.title"
-        :to="createItem.route"
-      />
-    </div>
+    <RelationButtonContainer
+      type="create"
+      :filterId="null"
+      :dark="false"
+      :btnList="createSectionList"
+    />
 
     <div class="section-title Relation-title">| 我要驗證資料 |</div>
-    <div class="Relation-btn-container Relation-btn-container-verify ">
-      <RelationButton
-        v-for="createItem in verifySectionList"
-        :key="createItem.id"
-        :title="createItem.title"
-        :to="createItem.route"
-      />
-    </div>
+    <RelationButtonContainer
+      type="verify"
+      :filterId="null"
+      :dark="false"
+      :btnList="verifySectionList"
+    />
   </div>
 </template>
 
 <script>
-import RelationButton from "../components/RelationButton";
+import RelationButtonContainer from "../components/RelationButtonContainer";
 export default {
   data() {
     return {
@@ -48,7 +44,7 @@ export default {
     };
   },
   components: {
-    RelationButton,
+    RelationButtonContainer,
   },
 };
 </script>
@@ -75,6 +71,16 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
+    @include atSmall {
+      max-width: 500px;
+      margin: auto;
+    }
+    @include atLarge {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      max-width: 1200px;
+    }
 
     &-create {
       .RelationButton {
@@ -97,12 +103,6 @@ export default {
   @include atLarge {
     padding: 50px 115px;
     justify-content: center;
-    .Relation-btn-container {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-      max-width: 1200px;
-    }
   }
 }
 </style>

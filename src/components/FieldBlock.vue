@@ -78,6 +78,16 @@
         {{ prompt }}
       </div>
     </div>
+
+    <!-- <div class="FieldBlock-verify">
+      <div class="FieldBlock-verify-radioBlock">
+        <input type="radio" /><label>資料正確</label>
+      </div>
+      <div class="FieldBlock-verify-radioBlock">
+        <input type="radio" /><label>資料錯誤 正確資料為</label>
+        <input type="text" />
+      </div>
+    </div> -->
   </div>
 </template>
 

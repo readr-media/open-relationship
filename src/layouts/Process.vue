@@ -39,7 +39,7 @@ export default {
         },
         {
           id: 3,
-          title: "開放資料（即將開放）",
+          title: "開放資料",
           content:
             "我們會將這些網友協力新增、且驗證過一定次數的資料彙集並開放，讓你一鍵下載。",
           btnStatus: "inactive",
@@ -47,7 +47,7 @@ export default {
         },
         {
           id: 4,
-          title: "資料庫網站上線（即將開放）",
+          title: "資料庫網站上線",
           content:
             "我們預計將架設視覺化、可查詢的資料庫網站，讓公眾人物關係一目瞭然！",
           btnStatus: "inactive",

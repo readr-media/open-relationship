@@ -5,7 +5,7 @@
     <About />
     <Relation />
     <Process />
-    <Cooperation />
+    <!-- <Cooperation /> -->
     <Contact />
     <Footer />
   </div>

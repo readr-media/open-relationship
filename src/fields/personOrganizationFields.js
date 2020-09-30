@@ -1,32 +1,24 @@
 export const personOrganizationFields = {
   person_id: {
     label: "姓名",
-    info: [
-      "若名字有分隔點，請用全形分隔點「・」",
-      "原住民中文名與羅馬拼音之間需要空格",
-      "若名字之間有空格，請用半形空格",
-    ],
+    info: ["若名字之間有空格，請用半形空格"],
     value: "",
     inputStatus: { type: "text" },
     required: true,
     verify: ["required"],
     formState: true,
   },
-  related_person_id: {
-    label: "關係者姓名",
-    info: [
-      "若名字有分隔點，請用全形分隔點「・」",
-      "原住民中文名與羅馬拼音之間需要空格",
-      "若名字之間有空格，請用半形空格",
-    ],
+  organization_id: {
+    label: "組織名稱",
+    info: ["若名字之間有空格，請用半形空格"],
     value: "",
     inputStatus: { type: "text" },
     required: true,
     verify: ["required"],
     formState: true,
   },
-  relative: {
-    label: "關係者如何稱呼該人物",
+  role: {
+    label: "職位名稱",
     info: [],
     value: "",
     inputStatus: { type: "text" },

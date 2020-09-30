@@ -40,7 +40,7 @@ export default {
         modify_time: Date(Date.now()).toString(),
         field_name: form.name.value,
         name: true,
-        aternative: true,
+        alternative: true,
         other_names: false,
       };
 

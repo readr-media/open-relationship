@@ -113,9 +113,9 @@ export default {
     uploadHandler() {
       this.checkForm(this.person);
       this.uploadFormToGoogle(this.person);
-      // this.uploadForm();
-      // this.clearForm(this.person);
-      // this.$router.push("/thanks");
+      this.uploadForm();
+      this.clearForm(this.person);
+      this.$router.push("/thanks");
     },
 
     async uploadForm() {

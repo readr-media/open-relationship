@@ -9,7 +9,7 @@
     />
     <div class="fieldContainer">
       <span class="create-star">＊</span>為必填欄位
-      <form action v-on:submit.prevent="checkForm">
+      <form action v-on:submit.prevent="uploadHandler">
         <FieldBlock
           v-for="field in organization"
           :key="field.label"
@@ -39,7 +39,10 @@ import { ADD_ORGANIZATION } from "../../graphQL/query/organization";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
 import { moveFormToGqlVariable } from "../../graphQL/organizationFormHandler";
 
+import formMixin from "../../mixins/formMixin";
+
 export default {
+  mixins: [formMixin],
   components: {
     FormHero,
     FieldBlock,
@@ -64,21 +67,8 @@ export default {
     };
   },
   methods: {
-    checkForm() {
-      // check form before upload
-      for (const item of Object.entries(this.organization)) {
-        // get form's each field object
-        const field = item[1];
-        // if there's an unedit field ,but required, return
-        if (field.required && field.value == "") {
-          field.formState = false;
-          return;
-        }
-        // if there's an uncorrect field ,reutrn
-        if (field.formState == false) {
-          return;
-        }
-      }
+    uploadHandler() {
+      this.checkForm(this.organization);
       this.uploadForm();
       this.clearForm(this.organization);
       this.$router.push("/thanks");
@@ -99,13 +89,6 @@ export default {
           feedback: this.collaborate.feedback,
         },
       });
-    },
-    clearForm(form) {
-      for (const item of Object.entries(form)) {
-        // get form's each field object
-        const field = item[1];
-        field.value = "";
-      }
     },
   },
 };

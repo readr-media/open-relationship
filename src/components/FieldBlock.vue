@@ -79,14 +79,15 @@
       </div>
     </div>
 
+    <!-- handle verify section -->
     <div v-if="type == 'verify'" class="FieldBlock-verify">
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" value="pass" v-model="verifyStatus" /><label
+        <input type="radio" value="pass" v-model="field.correctVerify" /><label
           >資料正確</label
         >
       </div>
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" value="fail" v-model="verifyStatus" /><label
+        <input type="radio" value="fail" v-model="field.correctVerify" /><label
           >資料錯誤</label
         >
       </div>

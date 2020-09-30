@@ -7,7 +7,6 @@ export const ADD_ORGANIZATION = gql`
     $other_names: String
     $identifiers: String
     $classification: String
-    $area: String
     $abstract: String
     $description: String
     $founding_date_year: Int
@@ -29,7 +28,6 @@ export const ADD_ORGANIZATION = gql`
         other_names: $other_names
         identifiers: $identifiers
         classification: $classification
-        area: $area
         abstract: $abstract
         description: $description
         founding_date_year: $founding_date_year
@@ -75,7 +73,6 @@ export const UPDATE_ORGANIZATION = gql`
     $other_names: String
     $identifiers: String
     $classification: String
-    $area: String
     $abstract: String
     $description: String
     $founding_date_year: Int
@@ -98,7 +95,6 @@ export const UPDATE_ORGANIZATION = gql`
         other_names: $other_names
         identifiers: $identifiers
         classification: $classification
-        area: $area
         abstract: $abstract
         description: $description
         founding_date_year: $founding_date_year

@@ -11,7 +11,7 @@
       <div class="fieldContainer-notation">
         <span class="verify-star">＊</span>為必填欄位
       </div>
-      <form action v-on:submit.prevent="checkForm">
+      <form action v-on:submit.prevent="uploadHandler">
         <FieldBlock
           v-for="field in person"
           :key="field.label"
@@ -44,7 +44,10 @@ import {
 import { getRandomId } from "../../graphQL/getRandomId";
 import gql from "graphql-tag";
 
+import formMixin from "../../mixins/formMixin";
+
 export default {
+  mixins: [formMixin],
   components: {
     FieldBlock,
     FormHero,
@@ -107,9 +110,13 @@ export default {
         },
       });
     },
-
-    async checkForm() {
-      // Post update data to keystone
+    uploadHandler() {
+      this.checkForm(this.person);
+      this.uploadForm();
+      this.clearForm(this.person);
+      this.$router.push("/thanks");
+    },
+    async uploadForm() {
       this.$apollo.mutate({
         mutation: UPDATE_PERSON,
         variables: {
@@ -118,8 +125,6 @@ export default {
           ...moveFormToGqlVariable(this.person),
         },
       });
-
-      this.$router.push("/thanks");
     },
   },
 };

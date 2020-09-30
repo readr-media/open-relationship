@@ -21,18 +21,21 @@
           />
         </li>
         <li>
-          去<span
-            :style="{ color: '#ed8c4a;', cursor: 'pointer' }"
-            @click="returnToVerifyPerson"
-            >驗證資料</span
-          >
+          去驗證資料
+          <RelationButtonContainer
+            type="verify"
+            :filterId="null"
+            :dark="true"
+            :btnList="verifySectionList"
+            :small="true"
+          />
         </li>
         <li>看看現在有哪些公開資料（ 即將開放）</li>
       </ul>
     </div>
 
     <!-- <RelationButton to="" title="新增組織" dark="true" type="create" /> -->
-    <!-- <div id="thanksPage-prompt">{{ seconds }}秒後回到主畫面</div> -->
+    <div id="thanksPage-prompt">{{ seconds }}秒後回到主畫面</div>
   </div>
 </template>
 
@@ -46,7 +49,7 @@ export default {
   data() {
     return {
       READrLogo,
-      seconds: 15,
+      seconds: 8,
       createSectionList: [
         { id: 1, title: "新增人物", route: "/person" },
         { id: 2, title: "新增組織", route: "/organization" },
@@ -68,17 +71,17 @@ export default {
     };
   },
   mounted() {
-    // const countDown = setInterval(() => {
-    //   this.seconds--;
-    //   if (this.seconds == 0) {
-    //     clearInterval(countDown);
-    //     this.$router.push("/");
-    //   }
-    // }, 1000);
+    const countDown = setInterval(() => {
+      this.seconds--;
+      if (this.seconds == 0) {
+        clearInterval(countDown);
+        this.$router.push("/");
+      }
+    }, 1000);
   },
   methods: {
-    returnToHome: function() {},
-    returnToVerifyPerson: function() {
+    returnToHome: function () {},
+    returnToVerifyPerson: function () {
       this.$router.push("/person-verify");
     },
   },

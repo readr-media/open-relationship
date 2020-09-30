@@ -7,10 +7,11 @@ export const personFields = {
       "若名字之間有空格，請用半形空格",
     ],
     value: "",
-    inputStatus: { type: "text" },
-    required: true,
-    verify: ["required"],
-    formState: true,
+    inputStatus: { type: "text" }, //which type of input it should have
+    required: true, //show star
+    verify: ["required"], //handle field-verify methods
+    formState: true, //if field-erify fails, it'll turn false, and sumbit won't pass.
+    correctVerify: null, //correction-verify flag,null,true or false
   },
   alternative: {
     label: "別名",
@@ -19,6 +20,7 @@ export const personFields = {
     inputStatus: { type: "text" },
 
     formState: true,
+    correctVerify: null,
   },
   other_names: {
     label: "舊名",
@@ -26,6 +28,7 @@ export const personFields = {
     value: "",
     inputStatus: { type: "text" },
     formState: true,
+    correctVerify: null,
   },
   // identifiers: {
   //   label: "ID",
@@ -40,6 +43,7 @@ export const personFields = {
     inputStatus: { type: "text" },
     verify: ["emailFormat"],
     formState: true,
+    correctVerify: null,
   },
   gender: {
     label: "生理性別",
@@ -53,6 +57,7 @@ export const personFields = {
       ],
     },
     formState: true,
+    correctVerify: null,
   },
 
   birth_date: {
@@ -63,6 +68,7 @@ export const personFields = {
     verify: ["dateFormat"],
 
     formState: true,
+    correctVerify: null,
   },
   death_date: {
     label: "死亡日期",
@@ -72,6 +78,7 @@ export const personFields = {
     verify: ["dateFormat"],
 
     formState: true,
+    correctVerify: null,
   },
   image: {
     label: "大頭照",
@@ -80,6 +87,7 @@ export const personFields = {
     inputStatus: { type: "text" },
     verify: ["urlFormat"],
     formState: true,
+    correctVerify: null,
   },
   summary: {
     label: "一句話描寫這個人",
@@ -87,6 +95,7 @@ export const personFields = {
     value: "",
     inputStatus: { type: "text" },
     formState: true,
+    correctVerify: null,
   },
   biography: {
     label: "詳細生平",
@@ -94,6 +103,7 @@ export const personFields = {
     value: "",
     inputStatus: { type: "textarea" },
     formState: true,
+    correctVerify: null,
   },
   national_identity: {
     label: "國籍",
@@ -101,6 +111,7 @@ export const personFields = {
     value: "",
     inputStatus: { type: "text" },
     formState: true,
+    correctVerify: null,
   },
   contact_details: {
     label: "聯絡方式",
@@ -108,6 +119,7 @@ export const personFields = {
     value: "",
     inputStatus: { type: "text" },
     formState: true,
+    correctVerify: null,
   },
   links: {
     label: "網站",
@@ -117,6 +129,7 @@ export const personFields = {
     verify: ["urlFormat"],
 
     formState: true,
+    correctVerify: null,
   },
   source: {
     label: "資料來源",
@@ -126,5 +139,6 @@ export const personFields = {
     required: true,
     verify: ["required", "urlFormat"],
     formState: true,
+    correctVerify: null,
   },
 };

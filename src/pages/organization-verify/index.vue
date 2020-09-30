@@ -5,7 +5,7 @@
       <div class="fieldContainer-notation">
         <span class="verify-star">＊</span>為必填欄位
       </div>
-      <form action v-on:submit.prevent="checkForm">
+      <form action v-on:submit.prevent="uploadHandler">
         <FieldBlock
           v-for="field in organization"
           :key="field.label"
@@ -38,7 +38,11 @@ import {
   moveGqlToForm,
 } from "../../graphQL/organizationFormHandler";
 
+import formMixin from "../../mixins/formMixin";
+
 export default {
+  mixins: [formMixin],
+
   components: {
     FieldBlock,
     FormHero,
@@ -99,7 +103,15 @@ export default {
         },
       });
     },
-    async checkForm() {
+
+    uploadHandler() {
+      this.checkForm(this.organization);
+      this.uploadForm();
+      this.clearForm(this.organization);
+      this.$router.push("/thanks");
+    },
+
+    async uploadForm() {
       // Post update data to keystone
       this.$apollo.mutate({
         mutation: UPDATE_ORGANIZATION,
@@ -109,8 +121,6 @@ export default {
           ...moveFormToGqlVariable(this.organization),
         },
       });
-
-      this.$router.push("/thanks");
     },
   },
 };

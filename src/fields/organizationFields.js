@@ -27,7 +27,7 @@ export const organizationFields = {
     info: [],
     value: "",
     inputStatus: { type: "text" },
-    verify: ["indentifiersFormat"],
+    // verify: ["indentifiersFormat"],
     formState: true,
   },
   classification: {

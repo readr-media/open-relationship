@@ -6,10 +6,11 @@ spec:
   selector:
     app: {{.app}}
     tier: {{.tier}}
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 3000
+  clusterIp:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
   type: ClusterIP
 ---
 apiVersion: extensions/v1beta1

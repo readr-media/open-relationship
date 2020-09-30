@@ -56,7 +56,7 @@
         changedMonth="(e) => verifyField(e)"
       /> -->
       <input
-        :type="field.inputStatus.type"
+        type="text"
         v-model="field.value"
         @change="(e) => verifyField(e)"
         placeholder="yyyy-mm-dd"
@@ -82,14 +82,16 @@
     <!-- handle verify section -->
     <div v-if="type == 'verify'" class="FieldBlock-verify">
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" value="pass" v-model="field.correctVerify" /><label
+        <input type="radio" :value="true" v-model="field.correctVerify" /><label
           >資料正確</label
         >
       </div>
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" value="fail" v-model="field.correctVerify" /><label
-          >資料錯誤</label
-        >
+        <input
+          type="radio"
+          :value="false"
+          v-model="field.correctVerify"
+        /><label>資料錯誤</label>
       </div>
     </div>
   </div>

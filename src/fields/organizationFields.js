@@ -1,7 +1,7 @@
 export const organizationFields = {
   name: {
     label: "組織名稱",
-    info: [],
+    info: ["若名字之間有空格，請用半形空格"],
     value: "",
     inputStatus: { type: "text" },
     required: true,
@@ -90,7 +90,7 @@ export const organizationFields = {
   },
   links: {
     label: "網站",
-    info: ["該組織的 wiki 頁面或是官方網站"],
+    info: ["該組織的維基百科頁面或是官方網站"],
     value: "",
     inputStatus: { type: "text" },
     formState: true,

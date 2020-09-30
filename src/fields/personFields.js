@@ -35,7 +35,7 @@ export const personFields = {
   // },
   email: {
     label: "電子信箱",
-    info: ["作答示範：readr123@gmail.com"],
+    info: [],
     value: "",
     inputStatus: { type: "text" },
     verify: ["emailFormat"],
@@ -111,7 +111,7 @@ export const personFields = {
   },
   links: {
     label: "網站",
-    info: ["人物的 wiki 頁面或是官方網站"],
+    info: ["人物的維基百科頁面或是官方網站"],
     value: "",
     inputStatus: { type: "text" },
     verify: ["urlFormat"],

@@ -1,11 +1,7 @@
 export const organizationRelationFields = {
   organization_id: {
     label: "組織名稱",
-    info: [
-      "若名字有分隔點，請用全形分隔點「・」",
-      "原住民中文名與羅馬拼音之間需要空格",
-      "若名字之間有空格，請用半形空格",
-    ],
+    info: ["若名字之間有空格，請用半形空格"],
     value: "",
     inputStatus: { type: "text" },
     required: true,
@@ -14,11 +10,7 @@ export const organizationRelationFields = {
   },
   related_organization_id: {
     label: "關係組織名稱",
-    info: [
-      "若名字有分隔點，請用全形分隔點「・」",
-      "原住民中文名與羅馬拼音之間需要空格",
-      "若名字之間有空格，請用半形空格",
-    ],
+    info: ["若名字之間有空格，請用半形空格"],
     value: "",
     inputStatus: { type: "text" },
     required: true,
@@ -26,8 +18,8 @@ export const organizationRelationFields = {
     formState: true,
   },
   relative: {
-    label: "隸屬",
-    info: [],
+    label: "組織與關係組織的從屬關係",
+    info: ["例：子公司、母公司、轉投資事業"],
     value: "",
     inputStatus: { type: "text" },
 

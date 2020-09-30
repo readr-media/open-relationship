@@ -50,7 +50,7 @@ export default {
     return {
       hero: {
         title: "新增組織資料表單",
-        content: "台灣政商組織資料",
+        content: "臺灣政商人物關係資料庫計畫",
         target: "組織",
         type: "create",
         id: 2,

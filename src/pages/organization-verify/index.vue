@@ -49,11 +49,11 @@ export default {
     return {
       organizationId: 1,
       hero: {
-        title: "新增人物資料表單",
+        title: "驗證組織資料表單",
         content: "臺灣政商人物關係資料庫計畫",
-        target: "人物",
+        target: "組織",
         type: "verify",
-        id: 1,
+        id: 2,
       },
       organization: organizationFields,
       collaborate: {

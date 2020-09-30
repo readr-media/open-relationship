@@ -39,7 +39,10 @@ export default {
       // console.log(target);
 
       let data = {};
+      let url = "";
       if (target == "person") {
+        url =
+          "https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec";
         data = {
           modify_time: Date(Date.now()).toString(),
           field_name: form.name.value,
@@ -63,6 +66,8 @@ export default {
           source: form.source.correctVerify,
         };
       } else if (target == "organization") {
+        url =
+          "https://script.google.com/macros/s/AKfycbwWPdn-Vn_P_jnSJ075W5liYeRZZ5EhajHe2LuSFeli_kXDzgAD/exec";
         data = {
           modify_time: Date(Date.now()).toString(),
           field_name: form.name.value,
@@ -88,8 +93,6 @@ export default {
       } else return;
 
       const cors = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
-      let url =
-        "https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec";
 
       axios({
         method: "post",
@@ -99,19 +102,6 @@ export default {
       })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
-      // const data = {
-      //   name: "LIYI",
-      //   phone: "123",
-      //   demand: "沒有",
-      // };
-      // axios({
-      //   method: "post",
-      //   url:
-      //     "https://script.google.com/macros/s/AKfycbysFToJy23aOzqhoRuKvhefP1WDHzTpQpSbf_4Vq52jRxRAOvxo/exec",
-      //   data: data,
-      // })
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err));
     },
   },
 };

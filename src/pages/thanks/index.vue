@@ -35,7 +35,7 @@
     </div>
 
     <!-- <RelationButton to="" title="新增組織" dark="true" type="create" /> -->
-    <div id="thanksPage-prompt">{{ seconds }}秒後回到主畫面</div>
+    <div id="thanksPage-prompt" @click="returnToHome">回到主畫面</div>
   </div>
 </template>
 
@@ -71,18 +71,17 @@ export default {
     };
   },
   mounted() {
-    const countDown = setInterval(() => {
-      this.seconds--;
-      if (this.seconds == 0) {
-        clearInterval(countDown);
-        this.$router.push("/");
-      }
-    }, 1000);
+    // const countDown = setInterval(() => {
+    //   this.seconds--;
+    //   if (this.seconds == 0) {
+    //     clearInterval(countDown);
+    //     this.$router.push("/");
+    //   }
+    // }, 1000);
   },
   methods: {
-    returnToHome: function () {},
-    returnToVerifyPerson: function () {
-      this.$router.push("/person-verify");
+    returnToHome: function () {
+      this.$router.push("/");
     },
   },
 };
@@ -150,6 +149,8 @@ export default {
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+
+    cursor: pointer;
   }
 
   .smallEnter {

@@ -112,10 +112,12 @@ export default {
     },
     uploadHandler() {
       this.checkForm(this.person);
-      this.uploadForm();
-      this.clearForm(this.person);
-      this.$router.push("/thanks");
+      this.uploadFormToGoogle(this.person);
+      // this.uploadForm();
+      // this.clearForm(this.person);
+      // this.$router.push("/thanks");
     },
+
     async uploadForm() {
       this.$apollo.mutate({
         mutation: UPDATE_PERSON,

@@ -1,5 +1,6 @@
 <template>
   <div id="Relation">
+    <!-- <a class="anchorPoint" href="#Relation" /> -->
     <div class="section-title Relation-title">| 我要新增資料 |</div>
     <RelationButtonContainer
       type="create"

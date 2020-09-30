@@ -6,9 +6,11 @@
       <div class="ProcessCard-text-title">{{ title }}</div>
       <div class="ProcessCard-text-content">{{ content }}</div>
     </div>
-    <div class="ProcessCard-btnContainer">
-      <Button :btnStatus="btnStatus" title="YOYO" fitDiv="true" />
-    </div>
+    <a class="anchorPoint" :href="to">
+      <div class="ProcessCard-btnContainer">
+        <Button :btnStatus="btnStatus" title="YOYO" fitDiv="true" />
+      </div>
+    </a>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ export default {
       numbers: [number1, number2, number3, number4],
     };
   },
-  props: ["number", "title", "content", "btnStatus"],
+  props: ["number", "title", "content", "btnStatus", "to"],
   methods: {},
   components: {
     Button,
@@ -38,6 +40,7 @@ export default {
 
 .ProcessCard {
   max-width: 100%;
+  height: 259px;
   background-color: #ffffff;
 
   display: flex;
@@ -56,33 +59,39 @@ export default {
     margin-top: -63px;
     background: none;
   }
+  .ProcessCard-textContainer {
+    height: 209px;
+    .ProcessCard-text-title {
+      // width: 380px;
+      height: 29px;
+      font-family: PingFangTC;
+      font-size: 21px;
+      font-weight: 300;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
 
-  .ProcessCard-text-title {
-    // width: 380px;
-    height: 29px;
-    font-family: PingFangTC;
-    font-size: 21px;
-    font-weight: 300;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000000;
-
-    margin: 38px auto 10px;
+      margin: 38px auto 10px;
+    }
+    .ProcessCard-text-content {
+      // width: 300px;
+      font-family: PingFang TC;
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.75;
+      letter-spacing: normal;
+      color: #000000;
+      margin: 0 25px 23px;
+    }
   }
-  .ProcessCard-text-content {
-    // width: 300px;
-    font-family: PingFang TC;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.75;
-    letter-spacing: normal;
-    color: #000000;
-    margin: 0 25px 23px;
+
+  .ProcessCard-btnContainer {
+    bottom: 0;
   }
 
   @include atSmall {

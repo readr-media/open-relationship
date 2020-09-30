@@ -1,5 +1,6 @@
 <template>
   <div id="Process">
+    <!-- <a class="anchorPoint" href="#Process" /> -->
     <div class="section-title" id="Process-title">| 階段進度 |</div>
     <div id="Process-cardContainer">
       <ProcessCard
@@ -9,6 +10,7 @@
         :title="processCard.title"
         :content="processCard.content"
         :btnStatus="processCard.btnStatus"
+        :to="processCard.to"
       />
     </div>
   </div>
@@ -22,31 +24,34 @@ export default {
       processCardList: [
         {
           id: 1,
-          title: "新增與驗證",
+          title: "新增資料",
           content:
-            "產生沒有意義的文章，供排版時填充版面用，但不會因為字義而左右版型的判斷。文字、標點符號出現機率大致符合台灣文章習慣。",
+            "你可以新增單筆或大量新增關於人物、組織的資料（更多屬性表單即將開放）。新增前請務必確認它是公開資料，且一定要附上資料來源。",
           btnStatus: "active",
+          to: "#Relation",
         },
         {
           id: 2,
-          title: "統整資料",
-          content:
-            "產生沒有意義的文章，供排版時填充版面用，但不會因為字義而左右版型的判斷。文字、標點符號出現機率大致符合台灣文章習慣。",
-          btnStatus: "inactive",
+          title: "驗證資料",
+          content: "你可以協助確認網友們新增的資料是不是正確的。",
+          btnStatus: "active",
+          to: "#Relation",
         },
         {
           id: 3,
-          title: "產出專題報告",
+          title: "開放資料（即將開放）",
           content:
-            "產生沒有意義的文章，供排版時填充版面用，但不會因為字義而左右版型的判斷。文字、標點符號出現機率大致符合台灣文章習慣。",
+            "我們會將這些網友協力新增、且驗證過一定次數的資料彙集並開放，讓你一鍵下載。",
           btnStatus: "inactive",
+          to: "",
         },
         {
           id: 4,
-          title: "資料庫網站開放使用",
+          title: "資料庫網站上線（即將開放）",
           content:
-            "產生沒有意義的文章，供排版時填充版面用，但不會因為字義而左右版型的判斷。文字、標點符號出現機率大致符合台灣文章習慣。",
+            "我們預計將架設視覺化、可查詢的資料庫網站，讓公眾人物關係一目瞭然！",
           btnStatus: "inactive",
+          to: "",
         },
       ],
     };

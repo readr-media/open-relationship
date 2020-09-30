@@ -63,4 +63,5 @@ export const moveGqlToForm = (person, targetPerson) => {
   person.national_identity.value = targetPerson.national_identity;
   person.contact_details.value = targetPerson.contact_details;
   person.links.value = targetPerson.links;
+  person.source.value = targetPerson.source;
 };

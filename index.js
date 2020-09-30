@@ -96,12 +96,31 @@ module.exports = {
       authStrategy,
     }),
     new NuxtApp({
+      //equal to nuxt.config.js
       srcDir: "src",
       buildDir: "dist",
-      modules: ["bootstrap-vue/nuxt"], //equal to nuxt.config.js
       telemetry: false,
       plugins: [{ src: "~/plugins/vue-tagsinput", mode: "client" }],
       css: ["~styles/global.style.css"],
+      store: ["~store"],
+      buildModules: ["@nuxtjs/apollo"],
+      apollo: {
+        clientConfigs: {
+          default: {
+            // httpEndpoint: "http://localhost:3000/admin/api/",
+            // browserHttpEndpoint: "/admin/api",
+            httpEndpoint: "https://or-dev.readr.tw/admin/api",
+          },
+        },
+      },
+      head: {
+        // titleTemplate: '%s - Nuxt.js',
+        meta: [
+          { charset: "utf-8" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          // { hid: 'description', name: 'description', content: 'Meta description' }
+        ],
+      },
     }),
   ],
 };
@@ -119,6 +138,8 @@ const PositionSchema = require("./lists/Posts");
 const MembershipSchema = require("./lists/Memberships");
 const CountSchema = require("./lists/Count");
 const MotionSchema = require("./lists/Motions");
+const CollaborateSchema = require("./lists/Collaborate");
+
 keystone.createList("Area", AreaSchema);
 keystone.createList("Person", PersonSchema);
 // keystone.createList('Contact_detail', ContactDetailSchema);
@@ -132,3 +153,4 @@ keystone.createList("Post", PositionSchema);
 keystone.createList("Membership", MembershipSchema);
 keystone.createList("Count", CountSchema);
 keystone.createList("Motion", MotionSchema);
+keystone.createList("Collaborate", CollaborateSchema);

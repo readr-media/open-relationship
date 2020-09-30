@@ -1,10 +1,11 @@
 <template>
   <div class="app">
     <Hero />
+    <Intro />
     <About />
     <Relation />
     <Process />
-    <Cooperation />
+    <!-- <Cooperation /> -->
     <Contact />
     <Footer />
   </div>
@@ -12,6 +13,7 @@
 
 <script>
 import Hero from "../layouts/Hero";
+import Intro from "../layouts/Intro";
 import About from "../layouts/About";
 import Relation from "../layouts/Relation";
 import Process from "../layouts/Process";
@@ -30,6 +32,7 @@ export default {
   methods: {},
   components: {
     Hero,
+    Intro,
     About,
     Relation,
     Process,

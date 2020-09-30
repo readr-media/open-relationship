@@ -1,7 +1,13 @@
 <template>
   <button
     class="Button"
-    :class="{ inactive: btnStatus == 'inactive', fitDiv: fitDiv }"
+    :class="{
+      inactive: btnStatus == 'inactive',
+      fitDiv: fitDiv,
+      round: round,
+      create: type == 'create',
+      verify: type == 'verify',
+    }"
   >
     <div v-if="btnStatus == 'inactive'" class="Button-text">即將開放</div>
     <div v-else-if="btnStatus == 'active'" class="Button-text">我要參與</div>
@@ -11,7 +17,7 @@
 
 <script>
 export default {
-  props: ["btnStatus", "title", "fitDiv"],
+  props: ["btnStatus", "title", "fitDiv", "round", "type"],
 };
 </script>
 
@@ -40,6 +46,10 @@ export default {
   &:focus {
     outline: 0;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .inactive {
@@ -48,5 +58,18 @@ export default {
 
 .fitDiv {
   width: 100%;
+}
+
+.round {
+  border-radius: 42px;
+  margin: 50px auto 87px;
+}
+
+.create {
+  background-color: #ed8c4a;
+}
+
+.verify {
+  background-color: #63c1e2;
 }
 </style>

@@ -1,4 +1,4 @@
-import { devideDate, mergeDate } from "../components/fieldVerify";
+import { devideDate, mergeDate } from "../utils/fieldVerify";
 export const moveFormToGqlVariable = (person) => {
   const {
     person_id,

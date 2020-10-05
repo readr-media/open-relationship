@@ -66,6 +66,14 @@
       </p>
     </div>
     <div v-else></div>
+
+    <Button
+      title="回到主畫面"
+      round="true"
+      :type="type"
+      :whiteText="true"
+      @click.native="returnToHome"
+    />
   </div>
 </template>
 
@@ -73,6 +81,8 @@
 import createLogo from "../images/orange-03.svg";
 import checkLogo from "../images/blue-03.svg";
 import RelationButtonContainer from "../components/RelationButtonContainer";
+import Button from "../components/Button";
+
 import relationListMixin from "../mixins/relationListMixin";
 
 export default {
@@ -80,12 +90,19 @@ export default {
 
   components: {
     RelationButtonContainer,
+    Button,
   },
   props: ["title", "content", "target", "type", "id"],
   data() {
     return {
       formLogo: this.type == "create" ? createLogo : checkLogo,
     };
+  },
+  methods: {
+    returnToHome: function () {
+      console.log("yoyo");
+      this.$router.push("/");
+    },
   },
 };
 </script>

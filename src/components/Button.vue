@@ -7,6 +7,7 @@
       round: round,
       create: type == 'create',
       verify: type == 'verify',
+      whiteText: whiteText,
     }"
   >
     <div v-if="btnStatus == 'inactive'" class="Button-text">即將開放</div>
@@ -17,7 +18,7 @@
 
 <script>
 export default {
-  props: ["btnStatus", "title", "fitDiv", "round", "type"],
+  props: ["btnStatus", "title", "fitDiv", "round", "type", "whiteText"],
 };
 </script>
 
@@ -71,5 +72,10 @@ export default {
 
 .verify {
   background-color: #63c1e2;
+}
+
+.whiteText {
+  color: white;
+  margin: 0;
 }
 </style>

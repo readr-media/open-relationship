@@ -40,7 +40,7 @@ import {
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from "../../graphQL/peopleFormHandler";
+} from "../../graphQL/personFormHandler";
 import { getRandomId } from "../../graphQL/getRandomId";
 import gql from "graphql-tag";
 

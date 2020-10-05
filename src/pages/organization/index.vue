@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     uploadHandler() {
-      console.log(this.checkForm(this.organization));
       if (!this.checkForm(this.organization)) return;
       this.uploadForm();
       this.clearForm(this.organization);

@@ -15,7 +15,7 @@ export const ADD_PERSON_RELATION = gql`
   ) {
     createPersonRelation(
       data: {
-        person_id: $person_id
+        person_id: { name: $person_id }
         related_person_id: $related_person_id
         relative: $relative
         start_date_year: $start_date_year
@@ -87,7 +87,7 @@ export const UPDATE_PERSON_RELATION = gql`
 
 export const FETCH_PERSON_RELATIONS_COUNT = gql`
   query {
-    _allPersonRelationssMeta {
+    _allPersonRelationsMeta {
       count
     }
   }
@@ -97,23 +97,15 @@ export const FETCH_RANDOM_PERSON_RELATION = gql`
   query getRandomPersonRelation($id: ID!) {
     PersonRelation(where: { id: $id }) {
       id
-      name
-      alternative
-      other_names
-      email
-      gender
-      birth_date_year
-      birth_date_month
-      birth_date_day
-      death_date_year
-      death_date_month
-      death_date_day
-      image
-      summary
-      biography
-      national_identity
-      contact_details
-      links
+      person_id
+      related_person_id
+      relative
+      start_date_year
+      start_date_month
+      start_date_day
+      end_date_year
+      end_date_month
+      end_date_day
       source
     }
   }

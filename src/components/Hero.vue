@@ -27,7 +27,7 @@
 
     <div id="Hero-rectangle-small">
       <div id="Hero-rectangle-small-title">
-        台灣
+        臺灣
         <div>
           <span class="text-style-1">政商人物</span
           ><span class="text-style-2">關係</span>
@@ -38,7 +38,7 @@
 
     <div id="Hero-rectangle-large">
       <div id="Hero-rectangle-large-title">
-        台灣
+        臺灣
         <span class="text-style-1">政商人物</span
         ><span class="text-style-2">關係</span>
         資料庫計畫

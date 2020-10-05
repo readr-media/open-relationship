@@ -42,7 +42,7 @@ import { personRelationFields } from "../../fields/personRelationFields";
 import gql from "graphql-tag";
 import { ADD_PERSON_RELATION } from "../../graphQL/query/person_relation";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
-import { moveFormToGqlVariable } from "../../graphQL/peopleRelationFormHandler";
+import { moveFormToGqlVariable } from "../../graphQL/personRelationFormHandler";
 import formMixin from "../../mixins/formMixin";
 
 export default {
@@ -75,8 +75,8 @@ export default {
     uploadHandler() {
       if (!this.checkForm(this.personRelation)) return;
       this.uploadForm();
-      // this.clearForm(this.personRelation);
-      // this.$router.push("/thanks");
+      this.clearForm(this.personRelation);
+      this.$router.push("/thanks");
     },
 
     async uploadForm() {

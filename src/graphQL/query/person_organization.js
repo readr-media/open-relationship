@@ -4,6 +4,7 @@ export const ADD_PERSON_ORGANIZATION = gql`
   mutation createPersonOrganization(
     $person_id: String!
     $organization_id: String!
+    $role: String
     $start_date_year: Int
     $start_date_month: Int
     $start_date_day: Int
@@ -16,6 +17,7 @@ export const ADD_PERSON_ORGANIZATION = gql`
       data: {
         person_id: $person_id
         organization_id: $organization_id
+        role: $role
         start_date_year: $start_date_year
         start_date_month: $start_date_month
         start_date_day: $start_date_day
@@ -27,6 +29,7 @@ export const ADD_PERSON_ORGANIZATION = gql`
     ) {
       person_id
       organization_id
+      role
       start_date_year
       start_date_month
       start_date_day
@@ -43,6 +46,7 @@ export const UPDATE_PERSON = gql`
     $id: ID!
     $person_id: String!
     $organization_id: String!
+    $role: String
     $start_date_year: Int
     $start_date_month: Int
     $start_date_day: Int
@@ -56,6 +60,7 @@ export const UPDATE_PERSON = gql`
       data: {
         person_id: $person_id
         organization_id: $organization_id
+        role: $role
         start_date_year: $start_date_year
         start_date_month: $start_date_month
         start_date_day: $start_date_day
@@ -68,6 +73,7 @@ export const UPDATE_PERSON = gql`
       id
       person_id
       organization_id
+      role
       start_date_year
       start_date_month
       start_date_day
@@ -93,6 +99,7 @@ export const FETCH_RANDOM_PERSON_RELATION = gql`
       id
       person_id
       organization_id
+      role
       start_date_year
       start_date_month
       start_date_day

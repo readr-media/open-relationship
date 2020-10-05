@@ -42,7 +42,7 @@ import { personFields } from "../../fields/personFields";
 import gql from "graphql-tag";
 import { ADD_PERSON } from "../../graphQL/query/person";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
-import { moveFormToGqlVariable } from "../../graphQL/peopleFormHandler";
+import { moveFormToGqlVariable } from "../../graphQL/personFormHandler";
 import formMixin from "../../mixins/formMixin";
 
 export default {

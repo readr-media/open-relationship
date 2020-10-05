@@ -15,6 +15,7 @@ module.exports = {
       many: false,
       ref: "Organization",
     },
+    role: { label: "職位名稱", type: Text },
     start_date_year: { label: "開始年", type: Integer },
     start_date_month: { label: "開始月", type: Integer },
     start_date_day: { label: "開始日", type: Integer },

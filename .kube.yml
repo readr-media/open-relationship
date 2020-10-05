@@ -6,7 +6,7 @@ spec:
   selector:
     app: {{.app}}
     tier: {{.tier}}
-  type: ClusterIP
+  type: NodePort
   ports:
   - protocol: TCP
     port: 80

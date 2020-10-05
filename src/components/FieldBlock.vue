@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { validateEmail, validateDate, validateUrl } from "./fieldVerify";
+import { validateEmail, validateDate, validateUrl } from "../utils/fieldVerify";
 export default {
   props: ["field", "type"],
   data() {

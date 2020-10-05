@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import Hero from "../layouts/Hero";
-import Intro from "../layouts/Intro";
-import About from "../layouts/About";
-import Relation from "../layouts/Relation";
-import Process from "../layouts/Process";
-import Cooperation from "../layouts/Cooperation";
-import Contact from "../layouts/Contact";
-import Footer from "../layouts/Footer";
+import Hero from "../components/Hero";
+import Intro from "../components/Intro";
+import About from "../components/About";
+import Relation from "../components/Relation";
+import Process from "../components/Process";
+// import Cooperation from "../components/Cooperation";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 export default {
   head: {
@@ -36,7 +36,7 @@ export default {
     About,
     Relation,
     Process,
-    Cooperation,
+    // Cooperation,
     Contact,
     Footer,
   },

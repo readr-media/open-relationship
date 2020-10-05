@@ -109,7 +109,7 @@ module.exports = {
           default: {
             // httpEndpoint: "http://localhost:3000/admin/api/",
             httpEndpoint: "https://whoareyou.readr.tw/admin/api",
-            browserHttpEndpoint: "/admin/api",
+            browserHttpEndpoint: "https://whoareyou.readr.tw/admin/api",
             // httpEndpoint: "https://or-dev.readr.tw/admin/api",
             // 正式機
           },

@@ -42,7 +42,7 @@ import { personRelationFields } from "../../fields/personRelationFields";
 import gql from "graphql-tag";
 import { ADD_PERSON_RELATION } from "../../graphQL/query/personRelation";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
-import { moveFormToGqlVariable } from "../../graphQL/peopleFormHandler";
+import { moveFormToGqlVariable } from "../../graphQL/peopleRelationFormHandler";
 import formMixin from "../../mixins/formMixin";
 
 export default {
@@ -73,17 +73,17 @@ export default {
   },
   methods: {
     uploadHandler() {
-      this.checkForm(this.person);
+      this.checkForm(this.personRelation);
       this.uploadForm();
-      this.clearForm(this.person);
-      this.$router.push("/thanks");
+      // this.clearForm(this.personRelation);
+      // this.$router.push("/thanks");
     },
 
     async uploadForm() {
       // Upload person form
       this.$apollo.mutate({
         mutation: ADD_PERSON_RELATION,
-        variables: await moveFormToGqlVariable(this.person),
+        variables: await moveFormToGqlVariable(this.personRelation),
       });
       // Update collaborate form
       this.$apollo.mutate({

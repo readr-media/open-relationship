@@ -22,6 +22,9 @@
       </picture>
     </div>
 
+    <img :src="READrLogo" id="Hero-logo" alt="" />
+    <img :src="share" id="Hero-share" alt="" />
+
     <div id="Hero-rectangle-small">
       <div id="Hero-rectangle-small-title">
         台灣
@@ -48,7 +51,17 @@
 </template>
 
 <script>
-export default {};
+import READrLogo from "../images/READrLogo.svg";
+import share from "../images/share.svg";
+
+export default {
+  data() {
+    return {
+      READrLogo,
+      share,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +74,22 @@ export default {};
   align-items: center;
   justify-content: center;
   position: relative;
+
+  #Hero-logo {
+    width: 45px;
+    height: 41px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  #Hero-share {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 10px;
+    left: 65px;
+  }
 
   #Hero-background {
     z-index: 1;
@@ -151,6 +180,21 @@ export default {};
   }
 
   @include atMedium {
+    #Hero-logo {
+      width: 50px;
+      height: 50px;
+
+      top: 20px;
+      left: 20px;
+    }
+
+    #Hero-share {
+      width: 45px;
+      height: 45px;
+      position: absolute;
+      top: 20px;
+      left: 90px;
+    }
     #Hero-rectangle-large {
       display: flex;
       min-width: auto;

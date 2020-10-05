@@ -23,7 +23,7 @@ import Footer from "../layouts/Footer";
 
 export default {
   head: {
-    title: "Home page",
+    title: "Open Relationship",
   },
   data() {
     return {};

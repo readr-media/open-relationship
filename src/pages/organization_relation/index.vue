@@ -58,9 +58,9 @@ export default {
   data() {
     return {
       hero: {
-        title: "新增人物資料表單",
+        title: "新增組織關係資料表單",
         content: "臺灣政商人物關係資料庫計畫",
-        target: "人物",
+        target: "組織關係",
         type: "create",
         id: 4,
       },

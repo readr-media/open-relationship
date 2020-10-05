@@ -66,6 +66,14 @@
       </p>
     </div>
     <div v-else></div>
+
+    <Button
+      title="回到主畫面"
+      round="true"
+      :type="type"
+      :whiteText="true"
+      @click.native="returnToHome"
+    />
   </div>
 </template>
 
@@ -73,34 +81,28 @@
 import createLogo from "../images/orange-03.svg";
 import checkLogo from "../images/blue-03.svg";
 import RelationButtonContainer from "../components/RelationButtonContainer";
+import Button from "../components/Button";
+
+import relationListMixin from "../mixins/relationListMixin";
 
 export default {
+  mixins: [relationListMixin],
+
   components: {
     RelationButtonContainer,
+    Button,
   },
   props: ["title", "content", "target", "type", "id"],
   data() {
     return {
       formLogo: this.type == "create" ? createLogo : checkLogo,
-      createSectionList: [
-        { id: 1, title: "新增人物", route: "/person" },
-        { id: 2, title: "新增組織", route: "/organization" },
-        // { id: 3, title: "新增人物關係", route: "/person_relation" },
-        // { id: 4, title: "新增組織關係", route: "/organization_relation" },
-        // {
-        //   id: 5,
-        //   title: "新增人物組織關係",
-        //   route: "/person_organization",
-        // },
-      ],
-      verifySectionList: [
-        { id: 1, title: "驗證人物", route: "/person-verify" },
-        { id: 2, title: "驗證組織", route: "/organization-verify" },
-        // { id: 3, title: "驗證人物關係", route: "/people_relation" },
-        // { id: 4, title: "驗證組織關係", route: "/organization_relation" },
-        // { id: 5, title: "驗證人物組織關係", route: "/people_organization" },
-      ],
     };
+  },
+  methods: {
+    returnToHome: function () {
+      console.log("yoyo");
+      this.$router.push("/");
+    },
   },
 };
 </script>

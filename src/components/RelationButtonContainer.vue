@@ -8,6 +8,7 @@
       :dark="dark"
       :type="type"
       :small="small"
+      :enable="createItem.enable"
     />
   </div>
 </template>
@@ -27,7 +28,7 @@ export default {
   },
 
   methods: {
-    relationBtnFilter: function(btnList) {
+    relationBtnFilter: function (btnList) {
       return btnList.filter((btn) => {
         return btn.id != this.filterId;
       });

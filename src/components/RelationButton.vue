@@ -8,6 +8,7 @@
       darkVerify: dark && type == 'verify',
       lightCreate: !dark && type == 'create',
       lightVerify: !dark && type == 'verify',
+      disable: !enable,
     }"
   >
     <span>{{ title }}</span>
@@ -16,7 +17,7 @@
 
 <script>
 export default {
-  props: ["title", "to", "dark", "type", "small"],
+  props: ["title", "to", "dark", "type", "small", "enable"],
 };
 </script>
 
@@ -100,5 +101,11 @@ export default {
     height: 40px;
     margin-bottom: 15px;
   }
+}
+
+.disable {
+  // background: red;
+  opacity: 0.5;
+  pointer-events: none;
 }
 </style>

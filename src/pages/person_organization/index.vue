@@ -37,7 +37,7 @@ import FieldBlock from "../../components/FieldBlock";
 import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
 import Button from "../../components/Button";
 
-import { personFields } from "../../fields/personFields";
+import { personOrganizationFields } from "../../fields/personOrganizationFields";
 
 import gql from "graphql-tag";
 import { ADD_PERSON } from "../../graphQL/query/person";
@@ -56,13 +56,13 @@ export default {
   data() {
     return {
       hero: {
-        title: "新增人物資料表單",
+        title: "新增人物組織關係資料表單",
         content: "臺灣政商人物關係資料庫計畫",
-        target: "人物",
+        target: "人物組織關係",
         type: "create",
         id: 1,
       },
-      person: personFields,
+      person: personOrganizationFields,
       collaborate: {
         name: "",
         email: "",

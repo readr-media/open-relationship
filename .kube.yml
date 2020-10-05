@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: open-relationship-cms
+  name: {{.app}}
 spec:
   selector:
-    app: open-relationship-cms
-    tier: backend
-  type: NodePort
+    app: {{.app}}
+    tier: {{.tier}}
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: 80
@@ -16,21 +16,21 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: open-relationship-cms
-    tier: backend
-  name: open-relationship-cms
+    app: {{.app}}
+    tier: {{.tier}}
+  name: {{.app}}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: open-relationship-cms
-        tier: backend
+        app: {{.app}}
+        tier: {{.tier}}
     spec:
       containers:
-      - image: gcr.io/mirrormedia-1470651750304/open-relationship:dev_liyibass_57_cms
+      - image: {{.image}}
         # imagePullPolicy: IfNotPresent
-        name: open-relationship-cms
+        name: {{.app}}
         ports:
         - containerPort: 3000
           protocol: TCP

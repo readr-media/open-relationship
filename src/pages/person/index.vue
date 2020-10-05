@@ -70,6 +70,7 @@ export default {
       },
     };
   },
+  mounted() {},
   methods: {
     uploadHandler() {
       this.checkForm(this.person);

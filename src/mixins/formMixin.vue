@@ -11,13 +11,14 @@ export default {
         // if there's an unedit field ,but required, return
         if (field.required && field.value == "") {
           field.formState = false;
-          return;
+          return false;
         }
         // if there's an uncorrect field ,reutrn
         if (field.formState == false) {
-          return;
+          return false;
         }
       }
+      return true;
     },
     clearForm(targetForm) {
       for (const item of Object.entries(targetForm)) {

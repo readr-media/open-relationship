@@ -73,7 +73,7 @@ export default {
   mounted() {},
   methods: {
     uploadHandler() {
-      this.checkForm(this.person);
+      if (!this.checkForm(this.person)) return;
       this.uploadForm();
       this.clearForm(this.person);
       this.$router.push("/thanks");

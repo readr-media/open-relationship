@@ -112,7 +112,7 @@ export default {
     },
 
     uploadHandler() {
-      this.checkForm(this.organization);
+      if (!this.checkForm(this.organization)) return;
       this.uploadFormToGoogle(this.organization, "organization");
 
       this.uploadForm();

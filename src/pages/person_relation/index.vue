@@ -40,7 +40,7 @@ import Button from "../../components/Button";
 import { personRelationFields } from "../../fields/personRelationFields";
 
 import gql from "graphql-tag";
-import { ADD_PERSON_RELATION } from "../../graphQL/query/personRelation";
+import { ADD_PERSON_RELATION } from "../../graphQL/query/person_relation";
 import { ADD_COLLABORATE } from "../../graphQL/query/collaborate";
 import { moveFormToGqlVariable } from "../../graphQL/peopleRelationFormHandler";
 import formMixin from "../../mixins/formMixin";
@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     uploadHandler() {
-      this.checkForm(this.personRelation);
+      if (!this.checkForm(this.personRelation)) return;
       this.uploadForm();
       // this.clearForm(this.personRelation);
       // this.$router.push("/thanks");

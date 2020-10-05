@@ -68,7 +68,8 @@ export default {
   },
   methods: {
     uploadHandler() {
-      this.checkForm(this.organization);
+      console.log(this.checkForm(this.organization));
+      if (!this.checkForm(this.organization)) return;
       this.uploadForm();
       this.clearForm(this.organization);
       this.$router.push("/thanks");

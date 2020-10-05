@@ -3,18 +3,21 @@ const { atTracking, byTracking } = require("@keystonejs/list-plugins");
 
 module.exports = {
   fields: {
-    person_id: {
-      label: "姓名",
-      type: Relationship,
-      many: false,
-      ref: "Person",
-    },
-    related_person_id: {
-      label: "關係者姓名",
-      type: Relationship,
-      many: false,
-      ref: "Person",
-    },
+    // person_id: {
+    //   label: "姓名",
+    //   type: Relationship,
+    //   many: false,
+    //   ref: "Person",
+    // },
+    // related_person_id: {
+    //   label: "關係者姓名",
+    //   type: Relationship,
+    //   many: false,
+    //   ref: "Person",
+    // },
+    person_id: { label: "姓名", type: Text },
+    related_person_id: { label: "關係者姓名", type: Text },
+
     relative: { label: "關係者如何稱呼該人物", type: Text },
 
     start_date_year: { label: "關係開始年", type: Integer },

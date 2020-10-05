@@ -9,19 +9,19 @@ export default {
           id: 3,
           title: "新增人物關係",
           route: "/person_relation",
-          enable: true,
+          enable: false,
         },
         {
           id: 4,
           title: "新增組織關係",
           route: "/organization_relation",
-          enable: true,
+          enable: false,
         },
         {
           id: 5,
           title: "新增人物組織關係",
           route: "/person_organization",
-          enable: true,
+          enable: false,
         },
       ],
       verifySectionList: [

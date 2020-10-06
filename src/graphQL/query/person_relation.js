@@ -28,13 +28,6 @@ export const ADD_PERSON_RELATION = gql`
       }
     ) {
       id
-      relative
-      person_id {
-        name
-      }
-      related_person_id {
-        name
-      }
     }
   }
 `
@@ -69,13 +62,6 @@ export const UPDATE_PERSON_RELATION = gql`
       }
     ) {
       id
-      relative
-      person_id {
-        name
-      }
-      related_person_id {
-        name
-      }
     }
   }
 `

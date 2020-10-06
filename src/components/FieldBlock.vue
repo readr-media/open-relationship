@@ -47,19 +47,10 @@
       v-else-if="field.inputStatus.type == 'date'"
       class="inputWrapper-single"
     >
-      <!-- <Datepicker
-        v-model="field.value"
-        format="yyyy-MM-dd "
-        class="input-single"
-        placeholder="輸入日期"
-        calendar-button-icon="fa fa-calendar"
-        changedMonth="(e) => verifyField(e)"
-      /> -->
       <input
         v-model="field.value"
-        type="text"
+        @change="verifyField(field)"
         placeholder="yyyy-mm-dd"
-        @change="(e) => verifyField(e)"
       />
     </div>
 
@@ -68,22 +59,12 @@
       v-else-if="field.inputStatus.type == 'relation'"
       class="inputWrapper-single"
     >
-      <RelationInput :field="field" />
-
-      <!-- <input
-        :type="field.inputStatus.type"
-        v-model="field.value"
-        @change="(e) => verifyField(e)"
-      /> -->
+      <RelationInput :field="field" :verifyField="verifyField" />
     </div>
 
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
-      <input
-        v-model="field.value"
-        :type="field.inputStatus.type"
-        @change="(e) => verifyField(e)"
-      />
+      <input v-model="field.value" @change="verifyField(field)" />
     </div>
 
     <!-- error prompt -->
@@ -150,43 +131,44 @@ export default {
     })
   },
   methods: {
-    verifyField() {
+    verifyField(field) {
+      console.log(field)
       //  return if there is no verify needed
-      if (!this.field.verify) return
+      if (!field.verify) return
 
       // handle multiple verify
-      this.field.verify.forEach((checkItem) => {
+      field.verify.forEach((checkItem) => {
         // handle each type of verify
         switch (checkItem) {
           case 'required':
-            if (this.field.value === '') {
-              this.field.formState = false
+            if (field.value == '') {
+              field.formState = false
             } else {
-              this.field.formState = true
+              field.formState = true
             }
             break
 
           case 'emailFormat':
-            if (validateEmail(this.field.value) || this.field.value === '') {
-              this.field.formState = true
+            if (validateEmail(field.value) || field.value == '') {
+              field.formState = true
             } else {
-              this.field.formState = false
+              field.formState = false
             }
             break
 
           case 'dateFormat':
-            if (validateDate(this.field.value) || this.field.value === '') {
-              this.field.formState = true
+            if (validateDate(field.value) || field.value == '') {
+              field.formState = true
             } else {
-              this.field.formState = false
+              field.formState = false
             }
             break
 
           case 'urlFormat':
-            if (validateUrl(this.field.value) || this.field.value === '') {
-              this.field.formState = true
+            if (validateUrl(field.value) || field.value == '') {
+              field.formState = true
             } else {
-              this.field.formState = false
+              field.formState = false
             }
             break
 

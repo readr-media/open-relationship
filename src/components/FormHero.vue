@@ -52,17 +52,30 @@
       </p>
 
       <p class="FormHero-content-paragraph">
-        驗證方式<br />1 在要驗證欄位中：<br />
-        &nbsp; &bull;&nbsp; 留下正確的資料，<br />
-        &nbsp; &bull;&nbsp; 刪除不正確的資料 <br />2 或是在空白處填入正確資料<br />3
-        留下您驗證時的參考資料來源網址 <br />驗證完成後選擇是否留下你的個人資料
+        驗證方式<br />1.在要驗證欄位中：<br />
+        &nbsp; &bull;&nbsp; 點選資料正確或資料錯誤<br />
+        &nbsp; &bull;&nbsp;
+        點選資料錯誤時，請刪除不正確的資料，留下正確的資料，或是在空白處填入正確資料
+        <br />2. 留下你驗證時的參考資料來源網址<br />3.
+        驗證完成後選擇是否留下你的個人資料 <br />
       </p>
 
       <p class="FormHero-content-paragraph">
         <br />
+        提示：若拿到重複的驗證內容，可以重新整理頁面，或回到專題主畫面再按一次驗證按鈕，就能看到新的驗證內容
+      </p>
+      <p class="FormHero-content-paragraph">
+        <br />
 
         如果有任何問題 歡迎來信 readr@readr.tw 或是私訊粉專
-        https://www.facebook.com/readr.tw/ 我們會有專人為你解答 謝謝你的參與！ |
+        <a
+          href=" https://www.facebook.com/readr.tw/ "
+          :style="{ color: 'white' }"
+        >
+          https://www.facebook.com/readr.tw/
+        </a>
+
+        我們會有專人為你解答 謝謝你的參與！
       </p>
     </div>
     <div v-else></div>

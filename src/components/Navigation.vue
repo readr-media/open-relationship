@@ -5,13 +5,13 @@
     </a>
     <div id="Navigation-share">
       <img :src="share" id="Navigation-share-icon" @click="folderToggle" />
-      <div class="Navigation-share-folder"></div>
+      <!-- <div class="Navigation-share-folder"></div> -->
     </div>
   </div>
 </template>
 
 <script>
-import READrLogo from '../images/READrLogo.svg'
+import READrLogo from '../images/logo.svg'
 import share from '../images/share.svg'
 
 export default {

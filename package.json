@@ -46,6 +46,7 @@
     "nuxt": "^2.14.4",
     "qs": "^6.9.4",
     "sass-loader": "^10.0.2",
+    "vue-autosuggest": "^2.2.0",
     "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {

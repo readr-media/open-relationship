@@ -18,8 +18,8 @@
 
 <script>
 export default {
-  props: ["btnStatus", "title", "fitDiv", "round", "type", "whiteText"],
-};
+  props: ['btnStatus', 'title', 'fitDiv', 'round', 'type', 'whiteText'],
+}
 </script>
 
 <style lang="scss" scoped>

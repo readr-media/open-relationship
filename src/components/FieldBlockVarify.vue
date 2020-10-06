@@ -14,14 +14,14 @@
 
       <div class="FieldBlock-modifier">
         <div class="radioBlock">
-          <input type="radio" v-model="modified.flag" value="false" /><label
+          <input v-model="modified.flag" type="radio" value="false" /><label
             >資料正確</label
           >
         </div>
         <div class="radioBlock">
-          <input type="radio" v-model="modified.flag" value="true" /><label
+          <input v-model="modified.flag" type="radio" value="true" /><label
             >資料錯誤，正確資料為：</label
-          ><input type="text" v-model="modified.payload" />
+          ><input v-model="modified.payload" type="text" />
         </div>
       </div>
     </div>
@@ -30,20 +30,20 @@
 
 <script>
 export default {
-  props: ["field"],
+  props: ['field'],
   data() {
     return {
       modified: {
-        flag: "",
-        payload: "",
+        flag: '',
+        payload: '',
       },
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss">
-@import "../styles/FieldBlock.scss";
+@import '../styles/FieldBlock.scss';
 .fieldContainer {
   width: 800px;
   margin: 50px auto 0;

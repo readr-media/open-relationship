@@ -1,11 +1,11 @@
 <template>
   <div id="Cooperation">
-    <div class="section-title" id="Coorperation-title">| 合作夥伴 |</div>
+    <div id="Coorperation-title" class="section-title">| 合作夥伴 |</div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>

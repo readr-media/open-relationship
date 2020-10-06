@@ -17,12 +17,12 @@
 
 <script>
 export default {
-  props: ["title", "to", "dark", "type", "small", "enable"],
-};
+  props: ['title', 'to', 'dark', 'type', 'small', 'enable'],
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 .RelationButton {
   width: 100%;

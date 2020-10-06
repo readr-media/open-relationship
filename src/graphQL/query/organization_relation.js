@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const ADD_ORGANIZATION_RELATION = gql`
   mutation createOrganizationRelation(
@@ -39,7 +39,7 @@ export const ADD_ORGANIZATION_RELATION = gql`
       source
     }
   }
-`;
+`
 
 export const UPDATE_ORGANIZATION_RELATION = gql`
   mutation(
@@ -83,7 +83,7 @@ export const UPDATE_ORGANIZATION_RELATION = gql`
       source
     }
   }
-`;
+`
 
 export const FETCH_ORGANIZATION_RELATIONS_COUNT = gql`
   query {
@@ -91,7 +91,7 @@ export const FETCH_ORGANIZATION_RELATIONS_COUNT = gql`
       count
     }
   }
-`;
+`
 // $parent:String,
 // $children:String,
 
@@ -111,4 +111,4 @@ export const FETCH_RANDOM_ORGANIZATION_RELATION = gql`
       source
     }
   }
-`;
+`

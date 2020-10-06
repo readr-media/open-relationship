@@ -15,28 +15,28 @@
 </template>
 
 <script>
-import Button from "../components/Button";
-import number1 from "../images/1.svg";
-import number2 from "../images/2.svg";
-import number3 from "../images/3.svg";
-import number4 from "../images/4.svg";
+import Button from '../components/Button'
+import number1 from '../images/1.svg'
+import number2 from '../images/2.svg'
+import number3 from '../images/3.svg'
+import number4 from '../images/4.svg'
 
 export default {
-  data() {
-    return {
-      numbers: [number1, number2, number3, number4],
-    };
-  },
-  props: ["number", "title", "content", "btnStatus", "to"],
-  methods: {},
   components: {
     Button,
   },
-};
+  props: ['number', 'title', 'content', 'btnStatus', 'to'],
+  data() {
+    return {
+      numbers: [number1, number2, number3, number4],
+    }
+  },
+  methods: {},
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 .ProcessCard {
   max-width: 100%;

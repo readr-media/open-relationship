@@ -1,17 +1,17 @@
 <template>
   <div id="Page-Person-verify" class="Form-Page">
     <FormHero
+      :id="hero.id"
       :title="hero.title"
       :content="hero.content"
       :target="hero.target"
-      :id="hero.id"
       type="verify"
     />
     <div class="fieldContainer">
       <div class="fieldContainer-notation">
         <span class="verify-star">＊</span>為必填欄位
       </div>
-      <form action v-on:submit.prevent="uploadHandler">
+      <form action @submit.prevent="uploadHandler">
         <FieldBlock
           v-for="field in personRelation"
           :key="field.label"
@@ -27,98 +27,94 @@
 </template>
 
 <script>
-import FormHero from "../../components/FormHero";
-import FieldBlock from "../../components/FieldBlock";
-import CollaborateFieldBlock from "../../components/CollaborateFieldBlock";
-import Button from "../../components/Button";
-import { personRelationFields } from "../../fields/personRelationFields";
+import FormHero from '../../components/FormHero'
+import FieldBlock from '../../components/FieldBlock'
+import Button from '../../components/Button'
+import { personRelationFields } from '../../fields/personRelationFields'
 import {
   FETCH_PERSON_RELATIONS_COUNT,
   FETCH_RANDOM_PERSON_RELATION,
   UPDATE_PERSON_RELATION,
-} from "../../graphQL/query/person_relation";
+} from '../../graphQL/query/person_relation'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from "../../graphQL/personRelationFormHandler";
-import { getRandomId } from "../../graphQL/getRandomId";
-import gql from "graphql-tag";
+} from '../../graphQL/personRelationFormHandler'
+import { getRandomId } from '../../graphQL/getRandomId'
 
-import formMixin from "../../mixins/formMixin";
+import formMixin from '../../mixins/formMixin'
 
 export default {
-  mixins: [formMixin],
   components: {
     FieldBlock,
     FormHero,
-    CollaborateFieldBlock,
     Button,
   },
+  mixins: [formMixin],
 
   data() {
     return {
       personRelationId: 1,
       hero: {
-        title: "驗證人物關係資料表單",
-        content: "臺灣政商人物關係資料庫計畫",
-        target: "人物關係",
-        type: "verify",
+        title: '驗證人物關係資料表單',
+        content: '臺灣政商人物關係資料庫計畫',
+        target: '人物關係',
+        type: 'verify',
         id: 3,
       },
       personRelation: personRelationFields,
 
       collaborate: {
-        name: "",
-        email: "",
-        feedback: "",
+        name: '',
+        email: '',
+        feedback: '',
       },
-    };
+    }
   },
 
   async mounted() {
-    await this.fetchPersonRelationsCount();
+    await this.fetchPersonRelationsCount()
   },
 
   methods: {
     fetchPersonRelationsCount() {
       // 1 fetch person counts
-      this.$apollo.addSmartQuery("_allPersonRelationsMeta", {
+      this.$apollo.addSmartQuery('_allPersonRelationsMeta', {
         query: FETCH_PERSON_RELATIONS_COUNT,
         update(data) {
-          //2 get random personid from result
-          const randomId = getRandomId(data._allPersonRelationsMeta.count);
-          if (randomId == 0) return;
+          // 2 get random personid from result
+          const randomId = getRandomId(data._allPersonRelationsMeta.count)
+          if (randomId === 0) return
           // 3 fetch random person
-          this.fetchRandomPersonRelation(randomId);
+          this.fetchRandomPersonRelation(randomId)
         },
-      });
-      return;
+      })
     },
-    async fetchRandomPersonRelation(randomId) {
+    fetchRandomPersonRelation(randomId) {
       // 4 fetch random person
-      this.$apollo.addSmartQuery("PersonRelation", {
+      this.$apollo.addSmartQuery('PersonRelation', {
         query: FETCH_RANDOM_PERSON_RELATION,
         variables() {
           return {
             id: randomId,
-          };
+          }
         },
         update(data) {
           // 5 set id and move data to form fields
-          this.personRelationId = data.PersonRelation.id;
-          moveGqlToForm(this.personRelation, data.PersonRelation);
+          this.personRelationId = data.PersonRelation.id
+          moveGqlToForm(this.personRelation, data.PersonRelation)
         },
-      });
+      })
     },
     uploadHandler() {
-      if (!this.checkForm(this.personRelation)) return;
+      if (!this.checkForm(this.personRelation)) return
       // this.uploadFormToGoogle(this.personRelation, "personRelation");
-      this.uploadForm();
-      this.clearForm(this.personRelation);
-      this.$router.push("/thanks");
+      this.uploadForm()
+      this.clearForm(this.personRelation)
+      this.$router.push('/thanks')
     },
 
-    async uploadForm() {
+    uploadForm() {
       this.$apollo.mutate({
         mutation: UPDATE_PERSON_RELATION,
         variables: {
@@ -126,10 +122,10 @@ export default {
           id: this.personRelationId,
           ...moveFormToGqlVariable(this.personRelation),
         },
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

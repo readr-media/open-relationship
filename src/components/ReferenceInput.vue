@@ -6,8 +6,8 @@
     />
     <span>
       <VoerroTagsInput
-        element-id="tags"
         v-model="selectedTags"
+        elementId="tags"
         typeahead="true"
         placeholder="新增關係"
       />
@@ -17,17 +17,17 @@
 
 <script>
 export default {
-  props: ["field"],
+  props: ['field'],
   data() {
     return {
       selectedTags: [
-        { key: "web-development", value: "Web Development" },
-        { key: "php", value: "PHP" },
-        { key: "javascript", value: "JavaScript" },
+        { key: 'web-development', value: 'Web Development' },
+        { key: 'php', value: 'PHP' },
+        { key: 'javascript', value: 'JavaScript' },
       ],
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

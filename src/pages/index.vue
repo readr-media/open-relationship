@@ -12,24 +12,16 @@
 </template>
 
 <script>
-import Hero from "../components/Hero";
-import Intro from "../components/Intro";
-import About from "../components/About";
-import Relation from "../components/Relation";
-import Process from "../components/Process";
+import Hero from '../components/Hero'
+import Intro from '../components/Intro'
+import About from '../components/About'
+import Relation from '../components/Relation'
+import Process from '../components/Process'
 // import Cooperation from "../components/Cooperation";
-import Contact from "../components/Contact";
-import Footer from "../components/Footer";
+import Contact from '../components/Contact'
+import Footer from '../components/Footer'
 
 export default {
-  head: {
-    title: "Open Relationship",
-  },
-  data() {
-    return {};
-  },
-
-  methods: {},
   components: {
     Hero,
     Intro,
@@ -40,7 +32,15 @@ export default {
     Contact,
     Footer,
   },
-};
+  data() {
+    return {}
+  },
+
+  methods: {},
+  head: {
+    title: 'Open Relationship',
+  },
+}
 </script>
 
 <style lang="scss">

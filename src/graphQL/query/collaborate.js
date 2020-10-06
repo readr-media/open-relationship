@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const ADD_COLLABORATE = gql`
   mutation createCollaborate($name: String, $email: String, $feedback: String) {
@@ -10,4 +10,4 @@ export const ADD_COLLABORATE = gql`
       feedback
     }
   }
-`;
+`

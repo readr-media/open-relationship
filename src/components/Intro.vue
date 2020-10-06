@@ -13,11 +13,11 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 #Intro {
   width: 100%;

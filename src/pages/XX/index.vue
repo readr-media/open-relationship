@@ -7,7 +7,7 @@
       https://www.facebook.com/readr.tw/ 我們會有專人為你解答 謝謝你的參與！
     </p>
 
-    <form action v-on:submit.prevent="checkForm">
+    <form action @submit.prevent="checkForm">
       <div
         v-for="field in personRelation"
         :key="field.label"
@@ -21,7 +21,7 @@
         </div>
 
         <div v-else class="inputWrapper">
-          <input :type="field.inputStatus.type" v-model="field.value" />
+          <input v-model="field.value" :type="field.inputStatus.type" />
         </div>
       </div>
 
@@ -36,16 +36,16 @@
 
       <div class="fieldBlock">
         <h5>你的大名</h5>
-        <input type="text" v-model="editor.name" />
+        <input v-model="editor.name" type="text" />
         <h5>你的email address</h5>
-        <input type="email" v-model="editor.email" />
+        <input v-model="editor.email" type="email" />
         <h5>你的協作心得</h5>
         <textarea
-          name
           id
+          v-model="editor.feedback"
+          name
           cols="30"
           rows="10"
-          v-model="editor.feedback"
         ></textarea>
       </div>
       <b-button type="submit">送出</b-button>
@@ -54,10 +54,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
-import { ADD_PERSON } from "../../graphQL/query/person";
-import ReferenceInput from "../../components/ReferenceInput";
+import { ADD_PERSON } from '../../graphQL/query/person'
+import ReferenceInput from '../../components/ReferenceInput'
 
 export default {
   components: {
@@ -67,48 +65,48 @@ export default {
     return {
       personRelation: {
         person_id: {
-          label: "人物名稱",
-          info: "",
-          value: "",
-          inputStatus: { type: "reference" },
+          label: '人物名稱',
+          info: '',
+          value: '',
+          inputStatus: { type: 'reference' },
         },
         organization_id: {
-          label: "組織名稱",
-          info: "",
-          value: "",
-          inputStatus: { type: "reference" },
+          label: '組織名稱',
+          info: '',
+          value: '',
+          inputStatus: { type: 'reference' },
         },
         role: {
-          label: "職位名稱",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
+          label: '職位名稱',
+          info: '',
+          value: '',
+          inputStatus: { type: 'text' },
         },
         start_date: {
-          label: "起始時間",
-          info: "",
-          value: "",
-          inputStatus: { type: "date" },
+          label: '起始時間',
+          info: '',
+          value: '',
+          inputStatus: { type: 'date' },
         },
         end_date: {
-          label: "結束時間",
-          info: "",
-          value: "",
-          inputStatus: { type: "date" },
+          label: '結束時間',
+          info: '',
+          value: '',
+          inputStatus: { type: 'date' },
         },
         source: {
-          label: "資料來源",
-          info: "",
-          value: "",
-          inputStatus: { type: "text" },
+          label: '資料來源',
+          info: '',
+          value: '',
+          inputStatus: { type: 'text' },
         },
       },
       editor: {
-        name: "",
-        email: "",
-        feedback: "",
+        name: '',
+        email: '',
+        feedback: '',
       },
-    };
+    }
   },
   methods: {
     async checkForm() {
@@ -116,22 +114,29 @@ export default {
       const {
         name,
         alternative,
+        // eslint-disable-next-line camelcase
         other_names,
+        // eslint-disable-next-line no-unused-vars
         identifiers,
         email,
         gender,
+        // eslint-disable-next-line camelcase
         birth_date,
+        // eslint-disable-next-line camelcase
         death_date,
         image,
         summary,
         biography,
+        // eslint-disable-next-line camelcase
         national_identity,
+        // eslint-disable-next-line camelcase
         contact_details,
         links,
         source,
-      } = this.person;
+      } = this.person
 
       // commit to graphQL
+      // eslint-disable-next-line no-undef
       await graphql(ADD_PERSON, {
         name: name.value,
         alternative: alternative.value,
@@ -140,6 +145,7 @@ export default {
         email: email.value,
         gender: gender.value,
         birth_date: birth_date.value.length ? birth_date.value.length : null,
+        // eslint-disable-next-line no-undef
         death_date: death_date.value.length ? eath_date.value : null,
         image: image.value,
         summary: summary.value,
@@ -148,14 +154,14 @@ export default {
         contact_details: contact_details.value,
         links: links.value,
         source: source.value,
-      });
+      })
 
       // Greet and redirect to home
-      alert("感謝您的幫助！");
-      this.$router.push("/");
+      alert('感謝您的幫助！')
+      this.$router.push('/')
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

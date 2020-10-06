@@ -22,8 +22,8 @@
       </picture>
     </div>
 
-    <img :src="READrLogo" id="Hero-logo" alt="" />
-    <img :src="share" id="Hero-share" alt="" />
+    <img id="Hero-logo" :src="READrLogo" alt="" />
+    <img id="Hero-share" :src="share" alt="" />
 
     <div id="Hero-rectangle-small">
       <div id="Hero-rectangle-small-title">
@@ -51,21 +51,21 @@
 </template>
 
 <script>
-import READrLogo from "../images/READrLogo.svg";
-import share from "../images/share.svg";
+import READrLogo from '../images/READrLogo.svg'
+import share from '../images/share.svg'
 
 export default {
   data() {
     return {
       READrLogo,
       share,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 #Hero {
   width: 100%;
 

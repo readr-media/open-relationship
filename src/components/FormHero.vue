@@ -78,36 +78,35 @@
 </template>
 
 <script>
-import createLogo from "../images/orange-03.svg";
-import checkLogo from "../images/blue-03.svg";
-import RelationButtonContainer from "../components/RelationButtonContainer";
-import Button from "../components/Button";
+import createLogo from '../images/orange-03.svg'
+import checkLogo from '../images/blue-03.svg'
+import RelationButtonContainer from '../components/RelationButtonContainer'
+import Button from '../components/Button'
 
-import relationListMixin from "../mixins/relationListMixin";
+import relationListMixin from '../mixins/relationListMixin'
 
 export default {
-  mixins: [relationListMixin],
-
   components: {
     RelationButtonContainer,
     Button,
   },
-  props: ["title", "content", "target", "type", "id"],
+  mixins: [relationListMixin],
+  props: ['title', 'content', 'target', 'type', 'id'],
   data() {
     return {
-      formLogo: this.type == "create" ? createLogo : checkLogo,
-    };
+      formLogo: this.type === 'create' ? createLogo : checkLogo,
+    }
   },
   methods: {
-    returnToHome: function () {
-      this.$router.push("/");
+    returnToHome() {
+      this.$router.push('/')
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 #FormHero {
   width: 100%;

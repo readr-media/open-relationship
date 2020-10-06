@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const ADD_PERSON_ORGANIZATION = gql`
   mutation createPersonOrganization(
@@ -39,7 +39,7 @@ export const ADD_PERSON_ORGANIZATION = gql`
       source
     }
   }
-`;
+`
 
 export const UPDATE_PERSON = gql`
   mutation(
@@ -83,7 +83,7 @@ export const UPDATE_PERSON = gql`
       source
     }
   }
-`;
+`
 
 export const FETCH_PERSON_RELATIONS_COUNT = gql`
   query {
@@ -91,7 +91,7 @@ export const FETCH_PERSON_RELATIONS_COUNT = gql`
       count
     }
   }
-`;
+`
 
 export const FETCH_RANDOM_PERSON_RELATION = gql`
   query getRandomPersonRelation($id: ID!) {
@@ -109,7 +109,7 @@ export const FETCH_RANDOM_PERSON_RELATION = gql`
       source
     }
   }
-`;
+`
 // $birth_date:String,$death_date:String,$image:String,$summary:String,$biography:String,$national_identity:String,
 // birth_date:$birth_date,death_date:$death_date,image:$image,summary:$summary,biography:$biography,national_identity:$national_identity
 

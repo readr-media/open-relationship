@@ -14,37 +14,37 @@
 </template>
 
 <script>
-import RelationButton from "./RelationButton";
+import RelationButton from './RelationButton'
 
 export default {
-  props: ["type", "filterId", "dark", "btnList", "small"],
   components: {
     RelationButton,
   },
+  props: ['type', 'filterId', 'dark', 'btnList', 'small'],
   data() {
     return {
       showBtnList: [],
-    };
-  },
-
-  methods: {
-    relationBtnFilter: function (btnList) {
-      return btnList.filter((btn) => {
-        return btn.id != this.filterId;
-      });
-      // return null;
-    },
+    }
   },
 
   mounted() {
-    const result = this.relationBtnFilter(this.btnList);
-    this.showBtnList = result;
+    const result = this.relationBtnFilter(this.btnList)
+    this.showBtnList = result
   },
-};
+
+  methods: {
+    relationBtnFilter(btnList) {
+      return btnList.filter((btn) => {
+        return btn.id !== this.filterId
+      })
+      // return null;
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 .Relation-btn-container {
   margin: 10px auto 0;

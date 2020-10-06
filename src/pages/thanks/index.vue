@@ -1,6 +1,6 @@
 <template>
   <div id="thanksPage">
-    <img :src="READrLogo" id="thanksPage-logo" alt="" />
+    <img id="thanksPage-logo" :src="READrLogo" alt="" />
 
     <div id="thanksPage-subtitle">謝謝你的貢獻！</div>
 
@@ -40,21 +40,20 @@
 </template>
 
 <script>
-import READrLogo from "../../images/READrLogo.svg";
-import RelationButtonContainer from "../../components/RelationButtonContainer";
-import relationListMixin from "../../mixins/relationListMixin";
+import READrLogo from '../../images/READrLogo.svg'
+import RelationButtonContainer from '../../components/RelationButtonContainer'
+import relationListMixin from '../../mixins/relationListMixin'
 
 export default {
-  mixins: [relationListMixin],
-
   components: {
     RelationButtonContainer,
   },
+  mixins: [relationListMixin],
   data() {
     return {
       READrLogo,
       seconds: 8,
-    };
+    }
   },
   mounted() {
     // const countDown = setInterval(() => {
@@ -66,15 +65,15 @@ export default {
     // }, 1000);
   },
   methods: {
-    returnToHome: function () {
-      this.$router.push("/");
+    returnToHome() {
+      this.$router.push('/')
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/responsiveMixin.scss";
+@import '../../styles/responsiveMixin.scss';
 #thanksPage {
   width: 100%;
   background-color: #102c34;

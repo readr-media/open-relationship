@@ -24,7 +24,7 @@
         :key="radio.label"
         class="radio-wrap"
       >
-        <input type="radio" :value="radio.value" v-model="field.value" /><label
+        <input v-model="field.value" type="radio" :value="radio.value" /><label
           >{{ radio.label }}</label
         >
       </span>
@@ -36,8 +36,8 @@
       class="inputWrapper-textarea"
     >
       <textarea
-        name=""
         v-model="field.value"
+        name=""
         class="CollaborateFieldBlock-input"
       ></textarea>
     </div>
@@ -56,18 +56,18 @@
         changedMonth="(e) => verifyField(e)"
       /> -->
       <input
-        type="text"
         v-model="field.value"
-        @change="(e) => verifyField(e)"
+        type="text"
         placeholder="yyyy-mm-dd"
+        @change="(e) => verifyField(e)"
       />
     </div>
 
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
       <input
-        :type="field.inputStatus.type"
         v-model="field.value"
+        :type="field.inputStatus.type"
         @change="(e) => verifyField(e)"
       />
     </div>
@@ -82,15 +82,15 @@
     <!-- handle verify section -->
     <div v-if="type == 'verify'" class="FieldBlock-verify">
       <div class="FieldBlock-verify-radioBlock">
-        <input type="radio" :value="true" v-model="field.correctVerify" /><label
+        <input v-model="field.correctVerify" type="radio" :value="true" /><label
           >資料正確</label
         >
       </div>
       <div class="FieldBlock-verify-radioBlock">
         <input
+          v-model="field.correctVerify"
           type="radio"
           :value="false"
-          v-model="field.correctVerify"
         /><label>資料錯誤</label>
       </div>
     </div>
@@ -98,90 +98,90 @@
 </template>
 
 <script>
-import { validateEmail, validateDate, validateUrl } from "../utils/fieldVerify";
+import { validateEmail, validateDate, validateUrl } from '../utils/fieldVerify'
 export default {
-  props: ["field", "type"],
+  props: ['field', 'type'],
   data() {
     return {
       errorPrompt: [],
-      verifyStatus: "pass",
-    };
+      verifyStatus: 'pass',
+    }
+  },
+
+  mounted() {
+    // when mounted,initial each field's own error prompt
+    if (!this.field.verify) return
+    this.field.verify.forEach((checkItem) => {
+      switch (checkItem) {
+        case 'required':
+          this.errorPrompt.push('錯誤警告-此欄位為必填')
+          break
+        case 'emailFormat':
+          this.errorPrompt.push('錯誤警告-email格式不正確')
+          break
+        case 'dateFormat':
+          this.errorPrompt.push('錯誤警告-日期格式不正確')
+          break
+        case 'urlFormat':
+          this.errorPrompt.push('錯誤警告-網址格式不正確')
+          break
+        default:
+          break
+      }
+    })
   },
   methods: {
     verifyField() {
       //  return if there is no verify needed
-      if (!this.field.verify) return;
+      if (!this.field.verify) return
 
       // handle multiple verify
       this.field.verify.forEach((checkItem) => {
         // handle each type of verify
         switch (checkItem) {
-          case "required":
-            if (this.field.value == "") {
-              this.field.formState = false;
+          case 'required':
+            if (this.field.value === '') {
+              this.field.formState = false
             } else {
-              this.field.formState = true;
+              this.field.formState = true
             }
-            break;
+            break
 
-          case "emailFormat":
-            if (validateEmail(this.field.value) || this.field.value == "") {
-              this.field.formState = true;
+          case 'emailFormat':
+            if (validateEmail(this.field.value) || this.field.value === '') {
+              this.field.formState = true
             } else {
-              this.field.formState = false;
+              this.field.formState = false
             }
-            break;
+            break
 
-          case "dateFormat":
-            if (validateDate(this.field.value) || this.field.value == "") {
-              this.field.formState = true;
+          case 'dateFormat':
+            if (validateDate(this.field.value) || this.field.value === '') {
+              this.field.formState = true
             } else {
-              this.field.formState = false;
+              this.field.formState = false
             }
-            break;
+            break
 
-          case "urlFormat":
-            if (validateUrl(this.field.value) || this.field.value == "") {
-              this.field.formState = true;
+          case 'urlFormat':
+            if (validateUrl(this.field.value) || this.field.value === '') {
+              this.field.formState = true
             } else {
-              this.field.formState = false;
+              this.field.formState = false
             }
-            break;
+            break
 
           default:
-            break;
+            break
         }
-      });
+      })
     },
   },
-
-  mounted() {
-    // when mounted,initial each field's own error prompt
-    if (!this.field.verify) return;
-    this.field.verify.forEach((checkItem) => {
-      switch (checkItem) {
-        case "required":
-          this.errorPrompt.push("錯誤警告-此欄位為必填");
-          break;
-        case "emailFormat":
-          this.errorPrompt.push("錯誤警告-email格式不正確");
-          break;
-        case "dateFormat":
-          this.errorPrompt.push("錯誤警告-日期格式不正確");
-          break;
-        case "urlFormat":
-          this.errorPrompt.push("錯誤警告-網址格式不正確");
-          break;
-        default:
-          break;
-      }
-    });
-  },
-};
+}
 </script>
 
 <style lang="scss">
-@import "../styles/FieldBlock.scss";
+@import '../styles/FieldBlock.scss';
 
 .fieldError {
   border: solid 3px #d0021b;

@@ -103,7 +103,19 @@ module.exports = {
       plugins: [{ src: '~/plugins/vue-tagsinput', mode: 'client' }],
       css: ['~styles/global.style.css'],
       store: ['~store'],
-      buildModules: ['@nuxtjs/apollo'],
+      buildModules: [
+        '@nuxtjs/apollo',
+        [
+          '@nuxtjs/google-analytics',
+          {
+            id: () => {
+              return document.domain.match(/^whoareyou.readr.tw/gs)
+                ? 'UA-83609754-1'
+                : 'UA-83609754-2'
+            },
+          },
+        ],
+      ],
       apollo: {
         clientConfigs: {
           default: {

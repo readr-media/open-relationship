@@ -1,7 +1,7 @@
 <template>
   <div class="RelationInput">
     <vue-autosuggest
-      v-model="input"
+      v-model="field.value.name"
       :sectionConfigs="sectionConfigs"
       :suggestions="filteredOptions"
       :inputProps="{
@@ -64,6 +64,7 @@ export default {
       ]
     },
   },
+
   methods: {
     // event fired when typing
     async onInputChange(text) {

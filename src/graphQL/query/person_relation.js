@@ -92,8 +92,14 @@ export const FETCH_RANDOM_PERSON_RELATION = gql`
   query getRandomPersonRelation($id: ID!) {
     PersonRelation(where: { id: $id }) {
       id
-      person_id
-      related_person_id
+      person_id {
+        id
+        name
+      }
+      related_person_id {
+        id
+        name
+      }
       relative
       start_date_year
       start_date_month

@@ -36,19 +36,19 @@ export default {
           id: 3,
           title: '驗證人物關係',
           route: '/person_relation_verify',
-          enable: false,
+          enable: true,
         },
         {
           id: 4,
           title: '驗證組織關係',
           route: '/organization_relation_verify',
-          enable: false,
+          enable: true,
         },
         {
           id: 5,
           title: '驗證人物組織關係',
           route: '/person_organization_verify',
-          enable: false,
+          enable: true,
         },
       ],
     }

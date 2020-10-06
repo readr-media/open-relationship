@@ -1,23 +1,28 @@
-//const { access } = require('./Permission.js');
-const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/fields');
-const { atTracking } = require('@keystonejs/list-plugins');
+// const { access } = require('./Permission.js');
+const { Text, Relationship, DateTime } = require('@keystonejs/fields')
+const { atTracking } = require('@keystonejs/list-plugins')
 
 module.exports = {
-  //label: "成員",
-  //plural: "成員",
+  // label: "成員",
+  // plural: "成員",
   fields: {
-    label: { label: "名稱", type: Text, isRequired: true },
-    role: { label: "職稱", type: Text },
-    member: { label: "成員", type: Relationship, many: false, ref: 'Person' },
-    organization: { label: "組織", type: Relationship, many: false, ref: 'Organization' },
-    posts: { label: "職稱", type: Relationship, many: false, ref: 'Post' },
-    on_behalf_of_id: { label: "on_behalf_of_id", type: Text },
-    area: { label: "地區", type: Relationship, many: false, ref: 'Area' },
-    start_date: { label: "起始日期", type: DateTime },
-    end_date: { label: "結束日期", type: DateTime },
-    //contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
-    links: { label: "相關連結", type: Text },
-    //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
+    label: { label: '名稱', type: Text, isRequired: true },
+    role: { label: '職稱', type: Text },
+    member: { label: '成員', type: Relationship, many: false, ref: 'Person' },
+    organization: {
+      label: '組織',
+      type: Relationship,
+      many: false,
+      ref: 'Organization',
+    },
+    posts: { label: '職稱', type: Relationship, many: false, ref: 'Post' },
+    on_behalf_of_id: { label: 'on_behalf_of_id', type: Text },
+    area: { label: '地區', type: Relationship, many: false, ref: 'Area' },
+    start_date: { label: '起始日期', type: DateTime },
+    end_date: { label: '結束日期', type: DateTime },
+    // contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
+    links: { label: '相關連結', type: Text },
+    // identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
   },
   /*
   access: {
@@ -30,9 +35,9 @@ module.exports = {
   */
   plugins: [
     atTracking({
-      createdAtField: "createAt",
-      updatedAtField: "updateAt",
-      format: "YYYY/MM/DD h:mm A",
+      createdAtField: 'createAt',
+      updatedAtField: 'updateAt',
+      format: 'YYYY/MM/DD h:mm A',
     }),
   ],
-};
+}

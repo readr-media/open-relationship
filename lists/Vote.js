@@ -1,19 +1,19 @@
-//const { access } = require('./Permission.js');
-const { Select, Text, Relationship, DateTime, Integer } = require('@keystonejs/fields');
-const { atTracking } = require('@keystonejs/list-plugins');
+// const { access } = require('./Permission.js');
+const { Text, Relationship } = require('@keystonejs/fields')
+const { atTracking } = require('@keystonejs/list-plugins')
 
 module.exports = {
-  label: "選舉",
-  plural: "選舉",
+  label: '選舉',
+  plural: '選舉',
   fields: {
-    vote_event: { label: "選舉活動", type: Text, isRequired: true},
-    voter: { label: "voter", type: Text},
-    option: { label: "選項", type: Text},
-    group: { label: "群組", type: Text},
-    role: { label: "role", type: Text},
-    weight: { label: "weight", type: Text},
-    pair: { label: "搭檔", type: Relationship, many: false, ref: 'ppl' },
-    //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
+    vote_event: { label: '選舉活動', type: Text, isRequired: true },
+    voter: { label: 'voter', type: Text },
+    option: { label: '選項', type: Text },
+    group: { label: '群組', type: Text },
+    role: { label: 'role', type: Text },
+    weight: { label: 'weight', type: Text },
+    pair: { label: '搭檔', type: Relationship, many: false, ref: 'ppl' },
+    // identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
   },
   /*
   access: {
@@ -25,10 +25,10 @@ module.exports = {
   },
   */
   plugins: [
-	atTracking({
-	  createdAtField: "createAt",
-	  updatedAtField: "updateAt",
-	  format: "YYYY/MM/DD h:mm A",
-	}),
+    atTracking({
+      createdAtField: 'createAt',
+      updatedAtField: 'updateAt',
+      format: 'YYYY/MM/DD h:mm A',
+    }),
   ],
-};
+}

@@ -1,5 +1,7 @@
-const crypto = require("crypto");
-const randomString = () => crypto.randomBytes(6).hexSlice();
+// const crypto = require('crypto')
+// const randomString = () => crypto.randomBytes(6).hexSlice()
+
+const config = require('./configs/config')
 
 module.exports = async (keystone) => {
   // Count existing users
@@ -14,11 +16,11 @@ module.exports = async (keystone) => {
         count
       }
     }`,
-  });
+  })
 
   if (count === 0) {
-    const password = "mirrormedia";
-    const email = "admin@mirrormedia.mg";
+    const password = config.keystone.admin.password
+    const email = config.keystone.admin.email
 
     const { errors } = await keystone.executeGraphQL({
       context: keystone.createContext({ skipAccessControl: true }),
@@ -28,11 +30,11 @@ module.exports = async (keystone) => {
             }
           }`,
       variables: { password, email },
-    });
+    })
 
     if (errors) {
-      console.log("failed to create initial user:");
-      console.log(errors);
+      console.log('failed to create initial user:')
+      console.log(errors)
     } else {
       console.log(`
 
@@ -40,7 +42,7 @@ module.exports = async (keystone) => {
         email: ${email}
         password: ${password}
       Please change these details after initial login.
-      `);
+      `)
     }
   }
-};
+}

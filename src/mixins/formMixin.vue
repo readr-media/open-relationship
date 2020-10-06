@@ -1,29 +1,37 @@
 <script>
-import axios from "axios";
-import qs from "qs";
+import axios from 'axios'
+import qs from 'qs'
 export default {
   methods: {
+    goToErrorField() {
+      const error = document.querySelector('.fieldError')
+      if (error) {
+        error.scrollIntoView()
+      }
+      console.log(error)
+    },
     checkForm(targetForm) {
       // check form before upload
       for (const item of Object.entries(targetForm)) {
         // get form's each field object
-        const field = item[1];
+        const field = item[1]
         // if there's an unedit field ,but required, return
-        if (field.required && field.value == "") {
-          field.formState = false;
-          return;
+        if (field.required && field.value === '') {
+          field.formState = false
+          return false
         }
         // if there's an uncorrect field ,reutrn
-        if (field.formState == false) {
-          return;
+        if (field.formState === false) {
+          return false
         }
       }
+      return true
     },
     clearForm(targetForm) {
       for (const item of Object.entries(targetForm)) {
         // get form's each field object
-        const field = item[1];
-        field.value = "";
+        const field = item[1]
+        field.value = ''
       }
     },
     uploadFormToGoogle(form, target) {
@@ -38,11 +46,11 @@ export default {
       // console.log(form);
       // console.log(target);
 
-      let data = {};
-      let url = "";
-      if (target == "person") {
+      let data = {}
+      let url = ''
+      if (target === 'person') {
         url =
-          "https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec";
+          'https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec'
         data = {
           modify_time: Date(Date.now()).toString(),
           field_name: form.name.value,
@@ -64,10 +72,10 @@ export default {
           contact_details: form.contact_details.correctVerify,
           links: form.links.correctVerify,
           source: form.source.correctVerify,
-        };
-      } else if (target == "organization") {
+        }
+      } else if (target === 'organization') {
         url =
-          "https://script.google.com/macros/s/AKfycbwWPdn-Vn_P_jnSJ075W5liYeRZZ5EhajHe2LuSFeli_kXDzgAD/exec";
+          'https://script.google.com/macros/s/AKfycbwWPdn-Vn_P_jnSJ075W5liYeRZZ5EhajHe2LuSFeli_kXDzgAD/exec'
         data = {
           modify_time: Date(Date.now()).toString(),
           field_name: form.name.value,
@@ -89,20 +97,20 @@ export default {
           links: form.links.correctVerify,
           address: form.address.correctVerify,
           source: form.source.correctVerify,
-        };
-      } else return;
+        }
+      } else return
 
-      const cors = "https://cors-anywhere.herokuapp.com/"; // use cors-anywhere to fetch api data
+      const cors = 'https://cors-anywhere.herokuapp.com/' // use cors-anywhere to fetch api data
 
       axios({
-        method: "post",
+        method: 'post',
         url: `${cors}${url}`,
         // data: payload,
         data: qs.stringify(data),
       })
         .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
     },
   },
-};
+}
 </script>

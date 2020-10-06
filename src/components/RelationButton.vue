@@ -10,6 +10,7 @@
       lightVerify: !dark && type == 'verify',
       disable: !enable,
     }"
+    @click.native="handleClick"
   >
     <span>{{ title }}</span>
   </router-link>
@@ -17,12 +18,23 @@
 
 <script>
 export default {
-  props: ["title", "to", "dark", "type", "small", "enable"],
-};
+  props: ['title', 'to', 'dark', 'type', 'small', 'enable'],
+  methods: {
+    handleClick() {
+      if (this.enable) {
+        this.$ga.event({
+          eventCategory: 'projects',
+          eventAction: 'click',
+          eventLabel: `點擊 ${this.title}`,
+        })
+      }
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 .RelationButton {
   width: 100%;

@@ -2,21 +2,30 @@
   "name": "open-relationship",
   "description": "",
   "private": true,
-  "version": "5.0.18",
-  "author": "Mirrormedia R&D Team",
+  "version": "1.0.0",
+  "author": "READr",
   "license": "MIT",
   "engines": {
-    "node": "^12.0.0"
+    "node": ">= 12"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
     "build": "cross-env NODE_ENV=production keystone build",
     "start": "cross-env NODE_ENV=production keystone start",
     "create-tables": "cross-env keystone create-tables",
-    "migrate": "cross-env CREATE_TABLES=true keystone upgrade-relationships --migration"
+    "migrate": "cross-env CREATE_TABLES=true keystone upgrade-relationships --migration",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "repository": "https://github.com/keystonejs/keystone/tree/master/packages/create-keystone-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone",
+  "lint-staged": {
+    "*.{js,vue}": "yarn lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "@keystonejs/app-admin-ui": "^7.3.5",
     "@keystonejs/app-graphql": "^6.1.2",
@@ -37,6 +46,20 @@
     "nuxt": "^2.14.4",
     "qs": "^6.9.4",
     "sass-loader": "^10.0.2",
+    "vue-autosuggest": "^2.2.0",
     "vuejs-datepicker": "^1.6.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/google-analytics": "^2.4.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2"
   }
 }

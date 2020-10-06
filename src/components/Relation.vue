@@ -20,20 +20,19 @@
 </template>
 
 <script>
-import RelationButtonContainer from "../components/RelationButtonContainer";
-import relationListMixin from "../mixins/relationListMixin";
+import RelationButtonContainer from '../components/RelationButtonContainer'
+import relationListMixin from '../mixins/relationListMixin'
 
 export default {
-  mixins: [relationListMixin],
-
   components: {
     RelationButtonContainer,
   },
-};
+  mixins: [relationListMixin],
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 #Relation {
   // height: 430px;

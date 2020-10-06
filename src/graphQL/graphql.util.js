@@ -1,1 +1,1 @@
-export const graphqlHandler = async (query, targetData) => {};
+export const graphqlHandler = async (query, targetData) => {}

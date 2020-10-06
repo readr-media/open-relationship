@@ -2,12 +2,10 @@
   <div class="CollaborateFieldBlock">
     <div class="CollaborateFieldInfo">
       <h5>協作者個人資訊</h5>
-      <p>
-        可選擇是否留下你的大名、Email 及心得，並提交問卷
-      </p>
+      <p>可選擇是否留下你的大名、Email 及心得，並提交問卷</p>
     </div>
 
-    <div class=" FieldBlock">
+    <div class="FieldBlock">
       <div class="FieldBlock-title">你的大名（選填）</div>
       <p class="FieldBlock-info">
         預計會在專題頁面上放上你的名字，感謝你的協作！
@@ -15,8 +13,8 @@
 
       <div class="inputWrapper-single">
         <input
-          type="text"
           v-model="collaborate.name"
+          type="text"
           class="CollaborateFieldBlock-input"
         />
       </div>
@@ -26,8 +24,8 @@
 
       <div class="inputWrapper-single">
         <input
-          type="text"
           v-model="collaborate.email"
+          type="text"
           class="CollaborateFieldBlock-input"
         />
       </div>
@@ -35,11 +33,11 @@
       <div class="FieldBlock-title">你的協作心得（選填）</div>
       <p class="FieldBlock-info">你的回饋，是 READr 推動專題的原動力！</p>
 
-      <div class="inputWrapper-textarea ">
+      <div class="inputWrapper-textarea">
         <textarea
-          name=""
           id=""
           v-model="collaborate.feedback"
+          name=""
           class="CollaborateFieldBlock-input"
         ></textarea>
       </div>
@@ -49,13 +47,13 @@
 
 <script>
 export default {
-  props: ["collaborate"],
-};
+  props: ['collaborate'],
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/FieldBlock.scss";
-@import "../styles/responsiveMixin.scss";
+@import '../styles/FieldBlock.scss';
+@import '../styles/responsiveMixin.scss';
 
 .CollaborateFieldBlock {
   width: 100%;

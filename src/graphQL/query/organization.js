@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const ADD_ORGANIZATION = gql`
   mutation createOrganization(
@@ -63,7 +63,7 @@ export const ADD_ORGANIZATION = gql`
       source
     }
   }
-`;
+`
 
 export const UPDATE_ORGANIZATION = gql`
   mutation(
@@ -131,7 +131,7 @@ export const UPDATE_ORGANIZATION = gql`
       source
     }
   }
-`;
+`
 
 export const FETCH_ORGANIZATIONS_COUNT = gql`
   query {
@@ -139,7 +139,7 @@ export const FETCH_ORGANIZATIONS_COUNT = gql`
       count
     }
   }
-`;
+`
 // $parent:String,
 // $children:String,
 
@@ -167,4 +167,4 @@ export const FETCH_RANDOM_ORGANIZATION = gql`
       source
     }
   }
-`;
+`

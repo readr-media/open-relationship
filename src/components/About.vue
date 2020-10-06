@@ -1,6 +1,6 @@
 <template>
   <div id="About">
-    <div class="section-title" id="About-title">| 計畫緣起 |</div>
+    <div id="About-title" class="section-title">| 計畫緣起 |</div>
     <div id="About-content">
       <p>
         2018 年，READr
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 #About {
   width: 100%;

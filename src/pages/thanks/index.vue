@@ -1,6 +1,6 @@
 <template>
   <div id="thanksPage">
-    <img :src="READrLogo" id="thanksPage-logo" alt="" />
+    <img id="thanksPage-logo" :src="READrLogo" alt="" />
 
     <div id="thanksPage-subtitle">謝謝你的貢獻！</div>
 
@@ -40,35 +40,20 @@
 </template>
 
 <script>
-import READrLogo from "../../images/READrLogo.svg";
-import RelationButtonContainer from "../../components/RelationButtonContainer";
+import READrLogo from '../../images/logo.svg'
+import RelationButtonContainer from '../../components/RelationButtonContainer'
+import relationListMixin from '../../mixins/relationListMixin'
+
 export default {
   components: {
     RelationButtonContainer,
   },
+  mixins: [relationListMixin],
   data() {
     return {
       READrLogo,
       seconds: 8,
-      createSectionList: [
-        { id: 1, title: "新增人物", route: "/person" },
-        { id: 2, title: "新增組織", route: "/organization" },
-        // { id: 3, title: "新增人物關係", route: "/person_relation" },
-        // { id: 4, title: "新增組織關係", route: "/organization_relation" },
-        // {
-        //   id: 5,
-        //   title: "新增人物組織關係",
-        //   route: "/person_organization",
-        // },
-      ],
-      verifySectionList: [
-        { id: 1, title: "驗證人物", route: "/person-verify" },
-        { id: 2, title: "驗證組織", route: "/organization-verify" },
-        // { id: 3, title: "驗證人物關係", route: "/people_relation" },
-        // { id: 4, title: "驗證組織關係", route: "/organization_relation" },
-        // { id: 5, title: "驗證人物組織關係", route: "/people_organization" },
-      ],
-    };
+    }
   },
   mounted() {
     // const countDown = setInterval(() => {
@@ -80,15 +65,15 @@ export default {
     // }, 1000);
   },
   methods: {
-    returnToHome: function() {
-      this.$router.push("/");
+    returnToHome() {
+      this.$router.push('/')
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/responsiveMixin.scss";
+@import '../../styles/responsiveMixin.scss';
 #thanksPage {
   width: 100%;
   background-color: #102c34;

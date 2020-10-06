@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const ADD_PERSON = gql`
   mutation createPerson(
@@ -63,7 +63,7 @@ export const ADD_PERSON = gql`
       source
     }
   }
-`;
+`
 
 export const UPDATE_PERSON = gql`
   mutation(
@@ -131,7 +131,7 @@ export const UPDATE_PERSON = gql`
       source
     }
   }
-`;
+`
 
 export const FETCH_PERSONS_COUNT = gql`
   query {
@@ -139,7 +139,7 @@ export const FETCH_PERSONS_COUNT = gql`
       count
     }
   }
-`;
+`
 
 export const FETCH_RANDOM_PERSON = gql`
   query getRandomPerson($id: ID!) {
@@ -165,7 +165,7 @@ export const FETCH_RANDOM_PERSON = gql`
       source
     }
   }
-`;
+`
 // $birth_date:String,$death_date:String,$image:String,$summary:String,$biography:String,$national_identity:String,
 // birth_date:$birth_date,death_date:$death_date,image:$image,summary:$summary,biography:$biography,national_identity:$national_identity
 

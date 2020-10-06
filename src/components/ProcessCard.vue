@@ -6,7 +6,7 @@
       <div class="ProcessCard-text-title">{{ title }}</div>
       <div class="ProcessCard-text-content">{{ content }}</div>
     </div>
-    <a class="anchorPoint" :href="to">
+    <a class="anchorPoint" :href="to" @click="handleClick">
       <div class="ProcessCard-btnContainer">
         <Button :btnStatus="btnStatus" title="YOYO" fitDiv="true" />
       </div>
@@ -15,28 +15,38 @@
 </template>
 
 <script>
-import Button from "../components/Button";
-import number1 from "../images/1.svg";
-import number2 from "../images/2.svg";
-import number3 from "../images/3.svg";
-import number4 from "../images/4.svg";
+import Button from '../components/Button'
+import number1 from '../images/letter-number-one.svg'
+import number2 from '../images/letter-number-two.svg'
+import number3 from '../images/letter-number-three.svg'
+import number4 from '../images/letter-number-four.svg'
 
 export default {
-  data() {
-    return {
-      numbers: [number1, number2, number3, number4],
-    };
-  },
-  props: ["number", "title", "content", "btnStatus", "to"],
-  methods: {},
   components: {
     Button,
   },
-};
+  props: ['number', 'title', 'content', 'btnStatus', 'to'],
+  data() {
+    return {
+      numbers: [number1, number2, number3, number4],
+    }
+  },
+  methods: {
+    handleClick() {
+      if (this.btnStatus === 'active') {
+        this.$ga.event({
+          eventCategory: 'projects',
+          eventAction: 'click',
+          eventLabel: `我要參與 ${this.title}`,
+        })
+      }
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 .ProcessCard {
   max-width: 100%;

@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <Navigation />
     <Hero />
     <Intro />
     <About />
@@ -12,35 +13,57 @@
 </template>
 
 <script>
-import Hero from "../layouts/Hero";
-import Intro from "../layouts/Intro";
-import About from "../layouts/About";
-import Relation from "../layouts/Relation";
-import Process from "../layouts/Process";
-import Cooperation from "../layouts/Cooperation";
-import Contact from "../layouts/Contact";
-import Footer from "../layouts/Footer";
+import Hero from '../components/Hero'
+import Intro from '../components/Intro'
+import About from '../components/About'
+import Relation from '../components/Relation'
+import Process from '../components/Process'
+// import Cooperation from "../components/Cooperation";
+import Contact from '../components/Contact'
+import Footer from '../components/Footer'
+import Navigation from '../components/Navigation'
 
 export default {
-  head: {
-    title: "Open Relationship",
-  },
-  data() {
-    return {};
-  },
-
-  methods: {},
   components: {
     Hero,
     Intro,
     About,
     Relation,
     Process,
-    Cooperation,
+    // Cooperation,
     Contact,
     Footer,
+    Navigation,
   },
-};
+  mounted() {
+    this.initIntersectionObserver()
+  },
+
+  methods: {
+    initIntersectionObserver() {
+      const target = document.querySelector('#Footer')
+      const callback = (entries, observer) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            observer.disconnect()
+            this.$ga.event({
+              eventCategory: 'projects',
+              eventAction: 'scroll',
+              eventLabel: 'scroll to end',
+            })
+          }
+        })
+      }
+      const observer = new IntersectionObserver(callback, {
+        threshold: 1,
+      })
+      observer.observe(target)
+    },
+  },
+  head: {
+    title: 'Open Relationship',
+  },
+}
 </script>
 
 <style lang="scss">

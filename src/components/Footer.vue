@@ -1,14 +1,16 @@
 <template>
   <div id="Footer">
     <div id="Footer-content">
-      <p>監製：簡信昌 製作人：陳玟諺</p>
-      <p>設計：陳怡蒨 工程：呂理詣</p>
+      <p>監製：簡信昌</p>
+      <p>製作人：陳玟諺、李又如、陳姿廷</p>
+      <p>設計：陳怡蒨</p>
+      <p>工程：呂理詣、黃竹安、邱柏榮</p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>
@@ -17,11 +19,10 @@ p {
 }
 #Footer {
   width: 100%;
-  height: 99px;
+  padding: 21px 0;
   background-color: #102c34;
   padding: 20px;
   #Footer-content {
-    height: 56px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;

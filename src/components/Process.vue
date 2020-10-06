@@ -1,7 +1,7 @@
 <template>
   <div id="Process">
     <!-- <a class="anchorPoint" href="#Process" /> -->
-    <div class="section-title" id="Process-title">| 階段進度 |</div>
+    <div id="Process-title" class="section-title">| 階段進度 |</div>
     <div id="Process-cardContainer">
       <ProcessCard
         v-for="processCard in processCardList"
@@ -17,53 +17,53 @@
 </template>
 
 <script>
-import ProcessCard from "../components/ProcessCard";
+import ProcessCard from '../components/ProcessCard'
 export default {
+  components: {
+    ProcessCard,
+  },
   data() {
     return {
       processCardList: [
         {
           id: 1,
-          title: "新增資料",
+          title: '新增資料',
           content:
-            "你可以新增單筆或大量新增關於人物、組織的資料（更多屬性表單即將開放）。新增前請務必確認它是公開資料，且一定要附上資料來源。",
-          btnStatus: "active",
-          to: "#Relation",
+            '你可以新增單筆或大量新增關於人物、組織的資料（更多屬性表單即將開放）。新增前請務必確認它是公開資料，且一定要附上資料來源。',
+          btnStatus: 'active',
+          to: '#Relation',
         },
         {
           id: 2,
-          title: "驗證資料",
-          content: "你可以協助確認網友們新增的資料是不是正確的。",
-          btnStatus: "active",
-          to: "#Relation",
+          title: '驗證資料',
+          content: '你可以協助確認網友們新增的資料是不是正確的。',
+          btnStatus: 'active',
+          to: '#Relation',
         },
         {
           id: 3,
-          title: "開放資料",
+          title: '開放資料',
           content:
-            "我們會將這些網友協力新增、且驗證過一定次數的資料彙集並開放，讓你一鍵下載。",
-          btnStatus: "inactive",
-          to: "",
+            '我們會將這些網友協力新增、且驗證過一定次數的資料彙集並開放，讓你一鍵下載。',
+          btnStatus: 'inactive',
+          to: '',
         },
         {
           id: 4,
-          title: "資料庫網站上線",
+          title: '資料庫網站上線',
           content:
-            "我們預計將架設視覺化、可查詢的資料庫網站，讓公眾人物關係一目瞭然！",
-          btnStatus: "inactive",
-          to: "",
+            '我們預計將架設視覺化、可查詢的資料庫網站，讓公眾人物關係一目瞭然！',
+          btnStatus: 'inactive',
+          to: '',
         },
       ],
-    };
+    }
   },
-  components: {
-    ProcessCard,
-  },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 
 #Process {
   // height: 770px;

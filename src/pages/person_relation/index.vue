@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     async uploadHandler() {
+      // if there's any form format error,scroll to it.
       if (await !this.checkForm(this.personRelation)) {
         this.goToErrorField()
         return

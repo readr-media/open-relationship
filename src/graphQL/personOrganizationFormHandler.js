@@ -1,22 +1,23 @@
-/* eslint-disable camelcase */
 import { devideDate, mergeDate } from '../utils/fieldVerify'
-export const moveFormToGqlVariable = (organization) => {
+export const moveFormToGqlVariable = (person) => {
   const {
     // eslint-disable-next-line camelcase
+    person_id,
+    // eslint-disable-next-line camelcase
     organization_id,
-    related_organization_id,
-    relative,
+    role,
+    // eslint-disable-next-line camelcase
     start_date,
+    // eslint-disable-next-line camelcase
     end_date,
-
     source,
-  } = organization
+  } = person
 
   return {
     // put form data to graphql's field
+    person_id: person_id.value.id,
     organization_id: organization_id.value.id,
-    related_organization_id: related_organization_id.value.id,
-    relative: relative.value,
+    role: role.value,
 
     start_date_year: devideDate(start_date.value, 'year'),
     start_date_month: devideDate(start_date.value, 'month'),
@@ -29,20 +30,20 @@ export const moveFormToGqlVariable = (organization) => {
   }
 }
 
-export const moveGqlToForm = (organization, target) => {
-  organization.organization_id.value.id = target.organization_id
-  organization.related_organization_id.value.id = target.related_organization_id
-  organization.relative.value = target.relative
+export const moveGqlToForm = (person, target) => {
+  person.person_id.value.id = target.person_id
+  person.organization_id.value.id = target.organization_id
+  person.role.value = target.role
 
-  organization.start_date.value = mergeDate(
+  person.start_date.value = mergeDate(
     target.start_date_year,
     target.start_date_month,
     target.start_date_day
   )
-  organization.end_date.value = mergeDate(
+  person.end_date.value = mergeDate(
     target.end_date_year,
     target.end_date_month,
     target.end_date_day
   )
-  organization.source.value = target.source
+  person.source.value = target.source
 }

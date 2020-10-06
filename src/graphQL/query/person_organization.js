@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 export const ADD_PERSON_ORGANIZATION = gql`
   mutation createPersonOrganization(
-    $person_id: String!
-    $organization_id: String!
+    $person_id: ID!
+    $organization_id: ID!
     $role: String
     $start_date_year: Int
     $start_date_month: Int
@@ -15,8 +15,8 @@ export const ADD_PERSON_ORGANIZATION = gql`
   ) {
     createPersonOrganization(
       data: {
-        person_id: $person_id
-        organization_id: $organization_id
+        person_id: { connect: { id: $person_id } }
+        organization_id: { connect: { id: $organization_id } }
         role: $role
         start_date_year: $start_date_year
         start_date_month: $start_date_month
@@ -27,25 +27,23 @@ export const ADD_PERSON_ORGANIZATION = gql`
         source: $source
       }
     ) {
-      person_id
-      organization_id
+      id
       role
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
+      person_id {
+        name
+      }
+      organization_id {
+        name
+      }
     }
   }
 `
 
-export const UPDATE_PERSON = gql`
+export const UPDATE_PERSON_ORGANIZATION = gql`
   mutation(
     $id: ID!
-    $person_id: String!
-    $organization_id: String!
+    $person_id: ID!
+    $organization_id: ID!
     $role: String
     $start_date_year: Int
     $start_date_month: Int
@@ -58,8 +56,8 @@ export const UPDATE_PERSON = gql`
     updatePerson(
       id: $id
       data: {
-        person_id: $person_id
-        organization_id: $organization_id
+        person_id: { connect: { id: $person_id } }
+        organization_id: { connect: { id: $organization_id } }
         role: $role
         start_date_year: $start_date_year
         start_date_month: $start_date_month
@@ -71,21 +69,18 @@ export const UPDATE_PERSON = gql`
       }
     ) {
       id
-      person_id
-      organization_id
       role
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
+      person_id {
+        name
+      }
+      organization_id {
+        name
+      }
     }
   }
 `
 
-export const FETCH_PERSON_RELATIONS_COUNT = gql`
+export const FETCH_PERSON_ORGANIZATION_COUNT = gql`
   query {
     _allPersonRelationsMeta {
       count
@@ -93,7 +88,7 @@ export const FETCH_PERSON_RELATIONS_COUNT = gql`
   }
 `
 
-export const FETCH_RANDOM_PERSON_RELATION = gql`
+export const FETCH_RANDOM_PERSON_ORGANIZATION = gql`
   query getRandomPersonRelation($id: ID!) {
     PersonRelation(where: { id: $id }) {
       id

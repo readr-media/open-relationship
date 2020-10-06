@@ -19,9 +19,15 @@ import About from '../components/About'
 import Relation from '../components/Relation'
 import Process from '../components/Process'
 // import Cooperation from "../components/Cooperation";
+<<<<<<< HEAD
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import Navigation from '../components/Navigation'
+=======
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
+import Navigation from "../components/Navigation";
+>>>>>>> d5e258d... style relation input
 
 export default {
   components: {
@@ -34,9 +40,12 @@ export default {
     Contact,
     Footer,
     Navigation,
+<<<<<<< HEAD
   },
   data() {
     return {}
+=======
+>>>>>>> d5e258d... style relation input
   },
   mounted() {
     this.initIntersectionObserver()

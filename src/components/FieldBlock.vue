@@ -63,6 +63,20 @@
       />
     </div>
 
+    <!-- handle relation -->
+    <div
+      v-else-if="field.inputStatus.type == 'relation'"
+      class="inputWrapper-single"
+    >
+      <RelationInput :field="field" />
+
+      <!-- <input
+        :type="field.inputStatus.type"
+        v-model="field.value"
+        @change="(e) => verifyField(e)"
+      /> -->
+    </div>
+
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
       <input
@@ -99,8 +113,13 @@
 
 <script>
 import { validateEmail, validateDate, validateUrl } from '../utils/fieldVerify'
+import RelationInput from './RelationInput'
+
 export default {
   props: ['field', 'type'],
+  components: {
+    RelationInput,
+  },
   data() {
     return {
       errorPrompt: [],

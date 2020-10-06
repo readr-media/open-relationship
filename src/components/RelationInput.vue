@@ -10,6 +10,7 @@
         elementId="tags"
         typeahead="true"
         placeholder="新增關係"
+        wrapper-class="wrapper-class"
       />
     </span>
   </div>
@@ -30,4 +31,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.wrapper-class {
+  border-bottom: 1px solid transparent;
+  border-color: #dbdbdb;
+  input {
+    border-bottom: none !important;
+  }
+}
+</style>

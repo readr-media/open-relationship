@@ -2,11 +2,11 @@
   "name": "open-relationship",
   "description": "",
   "private": true,
-  "version": "5.0.18",
-  "author": "Mirrormedia R&D Team",
+  "version": "1.0.0",
+  "author": "READr",
   "license": "MIT",
   "engines": {
-    "node": "^12.0.0"
+    "node": ">= 12"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",

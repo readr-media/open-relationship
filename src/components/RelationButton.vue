@@ -10,6 +10,7 @@
       lightVerify: !dark && type == 'verify',
       disable: !enable,
     }"
+    @click.native="handleClick"
   >
     <span>{{ title }}</span>
   </router-link>
@@ -18,6 +19,17 @@
 <script>
 export default {
   props: ['title', 'to', 'dark', 'type', 'small', 'enable'],
+  methods: {
+    handleClick() {
+      if (this.enable) {
+        this.$ga.event({
+          eventCategory: 'projects',
+          eventAction: 'click',
+          eventLabel: `點擊 ${this.title}`,
+        })
+      }
+    },
+  },
 }
 </script>
 

@@ -6,7 +6,7 @@
       <div class="ProcessCard-text-title">{{ title }}</div>
       <div class="ProcessCard-text-content">{{ content }}</div>
     </div>
-    <a class="anchorPoint" :href="to">
+    <a class="anchorPoint" :href="to" @click="handleClick">
       <div class="ProcessCard-btnContainer">
         <Button :btnStatus="btnStatus" title="YOYO" fitDiv="true" />
       </div>
@@ -31,7 +31,17 @@ export default {
       numbers: [number1, number2, number3, number4],
     }
   },
-  methods: {},
+  methods: {
+    handleClick() {
+      if (this.btnStatus === 'active') {
+        this.$ga.event({
+          eventCategory: 'projects',
+          eventAction: 'click',
+          eventLabel: `我要參與 ${this.title}`,
+        })
+      }
+    },
+  },
 }
 </script>
 

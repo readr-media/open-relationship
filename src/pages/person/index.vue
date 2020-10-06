@@ -23,7 +23,13 @@
         <CollaborateFieldBlock :collaborate="collaborate" />
 
         <div class="btnContainer">
-          <Button title="送出" fitDiv="true" round="true" type="create" />
+          <Button
+            title="送出"
+            fitDiv="true"
+            round="true"
+            type="create"
+            @click="handleClick"
+          />
         </div>
       </form>
     </div>
@@ -73,6 +79,14 @@ export default {
   },
 
   methods: {
+    handleClick() {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: 'send form',
+      })
+    },
+
     uploadHandler() {
       if (!this.checkForm(this.person)) return
       this.uploadForm()

@@ -5,6 +5,7 @@
       href="https://www.readr.tw/"
       target="_blank"
       rel="noopener noreferrer"
+      @click="handleClick"
     >
       <img :src="READrLogo" alt="READr" />
     </a>
@@ -42,6 +43,15 @@ export default {
       READrLogo,
       share,
     }
+  },
+  methods: {
+    handleClick() {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: 'go to readr',
+      })
+    },
   },
 }
 </script>

@@ -72,7 +72,7 @@
       round="true"
       :type="type"
       :whiteText="true"
-      @click.native="returnToHome"
+      @click.native="handleClick"
     />
   </div>
 </template>
@@ -98,8 +98,13 @@ export default {
     }
   },
   methods: {
-    returnToHome() {
+    handleClick() {
       this.$router.push('/')
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: 'back to home',
+      })
     },
   },
 }

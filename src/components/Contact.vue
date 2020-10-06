@@ -6,7 +6,7 @@
     </div>
     <form id="Contact-form">
       <input id="Contact-form-input" type="text" />
-      <Button title="送出" />
+      <Button title="送出" @click="handleClick" />
     </form>
   </div>
 </template>
@@ -16,6 +16,15 @@ import Button from '../components/Button'
 export default {
   components: {
     Button,
+  },
+  methods: {
+    handleClick() {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: 'send email',
+      })
+    },
   },
 }
 </script>

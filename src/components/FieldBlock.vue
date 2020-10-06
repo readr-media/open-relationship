@@ -49,8 +49,8 @@
     >
       <input
         v-model="field.value"
-        @change="verifyField(field)"
         placeholder="yyyy-mm-dd"
+        @change="verifyField(field)"
       />
     </div>
 
@@ -97,10 +97,10 @@ import { validateEmail, validateDate, validateUrl } from '../utils/fieldVerify'
 import RelationInput from './RelationInput'
 
 export default {
-  props: ['field', 'type'],
   components: {
     RelationInput,
   },
+  props: ['field', 'type'],
   data() {
     return {
       errorPrompt: [],
@@ -132,7 +132,6 @@ export default {
   },
   methods: {
     verifyField(field) {
-      console.log(field)
       //  return if there is no verify needed
       if (!field.verify) return
 
@@ -141,7 +140,7 @@ export default {
         // handle each type of verify
         switch (checkItem) {
           case 'required':
-            if (field.value == '') {
+            if (field.value === '') {
               field.formState = false
             } else {
               field.formState = true
@@ -149,7 +148,7 @@ export default {
             break
 
           case 'emailFormat':
-            if (validateEmail(field.value) || field.value == '') {
+            if (validateEmail(field.value) || field.value === '') {
               field.formState = true
             } else {
               field.formState = false
@@ -157,7 +156,7 @@ export default {
             break
 
           case 'dateFormat':
-            if (validateDate(field.value) || field.value == '') {
+            if (validateDate(field.value) || field.value === '') {
               field.formState = true
             } else {
               field.formState = false
@@ -165,7 +164,7 @@ export default {
             break
 
           case 'urlFormat':
-            if (validateUrl(field.value) || field.value == '') {
+            if (validateUrl(field.value) || field.value === '') {
               field.formState = true
             } else {
               field.formState = false

@@ -1,9 +1,10 @@
 <template>
   <div class="RelationInput">
     <vue-autosuggest
-      v-model="query"
+      v-model="input"
+      :sectionConfigs="sectionConfigs"
       :suggestions="filteredOptions"
-      :input-props="{
+      :inputProps="{
         id: 'autosuggest__input',
         placeholder: '輸入名稱',
       }"
@@ -29,8 +30,8 @@ import { VueAutosuggest } from 'vue-autosuggest'
 import gql from 'graphql-tag'
 
 export default {
-  props: ['field', 'verifyField'],
   components: { VueAutosuggest },
+  props: ['field', 'verifyField'],
 
   data() {
     return {
@@ -38,15 +39,23 @@ export default {
         id: '',
         name: '',
       },
+      // input's content
       input: '',
-
-      query: '',
+      // chosen item from list
       selected: '',
+      // fetched list(for apollo)
+      allPersons: [],
+      // auto complete list
       suggestions: [
         {
           data: [],
         },
       ],
+      sectionConfigs: {
+        default: {
+          limit: 5,
+        },
+      },
     }
   },
   computed: {
@@ -54,9 +63,7 @@ export default {
       return [
         {
           data: this.suggestions[0].data.filter((option) => {
-            return (
-              option.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1
-            )
+            return option.name.toLowerCase().includes(this.input.toLowerCase())
           }),
         },
       ]
@@ -64,10 +71,7 @@ export default {
   },
   methods: {
     // event fired when clicking on the input
-    clickHandler(item) {
-      console.log('CLICK')
-      this.$apollo.queries.getList
-    },
+    clickHandler(item) {},
 
     // event fired when selected an item
     onSelected(item) {
@@ -80,63 +84,67 @@ export default {
       }
 
       // verify data
-      if (this.field.value.name == '') {
+      if (this.field.value.name === '') {
         this.field.formState = false
       } else {
         this.field.formState = true
       }
     },
+
+    // event fired when typing
     onInputChange(text) {
-      // this.searchPerson(text);
+      this.searchPerson(text)
     },
-    /**
-     * This is what the <input/> value is set to when you are selecting a suggestion.
-     */
+
+    // This is what the <input/> value is set to when you are selecting a suggestion.
     getSuggestionValue(suggestion) {
       return suggestion.item.name
     },
 
     focusMe(e) {},
 
-    // searchPerson(text) {
-    //   this.$apollo.addSmartQuery("allPersons", {
-    //     query: gql`
-    //       {
-    //         allPersons(search: "${text}") {
-    //           id
-    //           name
-    //         }
-    //       }
-    //     `,
-    //     update(data) {
-    //       this.suggestions[0].data = data.allPersons;
-    //     },
-    //     error(error) {
-    //       console.error("We've got an error!", error);
-    //     },
-    //   });
-    //   return;
-    // },
-  },
-  apollo: {
-    allPersons: {
-      query: gql`
-        query allPersons($text: String!) {
-          allPersons(search: $text) {
-            id
-            name
+    // fetch list from CMS
+    searchPerson(text) {
+      this.$apollo.addSmartQuery('allPersons', {
+        query: gql`
+          query allPersons($text: String!) {
+            allPersons(search: $text) {
+              id
+              name
+            }
           }
-        }
-      `,
-      variables: {
-        text: ``,
-      },
-      update(data) {
-        console.log('Fetched')
-        this.suggestions[0].data = data.allPersons
-      },
+        `,
+        variables: {
+          text: `${text}`,
+        },
+        update(data) {
+          this.suggestions[0].data = data.allPersons
+        },
+        error(error) {
+          // eslint-disable-next-line no-console
+          console.error("We've got an error!", error)
+        },
+      })
     },
   },
+  // apollo: {
+  //   allPersons: {
+  //     query: gql`
+  //       query allPersons($text: String!) {
+  //         allPersons(search: $text) {
+  //           id
+  //           name
+  //         }
+  //       }
+  //     `,
+  //     variables: {
+  //       text: ``,
+  //     },
+  //     update(data) {
+  //       this.suggestions[0].data = data.allPersons
+  //     },
+  //   },
+  // },
 }
 </script>
 

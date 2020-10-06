@@ -29,20 +29,27 @@ export const moveFormToGqlVariable = (organization) => {
   }
 }
 
-export const moveGqlToForm = (organization, target) => {
-  organization.organization_id.value.id = target.organization_id
-  organization.related_organization_id.value.id = target.related_organization_id
-  organization.relative.value = target.relative
+export const moveGqlToForm = (organizationRelation, target) => {
+  organizationRelation.organization_id.value.id = target.organization_id.id
+  organizationRelation.organization_id.value.name = target.organization_id.name
 
-  organization.start_date.value = mergeDate(
+  organizationRelation.related_organization_id.value.id =
+    target.related_organization_id.id
+
+  organizationRelation.related_organization_id.value.name =
+    target.related_organization_id.name
+
+  organizationRelation.relative.value = target.relative
+
+  organizationRelation.start_date.value = mergeDate(
     target.start_date_year,
     target.start_date_month,
     target.start_date_day
   )
-  organization.end_date.value = mergeDate(
+  organizationRelation.end_date.value = mergeDate(
     target.end_date_year,
     target.end_date_month,
     target.end_date_day
   )
-  organization.source.value = target.source
+  organizationRelation.source.value = target.source
 }

@@ -28,13 +28,6 @@ export const ADD_ORGANIZATION_RELATION = gql`
       }
     ) {
       id
-      relative
-      organization_id {
-        name
-      }
-      related_organization_id {
-        name
-      }
     }
   }
 `
@@ -69,13 +62,6 @@ export const UPDATE_ORGANIZATION_RELATION = gql`
       }
     ) {
       id
-      relative
-      organization_id {
-        name
-      }
-      related_organization_id {
-        name
-      }
     }
   }
 `
@@ -94,8 +80,14 @@ export const FETCH_RANDOM_ORGANIZATION_RELATION = gql`
   query getRandomOrganizationRelation($id: ID!) {
     OrganizationRelation(where: { id: $id }) {
       id
-      organization_id
-      related_organization_id
+      organization_id {
+        id
+        name
+      }
+      related_organization_id {
+        id
+        name
+      }
       relative
       start_date_year
       start_date_month

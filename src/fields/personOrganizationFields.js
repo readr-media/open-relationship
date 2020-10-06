@@ -2,7 +2,7 @@ export const personOrganizationFields = {
   person_id: {
     label: '姓名',
     info: ['若名字之間有空格，請用半形空格'],
-    value: '',
+    value: { name: '', id: '' },
     inputStatus: { type: 'relation', target: 'person' },
     required: true,
     verify: ['required'],
@@ -11,7 +11,7 @@ export const personOrganizationFields = {
   organization_id: {
     label: '組織名稱',
     info: ['若名字之間有空格，請用半形空格'],
-    value: '',
+    value: { name: '', id: '' },
     inputStatus: { type: 'relation', target: 'organization' },
     required: true,
     verify: ['required'],

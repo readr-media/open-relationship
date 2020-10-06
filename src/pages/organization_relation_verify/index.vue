@@ -13,7 +13,7 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in person"
+          v-for="field in organizationRelation"
           :key="field.label"
           :field="field"
           type="verify"
@@ -32,14 +32,14 @@ import FieldBlock from '../../components/FieldBlock'
 import Button from '../../components/Button'
 import { organizationRelationFields } from '../../fields/organizationRelationFields'
 import {
-  FETCH_PERSONS_COUNT,
-  FETCH_RANDOM_PERSON,
-  UPDATE_PERSON,
-} from '../../graphQL/query/person'
+  FETCH_ORGANIZATION_RELATIONS_COUNT,
+  FETCH_RANDOM_ORGANIZATION_RELATION,
+  UPDATE_ORGANIZATION_RELATION,
+} from '../../graphQL/query/organization_relation'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '../../graphQL/personFormHandler'
+} from '../../graphQL/organizationRelationFormHandler'
 import { getRandomId } from '../../graphQL/getRandomId'
 
 import formMixin from '../../mixins/formMixin'
@@ -54,7 +54,7 @@ export default {
 
   data() {
     return {
-      organizationId: 1,
+      organizationRelationId: 1,
       hero: {
         title: '驗證組織關係資料表單',
         content: '臺灣政商人物關係資料庫計畫',
@@ -62,7 +62,7 @@ export default {
         type: 'verify',
         id: 4,
       },
-      person: organizationRelationFields,
+      organizationRelation: organizationRelationFields,
 
       collaborate: {
         name: '',
@@ -73,27 +73,27 @@ export default {
   },
 
   async mounted() {
-    await this.fetchPersonCount()
+    await this.fetchOrganizationCount()
   },
 
   methods: {
-    fetchPersonCount() {
+    fetchOrganizationCount() {
       // 1 fetch person counts
-      this.$apollo.addSmartQuery('_allPersonsMeta', {
-        query: FETCH_PERSONS_COUNT,
+      this.$apollo.addSmartQuery('_allOrganizationRelationsMeta', {
+        query: FETCH_ORGANIZATION_RELATIONS_COUNT,
         update(data) {
           // 2 get random personid from result
-          const randomId = getRandomId(data._allPersonsMeta.count)
+          const randomId = getRandomId(data._allOrganizationRelationsMeta.count)
           if (randomId === 0) return
-          // 3 fetch random person
-          this.fetchRandomPerson(randomId)
+          // 3 fetch random organization
+          this.fetchRandomOrganizationRelation(randomId)
         },
       })
     },
-    fetchRandomPerson(randomId) {
-      // 4 fetch random person
-      this.$apollo.addSmartQuery('Person', {
-        query: FETCH_RANDOM_PERSON,
+    fetchRandomOrganizationRelation(randomId) {
+      // 4 fetch random organization
+      this.$apollo.addSmartQuery('OrganizationRelation', {
+        query: FETCH_RANDOM_ORGANIZATION_RELATION,
         variables() {
           return {
             id: randomId,
@@ -101,29 +101,29 @@ export default {
         },
         update(data) {
           // 5 set id and move data to form fields
-          this.personId = data.Person.id
-          moveGqlToForm(this.person, data.Person)
+          this.organizationRelationId = data.OrganizationRelation.id
+          moveGqlToForm(this.organizationRelation, data.OrganizationRelation)
         },
       })
     },
     async uploadHandler() {
-      if (await !this.checkForm(this.person)) {
+      if (await !this.checkForm(this.organizationRelation)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.person, 'person')
+      // this.uploadFormToGoogle(this.organizationRelation, 'person')
       this.uploadForm()
-      this.clearForm(this.person)
+      this.clearForm(this.organizationRelation)
       this.$router.push('/thanks')
     },
 
     uploadForm() {
       this.$apollo.mutate({
-        mutation: UPDATE_PERSON,
+        mutation: UPDATE_ORGANIZATION_RELATION,
         variables: {
           // put form data to graphql's field
-          id: this.personId,
-          ...moveFormToGqlVariable(this.person),
+          id: this.organizationRelationId,
+          ...moveFormToGqlVariable(this.organizationRelation),
         },
       })
     },

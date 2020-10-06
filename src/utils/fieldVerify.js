@@ -47,7 +47,7 @@ export function validateUrl(str) {
 
 // Change datetime to 3 interger
 export function devideDate(dateString, selection) {
-  const parts = dateString.split('-')
+  const parts = dateString ? dateString.split('-') : ['', '', '']
   let day = parseInt(parts[2], 10)
   let month = parseInt(parts[1], 10)
   const year = parseInt(parts[0], 10)

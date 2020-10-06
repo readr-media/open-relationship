@@ -1,6 +1,8 @@
 // const crypto = require('crypto')
 // const randomString = () => crypto.randomBytes(6).hexSlice()
 
+const config = require('./configs/config')
+
 module.exports = async (keystone) => {
   // Count existing users
   const {
@@ -17,8 +19,8 @@ module.exports = async (keystone) => {
   })
 
   if (count === 0) {
-    const password = 'mirrormedia'
-    const email = 'admin@mirrormedia.mg'
+    const password = config.keystone.admin.password
+    const email = config.keystone.admin.email
 
     const { errors } = await keystone.executeGraphQL({
       context: keystone.createContext({ skipAccessControl: true }),

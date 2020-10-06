@@ -35,8 +35,31 @@ export default {
   data() {
     return {}
   },
+  mounted() {
+    this.initIntersectionObserver()
+  },
 
-  methods: {},
+  methods: {
+    initIntersectionObserver() {
+      const target = document.querySelector('#Footer')
+      const callback = (entries, observer) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            observer.disconnect()
+            this.$ga.event({
+              eventCategory: 'projects',
+              eventAction: 'scroll',
+              eventLabel: 'scroll to end',
+            })
+          }
+        })
+      }
+      const observer = new IntersectionObserver(callback, {
+        threshold: 1,
+      })
+      observer.observe(target)
+    },
+  },
   head: {
     title: 'Open Relationship',
   },

@@ -78,8 +78,8 @@
 </template>
 
 <script>
-import createLogo from '../images/orange-03.svg'
-import checkLogo from '../images/blue-03.svg'
+import createLogo from '../images/character-card-orange.svg'
+import checkLogo from '../images/character-card-blue.svg'
 import RelationButtonContainer from '../components/RelationButtonContainer'
 import Button from '../components/Button'
 

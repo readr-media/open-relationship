@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import READrLogo from '../../images/READrLogo.svg'
+import READrLogo from '../../images/logo.svg'
 import RelationButtonContainer from '../../components/RelationButtonContainer'
 import relationListMixin from '../../mixins/relationListMixin'
 

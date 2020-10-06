@@ -5,20 +5,20 @@
         <source
           media="(min-width:480px)"
           srcset="
-            ../images/hands.png 1x,
-            ../images/hands.png 2x,
-            ../images/hands.png 3x
+            ../images/bg-hero-md.png 1x,
+            ../images/bg-hero-md.png 2x,
+            ../images/bg-hero-md.png 3x
           "
         />
         <!-- <source
           media="(min-width:150px)"
           srcset="
-            ../images/bgSmall.png 1x,
-            ../images/bgSmall.png 2x,
-            ../images/bgSmall.png 3x
+            ../images/bg-hero-sm.png 1x,
+            ../images/bg-hero-sm.png 2x,
+            ../images/bg-hero-sm.png 3x
           "
         /> -->
-        <img srcset="../images/bgSmall.png" alt="" />
+        <img srcset="../images/bg-hero-sm.png" alt="" />
       </picture>
     </div>
 
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import READrLogo from '../images/READrLogo.svg'
+import READrLogo from '../images/logo.svg'
 import share from '../images/share.svg'
 
 export default {

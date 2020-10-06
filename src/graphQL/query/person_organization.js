@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 export const ADD_PERSON_ORGANIZATION = gql`
   mutation createPersonOrganization(
-    $person_id: String!
-    $organization_id: String!
+    $person_id: ID!
+    $organization_id: ID!
     $role: String
     $start_date_year: Int
     $start_date_month: Int
@@ -15,8 +15,8 @@ export const ADD_PERSON_ORGANIZATION = gql`
   ) {
     createPersonOrganization(
       data: {
-        person_id: $person_id
-        organization_id: $organization_id
+        person_id: { connect: { id: $person_id } }
+        organization_id: { connect: { id: $organization_id } }
         role: $role
         start_date_year: $start_date_year
         start_date_month: $start_date_month
@@ -27,25 +27,16 @@ export const ADD_PERSON_ORGANIZATION = gql`
         source: $source
       }
     ) {
-      person_id
-      organization_id
-      role
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
+      id
     }
   }
 `
 
-export const UPDATE_PERSON = gql`
+export const UPDATE_PERSON_ORGANIZATION = gql`
   mutation(
     $id: ID!
-    $person_id: String!
-    $organization_id: String!
+    $person_id: ID!
+    $organization_id: ID!
     $role: String
     $start_date_year: Int
     $start_date_month: Int
@@ -55,11 +46,11 @@ export const UPDATE_PERSON = gql`
     $end_date_day: Int
     $source: String
   ) {
-    updatePerson(
+    updatePersonOrganization(
       id: $id
       data: {
-        person_id: $person_id
-        organization_id: $organization_id
+        person_id: { connect: { id: $person_id } }
+        organization_id: { connect: { id: $organization_id } }
         role: $role
         start_date_year: $start_date_year
         start_date_month: $start_date_month
@@ -71,34 +62,30 @@ export const UPDATE_PERSON = gql`
       }
     ) {
       id
-      person_id
-      organization_id
-      role
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
     }
   }
 `
 
-export const FETCH_PERSON_RELATIONS_COUNT = gql`
+export const FETCH_PERSON_ORGANIZATIONS_COUNT = gql`
   query {
-    _allPersonRelationsMeta {
+    _allPersonOrganizationsMeta {
       count
     }
   }
 `
 
-export const FETCH_RANDOM_PERSON_RELATION = gql`
-  query getRandomPersonRelation($id: ID!) {
-    PersonRelation(where: { id: $id }) {
+export const FETCH_RANDOM_PERSON_ORGANIZATION = gql`
+  query getRandomPersonOrganization($id: ID!) {
+    PersonOrganization(where: { id: $id }) {
       id
-      person_id
-      organization_id
+      person_id {
+        id
+        name
+      }
+      organization_id {
+        id
+        name
+      }
       role
       start_date_year
       start_date_month

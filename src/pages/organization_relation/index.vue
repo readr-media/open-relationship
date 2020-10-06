@@ -38,9 +38,9 @@ import Button from '../../components/Button'
 
 import { organizationRelationFields } from '../../fields/organizationRelationFields'
 
-import { ADD_PERSON } from '../../graphQL/query/person'
+import { ADD_ORGANIZATION_RELATION } from '../../graphQL/query/organization_relation'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personFormHandler'
+import { moveFormToGqlVariable } from '../../graphQL/organizationRelationFormHandler'
 
 import formMixin from '../../mixins/formMixin'
 
@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     async uploadHandler() {
+      // if there's any form format error,scroll to it.
       if (await !this.checkForm(this.organizationRelation)) {
         this.goToErrorField()
         return
@@ -86,8 +87,8 @@ export default {
     async uploadForm() {
       // Upload person form
       this.$apollo.mutate({
-        mutation: ADD_PERSON,
-        variables: await moveFormToGqlVariable(this.person),
+        mutation: ADD_ORGANIZATION_RELATION,
+        variables: await moveFormToGqlVariable(this.organizationRelation),
       })
       // Update collaborate form
       this.$apollo.mutate({

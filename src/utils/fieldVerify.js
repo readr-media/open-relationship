@@ -47,7 +47,7 @@ export function validateUrl(str) {
 
 // Change datetime to 3 interger
 export function devideDate(dateString, selection) {
-  const parts = dateString.split('-')
+  const parts = dateString ? dateString.split('-') : ['', '', '']
   let day = parseInt(parts[2], 10)
   let month = parseInt(parts[1], 10)
   const year = parseInt(parts[0], 10)
@@ -73,7 +73,6 @@ export function mergeDate(year, month, day) {
   let dayString = day ? day.toString() : ''
   let monthString = month ? month.toString() : ''
   const yearString = year ? year.toString() : ''
-
   if (month < 10) {
     monthString = '0' + monthString
   }
@@ -81,7 +80,16 @@ export function mergeDate(year, month, day) {
   if (day < 10) {
     dayString = '0' + dayString
   }
+  // empty
+  if (!month && !day && !year) {
+    return null
+  }
 
-  const result = yearString.concat('-', monthString, '-', dayString)
-  return result
+  // year only
+  else if (!month || !day) {
+    return yearString
+  } else {
+    const result = yearString.concat('-', monthString, '-', dayString)
+    return result
+  }
 }

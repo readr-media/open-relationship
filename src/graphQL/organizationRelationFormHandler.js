@@ -1,74 +1,55 @@
+/* eslint-disable camelcase */
 import { devideDate, mergeDate } from '../utils/fieldVerify'
 export const moveFormToGqlVariable = (organization) => {
   const {
-    name,
-    alternative,
     // eslint-disable-next-line camelcase
-    other_names,
-    // eslint-disable-next-line no-unused-vars
-    identifiers,
-    classification,
+    organization_id,
+    related_organization_id,
+    relative,
+    start_date,
+    end_date,
 
-    abstract,
-    description,
-    // eslint-disable-next-line camelcase
-    founding_date,
-    // eslint-disable-next-line camelcase
-    dissolution_date,
-    image,
-    // eslint-disable-next-line camelcase
-    contact_details,
-    links,
-    address,
     source,
   } = organization
 
   return {
     // put form data to graphql's field
-    name: name.value,
-    alternative: alternative.value,
-    other_names: other_names.value,
-    identifiers: other_names.identifiers,
-    classification: classification.value,
+    organization_id: organization_id.value.id,
+    related_organization_id: related_organization_id.value.id,
+    relative: relative.value,
 
-    abstract: abstract.value,
-    description: description.value,
-    founding_date_year: devideDate(founding_date.value, 'year'),
-    founding_date_month: devideDate(founding_date.value, 'month'),
-    founding_date_day: devideDate(founding_date.value, 'day'),
-    dissolution_date_year: devideDate(dissolution_date.value, 'year'),
-    dissolution_date_month: devideDate(dissolution_date.value, 'month'),
-    dissolution_date_day: devideDate(dissolution_date.value, 'day'),
-    image: image.value,
-    contact_details: contact_details.value,
-    links: links.value,
-    address: address.value,
+    start_date_year: devideDate(start_date.value, 'year'),
+    start_date_month: devideDate(start_date.value, 'month'),
+    start_date_day: devideDate(start_date.value, 'day'),
+    end_date_year: devideDate(end_date.value, 'year'),
+    end_date_month: devideDate(end_date.value, 'month'),
+    end_date_day: devideDate(end_date.value, 'day'),
+
     source: source.value,
   }
 }
 
-export const moveGqlToForm = (organization, target) => {
-  organization.name.value = target.name
-  organization.alternative.value = target.alternative
-  organization.other_names.value = target.other_names
-  organization.identifiers.value = target.identifiers
-  organization.classification.value = target.classification
+export const moveGqlToForm = (organizationRelation, target) => {
+  organizationRelation.organization_id.value.id = target.organization_id.id
+  organizationRelation.organization_id.value.name = target.organization_id.name
 
-  organization.abstract.value = target.abstract
-  organization.description.value = target.description
-  organization.founding_date.value = mergeDate(
-    target.founding_date_year,
-    target.founding_date_month,
-    target.founding_date_day
+  organizationRelation.related_organization_id.value.id =
+    target.related_organization_id.id
+
+  organizationRelation.related_organization_id.value.name =
+    target.related_organization_id.name
+
+  organizationRelation.relative.value = target.relative
+
+  organizationRelation.start_date.value = mergeDate(
+    target.start_date_year,
+    target.start_date_month,
+    target.start_date_day
   )
-  organization.dissolution_date.value = mergeDate(
-    target.dissolution_date_year,
-    target.dissolution_date_month,
-    target.dissolution_date_day
+  organizationRelation.end_date.value = mergeDate(
+    target.end_date_year,
+    target.end_date_month,
+    target.end_date_day
   )
-  organization.image.value = target.image
-  organization.contact_details.value = target.contact_details
-  organization.links.value = target.links
-  organization.address.value = target.address
-  organization.source.value = target.source
+  organizationRelation.source.value = target.source
 }

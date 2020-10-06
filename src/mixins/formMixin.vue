@@ -31,7 +31,12 @@ export default {
       for (const item of Object.entries(targetForm)) {
         // get form's each field object
         const field = item[1]
-        field.value = ''
+        // relation input's default type is object, others are string
+        if (field.inputStatus.type === 'relation') {
+          field.value = { name: '', id: '' }
+        } else {
+          field.value = ''
+        }
       }
     },
     uploadFormToGoogle(form, target) {

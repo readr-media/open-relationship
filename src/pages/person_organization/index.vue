@@ -14,7 +14,7 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in person"
+          v-for="field in personOrganization"
           :key="field.label"
           :field="field"
           type="create"
@@ -38,9 +38,9 @@ import Button from '../../components/Button'
 
 import { personOrganizationFields } from '../../fields/personOrganizationFields'
 
-import { ADD_PERSON } from '../../graphQL/query/person'
+import { ADD_PERSON_ORGANIZATION } from '../../graphQL/query/person_organization'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personFormHandler'
+import { moveFormToGqlVariable } from '../../graphQL/personOrganizationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 export default {
@@ -58,9 +58,9 @@ export default {
         content: '臺灣政商人物關係資料庫計畫',
         target: '人物組織關係',
         type: 'create',
-        id: 1,
+        id: 5,
       },
-      person: personOrganizationFields,
+      personOrganization: personOrganizationFields,
       collaborate: {
         name: '',
         email: '',
@@ -69,24 +69,24 @@ export default {
     }
   },
   mounted() {
-    this.clearForm(this.personOrganizationFields)
+    this.clearForm(this.personOrganization)
   },
   methods: {
     async uploadHandler() {
-      if (await !this.checkForm(this.personOrganizationFields)) {
+      if (await !this.checkForm(this.personOrganization)) {
         this.goToErrorField()
         return
       }
       this.uploadForm()
-      this.clearForm(this.person)
+      this.clearForm(this.personOrganization)
       this.$router.push('/thanks')
     },
 
     async uploadForm() {
       // Upload person form
       this.$apollo.mutate({
-        mutation: ADD_PERSON,
-        variables: await moveFormToGqlVariable(this.person),
+        mutation: ADD_PERSON_ORGANIZATION,
+        variables: await moveFormToGqlVariable(this.personOrganization),
       })
       // Update collaborate form
       this.$apollo.mutate({

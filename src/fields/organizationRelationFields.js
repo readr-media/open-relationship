@@ -2,8 +2,8 @@ export const organizationRelationFields = {
   organization_id: {
     label: '組織名稱',
     info: ['若名字之間有空格，請用半形空格'],
-    value: '',
-    inputStatus: { type: 'text' },
+    value: { name: '', id: '' },
+    inputStatus: { type: 'relation', target: 'organization' },
     required: true,
     verify: ['required'],
     formState: true,
@@ -11,8 +11,8 @@ export const organizationRelationFields = {
   related_organization_id: {
     label: '關係組織名稱',
     info: ['若名字之間有空格，請用半形空格'],
-    value: '',
-    inputStatus: { type: 'text' },
+    value: { name: '', id: '' },
+    inputStatus: { type: 'relation', target: 'organization' },
     required: true,
     verify: ['required'],
     formState: true,

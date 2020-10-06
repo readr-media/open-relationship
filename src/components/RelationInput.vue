@@ -1,7 +1,7 @@
 <template>
   <div class="RelationInput">
     <vue-autosuggest
-      v-model="input"
+      v-model="field.value.name"
       :sectionConfigs="sectionConfigs"
       :suggestions="filteredOptions"
       :inputProps="{
@@ -9,8 +9,6 @@
         placeholder: '輸入名稱',
       }"
       @input="onInputChange"
-      @click="clickHandler"
-      @focus="focusMe"
       @selected="onSelected"
     >
       <div
@@ -27,18 +25,15 @@
 
 <script>
 import { VueAutosuggest } from 'vue-autosuggest'
-import gql from 'graphql-tag'
+import relationInputMixin from '../mixins/relationInputMixin'
 
 export default {
   components: { VueAutosuggest },
+  mixins: [relationInputMixin],
   props: ['field', 'verifyField'],
 
   data() {
     return {
-      target: {
-        id: '',
-        name: '',
-      },
       // input's content
       input: '',
       // chosen item from list
@@ -69,13 +64,27 @@ export default {
       ]
     },
   },
+
   methods: {
-    // event fired when clicking on the input
-    clickHandler(item) {},
+    // event fired when typing
+    async onInputChange(text) {
+      switch (this.field.inputStatus.target) {
+        case 'person':
+          await this.searchPersons(text)
+          break
+
+        case 'organization':
+          await this.searchOrganizations(text)
+          break
+
+        default:
+          break
+      }
+    },
 
     // event fired when selected an item
     onSelected(item) {
-      // get selected item
+      // get selected item from list
       this.selected = item.item
       // drop it to field value
       this.field.value = {
@@ -90,61 +99,7 @@ export default {
         this.field.formState = true
       }
     },
-
-    // event fired when typing
-    onInputChange(text) {
-      this.searchPerson(text)
-    },
-
-    // This is what the <input/> value is set to when you are selecting a suggestion.
-    getSuggestionValue(suggestion) {
-      return suggestion.item.name
-    },
-
-    focusMe(e) {},
-
-    // fetch list from CMS
-    searchPerson(text) {
-      this.$apollo.addSmartQuery('allPersons', {
-        query: gql`
-          query allPersons($text: String!) {
-            allPersons(search: $text) {
-              id
-              name
-            }
-          }
-        `,
-        variables: {
-          text: `${text}`,
-        },
-        update(data) {
-          this.suggestions[0].data = data.allPersons
-        },
-        error(error) {
-          // eslint-disable-next-line no-console
-          console.error("We've got an error!", error)
-        },
-      })
-    },
   },
-  // apollo: {
-  //   allPersons: {
-  //     query: gql`
-  //       query allPersons($text: String!) {
-  //         allPersons(search: $text) {
-  //           id
-  //           name
-  //         }
-  //       }
-  //     `,
-  //     variables: {
-  //       text: ``,
-  //     },
-  //     update(data) {
-  //       this.suggestions[0].data = data.allPersons
-  //     },
-  //   },
-  // },
 }
 </script>
 

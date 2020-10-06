@@ -106,6 +106,7 @@ export default {
         },
       })
     },
+
     async uploadHandler() {
       if (await !this.checkForm(this.personRelation)) {
         this.goToErrorField()

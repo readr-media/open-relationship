@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 export const ADD_ORGANIZATION_RELATION = gql`
   mutation createOrganizationRelation(
-    $organization_id: String!
-    $related_organization_id: String!
+    $organization_id: ID!
+    $related_organization_id: ID!
     $relative: String
     $start_date_year: Int
     $start_date_month: Int
@@ -15,8 +15,8 @@ export const ADD_ORGANIZATION_RELATION = gql`
   ) {
     createOrganizationRelation(
       data: {
-        organization_id: $organization_id
-        related_organization_id: $related_organization_id
+        organization_id: { connect: { id: $organization_id } }
+        related_organization_id: { connect: { id: $related_organization_id } }
         relative: $relative
         start_date_year: $start_date_year
         start_date_month: $start_date_month
@@ -27,16 +27,7 @@ export const ADD_ORGANIZATION_RELATION = gql`
         source: $source
       }
     ) {
-      organization_id
-      related_organization_id
-      relative
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
+      id
     }
   }
 `
@@ -44,8 +35,8 @@ export const ADD_ORGANIZATION_RELATION = gql`
 export const UPDATE_ORGANIZATION_RELATION = gql`
   mutation(
     $id: ID!
-    $organization_id: String!
-    $related_organization_id: String!
+    $organization_id: ID!
+    $related_organization_id: ID!
     $relative: String
     $start_date_year: Int
     $start_date_month: Int
@@ -58,8 +49,8 @@ export const UPDATE_ORGANIZATION_RELATION = gql`
     updateOrganizationRelation(
       id: $id
       data: {
-        organization_id: $organization_id
-        related_organization_id: $related_organization_id
+        organization_id: { connect: { id: $organization_id } }
+        related_organization_id: { connect: { id: $related_organization_id } }
         relative: $relative
         start_date_year: $start_date_year
         start_date_month: $start_date_month
@@ -71,16 +62,6 @@ export const UPDATE_ORGANIZATION_RELATION = gql`
       }
     ) {
       id
-      organization_id
-      related_organization_id
-      relative
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
     }
   }
 `
@@ -99,8 +80,14 @@ export const FETCH_RANDOM_ORGANIZATION_RELATION = gql`
   query getRandomOrganizationRelation($id: ID!) {
     OrganizationRelation(where: { id: $id }) {
       id
-      organization_id
-      related_organization_id
+      organization_id {
+        id
+        name
+      }
+      related_organization_id {
+        id
+        name
+      }
       relative
       start_date_year
       start_date_month

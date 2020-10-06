@@ -15,8 +15,8 @@ export const moveFormToGqlVariable = (person) => {
 
   return {
     // put form data to graphql's field
-    person_id: person_id.value,
-    related_person_id: related_person_id.value,
+    person_id: person_id.value.id,
+    related_person_id: related_person_id.value.id,
     relative: relative.value,
 
     start_date_year: devideDate(start_date.value, 'year'),
@@ -31,8 +31,12 @@ export const moveFormToGqlVariable = (person) => {
 }
 
 export const moveGqlToForm = (person, targetPerson) => {
-  person.person_id.value = targetPerson.person_id
-  person.related_person_id.value = targetPerson.related_person_id
+  person.person_id.value.id = targetPerson.person_id.id
+  person.person_id.value.name = targetPerson.person_id.name
+
+  person.related_person_id.value.id = targetPerson.related_person_id.id
+  person.related_person_id.value.name = targetPerson.related_person_id.name
+
   person.relative.value = targetPerson.relative
 
   person.start_date.value = mergeDate(

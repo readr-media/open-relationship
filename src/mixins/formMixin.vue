@@ -3,6 +3,13 @@ import axios from 'axios'
 import qs from 'qs'
 export default {
   methods: {
+    goToErrorField() {
+      const error = document.querySelector('.fieldError')
+      if (error) {
+        error.scrollIntoView()
+      }
+      console.log(error)
+    },
     checkForm(targetForm) {
       // check form before upload
       for (const item of Object.entries(targetForm)) {

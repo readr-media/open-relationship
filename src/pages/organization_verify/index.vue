@@ -107,8 +107,11 @@ export default {
       })
     },
 
-    uploadHandler() {
-      if (!this.checkForm(this.organization)) return
+    async uploadHandler() {
+      if (await !this.checkForm(this.organization)) {
+        this.goToErrorField()
+        return
+      }
       this.uploadFormToGoogle(this.organization, 'organization')
 
       this.uploadForm()

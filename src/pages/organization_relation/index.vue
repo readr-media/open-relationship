@@ -73,8 +73,11 @@ export default {
     this.clearForm(this.organizationRelation)
   },
   methods: {
-    uploadHandler() {
-      if (!this.checkForm(this.organizationRelation)) return
+    async uploadHandler() {
+      if (await !this.checkForm(this.organizationRelation)) {
+        this.goToErrorField()
+        return
+      }
       this.uploadForm()
       this.clearForm(this.organizationRelation)
       this.$router.push('/thanks')

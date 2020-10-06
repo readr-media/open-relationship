@@ -72,8 +72,11 @@ export default {
     this.clearForm(this.personOrganizationFields)
   },
   methods: {
-    uploadHandler() {
-      if (!this.checkForm(this.person)) return
+    async uploadHandler() {
+      if (await !this.checkForm(this.personOrganizationFields)) {
+        this.goToErrorField()
+        return
+      }
       this.uploadForm()
       this.clearForm(this.person)
       this.$router.push('/thanks')

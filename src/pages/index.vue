@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <!-- <Navigation /> -->
     <Hero />
     <Intro />
     <About />
@@ -20,6 +21,7 @@ import Process from '../components/Process'
 // import Cooperation from "../components/Cooperation";
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import Navigation from '../components/Navigation'
 
 export default {
   components: {
@@ -31,6 +33,7 @@ export default {
     // Cooperation,
     Contact,
     Footer,
+    Navigation,
   },
   data() {
     return {}

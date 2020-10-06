@@ -100,7 +100,6 @@ export default {
   },
   methods: {
     returnToHome: function () {
-      console.log("yoyo");
       this.$router.push("/");
     },
   },

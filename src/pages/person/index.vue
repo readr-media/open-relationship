@@ -70,6 +70,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.clearForm(this.person);
+  },
 
   methods: {
     uploadHandler() {

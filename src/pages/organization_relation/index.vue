@@ -72,6 +72,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.clearForm(this.organizationRelation);
+  },
   methods: {
     uploadHandler() {
       if (!this.checkForm(this.organizationRelation)) return;

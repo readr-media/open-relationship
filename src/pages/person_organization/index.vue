@@ -70,7 +70,9 @@ export default {
       },
     };
   },
-  mounted() {},
+  mounted() {
+    this.clearForm(this.personOrganizationFields);
+  },
   methods: {
     uploadHandler() {
       if (!this.checkForm(this.person)) return;

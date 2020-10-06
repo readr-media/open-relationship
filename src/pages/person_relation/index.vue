@@ -71,6 +71,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.clearForm(this.personRelation);
+  },
   methods: {
     uploadHandler() {
       if (!this.checkForm(this.personRelation)) return;

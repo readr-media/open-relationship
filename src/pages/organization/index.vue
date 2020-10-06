@@ -66,6 +66,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.clearForm(this.organization);
+  },
   methods: {
     uploadHandler() {
       if (!this.checkForm(this.organization)) return;

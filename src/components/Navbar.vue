@@ -48,6 +48,8 @@ export default {
 
 #Navbar {
   position: fixed;
+  box-sizing: border-box;
+  z-index: 20;
   top: 0;
   width: 100%;
   height: 85px;

@@ -72,6 +72,7 @@ export default {
 @import '../styles/responsiveMixin.scss';
 
 .Footer {
+  box-sizing: border-box;
   position: relative;
   height: 155px;
   width: 100%;

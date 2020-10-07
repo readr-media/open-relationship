@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Organization-verify" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -23,6 +24,8 @@
         </div>
       </form>
     </div>
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -43,14 +46,20 @@ import {
   moveFormToGqlVariable,
   moveGqlToForm,
 } from '../../graphQL/organizationFormHandler'
-
 import formMixin from '../../mixins/formMixin'
+
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
 
 export default {
   components: {
     FieldBlock,
     FormHero,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
   data() {

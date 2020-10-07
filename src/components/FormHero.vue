@@ -127,6 +127,8 @@ export default {
 @import '../styles/responsiveMixin.scss';
 
 #FormHero {
+  border-top: solid 1px #d8d8d8;
+
   width: 100%;
   // height: 550px;
   padding-bottom: 30px;

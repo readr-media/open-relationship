@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Person-verify" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -23,6 +24,8 @@
         </div>
       </form>
     </div>
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -41,14 +44,20 @@ import {
   moveGqlToForm,
 } from '../../graphQL/organizationRelationFormHandler'
 import { getRandomId } from '../../graphQL/getRandomId'
-
 import formMixin from '../../mixins/formMixin'
+
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
 
 export default {
   components: {
     FieldBlock,
     FormHero,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
 

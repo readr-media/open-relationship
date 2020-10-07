@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Person" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -27,6 +28,9 @@
         </div>
       </form>
     </div>
+
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -41,8 +45,11 @@ import { organizationRelationFields } from '../../fields/organizationRelationFie
 import { ADD_ORGANIZATION_RELATION } from '../../graphQL/query/organization_relation'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
 import { moveFormToGqlVariable } from '../../graphQL/organizationRelationFormHandler'
-
 import formMixin from '../../mixins/formMixin'
+
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
 
 export default {
   components: {
@@ -50,6 +57,9 @@ export default {
     FieldBlock,
     CollaborateFieldBlock,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
   data() {

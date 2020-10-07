@@ -7,6 +7,8 @@
       :filterId="null"
       :dark="false"
       :btnList="createSectionList"
+      :small="true"
+      :style="{ marginBottom: '50px' }"
     />
 
     <div class="section-title Relation-title">| 我要驗證資料 |</div>
@@ -15,7 +17,10 @@
       :filterId="null"
       :dark="false"
       :btnList="verifySectionList"
+      :small="true"
+      :style="{ marginBottom: '80px' }"
     />
+    <div class="continue">陸續開放更多協作表單</div>
   </div>
 </template>
 
@@ -46,7 +51,7 @@ export default {
 
   .Relation-title {
     color: #ffffff;
-    margin-bottom: 33px;
+    margin-bottom: 20px;
   }
 
   .Relation-btn-container {
@@ -81,9 +86,19 @@ export default {
       }
     }
   }
+  .continue {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
 
   @include atLarge {
-    padding: 50px 115px;
+    padding: 50px 115px 44px;
     justify-content: center;
   }
 }

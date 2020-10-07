@@ -1,12 +1,12 @@
 <template>
   <div class="app">
-    <Navigation />
+    <Navbar />
     <Hero />
     <Intro />
     <About />
     <Relation />
     <Process />
-    <!-- <Cooperation /> -->
+    <Cooperation />
     <Contact />
     <Footer />
   </div>
@@ -18,10 +18,10 @@ import Intro from '../components/Intro'
 import About from '../components/About'
 import Relation from '../components/Relation'
 import Process from '../components/Process'
-// import Cooperation from "../components/Cooperation";
+import Cooperation from '../components/Cooperation'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
-import Navigation from '../components/Navigation'
+import Navbar from '../components/Navbar'
 
 export default {
   components: {
@@ -30,10 +30,10 @@ export default {
     About,
     Relation,
     Process,
-    // Cooperation,
+    Cooperation,
     Contact,
     Footer,
-    Navigation,
+    Navbar,
   },
   mounted() {
     this.initIntersectionObserver()

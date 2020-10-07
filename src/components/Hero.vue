@@ -1,15 +1,5 @@
 <template>
   <div class="hero">
-    <a
-      class="hero__logo"
-      href="https://www.readr.tw/"
-      target="_blank"
-      rel="noopener noreferrer"
-      @click="handleClick"
-    >
-      <img :src="READrLogo" alt="READr" />
-    </a>
-
     <!-- <img id="Hero-share" :src="share" alt="" /> -->
 
     <picture class="hero__background">
@@ -27,32 +17,18 @@
         ><span class="color--blue">關係</span><br />資料庫計畫
       </h1>
       <p class="hero__description">
-        「臺灣政商人物關係資料庫計畫」希望用「開放資料」的格式將散佈在網路上關於公眾人物的公開資料串連起來，包括他們的學歷、經歷、資產、企業關係、選舉經驗、政治獻金、學術論文、報告、親戚關係、甚至每一句公開發言。
+        這是一個簡單但需要眾人協力的計畫。我們希望用「開放資料」的格式將散佈在網路上關於公眾人物的公開資料串連起來，包括公眾人物的學歷、經歷、資產、政治獻金、學術論文、報告、親戚關係、甚至說過的每一句話。當資料庫成形，人們可以專心在開發應用或是更深入的調查報導，而不是每一次都要從頭蒐集資料。
       </p>
     </div>
   </div>
 </template>
 
 <script>
-import READrLogo from '../images/logo.svg'
-import share from '../images/share.svg'
-
 export default {
   data() {
-    return {
-      READrLogo,
-      share,
-    }
+    return {}
   },
-  methods: {
-    handleClick() {
-      this.$ga.event({
-        eventCategory: 'projects',
-        eventAction: 'click',
-        eventLabel: 'go to readr',
-      })
-    },
-  },
+  methods: {},
 }
 </script>
 
@@ -61,20 +37,7 @@ export default {
 
 .hero {
   position: relative;
-  &__logo {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 45px;
-    height: 41px;
-    z-index: 999;
-    @include atMedium {
-      top: 20px;
-      left: 20px;
-      width: 50px;
-      height: 50px;
-    }
-  }
+
   &__background {
     position: relative;
     z-index: 1;

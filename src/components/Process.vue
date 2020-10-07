@@ -31,6 +31,18 @@ export default {
           content:
             '你可以新增單筆或大量新增關於人物、組織的資料（更多屬性表單即將開放）。新增前請務必確認它是公開資料，且一定要附上資料來源。',
           btnStatus: 'active',
+          btn: [
+            {
+              id: 1,
+              title: '新增單筆資料',
+              to: '',
+            },
+            {
+              id: 2,
+              title: '新增大量資料',
+              to: '',
+            },
+          ],
           to: '#Relation',
         },
         {

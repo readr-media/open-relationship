@@ -8,7 +8,7 @@
         :key="cooperation.id"
         class="logoContainer"
       >
-        <img :src="cooperation.logo" ：alt="cooperation.title" />
+        <img :src="cooperation.logo" :alt="cooperation.title" />
       </div>
     </div>
   </div>

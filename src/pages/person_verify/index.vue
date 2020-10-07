@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       personId: 1,
+      // eslint-disable-next-line vue/no-reserved-keys
       hero: {
         title: '驗證人物資料表單',
         content: '臺灣政商人物關係資料庫計畫',
@@ -72,22 +73,26 @@ export default {
     }
   },
 
-  async mounted() {
-    await this.fetchPersonCount()
+  mounted() {
+    this.fetchPersonCount().then((res) => {
+      this.fetchRandomPerson(res)
+    })
   },
-
   methods: {
     fetchPersonCount() {
       // 1 fetch person counts
-      this.$apollo.addSmartQuery('_allPersonsMeta', {
-        query: FETCH_PERSONS_COUNT,
-        update(data) {
-          // 2 get random personid from result
-          const randomId = getRandomId(data._allPersonsMeta.count)
-          if (randomId === 0) return
-          // 3 fetch random person
-          this.fetchRandomPerson(randomId)
-        },
+      return new Promise((resolve, reject) => {
+        this.$apollo.addSmartQuery('_allPersonsMeta', {
+          query: FETCH_PERSONS_COUNT,
+          update(data) {
+            // 2 get random personid from result
+            const randomId = getRandomId(data._allPersonsMeta.count)
+            if (randomId === 0) resolve(1)
+            // 3 fetch random person
+            resolve(randomId)
+            // this.fetchRandomPerson(randomId)
+          },
+        })
       })
     },
     fetchRandomPerson(randomId) {

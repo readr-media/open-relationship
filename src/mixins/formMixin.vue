@@ -8,7 +8,6 @@ export default {
       if (error) {
         error.scrollIntoView()
       }
-      console.log(error)
     },
     checkForm(targetForm) {
       // check form before upload

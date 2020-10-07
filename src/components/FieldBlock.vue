@@ -34,11 +34,13 @@
     <div
       v-else-if="field.inputStatus.type == 'textarea'"
       class="inputWrapper-textarea"
+      :class="{ textareaAuto: field.inputStatus.size === 'auto' }"
     >
       <textarea
         v-model="field.value"
         name=""
         class="CollaborateFieldBlock-input"
+        @change="verifyField(field)"
       ></textarea>
     </div>
 
@@ -104,6 +106,12 @@ export default {
   data() {
     return {
       errorPrompt: [],
+      errorPromptList: [
+        '錯誤警告-此欄位為必填',
+        '錯誤警告-email格式不正確',
+        '錯誤警告-日期格式不正確',
+        '錯誤警告-網址格式不正確',
+      ],
       verifyStatus: 'pass',
     }
   },
@@ -133,6 +141,7 @@ export default {
   methods: {
     verifyField(field) {
       //  return if there is no verify needed
+      console.log(field)
       if (!field.verify) return
 
       // handle multiple verify
@@ -142,38 +151,54 @@ export default {
           case 'required':
             if (field.value === '') {
               field.formState = false
+              console.log('require false')
+
+              this.errorPrompt.push('錯誤警告-此欄位為必填')
             } else {
               field.formState = true
+              console.log('require true')
+
+              this.errorPrompt.pop()
             }
             break
 
           case 'emailFormat':
             if (validateEmail(field.value) || field.value === '') {
               field.formState = true
+              this.errorPrompt.pop()
             } else {
               field.formState = false
+              this.errorPrompt.push('錯誤警告-email格式不正確')
             }
             break
 
           case 'dateFormat':
             if (validateDate(field.value) || field.value === '') {
               field.formState = true
+              this.errorPrompt.pop()
             } else {
               field.formState = false
+              this.errorPrompt.push('錯誤警告-日期格式不正確')
             }
             break
 
           case 'urlFormat':
             if (validateUrl(field.value) || field.value === '') {
               field.formState = true
+              console.log('url true')
+              this.errorPrompt.pop()
             } else {
               field.formState = false
+              console.log('url false')
+
+              this.errorPrompt.push('錯誤警告-網址格式不正確')
             }
             break
 
           default:
             break
         }
+        if (this.errorPrompt.length) field.formState = false
       })
     },
   },

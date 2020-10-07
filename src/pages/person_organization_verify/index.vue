@@ -73,21 +73,26 @@ export default {
   },
 
   async mounted() {
-    await this.fetchPersonOrganizationsCount()
+    await this.fetchPersonOrganizationsCount().then((res) => {
+      this.fetchRandomPersonOrganization(res)
+    })
   },
 
   methods: {
     fetchPersonOrganizationsCount() {
       // 1 fetch person counts
-      this.$apollo.addSmartQuery('_allPersonOrganizationsMeta', {
-        query: FETCH_PERSON_ORGANIZATIONS_COUNT,
-        update(data) {
-          // 2 get random personid from result
-          const randomId = getRandomId(data._allPersonOrganizationsMeta.count)
-          if (randomId === 0) return
-          // 3 fetch random person
-          this.fetchRandomPersonOrganization(randomId)
-        },
+      return new Promise((resolve, reject) => {
+        this.$apollo.addSmartQuery('_allPersonOrganizationsMeta', {
+          query: FETCH_PERSON_ORGANIZATIONS_COUNT,
+          update(data) {
+            // 2 get random personid from result
+            const randomId = getRandomId(data._allPersonOrganizationsMeta.count)
+            if (randomId === 0) resolve(1)
+            // 3 fetch random person
+            resolve(randomId)
+            // this.fetchRandomPerson(randomId)
+          },
+        })
       })
     },
     fetchRandomPersonOrganization(randomId) {

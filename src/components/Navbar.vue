@@ -35,6 +35,10 @@ export default {
         eventLabel: 'go to readr',
       })
     },
+    folderToggle() {
+      // const folder = document.querySelector('.Navbar__share_folder')
+      // folder.classList.toggle('Navbar__share_folder_show')
+    },
   },
 }
 </script>
@@ -43,10 +47,14 @@ export default {
 @import '../styles/responsiveMixin.scss';
 
 #Navbar {
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 85px;
   display: flex;
   padding: 11px 26px;
+  // background: rgba(255, 255, 255, 0.4);
+  // border: solid 1px #d8d8d8;
 
   flex-direction: row;
   align-items: center;

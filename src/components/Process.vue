@@ -11,6 +11,7 @@
         :content="processCard.content"
         :btnStatus="processCard.btnStatus"
         :to="processCard.to"
+        :btns="processCard.btns"
       />
     </div>
   </div>
@@ -30,43 +31,61 @@ export default {
           title: '新增資料',
           content:
             '你可以新增單筆或大量新增關於人物、組織的資料（更多屬性表單即將開放）。新增前請務必確認它是公開資料，且一定要附上資料來源。',
-          btnStatus: 'active',
-          btn: [
+          btns: [
             {
               id: 1,
               title: '新增單筆資料',
-              to: '',
+              to: '#Relation',
+              btnStatus: 'active',
             },
             {
               id: 2,
               title: '新增大量資料',
               to: '',
+              btnStatus: 'active',
             },
           ],
-          to: '#Relation',
         },
         {
           id: 2,
           title: '驗證資料',
           content: '你可以協助確認網友們新增的資料是不是正確的。',
-          btnStatus: 'active',
-          to: '#Relation',
+          btns: [
+            {
+              id: 1,
+              title: '我要參與',
+              to: '#Relation',
+              btnStatus: 'active',
+            },
+          ],
         },
         {
           id: 3,
           title: '開放資料',
           content:
             '我們會將這些網友協力新增、且驗證過一定次數的資料彙集並開放，讓你一鍵下載。',
-          btnStatus: 'inactive',
-          to: '',
+          btns: [
+            {
+              id: 1,
+              title: '即將開放',
+              to: '',
+              btnStatus: 'inactive',
+            },
+          ],
         },
         {
           id: 4,
           title: '資料庫網站上線',
           content:
             '我們預計將架設視覺化、可查詢的資料庫網站，讓公眾人物關係一目瞭然！',
-          btnStatus: 'inactive',
-          to: '',
+          btns: [
+            {
+              id: 1,
+              title: '即將開放',
+              to: '',
+              btnStatus: 'inactive',
+            },
+          ],
         },
       ],
     }

@@ -8,7 +8,7 @@
     <Process />
     <Cooperation />
     <Contact />
-    <Footer />
+    <Credit />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import Relation from '../components/Relation'
 import Process from '../components/Process'
 import Cooperation from '../components/Cooperation'
 import Contact from '../components/Contact'
-import Footer from '../components/Footer'
+import Credit from '../components/Credit'
 import Navbar from '../components/Navbar'
 
 export default {
@@ -32,7 +32,7 @@ export default {
     Process,
     Cooperation,
     Contact,
-    Footer,
+    Credit,
     Navbar,
   },
   mounted() {
@@ -41,7 +41,7 @@ export default {
 
   methods: {
     initIntersectionObserver() {
-      const target = document.querySelector('#Footer')
+      const target = document.querySelector('#Credit')
       const callback = (entries, observer) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {

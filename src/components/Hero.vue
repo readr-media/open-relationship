@@ -37,6 +37,7 @@ export default {
 
 .hero {
   position: relative;
+  // margin-top: 85px;
 
   &__background {
     position: relative;

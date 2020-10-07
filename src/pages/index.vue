@@ -9,6 +9,7 @@
     <Cooperation />
     <Contact />
     <Credit />
+    <More />
   </div>
 </template>
 
@@ -22,9 +23,11 @@ import Cooperation from '../components/Cooperation'
 import Contact from '../components/Contact'
 import Credit from '../components/Credit'
 import Navbar from '../components/Navbar'
+import More from '../components/More'
 
 export default {
   components: {
+    Navbar,
     Hero,
     Intro,
     About,
@@ -33,7 +36,7 @@ export default {
     Cooperation,
     Contact,
     Credit,
-    Navbar,
+    More,
   },
   mounted() {
     this.initIntersectionObserver()

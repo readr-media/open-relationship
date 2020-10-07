@@ -71,9 +71,13 @@
 
     <!-- error prompt -->
     <div v-if="field.formState == false" class="FieldBlock-error">
-      <div v-for="prompt in errorPrompt" :key="prompt">
+      <!-- <div v-for="prompt in errorPrompt" :key="prompt">
         {{ prompt }}
-      </div>
+      </div> -->
+      <div v-if="errorPromptId === 0">錯誤警告-此欄位為必填</div>
+      <div v-if="errorPromptId === 1">錯誤警告-email格式不正確</div>
+      <div v-if="errorPromptId === 2">錯誤警告-日期格式不正確</div>
+      <div v-if="errorPromptId === 3">錯誤警告-網址格式不正確</div>
     </div>
 
     <!-- handle verify section -->
@@ -105,13 +109,8 @@ export default {
   props: ['field', 'type'],
   data() {
     return {
-      errorPrompt: [],
-      errorPromptList: [
-        '錯誤警告-此欄位為必填',
-        '錯誤警告-email格式不正確',
-        '錯誤警告-日期格式不正確',
-        '錯誤警告-網址格式不正確',
-      ],
+      errorPromptId: 0,
+
       verifyStatus: 'pass',
     }
   },
@@ -119,87 +118,80 @@ export default {
   mounted() {
     // when mounted,initial each field's own error prompt
     if (!this.field.verify) return
-    this.field.verify.forEach((checkItem) => {
-      switch (checkItem) {
+    for (let i = 0; i < this.field.verify.length; i++) {
+      switch (this.field.verify[i]) {
         case 'required':
-          this.errorPrompt.push('錯誤警告-此欄位為必填')
+          this.errorPromptId = 0
           break
         case 'emailFormat':
-          this.errorPrompt.push('錯誤警告-email格式不正確')
+          this.errorPromptId = 1
           break
         case 'dateFormat':
-          this.errorPrompt.push('錯誤警告-日期格式不正確')
+          this.errorPromptId = 2
           break
         case 'urlFormat':
-          this.errorPrompt.push('錯誤警告-網址格式不正確')
+          this.errorPromptId = 3
           break
         default:
           break
       }
-    })
+      if (this.errorPromptId !== null) return
+    }
   },
   methods: {
     verifyField(field) {
       //  return if there is no verify needed
-      console.log(field)
       if (!field.verify) return
 
       // handle multiple verify
-      field.verify.forEach((checkItem) => {
+      for (let i = 0; i < field.verify.length; i++) {
         // handle each type of verify
-        switch (checkItem) {
+        switch (field.verify[i]) {
           case 'required':
             if (field.value === '') {
               field.formState = false
-              console.log('require false')
-
-              this.errorPrompt.push('錯誤警告-此欄位為必填')
+              this.errorPromptId = 0
             } else {
               field.formState = true
-              console.log('require true')
-
-              this.errorPrompt.pop()
+              this.errorPromptId = null
             }
             break
 
           case 'emailFormat':
             if (validateEmail(field.value) || field.value === '') {
               field.formState = true
-              this.errorPrompt.pop()
+              this.errorPromptId = null
             } else {
               field.formState = false
-              this.errorPrompt.push('錯誤警告-email格式不正確')
+              this.errorPromptId = 1
             }
             break
 
           case 'dateFormat':
             if (validateDate(field.value) || field.value === '') {
               field.formState = true
-              this.errorPrompt.pop()
+              this.errorPromptId = null
             } else {
               field.formState = false
-              this.errorPrompt.push('錯誤警告-日期格式不正確')
+              this.errorPromptId = 2
             }
             break
 
           case 'urlFormat':
             if (validateUrl(field.value) || field.value === '') {
               field.formState = true
-              console.log('url true')
-              this.errorPrompt.pop()
+              this.errorPromptId = null
             } else {
               field.formState = false
-              console.log('url false')
-
-              this.errorPrompt.push('錯誤警告-網址格式不正確')
+              this.errorPromptId = 3
             }
             break
 
           default:
             break
         }
-        if (this.errorPrompt.length) field.formState = false
-      })
+        if (this.errorPromptId !== null) return
+      }
     },
   },
 }

@@ -1,13 +1,15 @@
 <template>
-  <div class="PreviewNews">
-    <div class="PreviewNews__image">
-      <img :src="news.image" alt="" />
+  <a :href="news.url">
+    <div class="PreviewNews">
+      <div class="PreviewNews__image">
+        <img :src="news.image" alt="" />
+      </div>
+      <div class="PreviewNews__text">
+        <div class="PreviewNews__text_title">{{ news.title }}</div>
+        <div class="PreviewNews__text_date">{{ news.date }}</div>
+      </div>
     </div>
-    <div class="PreviewNews__text">
-      <div class="PreviewNews__text_title">{{ news.title }}</div>
-      <div class="PreviewNews__text_date">{{ news.date }}</div>
-    </div>
-  </div>
+  </a>
 </template>
 
 <script>
@@ -40,6 +42,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    color: black;
 
     &_title {
       font-size: 1rem;

@@ -10,10 +10,12 @@
     <Contact />
     <Credit />
     <More />
+    <Footer />
   </div>
 </template>
 
 <script>
+import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Intro from '../components/Intro'
 import About from '../components/About'
@@ -22,8 +24,8 @@ import Process from '../components/Process'
 import Cooperation from '../components/Cooperation'
 import Contact from '../components/Contact'
 import Credit from '../components/Credit'
-import Navbar from '../components/Navbar'
 import More from '../components/More'
+import Footer from '../components/Footer'
 
 export default {
   components: {
@@ -37,6 +39,7 @@ export default {
     Contact,
     Credit,
     More,
+    Footer,
   },
   mounted() {
     this.initIntersectionObserver()

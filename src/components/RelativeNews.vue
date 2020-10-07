@@ -29,6 +29,7 @@ export default {
           title: '五一連假人潮去哪裡？1968人潮示警系統有用嗎？',
           date: new Date().toDateString(),
           image: news1,
+          url: '',
         },
         {
           id: 2,
@@ -36,12 +37,14 @@ export default {
             '紐時募資廣告有用嗎？從Twitter聲量看臺灣如何成為「反世衛戰爭」的要角',
           date: new Date().toDateString(),
           image: news2,
+          url: '',
         },
         {
           id: 3,
           title: '【更新】敦睦艦隊27確診者 全臺足跡總整理',
           date: new Date().toDateString(),
           image: news3,
+          url: '',
         },
       ],
     }

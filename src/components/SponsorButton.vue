@@ -18,9 +18,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/responsiveMixin.scss';
+
 .SponsorButton {
-  max-width: 395px;
+  width: 279px;
   height: 43px;
   margin: auto;
+
+  a {
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+  @include atSmall {
+    width: 395px;
+  }
 }
 </style>

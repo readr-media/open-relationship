@@ -20,6 +20,6 @@ export default {
 <style lang="scss" scoped>
 #More {
   width: 100%;
-  padding: 61px 0;
+  padding: 61px 0 31px;
 }
 </style>

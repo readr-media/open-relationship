@@ -1,8 +1,8 @@
 <template>
-  <div id="Cooperation">
-    <div id="Cooperation__title" class="section-title">| 合作夥伴 |</div>
+  <div class="Cooperation">
+    <div class="Cooperation__title section-title">| 合作夥伴 |</div>
 
-    <div id="Cooperation__list_container">
+    <div class="Cooperation__list_container">
       <div
         v-for="cooperation in cooperationList"
         :key="cooperation.id"
@@ -32,13 +32,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#Cooperation {
+.Cooperation {
   width: 100%;
   background-color: #ebebeb;
   overflow: auto;
+  padding: 40px 0 20px;
 
   &__title {
-    margin-bottom: 0;
+    margin-bottom: 23px;
   }
 
   &__list_container {
@@ -48,8 +49,10 @@ export default {
 
     .logoContainer {
       width: 153px;
+      height: 36px;
       img {
         width: 100%;
+        height: 100%;
       }
     }
   }

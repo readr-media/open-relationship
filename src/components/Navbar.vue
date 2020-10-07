@@ -53,6 +53,8 @@ export default {
   height: 85px;
   display: flex;
   padding: 11px 26px;
+  // border-bottom: solid 1px #d8d8d8;
+
   // background: rgba(255, 255, 255, 0.4);
   // border: solid 1px #d8d8d8;
 

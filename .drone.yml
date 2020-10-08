@@ -69,8 +69,13 @@ pipeline:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
     secrets: [google_credentials]
     commands:
+      - ls -l ./configs/
       - gcloud source repos clone configs ../configs
+      - ls -l ./configs/
       - cp ../configs/openwarehouse/prod/open-relationship/config.js ./configs/config.js
+      - ls -l ./configs/
+      - md5sum ./configs/config.js
+      - md5sum ../configs/openwarehouse/prod/open-relationship/config.js
     when:
       event: [push]
       branch: [master]

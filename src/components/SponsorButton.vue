@@ -4,6 +4,7 @@
       href="https://www.readr.tw/donate"
       target="_blank"
       rel="noopener noreferrer"
+      @click="handleClick"
     >
       <img :src="sponsor" alt="READr sponsor" class="sponsor_normal" />
       <img :src="sponsorSmall" alt="READr sponsor" class="sponsor_small" />
@@ -21,6 +22,15 @@ export default {
       sponsor,
       sponsorSmall,
     }
+  },
+  methods: {
+    handleClick() {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: 'donate',
+      })
+    },
   },
 }
 </script>

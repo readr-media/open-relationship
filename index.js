@@ -15,8 +15,8 @@ const PROJECT_NAME = app.applicationName
 const SITE_DESCRIPTION =
   '「臺灣政商人物關係資料庫計畫」希望用「開放資料」的格式將散佈在網路上關於公眾人物的公開資料串連起來，包括他們的學歷、經歷、資產、企業關係、選舉經驗、政治獻金、學術論文、報告、親戚關係、甚至每一句公開發言。'
 const SITE_TITLE = '臺灣政商人物關係資料庫計畫'
-const SITE_URL = `${app.siteProtocol}://${app.domainName}`
-const SITE_OG_IMAGE = `${app.siteProtocol}://${app.domainName}/_nuxt/src/images/og.jpg`
+const SITE_URL = `${app.siteProtocol}://${app.domainName}/db/whoareyou`
+const SITE_OG_IMAGE = `${app.siteProtocol}://${app.domainName}/db/whoareyou/_nuxt/src/images/og.jpg`
 
 const adapterConfig = {
   dropDatabase: app.dropDatabase,

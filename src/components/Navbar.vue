@@ -17,14 +17,14 @@
         @click="folderToggle"
       />
       <div class="Navbar__share_folder">
-        <a
+        <!-- <a
           v-for="icon in shareList"
           :key="icon.id"
           class="Navbar__share_folder_icon"
           :href="icon.to"
         >
           <img :src="icon.svg" :alt="icon.alt" />
-        </a>
+        </a> -->
       </div>
     </div>
   </div>

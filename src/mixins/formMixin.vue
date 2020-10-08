@@ -79,27 +79,27 @@ export default {
             name: form.name.correctVerify,
             alternative: form.alternative.correctVerify,
             other_names: form.other_names.correctVerify,
-            email: form.email.correctVerify,
-            gender: form.gender.correctVerify,
-            birth_date_year: form.birth_date.correctVerify,
-            birth_date_month: form.birth_date.correctVerify,
-            birth_date_day: form.birth_date.correctVerify,
-            death_date_year: form.death_date.correctVerify,
-            death_date_month: form.death_date.correctVerify,
-            death_date_day: form.death_date.correctVerify,
+            identifiers: form.identifiers.correctVerify,
+            classification: form.classification.correctVerify,
+            abstract: form.abstract.correctVerify,
+            description: form.description.correctVerify,
+            founding_date_year: form.founding_date.correctVerify,
+            founding_date_month: form.founding_date.correctVerify,
+            founding_date_day: form.founding_date.correctVerify,
+            dissolution_date_year: form.dissolution_date.correctVerify,
+            dissolution_date_month: form.dissolution_date.correctVerify,
+            dissolution_date_day: form.dissolution_date.correctVerify,
             image: form.image.correctVerify,
-            summary: form.summary.correctVerify,
-            biography: form.biography.correctVerify,
-            national_identity: form.national_identity.correctVerify,
             contact_details: form.contact_details.correctVerify,
             links: form.links.correctVerify,
+            address: form.address.correctVerify,
             source: form.source.correctVerify,
           }
           break
 
         case 'personRelation':
           url =
-            'https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec'
+            'https://script.google.com/macros/s/AKfycbwZsp1UIqQUY3q8NMkrTa2M6LqyjIgvl2yRSDOOM1PusWcNyBs/exec'
           data = {
             modify_time: Date(Date.now()).toString(),
             field_name: form.person_id.value,
@@ -118,7 +118,7 @@ export default {
 
         case 'organizationRelation':
           url =
-            'https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec'
+            'https://script.google.com/macros/s/AKfycbwFzV0FKnBH7REv9vMRM0tNc0ZfaLFOcHKoNbvwx-WYEd4HjX0/exec'
           data = {
             modify_time: Date(Date.now()).toString(),
             field_name: form.organization_id.value,
@@ -137,7 +137,7 @@ export default {
 
         case 'personOrganization':
           url =
-            'https://script.google.com/macros/s/AKfycbw7C2oVigkE7cnox82Y9JR3m4YjHjmJKSJg_fheosrTfbSt1c4H/exec'
+            'https://script.google.com/macros/s/AKfycbx56ui4by3Nxsm_RleYlOHCXQiS5eXSG-rv5ZC0jYe6zaClSSw/exec'
           data = {
             modify_time: Date(Date.now()).toString(),
             field_name: form.person_id.value,

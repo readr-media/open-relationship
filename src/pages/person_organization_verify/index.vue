@@ -19,6 +19,9 @@
           :field="field"
           type="verify"
         />
+
+        <CollaborateFieldBlock :collaborate="collaborate" />
+
         <div class="btnContainer">
           <Button title="送出" fitDiv="true" round="true" type="verify" />
         </div>
@@ -33,6 +36,8 @@
 <script>
 import FormHero from '../../components/FormHero'
 import FieldBlock from '../../components/FieldBlock'
+import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
+
 import Button from '../../components/Button'
 import { personOrganizationFields } from '../../fields/personOrganizationFields'
 import {
@@ -55,6 +60,7 @@ export default {
   components: {
     FieldBlock,
     FormHero,
+    CollaborateFieldBlock,
     Button,
     Navbar,
     More,
@@ -126,7 +132,7 @@ export default {
         this.goToErrorField()
         return
       }
-      // this.uploadFormToGoogle(this.personOrganization, 'person')
+      this.uploadFormToGoogle(this.personOrganization, 'personOrganization')
       this.uploadForm()
       this.clearForm(this.personOrganization)
       this.$router.push('/thanks')

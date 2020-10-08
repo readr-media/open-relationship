@@ -42,6 +42,8 @@ export default {
       let data = {}
       let url = ''
 
+      console.log(form)
+
       switch (target) {
         case 'person':
           url =
@@ -102,7 +104,7 @@ export default {
             'https://script.google.com/macros/s/AKfycbwZsp1UIqQUY3q8NMkrTa2M6LqyjIgvl2yRSDOOM1PusWcNyBs/exec'
           data = {
             modify_time: Date(Date.now()).toString(),
-            field_name: form.person_id.value,
+            field_name: form.person_id.value.name,
             person_id: form.person_id.correctVerify,
             related_person_id: form.related_person_id.correctVerify,
             relative: form.relative.correctVerify,
@@ -121,7 +123,7 @@ export default {
             'https://script.google.com/macros/s/AKfycbwFzV0FKnBH7REv9vMRM0tNc0ZfaLFOcHKoNbvwx-WYEd4HjX0/exec'
           data = {
             modify_time: Date(Date.now()).toString(),
-            field_name: form.organization_id.value,
+            field_name: form.organization_id.value.name,
             organization_id: form.organization_id.correctVerify,
             related_organization_id: form.related_organization_id.correctVerify,
             relative: form.relative.correctVerify,
@@ -140,7 +142,7 @@ export default {
             'https://script.google.com/macros/s/AKfycbx56ui4by3Nxsm_RleYlOHCXQiS5eXSG-rv5ZC0jYe6zaClSSw/exec'
           data = {
             modify_time: Date(Date.now()).toString(),
-            field_name: form.person_id.value,
+            field_name: form.person_id.value.name,
             person_id: form.person_id.correctVerify,
             organization_id: form.organization_id.correctVerify,
             role: form.role.correctVerify,
@@ -159,7 +161,6 @@ export default {
       }
 
       const cors = 'https://cors-anywhere.herokuapp.com/' // use cors-anywhere to fetch api data
-
       axios({
         method: 'post',
         url: `${cors}${url}`,

@@ -116,7 +116,7 @@ module.exports = {
           '@nuxtjs/google-analytics',
           {
             id: () => {
-              return document.domain.match(/^whoareyou.readr.tw/gs)
+              return document.domain.match(/^www.readr.tw/gs)
                 ? 'UA-83609754-1'
                 : 'UA-83609754-2'
             },
@@ -126,7 +126,7 @@ module.exports = {
       apollo: {
         clientConfigs: {
           default: {
-            httpEndpoint: 'http://localhost:3000/admin/api/',
+            httpEndpoint: 'http://localhost:3000/db/whoareyou/admin/api/',
             browserHttpEndpoint: '/admin/api',
             // httpEndpoint: "https://whoareyou.readr.tw/admin/api",
             // httpEndpoint: "https://or-dev.readr.tw/admin/api",

@@ -114,7 +114,7 @@ export default {
   .ProcessCard-btnContainer {
     bottom: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 
     a {
@@ -122,17 +122,32 @@ export default {
     }
 
     .twoBtn {
-      width: 49.5%;
+      width: 100%;
     }
 
     .inactive {
       pointer-events: none;
+      .twoBtn {
+        width: 49.5%;
+      }
+    }
+
+    .Button {
+      margin-top: 1px;
     }
   }
 
   @include atSmall {
     max-width: 380px;
     margin: 76px 20px 20px;
+    .ProcessCard-btnContainer {
+      flex-direction: row;
+      .Button {
+        padding: 0;
+        margin-top: 0;
+        margin-right: 1px;
+      }
+    }
   }
   @include atMedium {
     max-width: 300px;

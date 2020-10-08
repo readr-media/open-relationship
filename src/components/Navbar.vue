@@ -1,7 +1,7 @@
 <template>
-  <div id="Navbar">
+  <div class="Navbar">
     <a
-      id="Navbar__logo"
+      class="Navbar__logo"
       href="https://www.readr.tw/"
       target="_blank"
       rel="noopener noreferrer"
@@ -10,9 +10,22 @@
       <img :src="READrLogo" alt="READr" />
     </a>
 
-    <div id="Navbar__share">
-      <img :src="share" @click="folderToggle" />
-      <!-- <div class="Navigation-share-folder"></div> -->
+    <div class="Navbar__share">
+      <img
+        :src="share"
+        class="Navbar__share_toggle_button"
+        @click="folderToggle"
+      />
+      <div class="Navbar__share_folder">
+        <a
+          v-for="icon in shareList"
+          :key="icon.id"
+          class="Navbar__share_folder_icon"
+          :href="icon.to"
+        >
+          <img :src="icon.svg" :alt="icon.alt" />
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -20,11 +33,25 @@
 <script>
 import READrLogo from '../images/logo.svg'
 import share from '../images/share.svg'
+import facebook from '../images/navbar/facebook.svg'
+import line from '../images/navbar/line.svg'
+import link from '../images/navbar/link.svg'
+
 export default {
   data() {
     return {
       READrLogo,
       share,
+      shareList: [
+        {
+          id: 1,
+          svg: facebook,
+          alt: 'facebook',
+          to: 'https://www.facebook.com/readr.tw/',
+        },
+        { id: 2, svg: line, alt: 'line', to: '' },
+        { id: 3, svg: link, alt: 'link', to: '' },
+      ],
     }
   },
   methods: {
@@ -36,8 +63,8 @@ export default {
       })
     },
     folderToggle() {
-      // const folder = document.querySelector('.Navbar__share_folder')
-      // folder.classList.toggle('Navbar__share_folder_show')
+      const folder = document.querySelector('.Navbar__share_folder')
+      folder.classList.toggle('Navbar__share_folder_show')
     },
   },
 }
@@ -46,7 +73,7 @@ export default {
 <style lang="scss" scoped>
 @import '../styles/responsiveMixin.scss';
 
-#Navbar {
+.Navbar {
   position: fixed;
   box-sizing: border-box;
   z-index: 20;
@@ -71,9 +98,34 @@ export default {
   }
 
   &__share {
+    position: relative;
+    cursor: pointer;
+
+    &_toggle_button {
+    }
+    &_folder {
+      // display: none;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+
+      top: 52px;
+      display: block;
+
+      opacity: 0;
+      transition: all 0.2s ease-in-out;
+
+      &_icon {
+        margin-bottom: 10px;
+      }
+
+      &_show {
+        opacity: 1;
+      }
+    }
     img {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
     }
   }
 

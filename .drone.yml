@@ -71,9 +71,9 @@ pipeline:
     commands:
       - gcloud source repos clone configs ../configs
       - cp ../configs/openwarehouse/prod/open-relationship/config.js ./configs/config.js
-      - ll ../
-      - ll ../configs
-      - ll ../configs/openwarehouse/prod/open-relationship/
+      - ls -l ../
+      - ls -l ../configs
+      - ls -l ../configs/openwarehouse/prod/open-relationship/
     when:
       event: [push]
       branch: [master]

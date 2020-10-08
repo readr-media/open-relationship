@@ -34,16 +34,16 @@ export default {
           btns: [
             {
               id: 1,
-              title: '新增單筆資料',
+              title: '我要參與', // 新增單筆資料
               to: '#Relation',
               btnStatus: 'active',
             },
-            {
-              id: 2,
-              title: '新增大量資料',
-              to: '',
-              btnStatus: 'active',
-            },
+            // {
+            //   id: 2,
+            //   title: '新增大量資料',
+            //   to: '',
+            //   btnStatus: 'active',
+            // },
           ],
         },
         {

@@ -1,7 +1,13 @@
 <template>
   <div class="Footer">
     <div class="Footer__icons_container">
-      <a v-for="icon in footerIcons" :key="icon.id" :href="icon.to">
+      <a
+        v-for="icon in footerIcons"
+        :key="icon.id"
+        :href="icon.to"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           :src="icon.svg"
           :alt="icon.alt"
@@ -11,13 +17,15 @@
     </div>
 
     <div class="Footer__btn_container">
-      <div
+      <a
         v-for="btn in footerBtns"
         :key="btn.id"
+        :href="btn.to"
         class="Footer__btn_container_btn"
-      >
-        {{ btn.title }}
-      </div>
+        target="_blank"
+        rel="noopener noreferrer"
+        v-text="btn.title"
+      />
     </div>
 
     <span class="Footer__copyright">&reg;2020 READr All Rights Reserved</span>
@@ -38,9 +46,14 @@ export default {
       instagram,
       github,
       footerBtns: [
-        { id: 1, title: '關於我們', to: '' },
-        { id: 2, title: '聯絡我們', to: '' },
-        { id: 3, title: '意見回饋', to: '' },
+        { id: 1, title: '關於我們', to: 'https://www.readr.tw/about' },
+        { id: 2, title: '聯絡我們', to: 'mailto:readr@readr.tw' },
+        {
+          id: 3,
+          title: '意見回饋',
+          to:
+            'https://docs.google.com/forms/d/e/1FAIpQLSc-nbJFU419hLQN5TOcHrOFUXv8a4-wKb_Wk85Up0kSt6926Q/viewform',
+        },
       ],
       footerIcons: [
         {
@@ -95,6 +108,7 @@ export default {
     &_btn {
       //   margin-right: 73px;
       cursor: pointer;
+      color: #000;
       font-size: 0.875rem;
       line-height: 1;
     }

@@ -1,6 +1,10 @@
 <template>
   <div class="SponsorButton">
-    <a href="">
+    <a
+      href="https://www.readr.tw/donate"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <img :src="sponsor" alt="READr sponsor" class="sponsor_normal" />
       <img :src="sponsorSmall" alt="READr sponsor" class="sponsor_small" />
     </a>

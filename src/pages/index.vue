@@ -66,9 +66,6 @@ export default {
       observer.observe(target)
     },
   },
-  head: {
-    title: 'Open Relationship',
-  },
 }
 </script>
 

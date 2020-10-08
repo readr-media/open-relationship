@@ -26,25 +26,25 @@ export default {
       relativeNewsList: [
         {
           id: 1,
-          title: '五一連假人潮去哪裡？1968人潮示警系統有用嗎？',
+          title: '2020 總統候選人之事實查核計畫 - 讀＋READr',
           date: new Date().toDateString(),
           image: news1,
-          url: '',
+          url: 'https://www.readr.tw/project/fact-check-2020',
         },
         {
           id: 2,
           title:
-            '紐時募資廣告有用嗎？從Twitter聲量看臺灣如何成為「反世衛戰爭」的要角',
+            '數讀政治獻金 3.0：翻開立委（12年份）的金主投資名冊 - 讀＋READr',
           date: new Date().toDateString(),
           image: news2,
-          url: '',
+          url: 'https://www.readr.tw/project/political-contribution',
         },
         {
           id: 3,
-          title: '【更新】敦睦艦隊27確診者 全臺足跡總整理',
+          title: '看板追追追——2020選舉看板紀錄 - 讀＋READr',
           date: new Date().toDateString(),
           image: news3,
-          url: '',
+          url: 'https://www.readr.tw/project/election-board',
         },
       ],
     }

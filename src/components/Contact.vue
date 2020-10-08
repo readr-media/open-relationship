@@ -1,7 +1,7 @@
 <template>
   <div id="Contact">
     <div id="Contact-title" class="section-title">
-      留下 email,<br class="changeLine-small" />
+      留下 email，<br class="changeLine-small" />
       通知你最新進度！
     </div>
     <form id="Contact-form">

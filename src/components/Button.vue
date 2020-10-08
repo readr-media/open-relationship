@@ -14,7 +14,7 @@
     @click="$emit('click')"
   >
     <div v-if="small" class="Button-text">{{ title }}</div>
-    <div v-else class="Button-text">XX{{ title }}</div>
+    <div v-else class="Button-text">{{ title }}</div>
   </button>
 </template>
 

@@ -1,7 +1,9 @@
+/* eslint-disable vue/no-parsing-error */
 <template>
   <button
     class="Button"
     :class="{
+      small: small,
       inactive: btnStatus == 'inactive',
       fitDiv: fitDiv,
       round: round,
@@ -11,13 +13,22 @@
     }"
     @click="$emit('click')"
   >
-    <div class="Button-text">{{ title }}</div>
+    <div v-if="small" class="Button-text">{{ title }}</div>
+    <div v-else class="Button-text">XX{{ title }}</div>
   </button>
 </template>
 
 <script>
 export default {
-  props: ['btnStatus', 'title', 'fitDiv', 'round', 'type', 'whiteText'],
+  props: [
+    'btnStatus',
+    'title',
+    'fitDiv',
+    'round',
+    'type',
+    'whiteText',
+    'small',
+  ],
 }
 </script>
 
@@ -77,5 +88,12 @@ export default {
 .whiteText {
   color: white;
   margin: 0;
+}
+
+.small {
+  font-size: 0.875rem;
+  padding: 5px 0;
+  height: 30px;
+  width: 120px;
 }
 </style>

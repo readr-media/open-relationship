@@ -19,6 +19,7 @@
       :btnList="verifySectionList"
       :small="true"
       :style="{ marginBottom: '80px' }"
+      :verifyPersonRelationsIsEnable="verifyPersonRelationsIsEnable"
     />
     <div class="continue">陸續開放更多協作表單</div>
   </div>
@@ -28,11 +29,30 @@
 import RelationButtonContainer from '../components/RelationButtonContainer'
 import relationListMixin from '../mixins/relationListMixin'
 
+import { FETCH_PERSON_RELATIONS_COUNT } from '../graphQL/query/person_relation'
+
 export default {
   components: {
     RelationButtonContainer,
   },
+  apollo: {
+    personRelationsCount: {
+      query: FETCH_PERSON_RELATIONS_COUNT,
+      update: (data) => data._allPersonRelationsMeta.count,
+      result(result) {
+        const count = result.data._allPersonRelationsMeta.count
+        if (count > 0) {
+          this.verifyPersonRelationsIsEnable = true
+        }
+      },
+    },
+  },
   mixins: [relationListMixin],
+  data() {
+    return {
+      verifyPersonRelationsIsEnable: false,
+    }
+  },
 }
 </script>
 

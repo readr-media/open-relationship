@@ -74,7 +74,10 @@ export default {
           alt: 'instagram',
           to: 'https://www.instagram.com/readrteam_daily/',
         },
-        { id: 4, svg: github, alt: 'github', to: '' },
+        { id: 4, 
+		  svg: github, 
+          alt: 'github', 
+          to: 'https://github.com/readr-media/' },
       ],
     }
   },

@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Organization-verify" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -23,6 +24,8 @@
         </div>
       </form>
     </div>
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -43,14 +46,20 @@ import {
   moveFormToGqlVariable,
   moveGqlToForm,
 } from '../../graphQL/organizationFormHandler'
-
 import formMixin from '../../mixins/formMixin'
+
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
 
 export default {
   components: {
     FieldBlock,
     FormHero,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
   data() {
@@ -73,21 +82,26 @@ export default {
   },
 
   async mounted() {
-    await this.fetchOrganizationCount()
+    await this.fetchOrganizationCount().then((res) => {
+      this.fetchRandomOrganization(res)
+    })
   },
 
   methods: {
     fetchOrganizationCount() {
-      // 1 fetch organization counts
-      this.$apollo.addSmartQuery('_allOrganizationsMeta', {
-        query: FETCH_ORGANIZATIONS_COUNT,
-        update(data) {
-          // 2 get random organizationid from result
-          const randomId = getRandomId(data._allOrganizationsMeta.count)
-          if (randomId === 0) return
-          // 3 fetch random organization
-          this.fetchRandomOrganization(randomId)
-        },
+      // 1 fetch person counts
+      return new Promise((resolve, reject) => {
+        this.$apollo.addSmartQuery('_allOrganizationsMeta', {
+          query: FETCH_ORGANIZATIONS_COUNT,
+          update(data) {
+            // 2 get random personid from result
+            const randomId = getRandomId(data._allOrganizationsMeta.count)
+            if (randomId === 0) resolve(1)
+            // 3 fetch random person
+            resolve(randomId)
+            // this.fetchRandomPerson(randomId)
+          },
+        })
       })
     },
     fetchRandomOrganization(randomId) {

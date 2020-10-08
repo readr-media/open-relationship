@@ -7,6 +7,8 @@
       :filterId="null"
       :dark="false"
       :btnList="createSectionList"
+      :small="true"
+      :style="{ marginBottom: '50px' }"
     />
 
     <div class="section-title Relation-title">| 我要驗證資料 |</div>
@@ -15,7 +17,11 @@
       :filterId="null"
       :dark="false"
       :btnList="verifySectionList"
+      :small="true"
+      :style="{ marginBottom: '80px' }"
+      :verifyPersonRelationsIsEnable="verifyPersonRelationsIsEnable"
     />
+    <div class="continue">陸續開放更多協作表單</div>
   </div>
 </template>
 
@@ -23,11 +29,30 @@
 import RelationButtonContainer from '../components/RelationButtonContainer'
 import relationListMixin from '../mixins/relationListMixin'
 
+import { FETCH_PERSON_RELATIONS_COUNT } from '../graphQL/query/person_relation'
+
 export default {
   components: {
     RelationButtonContainer,
   },
+  apollo: {
+    personRelationsCount: {
+      query: FETCH_PERSON_RELATIONS_COUNT,
+      update: (data) => data._allPersonRelationsMeta.count,
+      result(result) {
+        const count = result.data._allPersonRelationsMeta.count
+        if (count > 0) {
+          this.verifyPersonRelationsIsEnable = true
+        }
+      },
+    },
+  },
   mixins: [relationListMixin],
+  data() {
+    return {
+      verifyPersonRelationsIsEnable: false,
+    }
+  },
 }
 </script>
 
@@ -46,7 +71,7 @@ export default {
 
   .Relation-title {
     color: #ffffff;
-    margin-bottom: 33px;
+    margin-bottom: 20px;
   }
 
   .Relation-btn-container {
@@ -81,9 +106,19 @@ export default {
       }
     }
   }
+  .continue {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
 
   @include atLarge {
-    padding: 50px 115px;
+    padding: 50px 115px 44px;
     justify-content: center;
   }
 }

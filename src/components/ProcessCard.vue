@@ -6,11 +6,22 @@
       <div class="ProcessCard-text-title">{{ title }}</div>
       <div class="ProcessCard-text-content">{{ content }}</div>
     </div>
-    <a class="anchorPoint" :href="to" @click="handleClick">
-      <div class="ProcessCard-btnContainer">
-        <Button :btnStatus="btnStatus" title="YOYO" fitDiv="true" />
-      </div>
-    </a>
+
+    <div class="ProcessCard-btnContainer">
+      <a
+        v-for="btn in btns"
+        :key="btn.id"
+        class="anchorPoint"
+        :class="{
+          twoBtn: btns.length > 1,
+          inactive: btn.btnStatus == 'inactive',
+        }"
+        :href="btn.to"
+        @click="handleClick"
+      >
+        <Button :btnStatus="btn.btnStatus" :title="btn.title" fitDiv="true" />
+      </a>
+    </div>
   </div>
 </template>
 
@@ -25,7 +36,7 @@ export default {
   components: {
     Button,
   },
-  props: ['number', 'title', 'content', 'btnStatus', 'to'],
+  props: ['number', 'title', 'content', 'btnStatus', 'to', 'btns'],
   data() {
     return {
       numbers: [number1, number2, number3, number4],
@@ -102,11 +113,41 @@ export default {
 
   .ProcessCard-btnContainer {
     bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    a {
+      width: 100%;
+    }
+
+    .twoBtn {
+      width: 100%;
+    }
+
+    .inactive {
+      pointer-events: none;
+      .twoBtn {
+        width: 49.5%;
+      }
+    }
+
+    .Button {
+      margin-top: 1px;
+    }
   }
 
   @include atSmall {
     max-width: 380px;
     margin: 76px 20px 20px;
+    .ProcessCard-btnContainer {
+      flex-direction: row;
+      .Button {
+        padding: 0;
+        margin-top: 0;
+        margin-right: 1px;
+      }
+    }
   }
   @include atMedium {
     max-width: 300px;

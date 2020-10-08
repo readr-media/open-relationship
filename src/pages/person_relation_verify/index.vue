@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Person-verify" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -23,6 +24,8 @@
         </div>
       </form>
     </div>
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -41,14 +44,20 @@ import {
   moveGqlToForm,
 } from '../../graphQL/personRelationFormHandler'
 import { getRandomId } from '../../graphQL/getRandomId'
-
 import formMixin from '../../mixins/formMixin'
+
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
 
 export default {
   components: {
     FieldBlock,
     FormHero,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
 
@@ -73,21 +82,26 @@ export default {
   },
 
   async mounted() {
-    await this.fetchPersonRelationsCount()
+    await this.fetchPersonRelationsCount().then((res) => {
+      this.fetchRandomPersonRelation(res)
+    })
   },
 
   methods: {
     fetchPersonRelationsCount() {
       // 1 fetch person counts
-      this.$apollo.addSmartQuery('_allPersonRelationsMeta', {
-        query: FETCH_PERSON_RELATIONS_COUNT,
-        update(data) {
-          // 2 get random personid from result
-          const randomId = getRandomId(data._allPersonRelationsMeta.count)
-          if (randomId === 0) return
-          // 3 fetch random person
-          this.fetchRandomPersonRelation(randomId)
-        },
+      return new Promise((resolve, reject) => {
+        this.$apollo.addSmartQuery('_allPersonRelationsMeta', {
+          query: FETCH_PERSON_RELATIONS_COUNT,
+          update(data) {
+            // 2 get random personid from result
+            const randomId = getRandomId(data._allPersonRelationsMeta.count)
+            if (randomId === 0) resolve(1)
+            // 3 fetch random person
+            resolve(randomId)
+            // this.fetchRandomPerson(randomId)
+          },
+        })
       })
     },
     fetchRandomPersonRelation(randomId) {

@@ -1,18 +1,60 @@
 <template>
-  <div id="Cooperation">
-    <div id="Coorperation-title" class="section-title">| 合作夥伴 |</div>
+  <div class="Cooperation">
+    <div class="Cooperation__title section-title">| 合作夥伴 |</div>
+
+    <div class="Cooperation__list_container">
+      <div
+        v-for="cooperation in cooperationList"
+        :key="cooperation.id"
+        class="logoContainer"
+      >
+        <img :src="cooperation.logo" :alt="cooperation.title" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+import cooperation01 from '../images/cooperation_01.svg'
+export default {
+  data() {
+    return {
+      cooperationList: [
+        {
+          id: 1,
+          title: '公視P新聞實驗室',
+          logo: cooperation01,
+        },
+      ],
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-#Cooperation {
-  height: 279px;
+.Cooperation {
   width: 100%;
   background-color: #ebebeb;
   overflow: auto;
+  padding: 40px 0 20px;
+
+  &__title {
+    margin-bottom: 23px;
+  }
+
+  &__list_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .logoContainer {
+      width: 153px;
+      height: 36px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 </style>

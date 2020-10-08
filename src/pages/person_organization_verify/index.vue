@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Person-verify" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -23,6 +24,9 @@
         </div>
       </form>
     </div>
+
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -41,14 +45,20 @@ import {
   moveGqlToForm,
 } from '../../graphQL/personOrganizationFormHandler'
 import { getRandomId } from '../../graphQL/getRandomId'
-
 import formMixin from '../../mixins/formMixin'
+
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
 
 export default {
   components: {
     FieldBlock,
     FormHero,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
 
@@ -73,21 +83,26 @@ export default {
   },
 
   async mounted() {
-    await this.fetchPersonOrganizationsCount()
+    await this.fetchPersonOrganizationsCount().then((res) => {
+      this.fetchRandomPersonOrganization(res)
+    })
   },
 
   methods: {
     fetchPersonOrganizationsCount() {
       // 1 fetch person counts
-      this.$apollo.addSmartQuery('_allPersonOrganizationsMeta', {
-        query: FETCH_PERSON_ORGANIZATIONS_COUNT,
-        update(data) {
-          // 2 get random personid from result
-          const randomId = getRandomId(data._allPersonOrganizationsMeta.count)
-          if (randomId === 0) return
-          // 3 fetch random person
-          this.fetchRandomPersonOrganization(randomId)
-        },
+      return new Promise((resolve, reject) => {
+        this.$apollo.addSmartQuery('_allPersonOrganizationsMeta', {
+          query: FETCH_PERSON_ORGANIZATIONS_COUNT,
+          update(data) {
+            // 2 get random personid from result
+            const randomId = getRandomId(data._allPersonOrganizationsMeta.count)
+            if (randomId === 0) resolve(1)
+            // 3 fetch random person
+            resolve(randomId)
+            // this.fetchRandomPerson(randomId)
+          },
+        })
       })
     },
     fetchRandomPersonOrganization(randomId) {

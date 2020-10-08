@@ -1,5 +1,6 @@
-@import "../styles/responsiveMixin.scss";
+@import '../styles/responsiveMixin.scss';
 .Form-Page {
+  padding-top: 85px;
   width: 100%;
   background-color: #ebebeb;
 
@@ -134,6 +135,14 @@
       resize: none;
       margin: 0;
       border: 1px lightgray solid;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .textareaAuto {
+    textarea {
+      height: 65px;
     }
   }
 

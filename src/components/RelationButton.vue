@@ -97,7 +97,7 @@ export default {
 }
 
 .small {
-  width: 150px;
+  width: 100%;
   border-radius: 42px;
   padding: 9px 0;
   margin-bottom: 10px;
@@ -108,9 +108,9 @@ export default {
   }
 
   @include atLarge {
-    width: 150px;
+    width: 170px;
     padding: 0;
-    height: 40px;
+    height: 30px;
     margin-bottom: 15px;
   }
 }

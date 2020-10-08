@@ -1,39 +1,45 @@
 <template>
   <div class="app">
-    <Navigation />
+    <Navbar />
     <Hero />
     <Intro />
     <About />
     <Relation />
     <Process />
-    <!-- <Cooperation /> -->
+    <Cooperation />
     <Contact />
+    <Credit />
+    <More />
     <Footer />
   </div>
 </template>
 
 <script>
+import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Intro from '../components/Intro'
 import About from '../components/About'
 import Relation from '../components/Relation'
 import Process from '../components/Process'
-// import Cooperation from "../components/Cooperation";
+import Cooperation from '../components/Cooperation'
 import Contact from '../components/Contact'
+import Credit from '../components/Credit'
+import More from '../components/More'
 import Footer from '../components/Footer'
-import Navigation from '../components/Navigation'
 
 export default {
   components: {
+    Navbar,
     Hero,
     Intro,
     About,
     Relation,
     Process,
-    // Cooperation,
+    Cooperation,
     Contact,
+    Credit,
+    More,
     Footer,
-    Navigation,
   },
   mounted() {
     this.initIntersectionObserver()
@@ -41,7 +47,7 @@ export default {
 
   methods: {
     initIntersectionObserver() {
-      const target = document.querySelector('#Footer')
+      const target = document.querySelector('#Credit')
       const callback = (entries, observer) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
@@ -59,9 +65,6 @@ export default {
       })
       observer.observe(target)
     },
-  },
-  head: {
-    title: 'Open Relationship',
   },
 }
 </script>

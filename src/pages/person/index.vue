@@ -1,5 +1,6 @@
 <template>
   <div id="Page-Person" class="Form-Page">
+    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -33,6 +34,9 @@
         </div>
       </form>
     </div>
+
+    <More />
+    <Footer />
   </div>
 </template>
 
@@ -49,12 +53,19 @@ import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
 import { moveFormToGqlVariable } from '../../graphQL/personFormHandler'
 import formMixin from '../../mixins/formMixin'
 
+import Navbar from '../../components/Navbar'
+import More from '../../components/More'
+import Footer from '../../components/Footer'
+
 export default {
   components: {
     FormHero,
     FieldBlock,
     CollaborateFieldBlock,
     Button,
+    Navbar,
+    More,
+    Footer,
   },
   mixins: [formMixin],
   data() {
@@ -87,8 +98,11 @@ export default {
       })
     },
 
-    uploadHandler() {
-      if (!this.checkForm(this.person)) return
+    async uploadHandler() {
+      if (await !this.checkForm(this.person)) {
+        this.goToErrorField()
+        return
+      }
       this.uploadForm()
       this.clearForm(this.person)
       this.$router.push('/thanks')

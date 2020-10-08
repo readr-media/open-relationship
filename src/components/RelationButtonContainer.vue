@@ -8,7 +8,7 @@
       :dark="dark"
       :type="type"
       :small="small"
-      :enable="createItem.enable"
+      :enable="getButtonEnable(createItem)"
     />
   </div>
 </template>
@@ -20,7 +20,14 @@ export default {
   components: {
     RelationButton,
   },
-  props: ['type', 'filterId', 'dark', 'btnList', 'small'],
+  props: [
+    'type',
+    'filterId',
+    'dark',
+    'btnList',
+    'small',
+    'verifyPersonRelationsIsEnable',
+  ],
   data() {
     return {
       showBtnList: [],
@@ -33,6 +40,12 @@ export default {
   },
 
   methods: {
+    getButtonEnable(createItem) {
+      if (this.type === 'verify' && createItem.title === '驗證人物關係') {
+        return this.verifyPersonRelationsIsEnable && createItem.enable
+      }
+      return createItem.enable
+    },
     relationBtnFilter(btnList) {
       return btnList.filter((btn) => {
         return btn.id !== this.filterId

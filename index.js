@@ -11,6 +11,13 @@ const initialiseData = require('./initial-data')
 const { app, database, session } = require('./configs/config')
 
 const PROJECT_NAME = app.applicationName
+
+const SITE_DESCRIPTION =
+  '「臺灣政商人物關係資料庫計畫」希望用「開放資料」的格式將散佈在網路上關於公眾人物的公開資料串連起來，包括他們的學歷、經歷、資產、企業關係、選舉經驗、政治獻金、學術論文、報告、親戚關係、甚至每一句公開發言。'
+const SITE_TITLE = '臺灣政商人物關係資料庫計畫'
+const SITE_URL = `${app.siteProtocol}://${app.domainName}/db/whoareyou`
+const SITE_OG_IMAGE = `${app.siteProtocol}://${app.domainName}/db/whoareyou/_nuxt/src/images/og.jpg`
+
 const adapterConfig = {
   dropDatabase: app.dropDatabase,
   knexOptions: {
@@ -109,7 +116,7 @@ module.exports = {
           '@nuxtjs/google-analytics',
           {
             id: () => {
-              return document.domain.match(/^whoareyou.readr.tw/gs)
+              return document.domain.match(/^www.readr.tw/gs)
                 ? 'UA-83609754-1'
                 : 'UA-83609754-2'
             },
@@ -119,7 +126,7 @@ module.exports = {
       apollo: {
         clientConfigs: {
           default: {
-            httpEndpoint: 'http://localhost:3000/admin/api/',
+            httpEndpoint: 'http://localhost:3000/db/whoareyou/admin/api/',
             browserHttpEndpoint: '/admin/api',
             // httpEndpoint: "https://whoareyou.readr.tw/admin/api",
             // httpEndpoint: "https://or-dev.readr.tw/admin/api",
@@ -129,10 +136,68 @@ module.exports = {
       },
       head: {
         // titleTemplate: '%s - Nuxt.js',
+        htmlAttrs: {
+          lang: 'zh-Hant',
+        },
+        title: '臺灣政商人物關係資料庫計畫',
         meta: [
           { charset: 'utf-8' },
           { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          // { hid: 'description', name: 'description', content: 'Meta description' }
+          {
+            hid: 'robots',
+            name: 'robots',
+            content: 'index',
+          },
+          {
+            hid: 'description',
+            name: 'description',
+            content: SITE_DESCRIPTION,
+          },
+          {
+            hid: 'og:title',
+            property: 'og:title',
+            content: SITE_TITLE,
+          },
+          {
+            hid: 'og:description',
+            property: 'og:description',
+            content: SITE_DESCRIPTION,
+          },
+          {
+            hid: 'og:image',
+            property: 'og:image',
+            content: SITE_OG_IMAGE,
+          },
+          {
+            hid: 'og:url',
+            property: 'og:url',
+            content: SITE_URL,
+          },
+        ],
+        link: [
+          {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '32x32',
+            href: '/favicon-32x32.png',
+          },
+          {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '16x16',
+            href: '/favicon-16x16.png',
+          },
+          {
+            rel: 'apple-touch-icon',
+            sizes: '180x180',
+            href: '/apple-touch-icon.png',
+          },
+          { rel: 'manifest', href: '/site.webmanifest' },
+          {
+            rel: 'mask-icon',
+            href: '/safari-pinned-tab.svg',
+            color: '#04295e',
+          },
         ],
       },
     }),

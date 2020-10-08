@@ -142,7 +142,7 @@ export const FETCH_PERSONS_COUNT = gql`
 `
 
 export const FETCH_RANDOM_PERSON = gql`
-  query getRandomPerson($id: ID!) {
+  query Person($id: ID!) {
     Person(where: { id: $id }) {
       id
       name

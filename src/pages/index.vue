@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <Navbar />
     <Hero />
     <Intro />
     <About />
@@ -15,7 +14,6 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Intro from '../components/Intro'
 import About from '../components/About'
@@ -29,7 +27,6 @@ import Footer from '../components/Footer'
 
 export default {
   components: {
-    Navbar,
     Hero,
     Intro,
     About,

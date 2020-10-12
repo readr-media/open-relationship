@@ -1,6 +1,5 @@
 <template>
   <div id="Page-Organization-verify" class="Form-Page">
-    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -53,7 +52,6 @@ import {
 } from '../../graphQL/organizationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
-import Navbar from '../../components/Navbar'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 
@@ -63,7 +61,6 @@ export default {
     FormHero,
     CollaborateFieldBlock,
     Button,
-    Navbar,
     More,
     Footer,
   },

@@ -1,6 +1,5 @@
 <template>
   <div id="Page-Organization" class="Form-Page">
-    <Navbar />
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -44,7 +43,6 @@ import { moveFormToGqlVariable } from '../../graphQL/organizationFormHandler'
 
 import formMixin from '../../mixins/formMixin'
 
-import Navbar from '../../components/Navbar'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 
@@ -54,7 +52,6 @@ export default {
     FieldBlock,
     CollaborateFieldBlock,
     Button,
-    Navbar,
     More,
     Footer,
   },

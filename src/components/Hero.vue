@@ -1,12 +1,12 @@
 <template>
   <div class="hero">
     <picture class="hero__background">
-      <source media="(min-width:768px)" srcset="../images/bg-hero-md.png" />
+      <source media="(min-width:768px)" srcset="~/assets/bg-hero-md.png" />
       <source
         media="(max-width:767px) and (orientation: landscape)"
-        srcset="../images/bg-hero-md.png"
+        srcset="~/assets/bg-hero-md.png"
       />
-      <img src="../images/bg-hero-sm.png" />
+      <img src="~/assets/bg-hero-sm.png" />
     </picture>
 
     <div class="hero__content">

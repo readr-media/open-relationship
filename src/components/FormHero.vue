@@ -101,6 +101,7 @@ export default {
     font-size: 0.875rem;
     border: none;
     border-radius: 42px;
+    cursor: pointer;
     &::before {
       content: '';
       display: inline-block;

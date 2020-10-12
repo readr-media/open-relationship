@@ -61,7 +61,6 @@ export default {
 
 .ProcessCard {
   max-width: 100%;
-  height: 259px;
   background-color: #ffffff;
 
   display: flex;
@@ -81,7 +80,6 @@ export default {
     background: none;
   }
   .ProcessCard-textContainer {
-    height: 209px;
     .ProcessCard-text-title {
       // width: 380px;
       height: 29px;
@@ -106,6 +104,7 @@ export default {
       font-style: normal;
       line-height: 1.75;
       letter-spacing: normal;
+      text-align: justify;
       color: #000000;
       margin: 0 25px 23px;
     }

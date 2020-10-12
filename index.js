@@ -108,7 +108,7 @@ module.exports = {
       buildDir: 'dist',
       telemetry: false,
       plugins: [{ src: '~/plugins/vue-tagsinput', mode: 'client' }],
-      css: ['~styles/global.style.css'],
+      css: ['~styles/base.css', '~styles/global.style.css'],
       store: ['~store'],
       buildModules: [
         '@nuxtjs/apollo',

@@ -1,25 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'PingFang TC' !important;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
 html,
 body {
   text-rendering: geometricPrecision;
   text-rendering: optimizeLegibility;
-}
-
-#__nuxt {
-  width: 100%;
 }
 
 .app {
@@ -34,12 +16,4 @@ body {
   letter-spacing: 1px;
   text-align: center;
   margin: 0 auto 20px;
-}
-
-.changeLine-small {
-  display: none;
-}
-
-a {
-  text-decoration: none;
 }

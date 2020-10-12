@@ -67,11 +67,6 @@ export default {
 </script>
 
 <style lang="scss">
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
 body,
 html {
   margin: 0;
@@ -79,10 +74,6 @@ html {
 }
 
 body {
-  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto,
-    sans-serif;
-  display: flex;
-  justify-content: center;
   min-height: 100vh;
 }
 

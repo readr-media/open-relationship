@@ -1,7 +1,5 @@
 <template>
   <div class="hero">
-    <!-- <img id="Hero-share" :src="share" alt="" /> -->
-
     <picture class="hero__background">
       <source media="(min-width:768px)" srcset="../images/bg-hero-md.png" />
       <source
@@ -42,7 +40,6 @@ export default {
 
   &__background {
     position: relative;
-    z-index: 1;
     display: block;
     img {
       display: block;

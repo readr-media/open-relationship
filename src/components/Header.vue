@@ -5,68 +5,67 @@
       href="https://www.readr.tw/"
       target="_blank"
       rel="noopener noreferrer"
-      @click="handleClick"
+      @click="handleClick('go to readr')"
     >
-      <img :src="READrLogo" alt="READr" />
+      <img src="~/assets/logo.svg" alt="READr" />
     </a>
 
-    <!-- <div class="header__share">
+    <div class="header__share">
       <img
-        :src="share"
-        class="header__share_toggle_button"
-        @click="folderToggle"
+        class="toggle"
+        src="~/assets/share.svg"
+        alt="分享"
+        @click="toggleShareIcons"
       />
-      <div class="header__share_folder">
+      <div :class="{ active: shareIconsIsActive }" class="header__share-icons">
         <a
-          v-for="icon in shareList"
-          :key="icon.id"
-          class="header__share_folder_icon"
-          :href="icon.to"
+          class="icon facebook"
+          :href="`https://www.facebook.com/share.php?u=${url}`"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="handleClick('share to fb')"
         >
-          <img :src="icon.svg" :alt="icon.alt" />
+          <img src="~/assets/facebook.svg" alt="分享至 Facebook" />
+        </a>
+        <a
+          class="icon line"
+          :href="`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(
+            url
+          )}`"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="handleClick('share to line')"
+        >
+          <img src="~/assets/line.svg" alt="分享至 Line" />
         </a>
       </div>
-    </div> -->
+    </div>
   </header>
 </template>
 
 <script>
-import READrLogo from '../images/logo.svg'
-// import share from '../images/share.svg'
-// import facebook from '../images/navbar/facebook.svg'
-// import line from '../images/navbar/line.svg'
-// import link from '../images/navbar/link.svg'
-
 export default {
   name: 'Header',
   data() {
     return {
-      READrLogo,
-      // share,
-      // shareList: [
-      //   {
-      //     id: 1,
-      //     svg: facebook,
-      //     alt: 'facebook',
-      //     to: 'https://www.facebook.com/readr.tw/',
-      //   },
-      //   { id: 2, svg: line, alt: 'line', to: '' },
-      //   { id: 3, svg: link, alt: 'link', to: '' },
-      // ],
+      shareIconsIsActive: false,
+      url: undefined,
     }
   },
+  mounted() {
+    this.url = window.location.href
+  },
   methods: {
-    handleClick() {
+    handleClick(eventLabel) {
       this.$ga.event({
         eventCategory: 'projects',
         eventAction: 'click',
-        eventLabel: 'go to readr',
+        eventLabel,
       })
     },
-    // folderToggle() {
-    //   const folder = document.querySelector('.header__share_folder')
-    //   folder.classList.toggle('header__share_folder_show')
-    // },
+    toggleShareIcons() {
+      this.shareIconsIsActive = !this.shareIconsIsActive
+    },
   },
 }
 </script>
@@ -97,42 +96,40 @@ export default {
       height: 44px;
     }
   }
-
-  // &__share {
-  //   position: relative;
-  //   cursor: pointer;
-
-  //   &_toggle_button {
-  //   }
-  //   &_folder {
-  //     // display: none;
-  //     position: absolute;
-  //     display: flex;
-  //     flex-direction: column;
-
-  //     top: 52px;
-  //     display: block;
-
-  //     opacity: 0;
-  //     transition: all 0.2s ease-in-out;
-
-  //     &_icon {
-  //       margin-bottom: 10px;
-  //     }
-
-  //     &_show {
-  //       opacity: 1;
-  //     }
-  //   }
-  //   img {
-  //     width: 40px;
-  //     height: 40px;
-  //   }
-  // }
-
-  // @include atMedium {
-  //   width: 50px;
-  //   height: 50px;
-  // }
+  &__share {
+    position: relative;
+    margin: 0 0 0 auto;
+    img {
+      display: block;
+      width: 45px;
+      height: 45px;
+    }
+    .toggle {
+      cursor: pointer;
+    }
+  }
+  &__share-icons {
+    &.active {
+      display: block;
+      .icon {
+        visibility: visible;
+        transition: all 0.2s ease-in-out;
+      }
+      .facebook {
+        transform: translateY(55px);
+      }
+      .line {
+        transform: translateY(110px);
+      }
+    }
+    .icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(45px);
+      transition: all 0s ease-in-out;
+      visibility: hidden;
+    }
+  }
 }
 </style>

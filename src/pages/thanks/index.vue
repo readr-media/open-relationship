@@ -1,6 +1,6 @@
 <template>
   <div id="thanksPage">
-    <img id="thanksPage-logo" :src="READrLogo" alt="" />
+    <img id="thanksPage-logo" src="~/assets/logo.svg" alt="READr" />
 
     <div id="thanksPage-subtitle">謝謝你的貢獻！</div>
 
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import READrLogo from '../../images/logo.svg'
 import RelationButtonContainer from '../../components/RelationButtonContainer'
 import relationListMixin from '../../mixins/relationListMixin'
 
@@ -51,7 +50,6 @@ export default {
   mixins: [relationListMixin],
   data() {
     return {
-      READrLogo,
       seconds: 8,
     }
   },

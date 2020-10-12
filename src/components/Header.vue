@@ -101,8 +101,8 @@ export default {
     margin: 0 0 0 auto;
     img {
       display: block;
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
     }
     .toggle {
       cursor: pointer;

@@ -38,6 +38,7 @@ import READrLogo from '../images/logo.svg'
 // import link from '../images/navbar/link.svg'
 
 export default {
+  name: 'Header',
   data() {
     return {
       READrLogo,

@@ -53,14 +53,9 @@
       </div>
       <div v-else></div>
 
-      <Button
-        title="回到主畫面"
-        round="true"
-        :type="type"
-        :whiteText="true"
-        :small="true"
-        @click.native="handleClick"
-      />
+      <button :class="[type, 'form-hero__btn']" @click="handleClick">
+        回到主畫面
+      </button>
     </div>
   </div>
 </template>
@@ -68,14 +63,10 @@
 <script>
 import createLogo from '../images/character-card-orange.svg'
 import checkLogo from '../images/character-card-blue.svg'
-import Button from '../components/Button'
 
 import relationListMixin from '../mixins/relationListMixin'
 
 export default {
-  components: {
-    Button,
-  },
   mixins: [relationListMixin],
   props: ['title', 'content', 'target', 'type', 'id'],
   data() {
@@ -95,6 +86,40 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.form-hero {
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    width: 120px;
+    height: 30px;
+    padding: 5px 0;
+    color: #fff;
+    font-size: 0.875rem;
+    border: none;
+    border-radius: 42px;
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-right: 9px;
+      border-style: solid;
+      border-width: 5.5px 9.5px 5.5px 0;
+      border-color: transparent #fff transparent transparent;
+    }
+    &.create {
+      background-color: #ed8c4a;
+    }
+    &.verify {
+      background-color: #63c1e2;
+    }
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 @import '../styles/responsiveMixin.scss';

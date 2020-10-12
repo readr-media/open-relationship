@@ -78,7 +78,7 @@ export default {
           id: 4,
           svg: github,
           alt: 'github',
-          to: 'https://github.com/readr-media/',
+          to: 'https://github.com/readr-media/readr-data',
         },
       ],
     }

@@ -80,6 +80,7 @@ export default {
     background: none;
   }
   .ProcessCard-textContainer {
+    flex: 1;
     .ProcessCard-text-title {
       // width: 380px;
       height: 29px;

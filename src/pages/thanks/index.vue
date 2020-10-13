@@ -108,7 +108,6 @@ export default {
     width: 100%;
     // height: 84px;
     padding: 8px 11px;
-    font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -123,7 +122,6 @@ export default {
     margin-top: 50px;
     // width: 800px;
     height: 84px;
-    font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;

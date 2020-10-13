@@ -155,7 +155,6 @@ export default {
     // height: 294px;
 
     // margin: 0 auto 38px;
-    font-family: PingFang TC;
     font-size: 16px;
     font-stretch: normal;
     font-style: normal;

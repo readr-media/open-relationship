@@ -36,7 +36,6 @@ export default {
 .Button {
   //   width: 100%;
   height: 29px;
-  font-family: PingFangTC;
   font-size: 21px;
   font-weight: 600;
   font-stretch: normal;

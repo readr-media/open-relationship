@@ -84,7 +84,6 @@ export default {
     .ProcessCard-text-title {
       // width: 380px;
       height: 29px;
-      font-family: PingFangTC;
       font-size: 21px;
       font-weight: 300;
       font-stretch: normal;
@@ -98,7 +97,6 @@ export default {
     }
     .ProcessCard-text-content {
       // width: 300px;
-      font-family: PingFang TC;
       font-size: 16px;
       font-weight: normal;
       font-stretch: normal;

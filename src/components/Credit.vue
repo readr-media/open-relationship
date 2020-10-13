@@ -26,7 +26,6 @@ p {
   background-color: #102c34;
   padding: 20px;
   #Credit-content {
-    font-family: PingFang TC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;

@@ -43,7 +43,6 @@ export default {}
     // width: 800px;
     // height: 168px;
     width: 280px;
-    font-family: PingFang TC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;

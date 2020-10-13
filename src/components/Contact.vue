@@ -4,7 +4,7 @@
       留下 email，<br class="contact__break-line" />通知你最新進度！
     </div>
     <form class="contact__form" @submit.prevent="handleSubmit">
-      <input v-model="email" class="contact__input" type="email" />
+      <input v-model="email" class="contact__input" type="email" required />
       <Button class="contact__submit" title="送出" @click="handleClick" />
     </form>
     <p

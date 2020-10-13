@@ -40,6 +40,7 @@
     "axios": "^0.20.0",
     "core-js": "^2.0.0",
     "cross-env": "^7.0.2",
+    "dayjs": "^1.9.1",
     "express": "^4.17.1",
     "graphql-tag": "^2.11.0",
     "node-sass": "^4.14.1",

@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="page">
     <Hero />
     <Intro />
     <About />
@@ -67,14 +67,8 @@ export default {
 </script>
 
 <style lang="scss">
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  min-height: 100vh;
+.page {
+  padding-top: 66px;
 }
 
 .container {

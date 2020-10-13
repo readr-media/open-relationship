@@ -52,8 +52,6 @@ export default {
   background-color: #ffca54;
   border: none;
 
-  padding: 0 29px;
-
   &:focus {
     outline: 0;
   }

@@ -35,9 +35,6 @@ export default {
 
 .hero {
   position: relative;
-  // margin-top: 85px;
-  // border-top: solid 1px #d8d8d8;
-
   &__background {
     position: relative;
     display: block;
@@ -45,7 +42,7 @@ export default {
       display: block;
       width: 100%;
       height: 100%;
-      max-height: 100vh;
+      max-height: calc(100vh - 66px);
       object-fit: cover;
       object-position: center center;
     }

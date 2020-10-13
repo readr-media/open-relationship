@@ -17,7 +17,9 @@
           inactive: btn.btnStatus == 'inactive',
         }"
         :href="btn.to"
-        @click="handleClick"
+        :target="btn.target || '_self'"
+        :rel="getLinkRel(btn)"
+        @click="handleClick(btn.target)"
       >
         <Button :btnStatus="btn.btnStatus" :title="btn.title" fitDiv="true" />
       </a>
@@ -36,15 +38,35 @@ export default {
   components: {
     Button,
   },
-  props: ['number', 'title', 'content', 'btnStatus', 'to', 'btns'],
+  props: {
+    number: {
+      type: Number,
+      required: true,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    content: {
+      type: String,
+      default: '',
+    },
+    btns: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       numbers: [number1, number2, number3, number4],
     }
   },
   methods: {
-    handleClick() {
-      if (this.btnStatus === 'active') {
+    getLinkRel(target) {
+      return target === '_blank' ? 'noopener noreferrer' : ''
+    },
+    handleClick(btnStatus) {
+      if (btnStatus === 'active') {
         this.$ga.event({
           eventCategory: 'projects',
           eventAction: 'click',

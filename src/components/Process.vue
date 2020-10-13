@@ -38,12 +38,13 @@ export default {
               to: '#Relation',
               btnStatus: 'active',
             },
-            // {
-            //   id: 2,
-            //   title: '新增大量資料',
-            //   to: '',
-            //   btnStatus: 'active',
-            // },
+            {
+              id: 2,
+              title: '新增大量資料',
+              to: 'https://forms.gle/9XuMLUCQ6h56Fq668',
+              btnStatus: 'active',
+              target: '_blank',
+            },
           ],
         },
         {

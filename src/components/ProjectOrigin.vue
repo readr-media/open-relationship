@@ -14,6 +14,9 @@
       <p>
         註：《公務人員法》載明二親等為應迴避之親屬關係範圍，因此本計畫將親戚關係也納入資料蒐集的範圍。
       </p>
+      <a href="https://" target="_blank" rel="noopener noreferrer">
+        （看完整計畫緣起）
+      </a>
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@ export default {
   justify-content: center;
   padding: 50px 0;
   background-color: #ebebeb;
+  clear: both;
   &__content {
     width: 280px;
     line-height: 2;
@@ -51,6 +55,10 @@ export default {
       + p {
         margin-top: 40px;
       }
+    }
+    > a {
+      float: right;
+      font-weight: 500;
     }
   }
 }

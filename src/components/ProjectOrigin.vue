@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
-    <div class="about__title section-title">| 計畫緣起 |</div>
-    <div class="about__content">
+  <div class="origin">
+    <div class="origin__title section-title">| 計畫緣起 |</div>
+    <div class="origin__content">
       <p>
         2018 年，READr
         的成員在不同的場合、不約而同地聽到國際的公眾人物關係資料計畫（Open Data
@@ -20,14 +20,14 @@
 
 <script>
 export default {
-  name: 'About',
+  name: 'ProjectOrigin',
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../styles/responsiveMixin.scss';
 
-.about {
+.origin {
   display: flex;
   flex-direction: column;
   align-items: center;

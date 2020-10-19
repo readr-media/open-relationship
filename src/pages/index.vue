@@ -2,7 +2,7 @@
   <div class="page">
     <Hero />
     <Intro />
-    <About />
+    <ProjectOrigin />
     <Relation />
     <Process />
     <Cooperation />
@@ -16,7 +16,7 @@
 <script>
 import Hero from '../components/Hero'
 import Intro from '../components/Intro'
-import About from '../components/About'
+import ProjectOrigin from '../components/ProjectOrigin'
 import Relation from '../components/Relation'
 import Process from '../components/Process'
 import Cooperation from '../components/Cooperation'
@@ -29,7 +29,7 @@ export default {
   components: {
     Hero,
     Intro,
-    About,
+    ProjectOrigin,
     Relation,
     Process,
     Cooperation,

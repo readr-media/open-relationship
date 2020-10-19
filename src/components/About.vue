@@ -1,7 +1,7 @@
 <template>
-  <div id="About">
-    <div id="About-title" class="section-title">| 計畫緣起 |</div>
-    <div id="About-content">
+  <div class="about">
+    <div class="about__title section-title">| 計畫緣起 |</div>
+    <div class="about__content">
       <p>
         2018 年，READr
         的成員在不同的場合、不約而同地聽到國際的公眾人物關係資料計畫（Open Data
@@ -19,60 +19,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'About',
+}
 </script>
 
 <style lang="scss" scoped>
 @import '../styles/responsiveMixin.scss';
 
-#About {
-  width: 100%;
-  background-color: #ebebeb;
-  padding: 40px 20px;
-
+.about {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  #About-title {
-    color: #000000;
-  }
-
-  #About-content {
-    // width: 800px;
-    // height: 168px;
+  padding: 50px 0;
+  background-color: #ebebeb;
+  &__content {
     width: 280px;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 2;
-    letter-spacing: normal;
     text-align: justify;
-    color: #000000;
-    > p {
-      line-height: 2;
-      & + p {
-        margin-top: 40px;
-      }
-    }
-  }
-
-  @include atSmall {
-    padding: 50px 115px;
-    #About-content {
+    @include atSmall {
       width: 400px;
     }
-  }
-  @include atMedium {
-    #About-content {
+    @include atMedium {
       width: 600px;
     }
-  }
-  @include atLarge {
-    #About-content {
+    @include atLarge {
       width: 800px;
+    }
+    > p {
+      + p {
+        margin-top: 40px;
+      }
     }
   }
 }

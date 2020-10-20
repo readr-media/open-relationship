@@ -27,7 +27,7 @@
         </div>
       </form>
     </div>
-
+    <OtherForms operationType="create" />
     <More />
     <Footer />
   </div>
@@ -48,6 +48,7 @@ import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
 import Footer from '../../components/Footer'
+import OtherForms from '../../components/OtherForms'
 
 export default {
   components: {
@@ -57,6 +58,7 @@ export default {
     Button,
     More,
     Footer,
+    OtherForms,
   },
   mixins: [formMixin],
   data() {

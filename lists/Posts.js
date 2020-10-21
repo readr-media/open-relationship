@@ -15,7 +15,7 @@ module.exports = {
       many: false,
       ref: 'Organization',
     },
-    area: { label: '地區', type: Relationship, many: false, ref: 'Area' },
+    // area: { label: '地區', type: Relationship, many: false, ref: 'Area' },
     start_date: { label: '起始日期', type: DateTime },
     end_date: { label: '結束日期', type: DateTime },
     // contact_details: { label: "聯絡人", type: Relationship, many: false, ref: 'Contact_detail' },

@@ -208,14 +208,10 @@ const AreaSchema = require('./lists/Area')
 const PersonSchema = require('./lists/Person')
 // const ContactDetailSchema = require('./lists/Contact_detail');
 const OrganizationSchema = require('./lists/Organizations')
-// eslint-disable-next-line camelcase
-const Person_relationSchema = require('./lists/Person_relation')
-// eslint-disable-next-line camelcase
-const Person_organizationSchema = require('./lists/Person_organization')
-// eslint-disable-next-line camelcase
-const Person_publicationSchema = require('./lists/Person_publication')
-// eslint-disable-next-line camelcase
-const Organization_relationSchema = require('./lists/Organization_relation')
+const PersonRelationSchema = require('./lists/Person_relation')
+const PersonOrganizationSchema = require('./lists/Person_organization')
+const PersonPublicationSchema = require('./lists/Person_publication')
+const OrganizationRelationSchema = require('./lists/Organization_relation')
 const EventSchema = require('./lists/Events')
 const PositionSchema = require('./lists/Posts')
 const MembershipSchema = require('./lists/Memberships')
@@ -227,10 +223,10 @@ keystone.createList('Area', AreaSchema)
 keystone.createList('Person', PersonSchema)
 // keystone.createList('Contact_detail', ContactDetailSchema);
 keystone.createList('Organization', OrganizationSchema)
-keystone.createList('Person_relation', Person_relationSchema)
-keystone.createList('Person_organization', Person_organizationSchema)
-keystone.createList('Person_publication', Person_publicationSchema)
-keystone.createList('Organization_relation', Organization_relationSchema)
+keystone.createList('Person_relation', PersonRelationSchema)
+keystone.createList('Person_organization', PersonOrganizationSchema)
+keystone.createList('Person_publication', PersonPublicationSchema)
+keystone.createList('Organization_relation', OrganizationRelationSchema)
 keystone.createList('Event', EventSchema)
 keystone.createList('Post', PositionSchema)
 keystone.createList('Membership', MembershipSchema)

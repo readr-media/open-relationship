@@ -206,10 +206,10 @@ module.exports = {
 
 // 第一波開放表單
 const CollaborateSchema = require('./lists/Collaborate')
-const OrganizationRelationSchema = require('./lists/Organization_relation')
-const OrganizationSchema = require('./lists/Organizations')
-const PersonOrganizationSchema = require('./lists/Person_organization')
-const PersonRelationSchema = require('./lists/Person_relation')
+const OrganizationRelationSchema = require('./lists/OrganizationRelation')
+const OrganizationSchema = require('./lists/Organization')
+const PersonOrganizationSchema = require('./lists/PersonOrganization')
+const PersonRelationSchema = require('./lists/PersonRelation')
 const PersonSchema = require('./lists/Person')
 
 keystone.createList('Collaborate', CollaborateSchema)
@@ -221,13 +221,13 @@ keystone.createList('Person', PersonSchema)
 
 // 後續開放表單
 // const AreaSchema = require('./lists/Area')
-// const ContactDetailSchema = require('./lists/Contact_detail');
+// const ContactDetailSchema = require('./lists/ContactDetail');
 // const CountSchema = require('./lists/Count')
-// const EventSchema = require('./lists/Events')
-// const MembershipSchema = require('./lists/Memberships')
-// const MotionSchema = require('./lists/Motions')
-// const PersonPublicationSchema = require('./lists/Person_publication')
-// const PositionSchema = require('./lists/Posts')
+// const EventSchema = require('./lists/Event')
+// const MembershipSchema = require('./lists/Membership')
+// const MotionSchema = require('./lists/Motion')
+// const PersonPublicationSchema = require('./lists/PersonPublication')
+// const PositionSchema = require('./lists/Post')
 
 // keystone.createList('Area', AreaSchema)
 // keystone.createList('Contact_detail', ContactDetailSchema);

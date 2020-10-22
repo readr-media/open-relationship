@@ -35,7 +35,7 @@
     "@keystonejs/keystone": "^15.0.0",
     "@keystonejs/list-plugins": "^7.1.1",
     "@keystonejs/server-side-graphql-client": "^1.1.2",
-    "@nuxtjs/apollo": "^4.0.1-rc.3",
+    "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@voerro/vue-tagsinput": "^2.2.0",
     "axios": "^0.20.0",
     "core-js": "^2.0.0",

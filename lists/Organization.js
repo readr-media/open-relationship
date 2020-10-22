@@ -1,4 +1,4 @@
-const { Text, Select, Integer } = require('@keystonejs/fields')
+const { Text, Select, Integer, Relationship } = require('@keystonejs/fields')
 const { atTracking, byTracking } = require('@keystonejs/list-plugins')
 
 const classificationOptions = [
@@ -37,6 +37,12 @@ module.exports = {
     image: { label: '圖像', type: Text },
     contact_details: { label: '聯絡方式', type: Text, isMultiline: true },
     links: { label: '網站', type: Text },
+    tags: {
+      label: 'Tag',
+      type: Relationship,
+      ref: 'Tag',
+      many: true,
+    },
     address: { label: '組織稅籍登記地址', type: Text },
     source: { label: '來源', type: Text },
   },

@@ -211,6 +211,7 @@ const OrganizationSchema = require('./lists/Organization')
 const PersonOrganizationSchema = require('./lists/PersonOrganization')
 const PersonRelationSchema = require('./lists/PersonRelation')
 const PersonSchema = require('./lists/Person')
+const TagSchema = require('./lists/Tag')
 
 keystone.createList('Collaborate', CollaborateSchema)
 keystone.createList('Organization_relation', OrganizationRelationSchema)
@@ -218,6 +219,7 @@ keystone.createList('Organization', OrganizationSchema)
 keystone.createList('Person_organization', PersonOrganizationSchema)
 keystone.createList('Person_relation', PersonRelationSchema)
 keystone.createList('Person', PersonSchema)
+keystone.createList('Tag', TagSchema)
 
 // 後續開放表單
 // const AreaSchema = require('./lists/Area')

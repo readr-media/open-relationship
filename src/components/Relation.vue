@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/responsiveMixin.scss';
+@import '../scss/breakpoint.scss';
 
 #Relation {
   // height: 430px;

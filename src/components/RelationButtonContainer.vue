@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/responsiveMixin.scss';
+@import '../scss/breakpoint.scss';
 
 .Relation-btn-container {
   margin: 10px auto 0;

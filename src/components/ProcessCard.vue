@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/responsiveMixin.scss';
+@import '../scss/breakpoint.scss';
 
 .ProcessCard {
   max-width: 100%;

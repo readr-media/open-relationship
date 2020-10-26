@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/responsiveMixin.scss';
+@import '../scss/breakpoint.scss';
 
 .PreviewNews {
   width: 100%;

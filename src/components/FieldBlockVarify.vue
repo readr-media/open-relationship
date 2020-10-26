@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../scss/FieldBlock.scss';
+@import '../scss/field-block.scss';
 .fieldContainer {
   width: 800px;
   margin: 50px auto 0;

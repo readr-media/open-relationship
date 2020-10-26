@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/responsiveMixin.scss';
+@import '../scss/breakpoint.scss';
 
 .intro {
   background-color: #102c34;

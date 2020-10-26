@@ -52,8 +52,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/FieldBlock.scss';
-@import '../scss/responsiveMixin.scss';
+@import '../scss/field-block.scss';
+@import '../scss/breakpoint.scss';
 
 .CollaborateFieldBlock {
   width: 100%;

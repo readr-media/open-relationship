@@ -123,7 +123,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '../scss/responsiveMixin.scss';
+@import '../scss/breakpoint.scss';
 
 .FormHero {
   box-sizing: border-box;

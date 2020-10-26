@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
+@import '../scss/responsiveMixin.scss';
 
 .origin {
   display: flex;

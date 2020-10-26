@@ -210,7 +210,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/FieldBlock.scss';
+@import '../scss/FieldBlock.scss';
 
 .fieldError {
   border: solid 3px #d0021b;

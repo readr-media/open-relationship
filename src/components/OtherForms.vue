@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
+@import '../scss/responsiveMixin.scss';
 
 .other-forms {
   padding: 40px 10px;

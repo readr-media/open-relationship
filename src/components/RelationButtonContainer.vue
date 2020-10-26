@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
+@import '../scss/responsiveMixin.scss';
 
 .Relation-btn-container {
   margin: 10px auto 0;

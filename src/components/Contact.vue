@@ -74,8 +74,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .contact {
   padding: 42px 20px;
   background-color: #ebebeb;
@@ -91,13 +89,13 @@ export default {
     text-align: center;
   }
   &__break-line {
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       display: none;
     }
   }
   &__form {
     margin: 20px auto 0;
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       display: flex;
     }
   }
@@ -109,7 +107,7 @@ export default {
     font-size: 16px;
     background-color: #ffffff;
     box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       flex: 1;
       width: auto;
     }
@@ -118,7 +116,7 @@ export default {
     display: inline-block;
     width: 100%;
     margin-top: 10px;
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       width: 100px;
       margin: 0 0 0 10px;
     }

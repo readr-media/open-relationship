@@ -71,7 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/breakpoint.scss';
 #thanksPage {
   width: 100%;
   background-color: #102c34;
@@ -137,7 +136,7 @@ export default {
   .smallEnter {
     display: none;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     .smallEnter {
       display: inline;
     }

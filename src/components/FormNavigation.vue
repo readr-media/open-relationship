@@ -124,8 +124,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 #FormHero {
   width: 100%;
   // height: 550px;
@@ -192,7 +190,7 @@ export default {
     background-color: #63c1e2;
   }
 
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     // height: 420px;
     .FormHero-title {
       width: 400px;
@@ -202,7 +200,7 @@ export default {
     }
   }
 
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     .FormHero-content {
       width: 800px;
     }

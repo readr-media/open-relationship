@@ -1,10 +1,9 @@
-@import '../scss/breakpoint.scss';
 .Form-Page {
   padding-top: 66px;
   width: 100%;
   background-color: #ebebeb;
 
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     .fieldContainer {
       max-width: 620px;
       margin: auto;
@@ -21,7 +20,7 @@
       }
     }
   }
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     .fieldContainer {
       width: 720px;
       margin: auto;
@@ -37,7 +36,7 @@
       }
     }
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     .fieldContainer {
       width: 820px;
       margin: auto;

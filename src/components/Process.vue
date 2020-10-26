@@ -95,8 +95,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 #Process {
   // height: 770px;
   width: 100%;
@@ -117,16 +115,14 @@ export default {
     flex-wrap: wrap;
     align-content: center;
   }
-
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     padding: 50px;
     #Process-cardContainer {
       flex-direction: row;
       width: 700px;
     }
   }
-
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     // padding: 50px;
     #Process-cardContainer {
       flex-direction: row;

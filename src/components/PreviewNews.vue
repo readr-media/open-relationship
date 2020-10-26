@@ -19,8 +19,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .PreviewNews {
   width: 100%;
   height: 100px;
@@ -59,7 +57,7 @@ export default {
     }
   }
 
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     &__text {
       &_title {
         font-size: 1rem;

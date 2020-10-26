@@ -110,7 +110,7 @@ module.exports = {
       plugins: [{ src: '~/plugins/vue-tagsinput', mode: 'client' }],
       css: ['~styles/base.css'],
       styleResources: {
-        scss: '~scss/global.scss',
+        scss: ['~scss/global.scss', '~scss/breakpoint.scss'],
       },
       store: ['~store'],
       buildModules: [

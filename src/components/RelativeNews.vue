@@ -53,8 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .RelativeNews {
   margin: auto;
   box-sizing: border-box;
@@ -71,10 +69,10 @@ export default {
     color: rgb(0, 39, 84);
     margin-bottom: 14px;
   }
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     width: 500px;
   }
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     width: 600px;
   }
 }

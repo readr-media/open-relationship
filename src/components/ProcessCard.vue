@@ -79,8 +79,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .ProcessCard {
   max-width: 100%;
   background-color: #ffffff;
@@ -156,8 +154,7 @@ export default {
       margin-top: 1px;
     }
   }
-
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     max-width: 380px;
     margin: 76px 20px 20px;
     .ProcessCard-btnContainer {
@@ -169,10 +166,10 @@ export default {
       }
     }
   }
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     max-width: 300px;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     max-width: 380px;
   }
 }

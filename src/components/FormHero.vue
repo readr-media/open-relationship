@@ -123,8 +123,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .FormHero {
   box-sizing: border-box;
   width: 100%;
@@ -190,7 +188,7 @@ export default {
     align-self: flex-end;
   }
 
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     padding-bottom: 50px;
     .content_wrapper {
       width: 400px;
@@ -198,7 +196,7 @@ export default {
     }
   }
 
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     .content_wrapper {
       width: 600px;
     }

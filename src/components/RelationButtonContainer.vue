@@ -57,19 +57,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .Relation-btn-container {
   margin: 10px auto 0;
 
   width: 100%;
   display: flex;
   flex-direction: column;
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     max-width: 500px;
     margin: 10px auto 0;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;

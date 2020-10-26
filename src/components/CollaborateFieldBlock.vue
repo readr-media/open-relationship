@@ -53,7 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/field-block.scss';
-@import '../scss/breakpoint.scss';
 
 .CollaborateFieldBlock {
   width: 100%;
@@ -89,8 +88,7 @@ export default {
   &-input {
     margin-bottom: 21px;
   }
-
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     .CollaborateFieldInfo {
       padding: 30px 0 0;
     }

@@ -33,8 +33,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .hero {
   position: relative;
   &__background {
@@ -59,7 +57,7 @@ export default {
     color: #fff;
     text-align: center;
     background-color: #102c34;
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -68,7 +66,7 @@ export default {
       min-height: 50%;
       padding: 40px;
     }
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       width: 70%;
       max-width: 840px;
       padding: 60px 0;
@@ -77,26 +75,26 @@ export default {
   &__heading {
     font-size: 30px;
     font-weight: 600;
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       font-size: 40px;
       br {
         display: none;
       }
     }
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       font-size: 48px;
     }
   }
   &__description {
     display: none;
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       display: block;
       width: 495px;
       margin: 30px auto 0;
       font-weight: 500;
       line-height: 2;
     }
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       font-size: 20px;
     }
   }

@@ -28,8 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .origin {
   display: flex;
   flex-direction: column;
@@ -42,13 +40,13 @@ export default {
     width: 280px;
     line-height: 2;
     text-align: justify;
-    @include atSmall {
+    @include media-breakpoint-up(sm) {
       width: 400px;
     }
-    @include atMedium {
+    @include media-breakpoint-up(md) {
       width: 600px;
     }
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       width: 800px;
     }
     > p {

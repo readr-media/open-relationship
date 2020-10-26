@@ -87,8 +87,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .Footer {
   box-sizing: border-box;
   position: relative;
@@ -141,19 +139,17 @@ export default {
     height: 0.875rem;
     font-size: 0.875rem;
   }
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     &__btn_container {
       width: 600px;
     }
   }
-
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     height: 82px;
     padding: 0 52px;
 
     flex-direction: row-reverse;
     justify-content: space-between;
-
     &__copyright {
       position: absolute;
       right: 230px;

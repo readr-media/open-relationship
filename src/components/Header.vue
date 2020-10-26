@@ -71,8 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .header {
   display: flex;
   align-items: center;
@@ -85,7 +83,7 @@ export default {
   padding: 0 20px;
   background-color: #fff;
   border-bottom: solid 1px #d8d8d8;
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     padding: 0 26px;
   }
   &__logo {

@@ -34,8 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .RelationButton {
   width: 100%;
   border-radius: 42px;
@@ -60,7 +58,7 @@ export default {
     text-align: center;
     color: #ffffff;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     width: 170px;
     padding: 0;
     height: 80px;
@@ -105,7 +103,7 @@ export default {
     font-weight: nomal;
   }
 
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     width: 170px;
     padding: 0;
     height: 30px;

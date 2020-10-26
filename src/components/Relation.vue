@@ -57,8 +57,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 #Relation {
   // height: 430px;
   padding: 40px 20px 16px;
@@ -78,11 +76,11 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    @include atSmall {
+    @include media-breakpoint-up(sm) {
       max-width: 500px;
       margin: auto;
     }
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       flex-direction: row;
       align-items: center;
       justify-content: space-around;
@@ -117,7 +115,7 @@ export default {
     color: #ffffff;
   }
 
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     padding: 50px 115px 44px;
     justify-content: center;
   }

@@ -55,15 +55,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .other-forms {
   padding: 40px 10px;
   text-align: justify;
   line-height: 1.75;
   background-color: #fff;
   border-bottom: solid 1px #979797;
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     padding: 40px calc((100% - 620px) / 2);
   }
   > * + * {
@@ -78,7 +76,7 @@ export default {
   }
   &__links {
     padding: 0 10px;
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       display: flex;
       flex-wrap: wrap;
       padding: 0;
@@ -104,14 +102,14 @@ export default {
     line-height: normal;
     text-align: center;
     border-radius: 42px;
-    @include atLarge {
+    @include media-breakpoint-up(lg) {
       width: 170px;
       font-size: 16px;
       margin: 10px 30px 0 0;
     }
     + .link {
       margin: 30px 0 0;
-      @include atLarge {
+      @include media-breakpoint-up(lg) {
         margin: 10px 30px 0 0;
       }
     }

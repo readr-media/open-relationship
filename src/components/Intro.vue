@@ -16,8 +16,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/breakpoint.scss';
-
 .intro {
   background-color: #102c34;
 
@@ -31,8 +29,7 @@ export default {
   line-height: 2;
   text-align: center;
   color: #ffffff;
-
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     display: none;
   }
 }

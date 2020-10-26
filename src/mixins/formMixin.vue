@@ -33,6 +33,8 @@ export default {
         // relation input's default type is object, others are string
         if (field.inputStatus.type === 'relation') {
           field.value = { name: '', id: '' }
+        } else if (field.inputStatus.type === 'relationMany') {
+          field.value = []
         } else {
           field.value = ''
         }

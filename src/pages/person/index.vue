@@ -18,6 +18,7 @@
           :key="field.label"
           :field="field"
           type="create"
+          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
@@ -95,6 +96,9 @@ export default {
         eventAction: 'click',
         eventLabel: 'send form',
       })
+    },
+    updateTags(value) {
+      this.person.tags.value = value.map((item) => ({ id: item.id }))
     },
 
     async uploadHandler() {

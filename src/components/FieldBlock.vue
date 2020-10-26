@@ -64,6 +64,13 @@
       <RelationInput :field="field" :verifyField="verifyField" />
     </div>
 
+    <div v-else-if="field.inputStatus.type == 'relationMany'">
+      <RelationManyInput
+        :schemaTarget="field.inputStatus.target"
+        @update="updateTags"
+      />
+    </div>
+
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
       <input v-model="field.value" @change="verifyField(field)" />
@@ -101,10 +108,12 @@
 <script>
 import { validateEmail, validateDate, validateUrl } from '../utils/fieldVerify'
 import RelationInput from './RelationInput'
+import RelationManyInput from './RelationManyInput'
 
 export default {
   components: {
     RelationInput,
+    RelationManyInput,
   },
   props: ['field', 'type'],
   data() {
@@ -139,6 +148,9 @@ export default {
     }
   },
   methods: {
+    updateTags(value) {
+      this.$emit('updateTags', value)
+    },
     verifyField(field) {
       //  return if there is no verify needed
       if (!field.verify) return

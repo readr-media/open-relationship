@@ -131,6 +131,13 @@ export const personFields = {
     formState: true,
     correctVerify: null,
   },
+  tags: {
+    label: 'tag',
+    info: [],
+    value: [],
+    inputStatus: { type: 'relationMany', target: 'tag' },
+    verify: [],
+  },
   source: {
     label: '資料來源',
     info: ['網站連結'],

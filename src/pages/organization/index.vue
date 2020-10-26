@@ -15,6 +15,7 @@
           :key="field.label"
           :field="field"
           type="create"
+          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
@@ -79,6 +80,10 @@ export default {
     this.clearForm(this.organization)
   },
   methods: {
+    updateTags(value) {
+      this.organization.tags.value = value.map((item) => ({ id: item.id }))
+    },
+
     async uploadHandler() {
       if (await !this.checkForm(this.organization)) {
         this.goToErrorField()

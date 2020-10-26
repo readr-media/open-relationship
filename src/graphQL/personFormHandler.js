@@ -20,6 +20,7 @@ export const moveFormToGqlVariable = (person) => {
     contact_details,
     links,
     source,
+    tags,
   } = person
 
   return {
@@ -43,6 +44,7 @@ export const moveFormToGqlVariable = (person) => {
     contact_details: contact_details.value,
     links: links.value,
     source: source.value,
+    tags: tags.value,
   }
 }
 
@@ -69,4 +71,5 @@ export const moveGqlToForm = (person, targetPerson) => {
   person.contact_details.value = targetPerson.contact_details
   person.links.value = targetPerson.links
   person.source.value = targetPerson.source
+  person.tags.value = targetPerson.tags
 }

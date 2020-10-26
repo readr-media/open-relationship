@@ -21,6 +21,7 @@ export const moveFormToGqlVariable = (organization) => {
     links,
     address,
     source,
+    tags,
   } = organization
 
   return {
@@ -44,6 +45,7 @@ export const moveFormToGqlVariable = (organization) => {
     links: links.value,
     address: address.value,
     source: source.value,
+    tags: tags.value,
   }
 }
 
@@ -71,4 +73,5 @@ export const moveGqlToForm = (organization, target) => {
   organization.links.value = target.links
   organization.address.value = target.address
   organization.source.value = target.source
+  organization.tags.value = target.tags
 }

@@ -108,10 +108,14 @@ module.exports = {
       buildDir: 'dist',
       telemetry: false,
       plugins: [{ src: '~/plugins/vue-tagsinput', mode: 'client' }],
-      css: ['~styles/base.css', '~styles/global.style.css'],
+      css: ['~styles/base.css'],
+      styleResources: {
+        scss: '~scss/global.scss',
+      },
       store: ['~store'],
       buildModules: [
         '@nuxtjs/apollo',
+        '@nuxtjs/style-resources',
         [
           '@nuxtjs/google-analytics',
           {

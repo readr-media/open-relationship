@@ -56,6 +56,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'VerifyPerson',
   components: {
     FieldBlock,
     FormHero,

@@ -1,5 +1,5 @@
 <template>
-  <div id="Page-Person-verify" class="Form-Page">
+  <div id="Page-Organization-verify" class="Form-Page">
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -13,7 +13,7 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in personOrganization"
+          v-for="field in organization"
           :key="field.label"
           :field="field"
           type="verify"
@@ -37,18 +37,20 @@ import FormHero from '../../components/FormHero'
 import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
 
+import { organizationFields } from '../../fields/organizationFields'
 import Button from '../../components/Button'
-import { personOrganizationFields } from '../../fields/personOrganizationFields'
+
 import {
-  FETCH_PERSON_ORGANIZATIONS_COUNT,
-  FETCH_RANDOM_PERSON_ORGANIZATION,
-  UPDATE_PERSON_ORGANIZATION,
-} from '../../graphQL/query/person_organization'
+  FETCH_ORGANIZATIONS_COUNT,
+  FETCH_RANDOM_ORGANIZATION,
+  UPDATE_ORGANIZATION,
+} from '../../graphQL/query/organization'
+
+import { getRandomId } from '../../graphQL/getRandomId'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '../../graphQL/personOrganizationFormHandler'
-import { getRandomId } from '../../graphQL/getRandomId'
+} from '../../graphQL/organizationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -56,6 +58,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'VerifyOrganization',
   components: {
     FieldBlock,
     FormHero,
@@ -66,19 +69,17 @@ export default {
     OtherForms,
   },
   mixins: [formMixin],
-
   data() {
     return {
-      personOrganizationId: 1,
+      organizationId: 1,
       hero: {
-        title: '驗證人物組織關係資料表單',
+        title: '驗證組織資料表單',
         content: '臺灣政商人物關係資料庫計畫',
-        target: '人物組織關係',
+        target: '組織',
         type: 'verify',
-        id: 5,
+        id: 2,
       },
-      personOrganization: personOrganizationFields,
-
+      organization: organizationFields,
       collaborate: {
         name: '',
         email: '',
@@ -88,20 +89,20 @@ export default {
   },
 
   async mounted() {
-    await this.fetchPersonOrganizationsCount().then((res) => {
-      this.fetchRandomPersonOrganization(res)
+    await this.fetchOrganizationCount().then((res) => {
+      this.fetchRandomOrganization(res)
     })
   },
 
   methods: {
-    fetchPersonOrganizationsCount() {
+    fetchOrganizationCount() {
       // 1 fetch person counts
       return new Promise((resolve, reject) => {
-        this.$apollo.addSmartQuery('_allPersonOrganizationsMeta', {
-          query: FETCH_PERSON_ORGANIZATIONS_COUNT,
+        this.$apollo.addSmartQuery('_allOrganizationsMeta', {
+          query: FETCH_ORGANIZATIONS_COUNT,
           update(data) {
             // 2 get random personid from result
-            const randomId = getRandomId(data._allPersonOrganizationsMeta.count)
+            const randomId = getRandomId(data._allOrganizationsMeta.count)
             if (randomId === 0) resolve(1)
             // 3 fetch random person
             resolve(randomId)
@@ -110,10 +111,10 @@ export default {
         })
       })
     },
-    fetchRandomPersonOrganization(randomId) {
-      // 4 fetch random person
-      this.$apollo.addSmartQuery('Person', {
-        query: FETCH_RANDOM_PERSON_ORGANIZATION,
+    fetchRandomOrganization(randomId) {
+      // 4 fetch random organization
+      this.$apollo.addSmartQuery('Organization', {
+        query: FETCH_RANDOM_ORGANIZATION,
         variables() {
           return {
             id: randomId,
@@ -121,29 +122,31 @@ export default {
         },
         update(data) {
           // 5 set id and move data to form fields
-          this.personOrganizationId = data.PersonOrganization.id
-          moveGqlToForm(this.personOrganization, data.PersonOrganization)
+          this.organizationId = data.Organization.id
+          moveGqlToForm(this.organization, data.Organization)
         },
       })
     },
+
     async uploadHandler() {
-      if (await !this.checkForm(this.personOrganization)) {
+      if (await !this.checkForm(this.organization)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.personOrganization, 'personOrganization')
+      this.uploadFormToGoogle(this.organization, 'organization')
       this.uploadForm()
-      this.clearForm(this.personOrganization)
+      this.clearForm(this.organization)
       this.$router.push('/thanks')
     },
 
     uploadForm() {
+      // Post update data to keystone
       this.$apollo.mutate({
-        mutation: UPDATE_PERSON_ORGANIZATION,
+        mutation: UPDATE_ORGANIZATION,
         variables: {
           // put form data to graphql's field
-          id: this.personOrganizationId,
-          ...moveFormToGqlVariable(this.personOrganization),
+          id: this.organizationId,
+          ...moveFormToGqlVariable(this.organization),
         },
       })
     },

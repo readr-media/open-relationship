@@ -13,7 +13,7 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in organizationRelation"
+          v-for="field in personRelation"
           :key="field.label"
           :field="field"
           type="verify"
@@ -36,18 +36,17 @@
 import FormHero from '../../components/FormHero'
 import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
-
 import Button from '../../components/Button'
-import { organizationRelationFields } from '../../fields/organizationRelationFields'
+import { personRelationFields } from '../../fields/personRelationFields'
 import {
-  FETCH_ORGANIZATION_RELATIONS_COUNT,
-  FETCH_RANDOM_ORGANIZATION_RELATION,
-  UPDATE_ORGANIZATION_RELATION,
-} from '../../graphQL/query/organization_relation'
+  FETCH_PERSON_RELATIONS_COUNT,
+  FETCH_RANDOM_PERSON_RELATION,
+  UPDATE_PERSON_RELATION,
+} from '../../graphQL/query/person_relation'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '../../graphQL/organizationRelationFormHandler'
+} from '../../graphQL/personRelationFormHandler'
 import { getRandomId } from '../../graphQL/getRandomId'
 import formMixin from '../../mixins/formMixin'
 
@@ -56,28 +55,29 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'VerifyPersonRelation',
   components: {
     FieldBlock,
     FormHero,
-    CollaborateFieldBlock,
     Button,
     More,
     Footer,
+    CollaborateFieldBlock,
     OtherForms,
   },
   mixins: [formMixin],
 
   data() {
     return {
-      organizationRelationId: 1,
+      personRelationId: 1,
       hero: {
-        title: '驗證組織關係資料表單',
+        title: '驗證人物關係資料表單',
         content: '臺灣政商人物關係資料庫計畫',
-        target: '組織關係',
+        target: '人物關係',
         type: 'verify',
-        id: 4,
+        id: 3,
       },
-      organizationRelation: organizationRelationFields,
+      personRelation: personRelationFields,
 
       collaborate: {
         name: '',
@@ -88,22 +88,20 @@ export default {
   },
 
   async mounted() {
-    await this.fetchOrganizationCount().then((res) => {
-      this.fetchRandomOrganizationRelation(res)
+    await this.fetchPersonRelationsCount().then((res) => {
+      this.fetchRandomPersonRelation(res)
     })
   },
 
   methods: {
-    fetchOrganizationCount() {
+    fetchPersonRelationsCount() {
       // 1 fetch person counts
       return new Promise((resolve, reject) => {
-        this.$apollo.addSmartQuery('_allOrganizationRelationsMeta', {
-          query: FETCH_ORGANIZATION_RELATIONS_COUNT,
+        this.$apollo.addSmartQuery('_allPersonRelationsMeta', {
+          query: FETCH_PERSON_RELATIONS_COUNT,
           update(data) {
             // 2 get random personid from result
-            const randomId = getRandomId(
-              data._allOrganizationRelationsMeta.count
-            )
+            const randomId = getRandomId(data._allPersonRelationsMeta.count)
             if (randomId === 0) resolve(1)
             // 3 fetch random person
             resolve(randomId)
@@ -112,10 +110,10 @@ export default {
         })
       })
     },
-    fetchRandomOrganizationRelation(randomId) {
-      // 4 fetch random organization
-      this.$apollo.addSmartQuery('OrganizationRelation', {
-        query: FETCH_RANDOM_ORGANIZATION_RELATION,
+    fetchRandomPersonRelation(randomId) {
+      // 4 fetch random person
+      this.$apollo.addSmartQuery('PersonRelation', {
+        query: FETCH_RANDOM_PERSON_RELATION,
         variables() {
           return {
             id: randomId,
@@ -123,29 +121,30 @@ export default {
         },
         update(data) {
           // 5 set id and move data to form fields
-          this.organizationRelationId = data.OrganizationRelation.id
-          moveGqlToForm(this.organizationRelation, data.OrganizationRelation)
+          this.personRelationId = data.PersonRelation.id
+          moveGqlToForm(this.personRelation, data.PersonRelation)
         },
       })
     },
+
     async uploadHandler() {
-      if (await !this.checkForm(this.organizationRelation)) {
+      if (await !this.checkForm(this.personRelation)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.organizationRelation, 'organizationRelation')
+      this.uploadFormToGoogle(this.personRelation, 'personRelation')
       this.uploadForm()
-      this.clearForm(this.organizationRelation)
+      this.clearForm(this.personRelation)
       this.$router.push('/thanks')
     },
 
     uploadForm() {
       this.$apollo.mutate({
-        mutation: UPDATE_ORGANIZATION_RELATION,
+        mutation: UPDATE_PERSON_RELATION,
         variables: {
           // put form data to graphql's field
-          id: this.organizationRelationId,
-          ...moveFormToGqlVariable(this.organizationRelation),
+          id: this.personRelationId,
+          ...moveFormToGqlVariable(this.personRelation),
         },
       })
     },

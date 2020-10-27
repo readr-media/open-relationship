@@ -14,16 +14,23 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in personOrganization"
+          v-for="field in person"
           :key="field.label"
           :field="field"
           type="create"
+          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
         <div class="btnContainer">
-          <Button title="送出" fitDiv="true" round="true" type="create" />
+          <Button
+            title="送出"
+            fitDiv="true"
+            round="true"
+            type="create"
+            @click="handleClick"
+          />
         </div>
       </form>
     </div>
@@ -39,11 +46,11 @@ import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
 import Button from '../../components/Button'
 
-import { personOrganizationFields } from '../../fields/personOrganizationFields'
+import { personFields } from '../../fields/personFields'
 
-import { ADD_PERSON_ORGANIZATION } from '../../graphQL/query/person_organization'
+import { ADD_PERSON } from '../../graphQL/query/person'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personOrganizationFormHandler'
+import { moveFormToGqlVariable } from '../../graphQL/personFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -51,6 +58,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'CreatePerson',
   components: {
     FormHero,
     FieldBlock,
@@ -64,13 +72,13 @@ export default {
   data() {
     return {
       hero: {
-        title: '新增人物組織關係資料表單',
+        title: '新增人物資料表單',
         content: '臺灣政商人物關係資料庫計畫',
-        target: '人物組織關係',
+        target: '人物',
         type: 'create',
-        id: 5,
+        id: 1,
       },
-      personOrganization: personOrganizationFields,
+      person: personFields,
       collaborate: {
         name: '',
         email: '',
@@ -79,24 +87,36 @@ export default {
     }
   },
   mounted() {
-    this.clearForm(this.personOrganization)
+    this.clearForm(this.person)
   },
+
   methods: {
+    handleClick() {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: 'send form',
+      })
+    },
+    updateTags(value) {
+      this.person.tags.value = value.map((item) => ({ id: item.id }))
+    },
+
     async uploadHandler() {
-      if (await !this.checkForm(this.personOrganization)) {
+      if (await !this.checkForm(this.person)) {
         this.goToErrorField()
         return
       }
       this.uploadForm()
-      this.clearForm(this.personOrganization)
+      this.clearForm(this.person)
       this.$router.push('/thanks')
     },
 
     async uploadForm() {
       // Upload person form
       this.$apollo.mutate({
-        mutation: ADD_PERSON_ORGANIZATION,
-        variables: await moveFormToGqlVariable(this.personOrganization),
+        mutation: ADD_PERSON,
+        variables: await moveFormToGqlVariable(this.person),
       })
       // Update collaborate form
       this.$apollo.mutate({

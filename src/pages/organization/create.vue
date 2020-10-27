@@ -1,5 +1,5 @@
 <template>
-  <div id="Page-Person-Relation" class="Form-Page">
+  <div id="Page-Organization" class="Form-Page">
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -7,17 +7,15 @@
       :target="hero.target"
       type="create"
     />
-
     <div class="fieldContainer">
-      <div class="fieldContainer-notation">
-        <span class="create-star">＊</span>為必填欄位
-      </div>
+      <span class="create-star">＊</span>為必填欄位
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in personRelation"
+          v-for="field in organization"
           :key="field.label"
           :field="field"
           type="create"
+          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
@@ -38,12 +36,12 @@ import FormHero from '../../components/FormHero'
 import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
 import Button from '../../components/Button'
+import { organizationFields } from '../../fields/organizationFields'
 
-import { personRelationFields } from '../../fields/personRelationFields'
-
-import { ADD_PERSON_RELATION } from '../../graphQL/query/person_relation'
+import { ADD_ORGANIZATION } from '../../graphQL/query/organization'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personRelationFormHandler'
+import { moveFormToGqlVariable } from '../../graphQL/organizationFormHandler'
+
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -51,6 +49,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'CreateOrganization',
   components: {
     FormHero,
     FieldBlock,
@@ -64,13 +63,13 @@ export default {
   data() {
     return {
       hero: {
-        title: '新增人物關係資料表單',
+        title: '新增組織資料表單',
         content: '臺灣政商人物關係資料庫計畫',
-        target: '人物關係',
+        target: '組織',
         type: 'create',
-        id: 3,
+        id: 2,
       },
-      personRelation: personRelationFields,
+      organization: organizationFields,
       collaborate: {
         name: '',
         email: '',
@@ -79,25 +78,28 @@ export default {
     }
   },
   mounted() {
-    this.clearForm(this.personRelation)
+    this.clearForm(this.organization)
   },
   methods: {
+    updateTags(value) {
+      this.organization.tags.value = value.map((item) => ({ id: item.id }))
+    },
+
     async uploadHandler() {
-      // if there's any form format error,scroll to it.
-      if (await !this.checkForm(this.personRelation)) {
+      if (await !this.checkForm(this.organization)) {
         this.goToErrorField()
         return
       }
       this.uploadForm()
-      this.clearForm(this.personRelation)
+      this.clearForm(this.organization)
       this.$router.push('/thanks')
     },
 
     async uploadForm() {
       // Upload person form
       this.$apollo.mutate({
-        mutation: ADD_PERSON_RELATION,
-        variables: await moveFormToGqlVariable(this.personRelation),
+        mutation: ADD_ORGANIZATION,
+        variables: await moveFormToGqlVariable(this.organization),
       })
       // Update collaborate form
       this.$apollo.mutate({
@@ -114,9 +116,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#Page-Person-Relation {
-  width: 100%;
-
-  // background: gold;
+#Page-Organization {
+  .create-star {
+    color: #ed8c4a;
+    margin: 0;
+  }
 }
 </style>

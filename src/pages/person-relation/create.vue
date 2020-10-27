@@ -1,5 +1,5 @@
 <template>
-  <div id="Page-Person" class="Form-Page">
+  <div id="Page-Person-Relation" class="Form-Page">
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -14,23 +14,16 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in person"
+          v-for="field in personRelation"
           :key="field.label"
           :field="field"
           type="create"
-          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
         <div class="btnContainer">
-          <Button
-            title="送出"
-            fitDiv="true"
-            round="true"
-            type="create"
-            @click="handleClick"
-          />
+          <Button title="送出" fitDiv="true" round="true" type="create" />
         </div>
       </form>
     </div>
@@ -46,11 +39,11 @@ import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
 import Button from '../../components/Button'
 
-import { personFields } from '../../fields/personFields'
+import { personRelationFields } from '../../fields/personRelationFields'
 
-import { ADD_PERSON } from '../../graphQL/query/person'
+import { ADD_PERSON_RELATION } from '../../graphQL/query/person_relation'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personFormHandler'
+import { moveFormToGqlVariable } from '../../graphQL/personRelationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -58,6 +51,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'CreatePersonRelation',
   components: {
     FormHero,
     FieldBlock,
@@ -71,13 +65,13 @@ export default {
   data() {
     return {
       hero: {
-        title: '新增人物資料表單',
+        title: '新增人物關係資料表單',
         content: '臺灣政商人物關係資料庫計畫',
-        target: '人物',
+        target: '人物關係',
         type: 'create',
-        id: 1,
+        id: 3,
       },
-      person: personFields,
+      personRelation: personRelationFields,
       collaborate: {
         name: '',
         email: '',
@@ -86,36 +80,25 @@ export default {
     }
   },
   mounted() {
-    this.clearForm(this.person)
+    this.clearForm(this.personRelation)
   },
-
   methods: {
-    handleClick() {
-      this.$ga.event({
-        eventCategory: 'projects',
-        eventAction: 'click',
-        eventLabel: 'send form',
-      })
-    },
-    updateTags(value) {
-      this.person.tags.value = value.map((item) => ({ id: item.id }))
-    },
-
     async uploadHandler() {
-      if (await !this.checkForm(this.person)) {
+      // if there's any form format error,scroll to it.
+      if (await !this.checkForm(this.personRelation)) {
         this.goToErrorField()
         return
       }
       this.uploadForm()
-      this.clearForm(this.person)
+      this.clearForm(this.personRelation)
       this.$router.push('/thanks')
     },
 
     async uploadForm() {
       // Upload person form
       this.$apollo.mutate({
-        mutation: ADD_PERSON,
-        variables: await moveFormToGqlVariable(this.person),
+        mutation: ADD_PERSON_RELATION,
+        variables: await moveFormToGqlVariable(this.personRelation),
       })
       // Update collaborate form
       this.$apollo.mutate({
@@ -132,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#Page-Person {
+#Page-Person-Relation {
   width: 100%;
 
   // background: gold;

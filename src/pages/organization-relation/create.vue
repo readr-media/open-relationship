@@ -51,6 +51,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 
 export default {
+  name: 'CreateOrganizationRelation',
   components: {
     FormHero,
     FieldBlock,

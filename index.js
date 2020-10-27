@@ -108,9 +108,12 @@ module.exports = {
       buildDir: 'dist',
       telemetry: false,
       plugins: [{ src: '~/plugins/vue-tagsinput', mode: 'client' }],
-      css: ['~styles/base.css'],
+      css: ['~styles/base.css', '~scss/global.scss'],
+      // https://github.com/nuxt-community/style-resources-module
+      // Do not import actual styles.
+      // Use this module only to import variables, mixins, functions (et cetera) as they won't exist in the actual build.
       styleResources: {
-        scss: ['~scss/global.scss', '~scss/breakpoint.scss'],
+        scss: '~scss/breakpoint.scss',
       },
       store: ['~store'],
       buildModules: [

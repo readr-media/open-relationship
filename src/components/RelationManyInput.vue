@@ -1,12 +1,12 @@
 <template>
   <div class="relation-many">
     <div class="relation-many-container">
-      <div
-        v-for="item in items"
-        :key="item.name"
-        class="selected-item"
-        v-text="item.name"
-      />
+      <div v-for="item in items" :key="item.name" class="selected-item">
+        <span v-text="item.name" />
+        <button class="selected-item__remove" @click="removeItem(item.id)">
+          ✕
+        </button>
+      </div>
       <input
         v-model.trim="text"
         class="relation-many__input"
@@ -95,6 +95,12 @@ export default {
         }
       }
     },
+    removeItem(itemId) {
+      const index = this.items.findIndex((item) => item.id === itemId)
+      if (index > -1) {
+        this.items.splice(index, 1)
+      }
+    },
     selectItem(item) {
       this.items.push(item)
       this.text = ''
@@ -151,6 +157,9 @@ export default {
       padding: 5px;
       background-color: rgba(212, 212, 212, 0.2);
       border-radius: 5px;
+      &__remove {
+        margin-left: 2px;
+      }
     }
   }
   &__input {

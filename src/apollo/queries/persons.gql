@@ -1,0 +1,8 @@
+mutation createPersons ($data: [PersonsCreateInput]) {
+  createPersons(
+    data: $data
+  ) {
+    id
+    name
+  }
+}

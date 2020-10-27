@@ -84,19 +84,21 @@ export default {
 
     // event fired when selected an item
     onSelected(item) {
-      // get selected item from list
-      this.selected = item.item
-      // drop it to field value
-      this.field.value = {
-        name: this.selected.name,
-        id: this.selected.id,
-      }
+      if (item) {
+        // get selected item from list
+        this.selected = item.item
+        // drop it to field value
+        this.field.value = {
+          name: this.selected.name,
+          id: this.selected.id,
+        }
 
-      // verify data
-      if (this.field.value.name === '') {
-        this.field.formState = false
-      } else {
-        this.field.formState = true
+        // verify data
+        if (this.field.value.name === '') {
+          this.field.formState = false
+        } else {
+          this.field.formState = true
+        }
       }
     },
   },

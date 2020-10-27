@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <div class="contact__title">
+    <div class="g-heading">
       留下 email，<br class="contact__break-line" />通知你最新進度！
     </div>
     <form class="contact__form" @submit.prevent="handleSubmit">
@@ -81,12 +81,6 @@ export default {
     max-width: 610px;
     margin-left: auto;
     margin-right: auto;
-  }
-  &__title {
-    font-size: 21px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-align: center;
   }
   &__break-line {
     @include media-breakpoint-up(md) {

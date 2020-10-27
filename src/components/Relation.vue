@@ -1,7 +1,7 @@
 <template>
   <div id="Relation">
     <!-- <a class="anchorPoint" href="#Relation" /> -->
-    <div class="section-title Relation-title">| 我要新增資料 |</div>
+    <div class="g-heading Relation-title">| 我要新增資料 |</div>
     <RelationButtonContainer
       type="create"
       :filterId="null"
@@ -11,7 +11,7 @@
       :style="{ marginBottom: '50px' }"
     />
 
-    <div class="section-title Relation-title">| 我要驗證資料 |</div>
+    <div class="g-heading Relation-title">| 我要驗證資料 |</div>
     <RelationButtonContainer
       type="verify"
       :filterId="null"

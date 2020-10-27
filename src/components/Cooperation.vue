@@ -1,6 +1,6 @@
 <template>
   <div class="Cooperation">
-    <div class="Cooperation__title section-title">| 合作夥伴 |</div>
+    <div class="Cooperation__title g-heading">| 合作夥伴 |</div>
 
     <div class="Cooperation__list_container">
       <div

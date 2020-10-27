@@ -1,7 +1,7 @@
 <template>
   <div id="Process">
     <!-- <a class="anchorPoint" href="#Process" /> -->
-    <div id="Process-title" class="section-title">| 階段進度 |</div>
+    <div id="Process-title" class="g-heading">| 階段進度 |</div>
     <div id="Process-cardContainer">
       <ProcessCard
         v-for="processCard in processCardList"

@@ -1,6 +1,6 @@
 <template>
   <div class="origin">
-    <div class="origin__title section-title">| 計畫緣起 |</div>
+    <div class="origin__title g-heading">| 計畫緣起 |</div>
     <div class="origin__content">
       <p>
         2018 年，READr

@@ -49,7 +49,7 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
-import { createPersons } from '~/apollo/queries/persons.gql'
+import { createPersons } from '~/apollo/queries/person.gql'
 
 export default {
   name: 'CreatePersonRelation',

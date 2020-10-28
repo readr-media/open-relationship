@@ -33,27 +33,25 @@
 </template>
 
 <script>
-import FormHero from '../../components/FormHero'
-import FieldBlock from '../../components/FieldBlock'
-import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
+import FormHero from '~/components/FormHero'
+import FieldBlock from '~/components/FieldBlock'
+import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 
-import Button from '../../components/Button'
-import { personFields } from '../../fields/personFields'
-import {
-  FETCH_PERSONS_COUNT,
-  FETCH_RANDOM_PERSON,
-  UPDATE_PERSON,
-} from '../../graphQL/query/person'
+import Button from '~/components/Button'
+import { personFields } from '~/fields/personFields'
+import { UPDATE_PERSON } from '~/graphQL/query/person'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '../../graphQL/personFormHandler'
-import { getRandomId } from '../../graphQL/getRandomId'
-import formMixin from '../../mixins/formMixin'
+} from '~/graphQL/personFormHandler'
+import { getRandomId } from '~/graphQL/getRandomId'
+import formMixin from '~/mixins/formMixin'
 
-import More from '../../components/More'
-import Footer from '../../components/Footer'
-import OtherForms from '../../components/OtherForms'
+import More from '~/components/More'
+import Footer from '~/components/Footer'
+import OtherForms from '~/components/OtherForms'
+
+import { fetchPersonById, fetchPersonCount } from '~/apollo/queries/person.gql'
 
 export default {
   name: 'VerifyPerson',
@@ -66,11 +64,17 @@ export default {
     CollaborateFieldBlock,
     OtherForms,
   },
+  apollo: {
+    personCount: {
+      query: fetchPersonCount,
+      update: (data) => data._allPersonsMeta.count,
+    },
+  },
   mixins: [formMixin],
 
   data() {
     return {
-      personId: 1,
+      personId: this.$route.params.id,
       // eslint-disable-next-line vue/no-reserved-keys
       hero: {
         title: '驗證人物資料表單',
@@ -88,40 +92,25 @@ export default {
       },
     }
   },
-
+  computed: {
+    personIdSpecific() {
+      return Number(this.$route.params.id) && this.$route.params.id
+    },
+  },
   mounted() {
-    this.fetchPersonCount().then((res) => {
-      this.fetchRandomPerson(res)
-    })
+    this.fetchPerson()
   },
   methods: {
-    fetchPersonCount() {
-      // 1 fetch person counts
-      return new Promise((resolve, reject) => {
-        this.$apollo.addSmartQuery('_allPersonsMeta', {
-          query: FETCH_PERSONS_COUNT,
-          update(data) {
-            // 2 get random personid from result
-            const randomId = getRandomId(data._allPersonsMeta.count)
-            if (randomId === 0) resolve(1)
-            // 3 fetch random person
-            resolve(randomId)
-            // this.fetchRandomPerson(randomId)
-          },
-        })
-      })
-    },
-    fetchRandomPerson(randomId) {
-      // 4 fetch random person
+    fetchPerson() {
+      const id = this.personIdSpecific || getRandomId(this.personCount)
       this.$apollo.addSmartQuery('Person', {
-        query: FETCH_RANDOM_PERSON,
+        query: fetchPersonById,
         variables() {
           return {
-            id: randomId,
+            id,
           }
         },
-        update(data) {
-          // 5 set id and move data to form fields
+        update: (data) => {
           this.personId = data.Person.id
           moveGqlToForm(this.person, data.Person)
         },
@@ -134,12 +123,10 @@ export default {
       }
       this.uploadFormToGoogle(this.person, 'person')
       this.uploadForm()
-      this.clearForm(this.person)
-      this.$router.push('/thanks')
     },
 
-    uploadForm() {
-      this.$apollo.mutate({
+    async uploadForm() {
+      await this.$apollo.mutate({
         mutation: UPDATE_PERSON,
         variables: {
           // put form data to graphql's field
@@ -147,6 +134,8 @@ export default {
           ...moveFormToGqlVariable(this.person),
         },
       })
+      this.clearForm(this.person)
+      this.$router.push('/thanks')
     },
   },
 }

@@ -1,3 +1,33 @@
+query fetchPersonById ($id: ID!) {
+  Person(where: { id: $id }) {
+    id
+    name
+    alternative
+    other_names
+    email
+    gender
+    birth_date_year
+    birth_date_month
+    birth_date_day
+    death_date_year
+    death_date_month
+    death_date_day
+    image
+    summary
+    biography
+    national_identity
+    contact_details
+    links
+    source
+  }
+}
+
+query fetchPersonCount {
+  _allPersonsMeta {
+    count
+  }
+}
+
 mutation createPerson ($data: PersonCreateInput!) {
   createPerson(data: $data) {
     id

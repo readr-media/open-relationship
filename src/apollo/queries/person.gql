@@ -1,3 +1,10 @@
+mutation createPerson ($data: PersonCreateInput!) {
+  createPerson(data: $data) {
+    id
+    name
+  }
+}
+
 mutation createPersons ($data: [PersonsCreateInput]) {
   createPersons(
     data: $data

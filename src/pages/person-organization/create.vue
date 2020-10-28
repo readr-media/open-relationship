@@ -49,6 +49,8 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import { createOrganization } from '~/apollo/queries/organization.gql'
+import { createPerson } from '~/apollo/queries/person.gql'
 
 export default {
   name: 'CreatePersonOrganization',
@@ -79,6 +81,21 @@ export default {
       },
     }
   },
+  computed: {
+    needCreateCollaborate() {
+      return (
+        this.collaborate.name ||
+        this.collaborate.email ||
+        this.collaborate.feedback
+      )
+    },
+    needCreateOrganization() {
+      return !this.personOrganization.organization_id.value.id
+    },
+    needCreatePerson() {
+      return !this.personOrganization.person_id.value.id
+    },
+  },
   mounted() {
     this.clearForm(this.personOrganization)
   },
@@ -89,25 +106,53 @@ export default {
         return
       }
       this.uploadForm()
-      this.clearForm(this.personOrganization)
-      this.$router.push('/thanks')
     },
 
     async uploadForm() {
+      if (this.needCreatePerson) {
+        const resultCreatePerson = await this.$apollo.mutate({
+          mutation: createPerson,
+          variables: {
+            data: {
+              name: this.personOrganization.person_id.value.name,
+              source: this.personOrganization.source.value,
+            },
+          },
+        })
+        this.personOrganization.person_id.value.id =
+          resultCreatePerson.data.createPerson.id
+      }
+      if (this.needCreateOrganization) {
+        const resultCreateOrganization = await this.$apollo.mutate({
+          mutation: createOrganization,
+          variables: {
+            data: {
+              name: this.personOrganization.organization_id.value.name,
+              source: this.personOrganization.source.value,
+            },
+          },
+        })
+        this.personOrganization.organization_id.value.id =
+          resultCreateOrganization.data.createOrganization.id
+      }
       // Upload person form
-      this.$apollo.mutate({
+      await this.$apollo.mutate({
         mutation: ADD_PERSON_ORGANIZATION,
-        variables: await moveFormToGqlVariable(this.personOrganization),
+        variables: moveFormToGqlVariable(this.personOrganization),
       })
       // Update collaborate form
-      this.$apollo.mutate({
-        mutation: ADD_COLLABORATE,
-        variables: {
-          name: this.collaborate.name,
-          email: this.collaborate.email,
-          feedback: this.collaborate.feedback,
-        },
-      })
+      if (this.needCreateCollaborate) {
+        await this.$apollo.mutate({
+          mutation: ADD_COLLABORATE,
+          variables: {
+            name: this.collaborate.name,
+            email: this.collaborate.email,
+            feedback: this.collaborate.feedback,
+          },
+        })
+      }
+      this.clearForm(this.personOrganization)
+      this.$router.push('/thanks')
     },
   },
 }

@@ -49,6 +49,7 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import { createOrganizations } from '~/apollo/queries/organization.gql'
 
 export default {
   name: 'CreateOrganizationRelation',
@@ -79,10 +80,54 @@ export default {
       },
     }
   },
+  computed: {
+    needCreateCollaborate() {
+      return (
+        this.collaborate.name ||
+        this.collaborate.email ||
+        this.collaborate.feedback
+      )
+    },
+    needCreateOrganization() {
+      return !(
+        this.organizationRelation.organization_id.value.id &&
+        this.organizationRelation.related_organization_id.value.id
+      )
+    },
+  },
   mounted() {
     this.clearForm(this.organizationRelation)
   },
   methods: {
+    buildCreateOrganizationVariables() {
+      const variables = []
+      if (!this.organizationRelation.organization_id.value.id) {
+        variables.push(
+          this.buildOrganizationVariable(
+            this.organizationRelation.organization_id.value.name,
+            this.organizationRelation.source.value
+          )
+        )
+      }
+      if (!this.organizationRelation.related_organization_id.value.id) {
+        variables.push(
+          this.buildOrganizationVariable(
+            this.organizationRelation.related_organization_id.value.name,
+            this.organizationRelation.source.value
+          )
+        )
+      }
+      return { data: variables }
+    },
+    buildOrganizationVariable(name, source) {
+      return {
+        data: {
+          name,
+          source,
+        },
+      }
+    },
+
     async uploadHandler() {
       // if there's any form format error,scroll to it.
       if (await !this.checkForm(this.organizationRelation)) {
@@ -90,25 +135,51 @@ export default {
         return
       }
       this.uploadForm()
-      this.clearForm(this.organizationRelation)
-      this.$router.push('/thanks')
     },
 
     async uploadForm() {
+      if (this.needCreateOrganization) {
+        const resultCreateOrganizations = await this.$apollo.mutate({
+          mutation: createOrganizations,
+          variables: this.buildCreateOrganizationVariables(),
+        })
+        resultCreateOrganizations.data.createOrganizations.forEach(
+          (organization) => {
+            if (
+              this.organizationRelation.organization_id.value.name ===
+              organization.name
+            ) {
+              this.organizationRelation.organization_id.value.id =
+                organization.id
+            } else if (
+              this.organizationRelation.related_organization_id.value.name ===
+              organization.name
+            ) {
+              this.organizationRelation.related_organization_id.value.id =
+                organization.id
+            }
+          }
+        )
+      }
+
       // Upload person form
-      this.$apollo.mutate({
+      await this.$apollo.mutate({
         mutation: ADD_ORGANIZATION_RELATION,
-        variables: await moveFormToGqlVariable(this.organizationRelation),
+        variables: moveFormToGqlVariable(this.organizationRelation),
       })
       // Update collaborate form
-      this.$apollo.mutate({
-        mutation: ADD_COLLABORATE,
-        variables: {
-          name: this.collaborate.name,
-          email: this.collaborate.email,
-          feedback: this.collaborate.feedback,
-        },
-      })
+      if (this.needCreateCollaborate) {
+        await this.$apollo.mutate({
+          mutation: ADD_COLLABORATE,
+          variables: {
+            name: this.collaborate.name,
+            email: this.collaborate.email,
+            feedback: this.collaborate.feedback,
+          },
+        })
+      }
+      this.clearForm(this.organizationRelation)
+      this.$router.push('/thanks')
     },
   },
 }

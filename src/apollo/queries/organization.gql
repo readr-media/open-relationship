@@ -1,0 +1,8 @@
+mutation createOrganizations ($data: [OrganizationsCreateInput]) {
+  createOrganizations(
+    data: $data
+  ) {
+    id
+    name
+  }
+}

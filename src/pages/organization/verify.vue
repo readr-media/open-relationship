@@ -46,7 +46,7 @@ import {
   UPDATE_ORGANIZATION,
 } from '../../graphQL/query/organization'
 
-import { getRandomId } from '../../graphQL/getRandomId'
+import { getRandomId } from '../../utils'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,

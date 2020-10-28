@@ -48,7 +48,7 @@ import {
   moveFormToGqlVariable,
   moveGqlToForm,
 } from '../../graphQL/personOrganizationFormHandler'
-import { getRandomId } from '../../graphQL/getRandomId'
+import { getRandomId } from '../../utils'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'

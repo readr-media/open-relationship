@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <Nuxt />
+    <Nuxt class="g-page" />
   </div>
 </template>
 

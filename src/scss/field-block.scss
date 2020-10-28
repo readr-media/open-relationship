@@ -1,7 +1,6 @@
 .Form-Page {
-  padding-top: 66px;
   width: 100%;
-  background-color: #ebebeb;
+  background-color: $color-grey;
 
   @include media-breakpoint-up(sm) {
     .fieldContainer {
@@ -57,7 +56,7 @@
 .fieldContainer {
   box-sizing: border-box;
   width: 100%;
-  background-color: #ebebeb;
+  background-color: $color-grey;
   padding: 40px 10px;
 
   &-notation {

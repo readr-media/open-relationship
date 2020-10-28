@@ -1,5 +1,5 @@
 <template>
-  <div id="Process">
+  <div id="Process" class="g-bg-grey">
     <!-- <a class="anchorPoint" href="#Process" /> -->
     <div id="Process-title" class="g-heading">| 階段進度 |</div>
     <div id="Process-cardContainer">
@@ -99,7 +99,6 @@ export default {
   // height: 770px;
   width: 100%;
   padding: 40px 20px 20px;
-  background-color: #ebebeb;
   overflow: auto;
 
   #Process-title {

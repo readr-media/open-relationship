@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div>
     <Hero />
     <Intro />
     <ProjectOrigin />
@@ -67,10 +67,6 @@ export default {
 </script>
 
 <style lang="scss">
-.page {
-  padding-top: 66px;
-}
-
 .container {
   max-width: 700px !important;
 }

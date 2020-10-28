@@ -1,5 +1,5 @@
 <template>
-  <div class="intro" v-text="INTRODUCTION" />
+  <div class="intro g-bg-green" v-text="INTRODUCTION" />
 </template>
 
 <script>
@@ -17,8 +17,6 @@ export default {
 
 <style lang="scss" scoped>
 .intro {
-  background-color: #102c34;
-
   padding: 72px 20px;
 
   display: flex;

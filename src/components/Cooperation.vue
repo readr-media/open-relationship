@@ -1,5 +1,5 @@
 <template>
-  <div class="cooperation">
+  <div class="cooperation g-bg-grey">
     <div class="g-heading">| 合作夥伴 |</div>
     <div class="cooperation-container">
       <template v-for="item in PARTNER_LIST">
@@ -40,7 +40,6 @@ export default {
 <style lang="scss" scoped>
 .cooperation {
   padding: 40px 0 20px;
-  background-color: #ebebeb;
   &-container {
     display: flex;
     justify-content: center;

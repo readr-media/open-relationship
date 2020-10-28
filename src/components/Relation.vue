@@ -1,5 +1,5 @@
 <template>
-  <div id="Relation">
+  <div id="Relation" class="g-bg-green">
     <!-- <a class="anchorPoint" href="#Relation" /> -->
     <div class="g-heading Relation-title">| 我要新增資料 |</div>
     <RelationButtonContainer
@@ -61,7 +61,6 @@ export default {
   // height: 430px;
   padding: 40px 20px 16px;
   width: 100%;
-  background-color: #102c34;
 
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 <template>
-  <div class="origin">
+  <div class="origin g-bg-grey">
     <div class="origin__title g-heading">| 計畫緣起 |</div>
     <div class="origin__content">
       <p>
@@ -34,7 +34,6 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 50px 0;
-  background-color: #ebebeb;
   clear: both;
   &__content {
     width: 280px;

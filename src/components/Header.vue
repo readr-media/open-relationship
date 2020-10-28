@@ -79,7 +79,7 @@ export default {
   left: 0;
   right: 0;
   z-index: 999;
-  height: 66px;
+  height: $header-height;
   padding: 0 20px;
   background-color: #fff;
   border-bottom: solid 1px #d8d8d8;

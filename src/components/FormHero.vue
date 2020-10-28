@@ -1,5 +1,5 @@
 <template>
-  <div class="FormHero">
+  <div class="FormHero g-bg-green">
     <div class="content_wrapper">
       <div
         class="FormHero__title"
@@ -128,7 +128,6 @@ export default {
   width: 100%;
   // height: 550px;
   padding: 50px 25px 41px;
-  background-color: #102c34;
 
   .content_wrapper {
     width: 100%;

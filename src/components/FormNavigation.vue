@@ -1,5 +1,5 @@
 <template>
-  <div id="FormHero">
+  <div id="FormHero g-bg-green">
     <div class="FormHero-logo">
       <img :src="formLogo" alt="" />
     </div>
@@ -128,7 +128,6 @@ export default {
   width: 100%;
   // height: 550px;
   padding-bottom: 30px;
-  background-color: #102c34;
 
   display: flex;
   flex-direction: column;

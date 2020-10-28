@@ -9,7 +9,7 @@
       <img src="~/assets/bg-hero-sm.png" />
     </picture>
 
-    <div class="hero__content">
+    <div class="hero__content g-bg-green">
       <h1 class="hero__heading">
         臺灣<br /><span class="color--orange">政商人物</span
         ><span class="color--blue">關係</span><br />資料庫計畫
@@ -42,7 +42,7 @@ export default {
       display: block;
       width: 100%;
       height: 100%;
-      max-height: calc(100vh - 66px);
+      max-height: calc(100vh - #{$header-height});
       object-fit: cover;
       object-position: center center;
     }
@@ -56,7 +56,6 @@ export default {
     padding: 20px 0;
     color: #fff;
     text-align: center;
-    background-color: #102c34;
     @include media-breakpoint-up(md) {
       display: flex;
       justify-content: center;

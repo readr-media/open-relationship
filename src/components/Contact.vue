@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="contact g-bg-grey">
     <div class="g-heading">
       留下 email，<br class="contact__break-line" />通知你最新進度！
     </div>
@@ -76,7 +76,6 @@ export default {
 <style lang="scss" scoped>
 .contact {
   padding: 42px 20px;
-  background-color: #ebebeb;
   > * {
     max-width: 610px;
     margin-left: auto;

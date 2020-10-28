@@ -5,6 +5,11 @@ body {
   font-size: 16px;
   text-rendering: geometricPrecision;
   text-rendering: optimizeLegibility;
+  background-color: #fff;
+}
+
+.g-page {
+  padding-top: $header-height;
 }
 
 .g-heading {
@@ -20,4 +25,12 @@ body {
       margin-top: 30px;
     }
   }
+}
+
+.g-bg-green {
+  background-color: $color-green;
+}
+
+.g-bg-grey {
+  background-color: $color-grey;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="thanksPage">
+  <div id="thanksPage" class="g-bg-green">
     <img id="thanksPage-logo" src="~/assets/logo.svg" alt="READr" />
 
     <div id="thanksPage-subtitle">謝謝你的貢獻！</div>
@@ -73,7 +73,6 @@ export default {
 <style lang="scss" scoped>
 #thanksPage {
   width: 100%;
-  background-color: #102c34;
   min-height: 100vh;
 
   display: flex;

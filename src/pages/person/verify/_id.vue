@@ -100,8 +100,10 @@ export default {
       return Number(this.$route.params.id) && this.$route.params.id
     },
   },
-  mounted() {
-    this.fetchPerson()
+  watch: {
+    personCount() {
+      this.fetchPerson()
+    },
   },
   methods: {
     fetchPerson() {

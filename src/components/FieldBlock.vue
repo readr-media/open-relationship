@@ -2,13 +2,8 @@
   <div class="FieldBlock" :class="{ fieldError: field.formState == false }">
     <div class="FieldBlock-title">
       {{ field.label }}
-      <div class="FieldBlock-title-decoration">
-        <h5
-          v-if="field.required"
-          :class="type == 'create' ? 'create-star' : 'verify-star'"
-        >
-          ＊
-        </h5>
+      <div v-if="field.required" class="FieldBlock-title-decoration">
+        <h5 :class="type == 'create' ? 'create-star' : 'verify-star'">＊</h5>
       </div>
     </div>
     <div v-if="field.info.length > 0" class="FieldBlock-info">
@@ -160,7 +155,10 @@ export default {
         // handle each type of verify
         switch (field.verify[i]) {
           case 'required':
-            if (field.value === '') {
+            if (field.inputStatus.type === 'relation' && !field.value?.name) {
+              field.formState = false
+              this.errorPromptId = 0
+            } else if (!field.value) {
               field.formState = false
               this.errorPromptId = 0
             } else {

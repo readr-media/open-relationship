@@ -104,6 +104,7 @@ export default {
     cursor: pointer;
     &::before {
       content: '';
+      align-self: center;
       display: inline-block;
       width: 0;
       height: 0;

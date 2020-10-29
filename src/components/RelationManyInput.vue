@@ -2,7 +2,7 @@
   <div class="relation-many">
     <div class="relation-many-container">
       <div v-for="item in items" :key="item.name" class="selected-item">
-        <span v-text="item.name" />
+        <span class="selected-item__text" v-text="item.name" />
         <button class="selected-item__remove" @click="removeItem(item.id)">
           ✕
         </button>
@@ -104,6 +104,7 @@ export default {
     selectItem(item) {
       this.items.push(item)
       this.text = ''
+      this.suggestions = []
     },
     handleCompositionStart() {
       this.isComposing = true
@@ -147,18 +148,26 @@ export default {
   &-container {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 0 5px;
+    padding: 2px 2px 5px;
     border-bottom: 1px lightgray solid;
+    overflow: hidden;
     > * {
       margin-right: 5px;
     }
     .selected-item {
-      display: inline-block;
+      display: inline-flex;
+      margin-top: 5px;
       padding: 5px;
       background-color: rgba(212, 212, 212, 0.2);
       border-radius: 5px;
+      &__text {
+        white-space: nowrap;
+      }
       &__remove {
         margin-left: 2px;
+        @include media-breakpoint-up(lg) {
+          margin-left: 5px;
+        }
       }
     }
   }

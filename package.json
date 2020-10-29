@@ -29,7 +29,7 @@
   "dependencies": {
     "@keystonejs/app-admin-ui": "^7.3.5",
     "@keystonejs/app-graphql": "^6.1.2",
-    "@keystonejs/app-nuxt": "^5.1.5",
+    "@keystonejs/app-nuxt": "^5.1.6",
     "@keystonejs/auth-password": "^5.1.14",
     "@keystonejs/fields": "^17.1.2",
     "@keystonejs/keystone": "^15.0.0",

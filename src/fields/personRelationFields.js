@@ -30,7 +30,17 @@ export const personRelationFields = {
     info: [],
     value: '',
     inputStatus: { type: 'text' },
-
+    required: true,
+    verify: ['required'],
+    formState: true,
+  },
+  reverse_relative: {
+    label: '該人物如何稱呼關係者',
+    info: [],
+    value: '',
+    inputStatus: { type: 'text' },
+    required: true,
+    verify: ['required'],
     formState: true,
   },
   start_date: {

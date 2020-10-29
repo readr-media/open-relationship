@@ -153,10 +153,19 @@ export default {
         })
       }
       // Upload person form
-      await this.$apollo.mutate({
-        mutation: ADD_PERSON_RELATION,
-        variables: moveFormToGqlVariable(this.personRelation),
-      })
+      await Promise.all([
+        this.$apollo.mutate({
+          mutation: ADD_PERSON_RELATION,
+          variables: moveFormToGqlVariable({ person: this.personRelation }),
+        }),
+        this.$apollo.mutate({
+          mutation: ADD_PERSON_RELATION,
+          variables: moveFormToGqlVariable({
+            person: this.personRelation,
+            isReverse: true,
+          }),
+        }),
+      ])
       // Update collaborate form
       if (this.needCreateCollaborate) {
         await this.$apollo.mutate({

@@ -1,5 +1,5 @@
 import { devideDate, mergeDate } from '../utils/fieldVerify'
-export const moveFormToGqlVariable = (person) => {
+export const moveFormToGqlVariable = ({ person, isReverse = false }) => {
   const {
     // eslint-disable-next-line camelcase
     person_id,
@@ -7,17 +7,22 @@ export const moveFormToGqlVariable = (person) => {
     related_person_id,
     relative,
     // eslint-disable-next-line camelcase
+    reverse_relative,
+    // eslint-disable-next-line camelcase
     start_date,
     // eslint-disable-next-line camelcase
     end_date,
     source,
   } = person
 
+  const personId = person_id?.value?.id
+  const relatedPersonId = related_person_id?.value?.id
+
   return {
     // put form data to graphql's field
-    person_id: person_id.value.id,
-    related_person_id: related_person_id.value.id,
-    relative: relative.value,
+    person_id: isReverse ? relatedPersonId : personId,
+    related_person_id: isReverse ? personId : relatedPersonId,
+    relative: isReverse ? reverse_relative.value : relative.value,
 
     start_date_year: devideDate(start_date.value, 'year'),
     start_date_month: devideDate(start_date.value, 'month'),

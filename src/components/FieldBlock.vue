@@ -190,7 +190,7 @@ export default {
             break
 
           case 'urlFormat':
-            if (validateUrl(field.value) || field.value === '') {
+            if (validateUrl(field.value)) {
               field.formState = true
               this.errorPromptId = null
             } else {

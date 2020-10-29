@@ -42,7 +42,8 @@ export function validateUrl(str) {
       '(\\#[-a-z\\d_]*)?$',
     'i'
   ) // fragment locator
-  return !!pattern.test(str)
+  const split = str.split(';')
+  return !split.some((url) => !pattern.test(url))
 }
 
 // Change datetime to 3 interger

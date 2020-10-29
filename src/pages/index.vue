@@ -44,23 +44,25 @@ export default {
 
   methods: {
     initIntersectionObserver() {
-      const target = document.querySelector('#Credit')
-      const callback = (entries, observer) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            observer.disconnect()
-            this.$ga.event({
-              eventCategory: 'projects',
-              eventAction: 'scroll',
-              eventLabel: 'scroll to end',
-            })
-          }
+      import('intersection-observer').then(() => {
+        const target = document.querySelector('#Credit')
+        const callback = (entries, observer) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              observer.disconnect()
+              this.$ga.event({
+                eventCategory: 'projects',
+                eventAction: 'scroll',
+                eventLabel: 'scroll to end',
+              })
+            }
+          })
+        }
+        const observer = new IntersectionObserver(callback, {
+          threshold: 1,
         })
-      }
-      const observer = new IntersectionObserver(callback, {
-        threshold: 1,
+        observer.observe(target)
       })
-      observer.observe(target)
     },
   },
 }

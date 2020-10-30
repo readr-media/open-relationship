@@ -101,6 +101,20 @@ mutation updatePerson (
   }
 }
 
+query searchPersons($text: String) {
+  allPersons(search: $text) {
+    id
+    name
+    gender
+    birth_date_year
+    birth_date_month
+    birth_date_day
+    tags {
+      name
+    }
+  }
+}
+
 mutation createPersons ($data: [PersonsCreateInput]) {
   createPersons(
     data: $data

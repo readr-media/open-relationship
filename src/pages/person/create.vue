@@ -34,6 +34,7 @@
         </div>
       </form>
     </div>
+    <ListSameName :items="searchResults" />
     <OtherForms operationType="create" />
     <More />
     <Footer />
@@ -56,6 +57,10 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import ListSameName from '../../components/ListSameName'
+
+import { buildSearchItemInfo } from '~/utils/person'
+import { searchPersons } from '~/apollo/queries/person.gql'
 
 export default {
   name: 'CreatePerson',
@@ -67,6 +72,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -84,7 +90,16 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
+  },
+  watch: {
+    'person.name.value'(value) {
+      this.searchResults = []
+      if (value) {
+        this.searchPersonByText(value)
+      }
+    },
   },
   mounted() {
     this.clearForm(this.person)
@@ -96,6 +111,25 @@ export default {
         eventCategory: 'projects',
         eventAction: 'click',
         eventLabel: 'send form',
+      })
+    },
+    searchPersonByText(text) {
+      this.$apollo.addSmartQuery('searchResults', {
+        query: searchPersons,
+        variables: {
+          text,
+        },
+        update: (data) => {
+          const items = data.allPersons
+          if (items?.length > 0) {
+            return items.map((item) => ({
+              id: item.id,
+              name: item.name,
+              info: buildSearchItemInfo(item),
+            }))
+          }
+          return []
+        },
       })
     },
     updateTags(value) {

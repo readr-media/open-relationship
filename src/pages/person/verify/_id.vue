@@ -26,6 +26,7 @@
         </div>
       </form>
     </div>
+    <ListSameName :items="searchResults" />
     <OtherForms operationType="verify" />
     <More />
     <Footer />
@@ -48,11 +49,14 @@ import formMixin from '~/mixins/formMixin'
 
 import More from '~/components/More'
 import Footer from '~/components/Footer'
+import ListSameName from '~/components/ListSameName'
 import OtherForms from '~/components/OtherForms'
 
+import { buildSearchItemInfo } from '~/utils/person'
 import {
   fetchPersonById,
   fetchPersonCount,
+  searchPersons,
   updatePerson,
 } from '~/apollo/queries/person.gql'
 
@@ -66,6 +70,7 @@ export default {
     Footer,
     CollaborateFieldBlock,
     OtherForms,
+    ListSameName,
   },
   apollo: {
     personCount: {
@@ -93,6 +98,7 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
@@ -101,6 +107,12 @@ export default {
     },
   },
   watch: {
+    'person.name.value'(value) {
+      this.searchResults = []
+      if (value) {
+        this.searchPersonByText(value)
+      }
+    },
     personCount() {
       this.fetchPerson()
     },
@@ -118,6 +130,27 @@ export default {
         update: (data) => {
           this.personId = data.Person.id
           moveGqlToForm(this.person, data.Person)
+        },
+      })
+    },
+    searchPersonByText(text) {
+      this.$apollo.addSmartQuery('searchResults', {
+        query: searchPersons,
+        variables: {
+          text,
+        },
+        update: (data) => {
+          const items = data.allPersons
+          if (items?.length > 0) {
+            return items
+              .filter((item) => item.id !== this.personId)
+              .map((item) => ({
+                id: item.id,
+                name: item.name,
+                info: buildSearchItemInfo(item),
+              }))
+          }
+          return []
         },
       })
     },

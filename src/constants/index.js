@@ -16,4 +16,17 @@ const PARTNER_LIST = [
   },
 ]
 
-export { INTRODUCTION, LINKS, PARTNER_LIST }
+const GENDER_MAPPING = {
+  M: '男',
+  F: '女',
+}
+
+const ROUTE_MAPPING = {
+  organization: '組織',
+  'organization-relation': '組織關係',
+  person: '人物',
+  'person-organization': '人物組織關係',
+  'person-relation': '人物關係',
+}
+
+export { GENDER_MAPPING, INTRODUCTION, LINKS, PARTNER_LIST, ROUTE_MAPPING }

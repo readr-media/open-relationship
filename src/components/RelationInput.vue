@@ -40,6 +40,7 @@ export default {
       selected: '',
       // fetched list(for apollo)
       allPersons: [],
+      allOrganizations: [],
       // auto complete list
       suggestions: [
         {

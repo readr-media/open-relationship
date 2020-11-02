@@ -1,29 +1,32 @@
 <template>
   <div v-if="hasItems || showLinkForSameName" class="list">
-    <template v-if="hasItems">
-      <p>
-        <strong
-          >你要{{ formTypeDisplay }}的是下列{{ formNameDisplay }}嗎？</strong
-        >
-      </p>
-      <div class="list__items">
-        <div v-for="item in items" :key="`${item.name}${item.id}`">
-          <a
-            :href="`/${formName}/verify/${item.id}`"
-            :class="`g-color-${formType}`"
-            target="_blank"
-            rel="noopener noreferrer"
-            v-text="item.name"
-          />
-          <!-- 由於不同表單提供的欄位資訊不同，請先組好要顯示的資訊 -->
-          <span v-if="item.info">（{{ item.info }}）</span>
-        </div>
+    <p>
+      <strong v-if="isCreateForm && hasItems"
+        >你要新增的是下列{{ formNameDisplay }}嗎？</strong
+      >
+      <strong v-else-if="!isCreateForm"
+        >上述不是你要的驗證資料？{{
+          hasItems ? `請參考下列${formNameDisplay}` : ''
+        }}</strong
+      >
+    </p>
+    <div v-if="hasItems" class="list__items">
+      <div v-for="item in items" :key="`${item.name}${item.id}`">
+        <a
+          :href="`/${formName}/verify/${item.id}`"
+          :class="`g-color-${formType}`"
+          target="_blank"
+          rel="noopener noreferrer"
+          v-text="item.name"
+        />
+        <!-- 由於不同表單提供的欄位資訊不同，請先組好要顯示的資訊 -->
+        <span v-if="item.info">（{{ item.info }}）</span>
       </div>
-    </template>
+    </div>
     <p v-if="showLinkForSameName">
-      <span v-if="hasItems && formType === 'create'"
+      <span v-if="hasItems"
         >如果以上不是你要{{ formTypeDisplay }}的{{ formNameDisplay }}，</span
-      ><span v-else-if="hasItems && formType === 'verify'">
+      ><span v-else-if="!hasItems && !isCreateForm">
         如果你想要{{ formTypeDisplay }}的{{ formNameDisplay }}與上述{{
           formNameDisplay
         }}名稱相同，</span
@@ -76,6 +79,9 @@ export default {
     },
     hasItems() {
       return this.items.length > 0
+    },
+    isCreateForm() {
+      return this.formType === 'create'
     },
     linkForAddSameName() {
       return LINK_FOR_ADD_SAME_NAME[this.formName] || ''

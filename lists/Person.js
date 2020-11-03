@@ -11,7 +11,7 @@ module.exports = {
   fields: {
     name: { label: '姓名', type: Text, isRequired: true },
     alternative: { label: '別名', type: Text },
-    // other_names: { label: '舊名', type: Text },
+    other_names: { label: '舊名', type: Text },
     email: { label: '電子信箱', type: Text },
     gender: {
       label: '生理性別',

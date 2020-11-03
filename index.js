@@ -116,6 +116,7 @@ module.exports = {
         scss: ['~scss/breakpoint.scss', '~scss/variables.scss'],
       },
       store: ['~store'],
+      serverMiddleware: ['../middle/headers.js'],
       buildModules: [
         '@nuxtjs/apollo',
         '@nuxtjs/style-resources',

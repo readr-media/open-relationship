@@ -22,7 +22,8 @@ export const organizationRelationFields = {
     info: ['例：子公司、母公司、轉投資事業'],
     value: '',
     inputStatus: { type: 'text' },
-
+    required: true,
+    verify: ['required'],
     formState: true,
   },
   start_date: {
@@ -51,7 +52,10 @@ export const organizationRelationFields = {
   },
   source: {
     label: '資料來源',
-    info: ['網站連結'],
+    info: [
+      '網站連結',
+      '若要提供 2 個以上的資料來源網址，請在網址與網址之間加入半形分號',
+    ],
     value: '',
     inputStatus: { type: 'text' },
     required: true,

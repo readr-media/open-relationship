@@ -1,7 +1,7 @@
 <template>
-  <div id="Process">
+  <div id="Process" class="g-bg-grey">
     <!-- <a class="anchorPoint" href="#Process" /> -->
-    <div id="Process-title" class="section-title">| 階段進度 |</div>
+    <div id="Process-title" class="g-heading">| 階段進度 |</div>
     <div id="Process-cardContainer">
       <ProcessCard
         v-for="processCard in processCardList"
@@ -38,12 +38,13 @@ export default {
               to: '#Relation',
               btnStatus: 'active',
             },
-            // {
-            //   id: 2,
-            //   title: '新增大量資料',
-            //   to: '',
-            //   btnStatus: 'active',
-            // },
+            {
+              id: 2,
+              title: '新增大量資料',
+              to: 'https://forms.gle/9XuMLUCQ6h56Fq668',
+              btnStatus: 'active',
+              target: '_blank',
+            },
           ],
         },
         {
@@ -94,13 +95,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
-
 #Process {
   // height: 770px;
   width: 100%;
   padding: 40px 20px 20px;
-  background-color: #ebebeb;
   overflow: auto;
 
   #Process-title {
@@ -116,16 +114,14 @@ export default {
     flex-wrap: wrap;
     align-content: center;
   }
-
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     padding: 50px;
     #Process-cardContainer {
       flex-direction: row;
       width: 700px;
     }
   }
-
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     // padding: 50px;
     #Process-cardContainer {
       flex-direction: row;

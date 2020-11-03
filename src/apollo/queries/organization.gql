@@ -1,0 +1,15 @@
+mutation createOrganization ($data: OrganizationCreateInput!) {
+  createOrganization(data: $data) {
+    id
+    name
+  }
+}
+
+mutation createOrganizations ($data: [OrganizationsCreateInput]) {
+  createOrganizations(
+    data: $data
+  ) {
+    id
+    name
+  }
+}

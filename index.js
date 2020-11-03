@@ -108,15 +108,23 @@ module.exports = {
       buildDir: 'dist',
       telemetry: false,
       plugins: [{ src: '~/plugins/vue-tagsinput', mode: 'client' }],
-      css: ['~styles/global.style.css'],
+      css: ['~styles/base.css', '~scss/global.scss'],
+      // https://github.com/nuxt-community/style-resources-module
+      // Do not import actual styles.
+      // Use this module only to import variables, mixins, functions (et cetera) as they won't exist in the actual build.
+      styleResources: {
+        scss: ['~scss/breakpoint.scss', '~scss/variables.scss'],
+      },
       store: ['~store'],
+      serverMiddleware: ['../middle/headers.js'],
       buildModules: [
         '@nuxtjs/apollo',
+        '@nuxtjs/style-resources',
         [
           '@nuxtjs/google-analytics',
           {
             id: () => {
-              return document.domain.match(/^www.readr.tw/gs)
+              return document.domain.match(/^whoareyou.readr.tw/gs)
                 ? 'UA-83609754-1'
                 : 'UA-83609754-2'
             },
@@ -204,36 +212,38 @@ module.exports = {
   ],
 }
 
-const AreaSchema = require('./lists/Area')
-const PersonSchema = require('./lists/Person')
-// const ContactDetailSchema = require('./lists/Contact_detail');
-const OrganizationSchema = require('./lists/Organizations')
-// eslint-disable-next-line camelcase
-const Person_relationSchema = require('./lists/Person_relation')
-// eslint-disable-next-line camelcase
-const Person_organizationSchema = require('./lists/Person_organization')
-// eslint-disable-next-line camelcase
-const Person_publicationSchema = require('./lists/Person_publication')
-// eslint-disable-next-line camelcase
-const Organization_relationSchema = require('./lists/Organization_relation')
-const EventSchema = require('./lists/Events')
-const PositionSchema = require('./lists/Posts')
-const MembershipSchema = require('./lists/Memberships')
-const CountSchema = require('./lists/Count')
-const MotionSchema = require('./lists/Motions')
+// 第一波開放表單
 const CollaborateSchema = require('./lists/Collaborate')
+const OrganizationRelationSchema = require('./lists/OrganizationRelation')
+const OrganizationSchema = require('./lists/Organization')
+const PersonOrganizationSchema = require('./lists/PersonOrganization')
+const PersonRelationSchema = require('./lists/PersonRelation')
+const PersonSchema = require('./lists/Person')
+const TagSchema = require('./lists/Tag')
 
-keystone.createList('Area', AreaSchema)
-keystone.createList('Person', PersonSchema)
-// keystone.createList('Contact_detail', ContactDetailSchema);
-keystone.createList('Organization', OrganizationSchema)
-keystone.createList('Person_relation', Person_relationSchema)
-keystone.createList('Person_organization', Person_organizationSchema)
-keystone.createList('Person_publication', Person_publicationSchema)
-keystone.createList('Organization_relation', Organization_relationSchema)
-keystone.createList('Event', EventSchema)
-keystone.createList('Post', PositionSchema)
-keystone.createList('Membership', MembershipSchema)
-keystone.createList('Count', CountSchema)
-keystone.createList('Motion', MotionSchema)
 keystone.createList('Collaborate', CollaborateSchema)
+keystone.createList('Organization_relation', OrganizationRelationSchema)
+keystone.createList('Organization', OrganizationSchema)
+keystone.createList('Person_organization', PersonOrganizationSchema)
+keystone.createList('Person_relation', PersonRelationSchema)
+keystone.createList('Person', PersonSchema)
+keystone.createList('Tag', TagSchema)
+
+// 後續開放表單
+// const AreaSchema = require('./lists/Area')
+// const ContactDetailSchema = require('./lists/ContactDetail');
+// const CountSchema = require('./lists/Count')
+// const EventSchema = require('./lists/Event')
+// const MembershipSchema = require('./lists/Membership')
+// const MotionSchema = require('./lists/Motion')
+// const PersonPublicationSchema = require('./lists/PersonPublication')
+// const PositionSchema = require('./lists/Post')
+
+// keystone.createList('Area', AreaSchema)
+// keystone.createList('Contact_detail', ContactDetailSchema);
+// keystone.createList('Count', CountSchema)
+// keystone.createList('Event', EventSchema)
+// keystone.createList('Membership', MembershipSchema)
+// keystone.createList('Motion', MotionSchema)
+// keystone.createList('Person_publication', PersonPublicationSchema)
+// keystone.createList('Post', PositionSchema)

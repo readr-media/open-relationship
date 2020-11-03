@@ -17,7 +17,9 @@
           inactive: btn.btnStatus == 'inactive',
         }"
         :href="btn.to"
-        @click="handleClick"
+        :target="btn.target || '_self'"
+        :rel="getLinkRel(btn)"
+        @click="handleClick(btn.target)"
       >
         <Button :btnStatus="btn.btnStatus" :title="btn.title" fitDiv="true" />
       </a>
@@ -36,15 +38,35 @@ export default {
   components: {
     Button,
   },
-  props: ['number', 'title', 'content', 'btnStatus', 'to', 'btns'],
+  props: {
+    number: {
+      type: Number,
+      required: true,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    content: {
+      type: String,
+      default: '',
+    },
+    btns: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       numbers: [number1, number2, number3, number4],
     }
   },
   methods: {
-    handleClick() {
-      if (this.btnStatus === 'active') {
+    getLinkRel(target) {
+      return target === '_blank' ? 'noopener noreferrer' : ''
+    },
+    handleClick(btnStatus) {
+      if (btnStatus === 'active') {
         this.$ga.event({
           eventCategory: 'projects',
           eventAction: 'click',
@@ -57,11 +79,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
-
 .ProcessCard {
   max-width: 100%;
-  height: 259px;
   background-color: #ffffff;
 
   display: flex;
@@ -81,11 +100,10 @@ export default {
     background: none;
   }
   .ProcessCard-textContainer {
-    height: 209px;
+    flex: 1;
     .ProcessCard-text-title {
       // width: 380px;
       height: 29px;
-      font-family: PingFangTC;
       font-size: 21px;
       font-weight: 300;
       font-stretch: normal;
@@ -99,13 +117,13 @@ export default {
     }
     .ProcessCard-text-content {
       // width: 300px;
-      font-family: PingFang TC;
       font-size: 16px;
       font-weight: normal;
       font-stretch: normal;
       font-style: normal;
       line-height: 1.75;
       letter-spacing: normal;
+      text-align: justify;
       color: #000000;
       margin: 0 25px 23px;
     }
@@ -136,8 +154,7 @@ export default {
       margin-top: 1px;
     }
   }
-
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     max-width: 380px;
     margin: 76px 20px 20px;
     .ProcessCard-btnContainer {
@@ -149,10 +166,10 @@ export default {
       }
     }
   }
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     max-width: 300px;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     max-width: 380px;
   }
 }

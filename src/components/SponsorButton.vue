@@ -36,8 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
-
 .SponsorButton {
   width: 279px;
   height: 43px;
@@ -60,7 +58,7 @@ export default {
   &:hover {
     transform: scale(1.05);
   }
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     width: 395px;
 
     .sponsor {

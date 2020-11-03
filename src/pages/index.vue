@@ -1,9 +1,8 @@
 <template>
-  <div class="app">
-    <Navbar />
+  <div>
     <Hero />
     <Intro />
-    <About />
+    <ProjectOrigin />
     <Relation />
     <Process />
     <Cooperation />
@@ -15,10 +14,9 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Intro from '../components/Intro'
-import About from '../components/About'
+import ProjectOrigin from '../components/ProjectOrigin'
 import Relation from '../components/Relation'
 import Process from '../components/Process'
 import Cooperation from '../components/Cooperation'
@@ -29,10 +27,9 @@ import Footer from '../components/Footer'
 
 export default {
   components: {
-    Navbar,
     Hero,
     Intro,
-    About,
+    ProjectOrigin,
     Relation,
     Process,
     Cooperation,
@@ -47,48 +44,31 @@ export default {
 
   methods: {
     initIntersectionObserver() {
-      const target = document.querySelector('#Credit')
-      const callback = (entries, observer) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            observer.disconnect()
-            this.$ga.event({
-              eventCategory: 'projects',
-              eventAction: 'scroll',
-              eventLabel: 'scroll to end',
-            })
-          }
+      import('intersection-observer').then(() => {
+        const target = document.querySelector('#Credit')
+        const callback = (entries, observer) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              observer.disconnect()
+              this.$ga.event({
+                eventCategory: 'projects',
+                eventAction: 'scroll',
+                eventLabel: 'scroll to end',
+              })
+            }
+          })
+        }
+        const observer = new IntersectionObserver(callback, {
+          threshold: 1,
         })
-      }
-      const observer = new IntersectionObserver(callback, {
-        threshold: 1,
+        observer.observe(target)
       })
-      observer.observe(target)
     },
   },
 }
 </script>
 
 <style lang="scss">
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto,
-    sans-serif;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-}
-
 .container {
   max-width: 700px !important;
 }

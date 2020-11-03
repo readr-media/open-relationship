@@ -22,7 +22,8 @@ export const personOrganizationFields = {
     info: [],
     value: '',
     inputStatus: { type: 'text' },
-
+    required: true,
+    verify: ['required'],
     formState: true,
   },
   start_date: {
@@ -51,7 +52,10 @@ export const personOrganizationFields = {
   },
   source: {
     label: '資料來源',
-    info: ['網站連結'],
+    info: [
+      '網站連結',
+      '若要提供 2 個以上的資料來源網址，請在網址與網址之間加入半形分號',
+    ],
     value: '',
     inputStatus: { type: 'text' },
     required: true,

@@ -34,8 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
-
 .RelationButton {
   width: 100%;
   border-radius: 42px;
@@ -51,7 +49,6 @@ export default {
   text-decoration: none;
 
   span {
-    font-family: PingFang TC;
     font-size: 21px;
     font-weight: 500;
     font-stretch: normal;
@@ -61,7 +58,7 @@ export default {
     text-align: center;
     color: #ffffff;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     width: 170px;
     padding: 0;
     height: 80px;
@@ -102,12 +99,11 @@ export default {
   padding: 9px 0;
   margin-bottom: 10px;
   span {
-    font-family: PingFang TC;
     font-size: 1rem;
     font-weight: nomal;
   }
 
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     width: 170px;
     padding: 0;
     height: 30px;

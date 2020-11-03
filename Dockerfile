@@ -23,4 +23,4 @@ WORKDIR /app
 COPY --from=build /build /app
 
 EXPOSE 3000
-CMD ["./dumb-init", "yarn", "dev"]
+CMD ["./dumb-init", "yarn", "start"]

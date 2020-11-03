@@ -2,13 +2,8 @@
   <div class="FieldBlock" :class="{ fieldError: field.formState == false }">
     <div class="FieldBlock-title">
       {{ field.label }}
-      <div class="FieldBlock-title-decoration">
-        <h5
-          v-if="field.required"
-          :class="type == 'create' ? 'create-star' : 'verify-star'"
-        >
-          ＊
-        </h5>
+      <div v-if="field.required" class="FieldBlock-title-decoration">
+        <h5 :class="type == 'create' ? 'create-star' : 'verify-star'">＊</h5>
       </div>
     </div>
     <div v-if="field.info.length > 0" class="FieldBlock-info">
@@ -64,6 +59,13 @@
       <RelationInput :field="field" :verifyField="verifyField" />
     </div>
 
+    <div v-else-if="field.inputStatus.type == 'relationMany'">
+      <RelationManyInput
+        :schemaTarget="field.inputStatus.target"
+        @update="updateTags"
+      />
+    </div>
+
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
       <input v-model="field.value" @change="verifyField(field)" />
@@ -95,16 +97,19 @@
         /><label>資料錯誤</label>
       </div>
     </div>
+    <slot />
   </div>
 </template>
 
 <script>
 import { validateEmail, validateDate, validateUrl } from '../utils/fieldVerify'
 import RelationInput from './RelationInput'
+import RelationManyInput from './RelationManyInput'
 
 export default {
   components: {
     RelationInput,
+    RelationManyInput,
   },
   props: ['field', 'type'],
   data() {
@@ -139,6 +144,9 @@ export default {
     }
   },
   methods: {
+    updateTags(value) {
+      this.$emit('updateTags', value)
+    },
     verifyField(field) {
       //  return if there is no verify needed
       if (!field.verify) return
@@ -148,7 +156,10 @@ export default {
         // handle each type of verify
         switch (field.verify[i]) {
           case 'required':
-            if (field.value === '') {
+            if (field.inputStatus.type === 'relation' && !field.value?.name) {
+              field.formState = false
+              this.errorPromptId = 0
+            } else if (!field.value) {
               field.formState = false
               this.errorPromptId = 0
             } else {
@@ -178,7 +189,7 @@ export default {
             break
 
           case 'urlFormat':
-            if (validateUrl(field.value) || field.value === '') {
+            if (validateUrl(field.value)) {
               field.formState = true
               this.errorPromptId = null
             } else {
@@ -198,7 +209,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/FieldBlock.scss';
+@import '../scss/field-block.scss';
 
 .fieldError {
   border: solid 3px #d0021b;

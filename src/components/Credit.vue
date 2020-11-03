@@ -1,5 +1,5 @@
 <template>
-  <div id="Credit">
+  <div id="Credit" class="g-bg-green">
     <div id="Credit-content">
       <p>
         監製：簡信昌<br />
@@ -23,10 +23,8 @@ p {
 #Credit {
   width: 100%;
   padding: 21px 0;
-  background-color: #102c34;
   padding: 20px;
   #Credit-content {
-    font-family: PingFang TC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;

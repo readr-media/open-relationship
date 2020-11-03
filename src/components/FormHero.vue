@@ -1,5 +1,5 @@
 <template>
-  <div class="FormHero">
+  <div class="FormHero g-bg-green">
     <div class="content_wrapper">
       <div
         class="FormHero__title"
@@ -53,14 +53,9 @@
       </div>
       <div v-else></div>
 
-      <Button
-        title="回到主畫面"
-        round="true"
-        :type="type"
-        :whiteText="true"
-        :small="true"
-        @click.native="handleClick"
-      />
+      <button :class="[type, 'form-hero__btn']" @click="handleClick">
+        回到主畫面
+      </button>
     </div>
   </div>
 </template>
@@ -68,14 +63,10 @@
 <script>
 import createLogo from '../images/character-card-orange.svg'
 import checkLogo from '../images/character-card-blue.svg'
-import Button from '../components/Button'
 
 import relationListMixin from '../mixins/relationListMixin'
 
 export default {
-  components: {
-    Button,
-  },
   mixins: [relationListMixin],
   props: ['title', 'content', 'target', 'type', 'id'],
   data() {
@@ -97,15 +88,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/responsiveMixin.scss';
+.form-hero {
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    width: 120px;
+    height: 30px;
+    padding: 5px 0;
+    color: #fff;
+    font-size: 0.875rem;
+    border: none;
+    border-radius: 42px;
+    cursor: pointer;
+    &::before {
+      content: '';
+      align-self: center;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-right: 9px;
+      border-style: solid;
+      border-width: 5.5px 9.5px 5.5px 0;
+      border-color: transparent #fff transparent transparent;
+    }
+    &.create {
+      background-color: #ed8c4a;
+    }
+    &.verify {
+      background-color: #63c1e2;
+    }
+  }
+}
+</style>
 
+<style lang="scss" scoped>
 .FormHero {
-  border-top: solid 1px #d8d8d8;
   box-sizing: border-box;
   width: 100%;
   // height: 550px;
   padding: 50px 25px 41px;
-  background-color: #102c34;
 
   .content_wrapper {
     width: 100%;
@@ -130,7 +153,6 @@ export default {
     // height: 294px;
 
     // margin: 0 auto 38px;
-    font-family: PingFang TC;
     font-size: 16px;
     font-stretch: normal;
     font-style: normal;
@@ -166,7 +188,7 @@ export default {
     align-self: flex-end;
   }
 
-  @include atSmall {
+  @include media-breakpoint-up(sm) {
     padding-bottom: 50px;
     .content_wrapper {
       width: 400px;
@@ -174,7 +196,7 @@ export default {
     }
   }
 
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     .content_wrapper {
       width: 600px;
     }

@@ -36,7 +36,6 @@ export default {
 .Button {
   //   width: 100%;
   height: 29px;
-  font-family: PingFangTC;
   font-size: 21px;
   font-weight: 600;
   font-stretch: normal;
@@ -44,15 +43,12 @@ export default {
   line-height: normal;
   letter-spacing: 2px;
   text-align: center;
-  color: #000000;
 
   height: 50px;
   text-align: center;
   line-height: 50px;
   background-color: #ffca54;
   border: none;
-
-  padding: 0 29px;
 
   &:focus {
     outline: 0;

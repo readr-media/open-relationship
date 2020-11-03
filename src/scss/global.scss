@@ -1,0 +1,44 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  text-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
+  background-color: #fff;
+}
+
+.g-page {
+  padding-top: $header-height;
+}
+
+.g-heading {
+  color: #000;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-align: center;
+  + * {
+    margin-top: 20px;
+    @include media-breakpoint-up(lg) {
+      margin-top: 30px;
+    }
+  }
+}
+
+.g-bg-green {
+  background-color: $color-green;
+}
+
+.g-bg-grey {
+  background-color: $color-grey;
+}
+
+.g-color-create {
+  color: $color-create
+}
+
+.g-color-verify {
+  color: $color-verify
+}

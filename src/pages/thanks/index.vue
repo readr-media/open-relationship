@@ -1,6 +1,6 @@
 <template>
-  <div id="thanksPage">
-    <img id="thanksPage-logo" :src="READrLogo" alt="" />
+  <div id="thanksPage" class="g-bg-green">
+    <img id="thanksPage-logo" src="~/assets/logo.svg" alt="READr" />
 
     <div id="thanksPage-subtitle">謝謝你的貢獻！</div>
 
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import READrLogo from '../../images/logo.svg'
 import RelationButtonContainer from '../../components/RelationButtonContainer'
 import relationListMixin from '../../mixins/relationListMixin'
 
@@ -51,7 +50,6 @@ export default {
   mixins: [relationListMixin],
   data() {
     return {
-      READrLogo,
       seconds: 8,
     }
   },
@@ -73,10 +71,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/responsiveMixin.scss';
 #thanksPage {
   width: 100%;
-  background-color: #102c34;
   min-height: 100vh;
 
   display: flex;
@@ -110,7 +106,6 @@ export default {
     width: 100%;
     // height: 84px;
     padding: 8px 11px;
-    font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -125,7 +120,6 @@ export default {
     margin-top: 50px;
     // width: 800px;
     height: 84px;
-    font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -141,7 +135,7 @@ export default {
   .smallEnter {
     display: none;
   }
-  @include atLarge {
+  @include media-breakpoint-up(lg) {
     .smallEnter {
       display: inline;
     }

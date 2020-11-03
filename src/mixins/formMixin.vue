@@ -15,12 +15,18 @@ export default {
         // get form's each field object
         const field = item[1]
         // if there's an unedit field ,but required, return
-        if (field.required && field.value === '') {
-          field.formState = false
-          return false
+        if (field.required) {
+          if (field.inputStatus.type === 'relation' && !field.value?.name) {
+            field.formState = false
+            return false
+          } else if (!field.value) {
+            field.formState = false
+            return false
+          }
         }
+        field.formState = true
         // if there's an uncorrect field ,reutrn
-        if (field.formState === false) {
+        if (!field.formState) {
           return false
         }
       }
@@ -33,6 +39,8 @@ export default {
         // relation input's default type is object, others are string
         if (field.inputStatus.type === 'relation') {
           field.value = { name: '', id: '' }
+        } else if (field.inputStatus.type === 'relationMany') {
+          field.value = []
         } else {
           field.value = ''
         }

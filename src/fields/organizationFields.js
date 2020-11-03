@@ -8,6 +8,14 @@ export const organizationFields = {
     verify: ['required'],
     formState: true,
   },
+  identifiers: {
+    label: '統一編號',
+    info: [],
+    value: '',
+    inputStatus: { type: 'text' },
+    // verify: ["indentifiersFormat"],
+    formState: true,
+  },
   alternative: {
     label: '組織別名',
     info: [],
@@ -20,14 +28,6 @@ export const organizationFields = {
     info: [],
     value: '',
     inputStatus: { type: 'text' },
-    formState: true,
-  },
-  identifiers: {
-    label: '統一編號',
-    info: [],
-    value: '',
-    inputStatus: { type: 'text' },
-    // verify: ["indentifiersFormat"],
     formState: true,
   },
   classification: {
@@ -103,9 +103,19 @@ export const organizationFields = {
     verify: ['urlFormat'],
     formState: true,
   },
+  tags: {
+    label: 'tag',
+    info: [],
+    value: [],
+    inputStatus: { type: 'relationMany', target: 'tag' },
+    verify: [],
+  },
   source: {
     label: '資料來源',
-    info: ['網站連結'],
+    info: [
+      '網站連結',
+      '若要提供 2 個以上的資料來源網址，請在網址與網址之間加入半形分號',
+    ],
     value: '',
     inputStatus: { type: 'text' },
     required: true,

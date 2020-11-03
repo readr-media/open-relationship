@@ -20,6 +20,7 @@ export const ADD_ORGANIZATION = gql`
     $links: String
     $address: String
     $source: String
+    $tags: [TagWhereUniqueInput]
   ) {
     createOrganization(
       data: {
@@ -41,6 +42,7 @@ export const ADD_ORGANIZATION = gql`
         links: $links
         address: $address
         source: $source
+        tags: { connect: $tags }
       }
     ) {
       name

@@ -1,4 +1,4 @@
-const { Text, Select, Integer } = require('@keystonejs/fields')
+const { Text, Select, Integer, Relationship } = require('@keystonejs/fields')
 const { atTracking, byTracking } = require('@keystonejs/list-plugins')
 
 const genderOptions = [
@@ -34,6 +34,12 @@ module.exports = {
     national_identity: { label: '國籍', type: Text },
     contact_details: { label: '聯絡方式', type: Text, isMultiline: true },
     links: { label: '網站', type: Text },
+    tags: {
+      label: 'Tag',
+      type: Relationship,
+      ref: 'Tag',
+      many: true,
+    },
     source: { label: '資料來源', type: Text },
   },
   plugins: [atTracking(), byTracking()],

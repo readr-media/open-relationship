@@ -1,0 +1,19 @@
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+$header-height: 66px;
+
+$color-green: #102c34;
+$color-grey: #ebebeb;
+$color-create: #ed8c4a;
+$color-verify: #63c1e2;

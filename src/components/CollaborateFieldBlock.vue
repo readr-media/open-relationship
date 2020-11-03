@@ -52,8 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/FieldBlock.scss';
-@import '../styles/responsiveMixin.scss';
+@import '../scss/field-block.scss';
 
 .CollaborateFieldBlock {
   width: 100%;
@@ -64,7 +63,6 @@ export default {
     width: 100%;
     h5 {
       height: 40px;
-      font-family: PingFangTC;
       font-size: 28px;
       font-weight: 500;
       font-stretch: normal;
@@ -77,7 +75,6 @@ export default {
     p {
       // height: 56px;
       width: 100%;
-      font-family: PingFangTC;
       font-size: 16px;
       font-weight: normal;
       font-stretch: normal;
@@ -91,8 +88,7 @@ export default {
   &-input {
     margin-bottom: 21px;
   }
-
-  @include atMedium {
+  @include media-breakpoint-up(md) {
     .CollaborateFieldInfo {
       padding: 30px 0 0;
     }

@@ -1,0 +1,17 @@
+query fetchTags ($name: String!) {
+  allTags (search: $name) {
+    id
+    name
+  }
+}
+
+mutation createTag ($name: String!) {
+  createTag (
+    data: {
+      name: $name
+    }
+  ) {
+    id
+    name
+  }
+}

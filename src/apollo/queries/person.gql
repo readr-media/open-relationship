@@ -123,6 +123,8 @@ fragment searchResultFields on Person {
   id
   name
   gender
+  alternative
+  other_names
   birth_date_year
   birth_date_month
   birth_date_day

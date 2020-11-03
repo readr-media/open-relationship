@@ -8,7 +8,7 @@ function buildSearchItemInfo(item) {
     item.birth_date_day
   )
   const tags = item.tags.map((tag) => tag.name).join('、')
-  const combined = [gender, birthdate, tags]
+  const combined = [gender, birthdate, item.alternative, item.other_names, tags]
   return combined.filter((info) => info).join('、')
 }
 

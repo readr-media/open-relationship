@@ -8,6 +8,14 @@ export const organizationFields = {
     verify: ['required'],
     formState: true,
   },
+  identifiers: {
+    label: '統一編號',
+    info: [],
+    value: '',
+    inputStatus: { type: 'text' },
+    // verify: ["indentifiersFormat"],
+    formState: true,
+  },
   alternative: {
     label: '組織別名',
     info: [],
@@ -20,14 +28,6 @@ export const organizationFields = {
     info: [],
     value: '',
     inputStatus: { type: 'text' },
-    formState: true,
-  },
-  identifiers: {
-    label: '統一編號',
-    info: [],
-    value: '',
-    inputStatus: { type: 'text' },
-    // verify: ["indentifiersFormat"],
     formState: true,
   },
   classification: {

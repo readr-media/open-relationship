@@ -22,7 +22,8 @@ export const personOrganizationFields = {
     info: [],
     value: '',
     inputStatus: { type: 'text' },
-
+    required: true,
+    verify: ['required'],
     formState: true,
   },
   start_date: {

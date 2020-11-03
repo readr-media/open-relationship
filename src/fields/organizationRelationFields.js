@@ -22,7 +22,8 @@ export const organizationRelationFields = {
     info: ['例：子公司、母公司、轉投資事業'],
     value: '',
     inputStatus: { type: 'text' },
-
+    required: true,
+    verify: ['required'],
     formState: true,
   },
   start_date: {

@@ -14,12 +14,14 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in person"
+          v-for="(field, key) in person"
           :key="field.label"
           :field="field"
           type="create"
           @updateTags="updateTags"
-        />
+        >
+          <ListSameName v-if="key === 'name'" :items="searchResults" />
+        </FieldBlock>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -34,7 +36,6 @@
         </div>
       </form>
     </div>
-    <ListSameName :items="searchResults" />
     <OtherForms operationType="create" />
     <More />
     <Footer />
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import { uniqBy } from 'lodash'
 import FormHero from '../../components/FormHero'
 import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
@@ -120,9 +122,9 @@ export default {
           text,
         },
         update: (data) => {
-          const items = data.allPersons
-          if (items?.length > 0) {
-            return items.map((item) => ({
+          const uniqItems = uniqBy([...data.name, ...data.alternative], 'id')
+          if (uniqItems?.length > 0) {
+            return uniqItems.map((item) => ({
               id: item.id,
               name: item.name,
               info: buildSearchItemInfo(item),

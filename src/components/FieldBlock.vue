@@ -97,6 +97,7 @@
         /><label>資料錯誤</label>
       </div>
     </div>
+    <slot />
   </div>
 </template>
 

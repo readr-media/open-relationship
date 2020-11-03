@@ -123,7 +123,7 @@ module.exports = {
           '@nuxtjs/google-analytics',
           {
             id: () => {
-              return document.domain.match(/^www.readr.tw/gs)
+              return document.domain.match(/^whoareyou.readr.tw/gs)
                 ? 'UA-83609754-1'
                 : 'UA-83609754-2'
             },

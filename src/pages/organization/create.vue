@@ -43,7 +43,6 @@ import { organizationFields } from '../../fields/organizationFields'
 
 import { ADD_ORGANIZATION } from '../../graphQL/query/organization'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/organizationFormHandler'
 
 import formMixin from '../../mixins/formMixin'
 
@@ -52,6 +51,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 import ListSameName from '../../components/ListSameName'
 
+import { buildGqlVariables } from '~/utils'
 import { buildSearchItemInfo } from '~/utils/organization'
 import { searchOrganizations } from '~/apollo/queries/organization.gql'
 
@@ -133,12 +133,12 @@ export default {
 
     async uploadForm() {
       // Upload person form
-      this.$apollo.mutate({
+      await this.$apollo.mutate({
         mutation: ADD_ORGANIZATION,
-        variables: await moveFormToGqlVariable(this.organization),
+        variables: buildGqlVariables(this.organization),
       })
       // Update collaborate form
-      this.$apollo.mutate({
+      await this.$apollo.mutate({
         mutation: ADD_COLLABORATE,
         variables: {
           name: this.collaborate.name,

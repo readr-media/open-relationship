@@ -41,11 +41,8 @@ import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 
 import Button from '~/components/Button'
 import { personFields } from '~/fields/personFields'
-import {
-  moveFormToGqlVariable,
-  moveGqlToForm,
-} from '~/graphQL/personFormHandler'
-import { getRandomId } from '~/utils'
+import { moveGqlToForm } from '~/graphQL/personFormHandler'
+import { buildGqlVariables, getRandomId } from '~/utils'
 import formMixin from '~/mixins/formMixin'
 
 import More from '~/components/More'
@@ -170,7 +167,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.personId,
-          ...moveFormToGqlVariable(this.person),
+          ...buildGqlVariables(this.person),
         },
       })
       this.clearForm(this.person)

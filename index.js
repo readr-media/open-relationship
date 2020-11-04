@@ -95,6 +95,11 @@ const authStrategy = keystone.createAuthStrategy({
 
 module.exports = {
   keystone,
+  configureExpress: (app) => {
+    if (process.env.NODE_ENV === 'production') {
+      app.set('trust proxy', true)
+    }
+  },
   apps: [
     new GraphQLApp(),
     new AdminUIApp({

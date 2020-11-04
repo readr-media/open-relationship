@@ -61,6 +61,7 @@
 
     <div v-else-if="field.inputStatus.type == 'relationMany'">
       <RelationManyInput
+        :initialValue="field.value"
         :schemaTarget="field.inputStatus.target"
         @update="updateTags"
       />

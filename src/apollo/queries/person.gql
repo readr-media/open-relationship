@@ -19,6 +19,10 @@ query fetchPersonById ($id: ID!) {
     contact_details
     links
     source
+    tags {
+      id
+      name
+    }
   }
 }
 
@@ -55,6 +59,7 @@ mutation updatePerson (
   $contact_details: String
   $links: String
   $source: String
+  $tags: TagRelateToManyInput
 ) {
   updatePerson(
     id: $id
@@ -77,6 +82,7 @@ mutation updatePerson (
       contact_details: $contact_details
       links: $links
       source: $source
+      tags: $tags
     }
   ) {
     id

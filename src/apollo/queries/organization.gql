@@ -77,7 +77,7 @@ mutation updateOrganization (
   $links: String
   $address: String
   $source: String
-  $tags: [Tag]
+  $tags: TagRelateToManyInput
 ) {
   updateOrganization (
     id: $id

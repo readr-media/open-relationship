@@ -9,10 +9,14 @@ function handleRelationMany(items) {
     data.create = createItems.map((item) => ({ name: item.name }))
   }
   if (connectItems.length > 0) {
-    data.connect = connectItems.map((item) => ({ id: item.id }))
+    data.connect = connectItems
+      .filter((item) => item.id)
+      .map((item) => ({ id: item.id }))
   }
   if (disconnectItems.length > 0) {
-    data.disconnect = disconnectItems.map((item) => ({ id: item.id }))
+    data.disconnect = disconnectItems
+      .filter((item) => item.id)
+      .map((item) => ({ id: item.id }))
   }
   return data
 }

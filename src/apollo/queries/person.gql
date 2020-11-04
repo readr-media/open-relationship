@@ -103,10 +103,10 @@ mutation updatePerson (
 
 query searchPersons($text: String) {
   name: allPersons(search: $text) {
-    ...searchResultFields
+    ...searchResultPerson
 	}
   alternative: allPersons (where:{ alternative_contains: $text }) {
-    ...searchResultFields
+    ...searchResultPerson
   }
 }
 
@@ -119,7 +119,7 @@ mutation createPersons ($data: [PersonsCreateInput]) {
   }
 }
 
-fragment searchResultFields on Person {
+fragment searchResultPerson on Person {
   id
   name
   gender

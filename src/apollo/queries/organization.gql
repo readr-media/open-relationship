@@ -34,10 +34,10 @@ query fetchOrganizationCount {
 
 query searchOrganizations($text: String) {
   name: allOrganizations(search: $text) {
-    ...searchResultFields
+    ...searchResultOrganization
 	}
   alternative: allOrganizations (where:{ alternative_contains: $text }) {
-    ...searchResultFields
+    ...searchResultOrganization
   }
 }
 
@@ -108,7 +108,7 @@ mutation updateOrganization (
   }
 }
 
-fragment searchResultFields on Organization {
+fragment searchResultOrganization on Organization {
   id
   name
   identifiers

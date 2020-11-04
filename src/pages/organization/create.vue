@@ -127,8 +127,6 @@ export default {
         return
       }
       this.uploadForm()
-      this.clearForm(this.organization)
-      this.$router.push('/thanks')
     },
 
     async uploadForm() {
@@ -146,6 +144,8 @@ export default {
           feedback: this.collaborate.feedback,
         },
       })
+      this.clearForm(this.organization)
+      this.$router.push('/thanks')
     },
   },
 }

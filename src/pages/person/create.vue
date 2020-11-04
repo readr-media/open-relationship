@@ -135,7 +135,7 @@ export default {
       })
     },
     updateTags(value) {
-      this.person.tags.value = value.map((item) => ({ id: item.id }))
+      this.person.tags.value = value
     },
 
     async uploadHandler() {

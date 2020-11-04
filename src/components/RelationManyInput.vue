@@ -1,9 +1,9 @@
 <template>
   <div class="relation-many">
     <div class="relation-many-container">
-      <div v-for="item in items" :key="item.name" class="selected-item">
+      <div v-for="item in itemsDisplay" :key="item.name" class="selected-item">
         <span class="selected-item__text" v-text="item.name" />
-        <button class="selected-item__remove" @click="removeItem(item.id)">
+        <button class="selected-item__remove" @click="removeItem(item)">
           ✕
         </button>
       </div>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { createTag, fetchTags } from '~/apollo/queries/tag.gql'
+import { fetchTags } from '~/apollo/queries/tag.gql'
 
 export default {
   name: 'RelationManyInput',
@@ -55,9 +55,15 @@ export default {
     }
   },
   computed: {
+    itemsDisplay() {
+      return this.items.filter((item) => item.action !== 'disconnect')
+    },
     suggestionsCanSelect() {
       return this.suggestions.filter((item) => {
-        return !this.items.some((selected) => selected.name === item.name)
+        return !this.items.some(
+          (selected) =>
+            selected.name === item.name && selected.action !== 'disconnect'
+        )
       })
     },
   },
@@ -67,17 +73,6 @@ export default {
     },
   },
   methods: {
-    async createNewItem() {
-      switch (this.schemaTarget) {
-        case 'tag':
-          return await this.$apollo.mutate({
-            mutation: createTag,
-            variables: {
-              name: this.text,
-            },
-          })
-      }
-    },
     fetchSuggestions() {
       if (this.text) {
         // 定義如何取得對應 schema target 建議的項目
@@ -95,13 +90,11 @@ export default {
         }
       }
     },
-    removeItem(itemId) {
-      const index = this.items.findIndex((item) => item.id === itemId)
-      if (index > -1) {
-        this.items.splice(index, 1)
-      }
+    removeItem(item) {
+      this.$set(item, 'action', 'disconnect')
     },
     selectItem(item) {
+      this.$set(item, 'action', 'connect')
       this.items.push(item)
       this.text = ''
       this.suggestions = []
@@ -117,20 +110,26 @@ export default {
         const hasSelected = this.items.find(
           (selected) => selected.name === this.text
         )
-        if (hasSelected) {
+        if (hasSelected && hasSelected.action === 'disconnect') {
+          this.$set(hasSelected, 'action', 'connect')
+          return (this.text = '')
+        } else if (hasSelected) {
           return
         }
         const hasSuggestion = this.suggestions.find(
           (suggestion) => suggestion.name === this.text
         )
         if (hasSuggestion) {
+          this.$set(hasSuggestion, 'action', 'connect')
           this.items.push(hasSuggestion)
           this.text = ''
         } else {
-          this.createNewItem().then((data) => {
-            this.items.push(data.data.createTag)
-            this.text = ''
-          })
+          const newItem = {
+            name: this.text,
+            action: 'create',
+          }
+          this.items.push(newItem)
+          this.text = ''
         }
       }
     },

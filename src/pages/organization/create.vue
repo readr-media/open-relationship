@@ -118,7 +118,7 @@ export default {
       })
     },
     updateTags(value) {
-      this.organization.tags.value = value.map((item) => ({ id: item.id }))
+      this.organization.tags.value = value
     },
 
     async uploadHandler() {

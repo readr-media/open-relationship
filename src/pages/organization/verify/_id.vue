@@ -1,5 +1,5 @@
 <template>
-  <div id="Page-Person-verify" class="Form-Page">
+  <div id="Page-Organization-verify" class="Form-Page">
     <FormHero
       :id="hero.id"
       :title="hero.title"
@@ -13,7 +13,7 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in person"
+          v-for="field in organization"
           :key="field.label"
           :field="field"
           type="verify"
@@ -39,13 +39,14 @@ import FormHero from '~/components/FormHero'
 import FieldBlock from '~/components/FieldBlock'
 import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 
+import { organizationFields } from '~/fields/organizationFields'
 import Button from '~/components/Button'
-import { personFields } from '~/fields/personFields'
+
+import { getRandomId } from '~/utils'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '~/graphQL/personFormHandler'
-import { getRandomId } from '~/utils'
+} from '~/graphQL/organizationFormHandler'
 import formMixin from '~/mixins/formMixin'
 
 import More from '~/components/More'
@@ -53,47 +54,44 @@ import Footer from '~/components/Footer'
 import ListSameName from '~/components/ListSameName'
 import OtherForms from '~/components/OtherForms'
 
-import { buildSearchItemInfo } from '~/utils/person'
+import { buildSearchItemInfo } from '~/utils/organization'
 import {
-  fetchPersonById,
-  fetchPersonCount,
-  searchPersons,
-  updatePerson,
-} from '~/apollo/queries/person.gql'
+  fetchOrganizationById,
+  fetchOrganizationCount,
+  searchOrganizations,
+  updateOrganization,
+} from '~/apollo/queries/organization.gql'
 
 export default {
-  name: 'VerifyPerson',
+  name: 'VerifyOrganization',
   components: {
     FieldBlock,
     FormHero,
+    CollaborateFieldBlock,
     Button,
     More,
     Footer,
-    CollaborateFieldBlock,
-    OtherForms,
     ListSameName,
+    OtherForms,
   },
   apollo: {
-    personCount: {
-      query: fetchPersonCount,
-      update: (data) => data._allPersonsMeta.count,
+    organizationCount: {
+      query: fetchOrganizationCount,
+      update: (data) => data._allOrganizationsMeta.count ?? 0,
     },
   },
   mixins: [formMixin],
-
   data() {
     return {
-      personId: this.$route.params.id,
-      // eslint-disable-next-line vue/no-reserved-keys
+      organizationId: this.$route.params.id,
       hero: {
-        title: '驗證人物資料表單',
+        title: '驗證組織資料表單',
         content: '臺灣政商人物關係資料庫計畫',
-        target: '人物',
+        target: '組織',
         type: 'verify',
-        id: 1,
+        id: 2,
       },
-      person: personFields,
-
+      organization: organizationFields,
       collaborate: {
         name: '',
         email: '',
@@ -103,40 +101,42 @@ export default {
     }
   },
   computed: {
-    personIdSpecific() {
+    organizationIdSpecific() {
       return Number(this.$route.params.id) && this.$route.params.id
     },
   },
   watch: {
-    'person.name.value'(value) {
+    'organization.name.value'(value) {
       this.searchResults = []
       if (value) {
-        this.searchPersonByText(value)
+        this.searchOrganizationByText(value)
       }
     },
-    personCount() {
-      this.fetchPerson()
+    organizationCount() {
+      this.fetchOrganization()
     },
   },
+
   methods: {
-    fetchPerson() {
-      const id = this.personIdSpecific || getRandomId(this.personCount)
-      this.$apollo.addSmartQuery('Person', {
-        query: fetchPersonById,
+    fetchOrganization() {
+      const id =
+        this.organizationIdSpecific || getRandomId(this.organizationCount)
+      this.$apollo.addSmartQuery('Organization', {
+        query: fetchOrganizationById,
         variables() {
           return {
             id,
           }
         },
         update: (data) => {
-          this.personId = data.Person.id
-          moveGqlToForm(this.person, data.Person)
+          this.organizationId = data.Organization.id
+          moveGqlToForm(this.organization, data.Organization)
         },
       })
     },
-    searchPersonByText(text) {
+    searchOrganizationByText(text) {
       this.$apollo.addSmartQuery('searchResults', {
-        query: searchPersons,
+        query: searchOrganizations,
         variables: {
           text,
         },
@@ -144,7 +144,7 @@ export default {
           const uniqItems = uniqBy([...data.name, ...data.alternative], 'id')
           if (uniqItems?.length > 0) {
             return uniqItems
-              .filter((item) => item.id !== this.personId)
+              .filter((item) => item.id !== this.organizationId)
               .map((item) => ({
                 id: item.id,
                 name: item.name,
@@ -155,25 +155,27 @@ export default {
         },
       })
     },
+
     async uploadHandler() {
-      if (await !this.checkForm(this.person)) {
+      if (await !this.checkForm(this.organization)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.person, 'person')
+      this.uploadFormToGoogle(this.organization, 'organization')
       this.uploadForm()
     },
 
     async uploadForm() {
+      // Post update data to keystone
       await this.$apollo.mutate({
-        mutation: updatePerson,
+        mutation: updateOrganization,
         variables: {
           // put form data to graphql's field
-          id: this.personId,
-          ...moveFormToGqlVariable(this.person),
+          id: this.organizationId,
+          ...moveFormToGqlVariable(this.organization),
         },
       })
-      this.clearForm(this.person)
+      this.clearForm(this.organization)
       this.$router.push('/thanks')
     },
   },

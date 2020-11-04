@@ -11,12 +11,14 @@
       <span class="create-star">＊</span>為必填欄位
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in organization"
+          v-for="(field, key) in organization"
           :key="field.label"
           :field="field"
           type="create"
           @updateTags="updateTags"
-        />
+        >
+          <ListSameName v-if="key === 'name'" :items="searchResults" />
+        </FieldBlock>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -32,6 +34,7 @@
 </template>
 
 <script>
+import { uniqBy } from 'lodash'
 import FormHero from '../../components/FormHero'
 import FieldBlock from '../../components/FieldBlock'
 import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
@@ -47,6 +50,10 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import ListSameName from '../../components/ListSameName'
+
+import { buildSearchItemInfo } from '~/utils/organization'
+import { searchOrganizations } from '~/apollo/queries/organization.gql'
 
 export default {
   name: 'CreateOrganization',
@@ -58,6 +65,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -75,14 +83,42 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
+  },
+  watch: {
+    'organization.name.value'(value) {
+      this.searchResults = []
+      if (value) {
+        this.searchOrganizationByText(value)
+      }
+    },
   },
   mounted() {
     this.clearForm(this.organization)
   },
   methods: {
+    searchOrganizationByText(text) {
+      this.$apollo.addSmartQuery('searchResults', {
+        query: searchOrganizations,
+        variables: {
+          text,
+        },
+        update: (data) => {
+          const uniqItems = uniqBy([...data.name, ...data.alternative], 'id')
+          if (uniqItems?.length > 0) {
+            return uniqItems.map((item) => ({
+              id: item.id,
+              name: item.name,
+              info: buildSearchItemInfo(item),
+            }))
+          }
+          return []
+        },
+      })
+    },
     updateTags(value) {
-      this.organization.tags.value = value.map((item) => ({ id: item.id }))
+      this.organization.tags.value = value
     },
 
     async uploadHandler() {

@@ -1,4 +1,6 @@
 import { devideDate, mergeDate } from '../utils/fieldVerify'
+import { handleRelationMany } from '~/utils'
+
 export const moveFormToGqlVariable = (person) => {
   const {
     name,
@@ -44,7 +46,7 @@ export const moveFormToGqlVariable = (person) => {
     contact_details: contact_details.value,
     links: links.value,
     source: source.value,
-    tags: tags.value,
+    tags: handleRelationMany(tags.value),
   }
 }
 

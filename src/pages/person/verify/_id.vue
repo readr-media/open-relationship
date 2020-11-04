@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { uniqBy } from 'lodash'
 import FormHero from '~/components/FormHero'
 import FieldBlock from '~/components/FieldBlock'
 import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
@@ -140,9 +141,9 @@ export default {
           text,
         },
         update: (data) => {
-          const items = data.allPersons
-          if (items?.length > 0) {
-            return items
+          const uniqItems = uniqBy([...data.name, ...data.alternative], 'id')
+          if (uniqItems?.length > 0) {
+            return uniqItems
               .filter((item) => item.id !== this.personId)
               .map((item) => ({
                 id: item.id,

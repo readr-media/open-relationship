@@ -50,6 +50,13 @@ export const organizationRelationFields = {
 
     formState: true,
   },
+  tags: {
+    label: 'tag',
+    info: [],
+    value: [],
+    inputStatus: { type: 'relationMany', target: 'tag' },
+    verify: [],
+  },
   source: {
     label: '資料來源',
     info: [

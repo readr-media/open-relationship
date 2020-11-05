@@ -24,6 +24,12 @@ module.exports = {
     end_date_month: { label: '結束月', type: Integer },
     end_date_day: { label: '結束日', type: Integer },
     source: { label: '資料來源', type: Text },
+    tags: {
+      label: 'Tag',
+      type: Relationship,
+      ref: 'Tag',
+      many: true,
+    },
   },
   plugins: [atTracking(), byTracking()],
 }

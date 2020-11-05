@@ -30,12 +30,6 @@ module.exports = {
       many: true,
     },
     source: { label: '資料來源', type: Text },
-    tags: {
-      label: 'Tag',
-      type: Relationship,
-      ref: 'Tag',
-      many: true,
-    },
   },
   plugins: [atTracking(), byTracking()],
   labelResolver: (item) => `${item.person_id}+${item.organization_id}`,

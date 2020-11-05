@@ -44,6 +44,7 @@ export default {
         } else {
           field.value = ''
         }
+        field.correctVerify = null
       }
     },
     uploadFormToGoogle(form, target) {

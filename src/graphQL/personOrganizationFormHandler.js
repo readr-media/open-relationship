@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 import { devideDate, mergeDate } from '../utils/fieldVerify'
+import { handleRelationMany } from '~/utils'
+
 export const moveFormToGqlVariable = (person) => {
   const {
     person_id,
@@ -8,6 +10,7 @@ export const moveFormToGqlVariable = (person) => {
     start_date,
     end_date,
     source,
+    tags,
   } = person
 
   return {
@@ -24,6 +27,7 @@ export const moveFormToGqlVariable = (person) => {
     end_date_day: devideDate(end_date.value, 'day'),
 
     source: source.value,
+    tags: handleRelationMany(tags.value),
   }
 }
 
@@ -50,4 +54,5 @@ export const moveGqlToForm = (personOrganization, targetPersonOrganization) => {
     targetPersonOrganization.end_date_day
   )
   personOrganization.source.value = targetPersonOrganization.source
+  personOrganization.tags.value = targetPersonOrganization.tags
 }

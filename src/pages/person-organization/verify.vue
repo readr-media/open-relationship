@@ -134,12 +134,10 @@ export default {
       }
       this.uploadFormToGoogle(this.personOrganization, 'personOrganization')
       this.uploadForm()
-      this.clearForm(this.personOrganization)
-      this.$router.push('/thanks')
     },
 
-    uploadForm() {
-      this.$apollo.mutate({
+    async uploadForm() {
+      await this.$apollo.mutate({
         mutation: UPDATE_PERSON_ORGANIZATION,
         variables: {
           // put form data to graphql's field
@@ -147,6 +145,8 @@ export default {
           ...moveFormToGqlVariable(this.personOrganization),
         },
       })
+      this.clearForm(this.personOrganization)
+      this.$router.push('/thanks')
     },
   },
 }

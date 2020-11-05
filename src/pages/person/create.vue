@@ -53,7 +53,6 @@ import { personFields } from '../../fields/personFields'
 
 import { ADD_PERSON } from '../../graphQL/query/person'
 import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -61,6 +60,7 @@ import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 import ListSameName from '../../components/ListSameName'
 
+import { buildGqlVariables } from '~/utils'
 import { buildSearchItemInfo } from '~/utils/person'
 import { searchPersons } from '~/apollo/queries/person.gql'
 
@@ -144,18 +144,16 @@ export default {
         return
       }
       this.uploadForm()
-      this.clearForm(this.person)
-      this.$router.push('/thanks')
     },
 
     async uploadForm() {
       // Upload person form
-      this.$apollo.mutate({
+      await this.$apollo.mutate({
         mutation: ADD_PERSON,
-        variables: await moveFormToGqlVariable(this.person),
+        variables: buildGqlVariables(this.person),
       })
       // Update collaborate form
-      this.$apollo.mutate({
+      await this.$apollo.mutate({
         mutation: ADD_COLLABORATE,
         variables: {
           name: this.collaborate.name,
@@ -163,6 +161,8 @@ export default {
           feedback: this.collaborate.feedback,
         },
       })
+      this.clearForm(this.person)
+      this.$router.push('/thanks')
     },
   },
 }

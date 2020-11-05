@@ -27,7 +27,19 @@ module.exports = {
     end_date_year: { label: '關係結束年', type: Integer },
     end_date_month: { label: '關係結束月', type: Integer },
     end_date_day: { label: '關係結束日', type: Integer },
+    tags: {
+      label: 'Tag',
+      type: Relationship,
+      ref: 'Tag',
+      many: true,
+    },
     source: { label: '資料來源', type: Text },
+    tags: {
+      label: 'Tag',
+      type: Relationship,
+      ref: 'Tag',
+      many: true,
+    },
   },
   plugins: [atTracking(), byTracking()],
 }

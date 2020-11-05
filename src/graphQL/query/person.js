@@ -20,7 +20,7 @@ export const ADD_PERSON = gql`
     $contact_details: String
     $links: String
     $source: String
-    $tags: [TagWhereUniqueInput]
+    $tags: TagRelateToManyInput
   ) {
     createPerson(
       data: {
@@ -42,7 +42,7 @@ export const ADD_PERSON = gql`
         contact_details: $contact_details
         links: $links
         source: $source
-        tags: { connect: $tags }
+        tags: $tags
       }
     ) {
       name

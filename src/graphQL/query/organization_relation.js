@@ -12,6 +12,7 @@ export const ADD_ORGANIZATION_RELATION = gql`
     $end_date_month: Int
     $end_date_day: Int
     $source: String
+    $tags: TagRelateToManyInput
   ) {
     createOrganizationRelation(
       data: {
@@ -25,6 +26,7 @@ export const ADD_ORGANIZATION_RELATION = gql`
         end_date_month: $end_date_month
         end_date_day: $end_date_day
         source: $source
+        tags: $tags
       }
     ) {
       id
@@ -96,6 +98,10 @@ export const FETCH_RANDOM_ORGANIZATION_RELATION = gql`
       end_date_month
       end_date_day
       source
+      tags {
+        id
+        name
+      }
     }
   }
 `

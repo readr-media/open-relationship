@@ -33,26 +33,27 @@
 </template>
 
 <script>
-import FormHero from '../../components/FormHero'
-import FieldBlock from '../../components/FieldBlock'
-import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
-import Button from '../../components/Button'
-import { personRelationFields } from '../../fields/personRelationFields'
-import {
-  FETCH_PERSON_RELATIONS_COUNT,
-  FETCH_RANDOM_PERSON_RELATION,
-  UPDATE_PERSON_RELATION,
-} from '../../graphQL/query/person_relation'
+import FormHero from '~/components/FormHero'
+import FieldBlock from '~/components/FieldBlock'
+import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
+import Button from '~/components/Button'
+import { personRelationFields } from '~/fields/personRelationFields'
+import { UPDATE_PERSON_RELATION } from '~/graphQL/query/person_relation'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '../../graphQL/personRelationFormHandler'
-import { getRandomId } from '../../utils'
-import formMixin from '../../mixins/formMixin'
+} from '~/graphQL/personRelationFormHandler'
+import { getRandomId } from '~/utils'
+import formMixin from '~/mixins/formMixin'
 
-import More from '../../components/More'
-import Footer from '../../components/Footer'
-import OtherForms from '../../components/OtherForms'
+import More from '~/components/More'
+import Footer from '~/components/Footer'
+import OtherForms from '~/components/OtherForms'
+
+import {
+  fetchPersonRelationById,
+  fetchPersonRelationsCount,
+} from '~/apollo/queries/person-relation.gql'
 
 export default {
   name: 'VerifyPersonRelation',
@@ -65,11 +66,17 @@ export default {
     CollaborateFieldBlock,
     OtherForms,
   },
+  apollo: {
+    personRelationsCount: {
+      query: fetchPersonRelationsCount,
+      update: (data) => data._allPersonRelationsMeta.count,
+    },
+  },
   mixins: [formMixin],
 
   data() {
     return {
-      personRelationId: 1,
+      personRelationId: this.$route.params.id,
       hero: {
         title: '驗證人物關係資料表單',
         content: '臺灣政商人物關係資料庫計畫',
@@ -86,41 +93,28 @@ export default {
       },
     }
   },
-
-  async mounted() {
-    await this.fetchPersonRelationsCount().then((res) => {
-      this.fetchRandomPersonRelation(res)
-    })
-  },
-
-  methods: {
-    fetchPersonRelationsCount() {
-      // 1 fetch person counts
-      return new Promise((resolve, reject) => {
-        this.$apollo.addSmartQuery('_allPersonRelationsMeta', {
-          query: FETCH_PERSON_RELATIONS_COUNT,
-          update(data) {
-            // 2 get random personid from result
-            const randomId = getRandomId(data._allPersonRelationsMeta.count)
-            if (randomId === 0) resolve(1)
-            // 3 fetch random person
-            resolve(randomId)
-            // this.fetchRandomPerson(randomId)
-          },
-        })
-      })
+  computed: {
+    personRelationIdSpecific() {
+      return Number(this.$route.params.id) && this.$route.params.id
     },
-    fetchRandomPersonRelation(randomId) {
-      // 4 fetch random person
+  },
+  watch: {
+    personRelationsCount() {
+      this.fetchPersonRelation()
+    },
+  },
+  methods: {
+    fetchPersonRelation() {
+      const id =
+        this.personRelationIdSpecific || getRandomId(this.personRelationsCount)
       this.$apollo.addSmartQuery('PersonRelation', {
-        query: FETCH_RANDOM_PERSON_RELATION,
+        query: fetchPersonRelationById,
         variables() {
           return {
-            id: randomId,
+            id,
           }
         },
-        update(data) {
-          // 5 set id and move data to form fields
+        update: (data) => {
           this.personRelationId = data.PersonRelation.id
           moveGqlToForm(this.personRelation, data.PersonRelation)
         },

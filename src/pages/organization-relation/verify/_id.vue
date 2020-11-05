@@ -33,27 +33,28 @@
 </template>
 
 <script>
-import FormHero from '../../components/FormHero'
-import FieldBlock from '../../components/FieldBlock'
-import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
+import FormHero from '~/components/FormHero'
+import FieldBlock from '~/components/FieldBlock'
+import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 
-import Button from '../../components/Button'
-import { organizationRelationFields } from '../../fields/organizationRelationFields'
-import {
-  FETCH_ORGANIZATION_RELATIONS_COUNT,
-  FETCH_RANDOM_ORGANIZATION_RELATION,
-  UPDATE_ORGANIZATION_RELATION,
-} from '../../graphQL/query/organization_relation'
+import Button from '~/components/Button'
+import { organizationRelationFields } from '~/fields/organizationRelationFields'
+import { UPDATE_ORGANIZATION_RELATION } from '~/graphQL/query/organization_relation'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
-} from '../../graphQL/organizationRelationFormHandler'
-import { getRandomId } from '../../utils'
-import formMixin from '../../mixins/formMixin'
+} from '~/graphQL/organizationRelationFormHandler'
+import { getRandomId } from '~/utils'
+import formMixin from '~/mixins/formMixin'
 
-import More from '../../components/More'
-import Footer from '../../components/Footer'
-import OtherForms from '../../components/OtherForms'
+import More from '~/components/More'
+import Footer from '~/components/Footer'
+import OtherForms from '~/components/OtherForms'
+
+import {
+  fetchOrganizationRelationById,
+  fetchOrganizationRelationsCount,
+} from '~/apollo/queries/organization-relation.gql'
 
 export default {
   name: 'VerifyOrganizationRelation',
@@ -66,11 +67,17 @@ export default {
     Footer,
     OtherForms,
   },
+  apollo: {
+    organizationRelationsCount: {
+      query: fetchOrganizationRelationsCount,
+      update: (data) => data._allOrganizationRelationsMeta.count,
+    },
+  },
   mixins: [formMixin],
 
   data() {
     return {
-      organizationRelationId: 1,
+      organizationRelationId: this.$route.params.id,
       hero: {
         title: '驗證組織關係資料表單',
         content: '臺灣政商人物關係資料庫計畫',
@@ -87,43 +94,30 @@ export default {
       },
     }
   },
-
-  async mounted() {
-    await this.fetchOrganizationCount().then((res) => {
-      this.fetchRandomOrganizationRelation(res)
-    })
+  computed: {
+    organizationRelationIdSpecific() {
+      return Number(this.$route.params.id) && this.$route.params.id
+    },
+  },
+  watch: {
+    organizationRelationsCount() {
+      this.fetchOrganizationRelation()
+    },
   },
 
   methods: {
-    fetchOrganizationCount() {
-      // 1 fetch person counts
-      return new Promise((resolve, reject) => {
-        this.$apollo.addSmartQuery('_allOrganizationRelationsMeta', {
-          query: FETCH_ORGANIZATION_RELATIONS_COUNT,
-          update(data) {
-            // 2 get random personid from result
-            const randomId = getRandomId(
-              data._allOrganizationRelationsMeta.count
-            )
-            if (randomId === 0) resolve(1)
-            // 3 fetch random person
-            resolve(randomId)
-            // this.fetchRandomPerson(randomId)
-          },
-        })
-      })
-    },
-    fetchRandomOrganizationRelation(randomId) {
-      // 4 fetch random organization
+    fetchOrganizationRelation() {
+      const id =
+        this.organizationRelationIdSpecific ||
+        getRandomId(this.organizationRelationsCount)
       this.$apollo.addSmartQuery('OrganizationRelation', {
-        query: FETCH_RANDOM_ORGANIZATION_RELATION,
+        query: fetchOrganizationRelationById,
         variables() {
           return {
-            id: randomId,
+            id,
           }
         },
-        update(data) {
-          // 5 set id and move data to form fields
+        update: (data) => {
           this.organizationRelationId = data.OrganizationRelation.id
           moveGqlToForm(this.organizationRelation, data.OrganizationRelation)
         },

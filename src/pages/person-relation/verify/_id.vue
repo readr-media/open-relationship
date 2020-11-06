@@ -136,7 +136,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.personRelationId,
-          ...moveFormToGqlVariable(this.personRelation),
+          ...moveFormToGqlVariable({ person: this.personRelation }),
         },
       })
       this.clearForm(this.personRelation)

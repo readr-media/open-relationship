@@ -71,9 +71,6 @@ export default {
     initialValue(value) {
       this.items = value
     },
-    items(value) {
-      this.$emit('update', value)
-    },
   },
   methods: {
     fetchSuggestions() {

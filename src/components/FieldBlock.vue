@@ -67,7 +67,6 @@
       <RelationManyInput
         :initialValue="field.value"
         :schemaTarget="field.inputStatus.target"
-        @update="updateTags"
       />
     </div>
 
@@ -156,9 +155,6 @@ export default {
     }
   },
   methods: {
-    updateTags(value) {
-      this.$emit('updateTags', value)
-    },
     verifyField(field) {
       //  return if there is no verify needed
       if (!field.verify) return

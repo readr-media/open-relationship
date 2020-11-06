@@ -18,7 +18,6 @@
           :key="field.label"
           :field="field"
           type="create"
-          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
@@ -127,9 +126,6 @@ export default {
           source,
         },
       }
-    },
-    updateTags(value) {
-      this.organizationRelation.tags.value = value
     },
 
     async uploadHandler() {

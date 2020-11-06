@@ -15,7 +15,6 @@
           :key="field.label"
           :field="field"
           type="create"
-          @updateTags="updateTags"
         >
           <ListSameName v-if="key === 'name'" :items="searchResults" />
         </FieldBlock>
@@ -116,9 +115,6 @@ export default {
           return []
         },
       })
-    },
-    updateTags(value) {
-      this.organization.tags.value = value
     },
 
     async uploadHandler() {

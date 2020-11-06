@@ -18,7 +18,6 @@
           :key="field.label"
           :field="field"
           type="create"
-          @updateTags="updateTags"
         />
 
         <CollaborateFieldBlock :collaborate="collaborate" />
@@ -101,9 +100,6 @@ export default {
     this.clearForm(this.personOrganization)
   },
   methods: {
-    updateTags(value) {
-      this.personOrganization.tags.value = value
-    },
     async uploadHandler() {
       if (await !this.checkForm(this.personOrganization)) {
         this.goToErrorField()

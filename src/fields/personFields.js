@@ -133,8 +133,8 @@ export const personFields = {
     correctVerify: null,
   },
   tags: {
-    label: 'tag',
-    info: [],
+    label: '標籤（tag）',
+    info: ['如何分類這筆資料？例如：第十屆立法委員、2018縣市議員選舉等等'],
     value: [],
     inputStatus: { type: 'relationMany', target: 'tag' },
     verify: [],

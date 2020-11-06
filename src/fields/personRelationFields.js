@@ -11,6 +11,7 @@ export const personRelationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   related_person_id: {
     label: '關係者姓名',
@@ -24,6 +25,7 @@ export const personRelationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   relative: {
     label: '關係者如何稱呼該人物',

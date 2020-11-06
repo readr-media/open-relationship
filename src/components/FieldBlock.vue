@@ -56,7 +56,11 @@
       v-else-if="field.inputStatus.type == 'relation'"
       class="inputWrapper-single"
     >
-      <RelationInput :field="field" :verifyField="verifyField" />
+      <RelationInput
+        :field="field"
+        :readonly="type === 'verify' && field.lockedDuringVerification"
+        :verifyField="verifyField"
+      />
     </div>
 
     <div v-else-if="field.inputStatus.type == 'relationMany'">
@@ -69,7 +73,11 @@
 
     <!-- handle single input -->
     <div v-else class="inputWrapper-single">
-      <input v-model="field.value" @change="verifyField(field)" />
+      <input
+        v-model="field.value"
+        :readonly="type === 'verify' && field.lockedDuringVerification"
+        @change="verifyField(field)"
+      />
     </div>
 
     <!-- error prompt -->
@@ -84,7 +92,10 @@
     </div>
 
     <!-- handle verify section -->
-    <div v-if="type == 'verify'" class="FieldBlock-verify">
+    <div
+      v-if="type == 'verify' && !field.lockedDuringVerification"
+      class="FieldBlock-verify"
+    >
       <div class="FieldBlock-verify-radioBlock">
         <input v-model="field.correctVerify" type="radio" :value="true" /><label
           >資料正確</label

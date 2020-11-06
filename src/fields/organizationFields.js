@@ -7,6 +7,7 @@ export const organizationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   identifiers: {
     label: '統一編號',

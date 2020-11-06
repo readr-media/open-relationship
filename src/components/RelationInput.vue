@@ -1,6 +1,8 @@
 <template>
   <div class="RelationInput">
+    <input v-if="readonly" v-model="field.value.name" readonly />
     <vue-autosuggest
+      v-else
       v-model="field.value.name"
       :sectionConfigs="sectionConfigs"
       :suggestions="filteredOptions"
@@ -30,7 +32,16 @@ import relationInputMixin from '../mixins/relationInputMixin'
 export default {
   components: { VueAutosuggest },
   mixins: [relationInputMixin],
-  props: ['field', 'verifyField'],
+  props: {
+    field: {
+      type: Object,
+      required: true,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   data() {
     return {

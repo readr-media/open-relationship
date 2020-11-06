@@ -12,6 +12,7 @@ export const personFields = {
     verify: ['required'], // handle field-verify methods
     formState: true, // if field-erify fails, it'll turn false, and sumbit won't pass.
     correctVerify: null, // correction-verify flag,null,true or false
+    lockedDuringVerification: true,
   },
   alternative: {
     label: '別名',

@@ -7,6 +7,7 @@ export const personOrganizationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   organization_id: {
     label: '組織名稱',
@@ -16,6 +17,7 @@ export const personOrganizationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   role: {
     label: '職位名稱',

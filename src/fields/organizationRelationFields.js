@@ -7,6 +7,7 @@ export const organizationRelationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   related_organization_id: {
     label: '關係組織名稱',
@@ -16,6 +17,7 @@ export const organizationRelationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
   },
   relative: {
     label: '組織與關係組織的從屬關係',

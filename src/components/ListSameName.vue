@@ -25,11 +25,13 @@
     </div>
     <p v-if="showLinkForSameName">
       <span v-if="hasItems"
-        >如果以上不是你要{{ formTypeDisplay }}的{{ formNameDisplay }}，</span
-      ><span v-else-if="!hasItems && !isCreateForm">
-        如果你想要{{ formTypeDisplay }}的{{ formNameDisplay }}與上述{{
+        >如果以上名稱皆符合卻不是你要{{ formTypeDisplay }}的{{
           formNameDisplay
-        }}名稱相同，</span
+        }}，</span
+      ><span v-else-if="!hasItems && !isCreateForm">
+        如果你想要驗證的{{ formNameDisplay }}與上述{{
+          fieldDisplayNameForSameNameList
+        }}名稱完全相同，</span
       ><span
         >請填寫<a
           :class="`g-color-${formType}`"
@@ -37,7 +39,7 @@
           target="_blank"
           rel="noopener noreferrer"
           >表單</a
-        >，我們將為你新增{{ formNameDisplay }}資料
+        >，我們將為你新增資料
       </span>
     </p>
   </div>
@@ -94,6 +96,17 @@ export default {
         this.linkForAddSameName &&
         !(this.formType === 'create' && !this.hasItems)
       )
+    },
+    fieldDisplayNameForSameNameList() {
+      switch (this.formName) {
+        case 'person-organization':
+          return '人物、組織'
+        case 'organization':
+        case 'organization-relation':
+          return '組織'
+        default:
+          return '人物'
+      }
     },
   },
 }

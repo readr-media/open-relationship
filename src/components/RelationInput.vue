@@ -17,8 +17,12 @@
         slot-scope="{ suggestion }"
         style="display: flex; align-items: center"
       >
+        <!-- 由於不同表單提供的欄位資訊不同，請先組好要顯示的資訊 -->
         <div style="{ display: 'flex', color: 'navyblue'}">
-          {{ suggestion.item.name }}
+          {{ suggestion.item.name
+          }}<span v-if="suggestion.item.info"
+            >（{{ suggestion.item.info }}）</span
+          >
         </div>
       </div>
     </vue-autosuggest>

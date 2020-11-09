@@ -8,6 +8,7 @@ export const personOrganizationFields = {
     verify: ['required'],
     formState: true,
     lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   organization_id: {
     label: '組織名稱',
@@ -18,6 +19,7 @@ export const personOrganizationFields = {
     verify: ['required'],
     formState: true,
     lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   role: {
     label: '職位名稱',

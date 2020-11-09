@@ -12,6 +12,7 @@ export const personRelationFields = {
     verify: ['required'],
     formState: true,
     lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   related_person_id: {
     label: '關係者姓名',
@@ -26,6 +27,7 @@ export const personRelationFields = {
     verify: ['required'],
     formState: true,
     lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   relative: {
     label: '關係者如何稱呼該人物',

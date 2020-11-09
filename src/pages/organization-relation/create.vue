@@ -14,7 +14,12 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <template v-for="(field, key) in organizationRelation">
-          <FieldBlock :key="field.label" :field="field" type="create" />
+          <FieldBlock
+            v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
+            :key="field.label"
+            :field="field"
+            type="create"
+          />
           <ListSameName
             v-if="key === 'related_organization_id'"
             :key="`${key}`"
@@ -22,12 +27,13 @@
             class="FieldBlock"
           />
         </template>
+        <template v-if="!haveExactlySameName">
+          <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <CollaborateFieldBlock :collaborate="collaborate" />
-
-        <div class="btnContainer">
-          <Button title="送出" fitDiv="true" round="true" type="create" />
-        </div>
+          <div class="btnContainer">
+            <Button title="送出" fitDiv="true" round="true" type="create" />
+          </div>
+        </template>
       </form>
     </div>
     <OtherForms operationType="create" />
@@ -88,6 +94,9 @@ export default {
     }
   },
   computed: {
+    haveExactlySameName() {
+      return this.searchResults.length > 0
+    },
     needCreateCollaborate() {
       return (
         this.collaborate.name ||

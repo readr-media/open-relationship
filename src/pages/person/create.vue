@@ -15,6 +15,7 @@
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
           v-for="(field, key) in person"
+          v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
           :key="field.label"
           :field="field"
           type="create"
@@ -22,17 +23,19 @@
           <ListSameName v-if="key === 'name'" :items="searchResults" />
         </FieldBlock>
 
-        <CollaborateFieldBlock :collaborate="collaborate" />
+        <template v-if="!haveExactlySameName">
+          <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <div class="btnContainer">
-          <Button
-            title="送出"
-            fitDiv="true"
-            round="true"
-            type="create"
-            @click="handleClick"
-          />
-        </div>
+          <div class="btnContainer">
+            <Button
+              title="送出"
+              fitDiv="true"
+              round="true"
+              type="create"
+              @click="handleClick"
+            />
+          </div>
+        </template>
       </form>
     </div>
     <OtherForms operationType="create" />
@@ -93,6 +96,13 @@ export default {
       },
       searchResults: [],
     }
+  },
+  computed: {
+    haveExactlySameName() {
+      return this.searchResults.some(
+        (item) => item.name === this.person.name.value
+      )
+    },
   },
   watch: {
     'person.name.value'(value) {

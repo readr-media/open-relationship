@@ -8,6 +8,7 @@ export const organizationFields = {
     verify: ['required'],
     formState: true,
     lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   identifiers: {
     label: '統一編號',

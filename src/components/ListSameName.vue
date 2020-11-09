@@ -48,7 +48,10 @@ import { ROUTE_MAPPING } from '~/constants'
 
 const LINK_FOR_ADD_SAME_NAME = {
   person: 'https://forms.gle/cuzHnCb8pE1S31FV7',
+  'person-organization': 'https://forms.gle/KmnkF5HrbeQUkcXK9',
+  'person-relation': 'https://forms.gle/pV2z67vNe5NhKKPp7',
   organization: 'https://forms.gle/ExtoR4116oSndUot6',
+  'organization-relation': 'https://forms.gle/t5GwSywgcVfp9qhv6',
 }
 
 export default {

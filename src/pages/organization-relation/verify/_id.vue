@@ -12,6 +12,15 @@
         <span class="verify-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
+        <template v-for="(field, key) in organizationRelation">
+          <FieldBlock :key="field.label" :field="field" type="verify" />
+          <ListSameName
+            v-if="key === 'related_organization_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
         <FieldBlock
           v-for="field in organizationRelation"
           :key="field.label"
@@ -50,10 +59,11 @@ import formMixin from '~/mixins/formMixin'
 import More from '~/components/More'
 import Footer from '~/components/Footer'
 import OtherForms from '~/components/OtherForms'
-
+import ListSameName from '~/components/ListSameName'
 import {
   fetchOrganizationRelationById,
   fetchOrganizationRelationsCount,
+  searchOrganizationRelations,
 } from '~/apollo/queries/organization-relation.gql'
 
 export default {
@@ -66,6 +76,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   apollo: {
     organizationRelationsCount: {
@@ -92,6 +103,7 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
@@ -100,6 +112,12 @@ export default {
     },
   },
   watch: {
+    'organizationRelation.organization_id.value.name'() {
+      this.searchOrganizationRelationByName()
+    },
+    'organizationRelation.related_organization_id.value.name'() {
+      this.searchOrganizationRelationByName()
+    },
     organizationRelationsCount() {
       this.fetchOrganizationRelation()
     },
@@ -122,6 +140,35 @@ export default {
           moveGqlToForm(this.organizationRelation, data.OrganizationRelation)
         },
       })
+    },
+    searchOrganizationRelationByName() {
+      this.searchResults = []
+      const organizationName = this.organizationRelation?.organization_id?.value
+        ?.name
+      const relatedOrganizationName = this.organizationRelation
+        ?.related_organization_id?.value?.name
+      if (organizationName && relatedOrganizationName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchOrganizationRelations,
+          variables: {
+            organizationName,
+            relatedOrganizationName,
+          },
+          update: (data) => {
+            const items = data.allOrganizationRelations
+            if (items?.length > 0) {
+              return items
+                .filter((item) => item.id !== this.organizationRelationId)
+                .map((item) => ({
+                  id: item.id,
+                  name: `${organizationName}+${relatedOrganizationName}`,
+                  info: item.relative,
+                }))
+            }
+            return []
+          },
+        })
+      }
     },
     async uploadHandler() {
       if (await !this.checkForm(this.organizationRelation)) {

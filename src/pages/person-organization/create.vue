@@ -13,12 +13,15 @@
         <span class="create-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
-        <FieldBlock
-          v-for="field in personOrganization"
-          :key="field.label"
-          :field="field"
-          type="create"
-        />
+        <template v-for="(field, key) in personOrganization">
+          <FieldBlock :key="field.label" :field="field" type="create" />
+          <ListSameName
+            v-if="key === 'organization_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -49,8 +52,10 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import ListSameName from '~/components/ListSameName'
 import { createOrganization } from '~/apollo/queries/organization.gql'
 import { createPerson } from '~/apollo/queries/person.gql'
+import { searchPersonOrganizations } from '~/apollo/queries/person-organization.gql'
 
 export default {
   name: 'CreatePersonOrganization',
@@ -62,6 +67,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -79,6 +85,7 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
@@ -96,10 +103,44 @@ export default {
       return !this.personOrganization.person_id.value.id
     },
   },
+  watch: {
+    'personOrganization.person_id.value.name'() {
+      this.searchPersonOrganizationByName()
+    },
+    'personOrganization.organization_id.value.name'() {
+      this.searchPersonOrganizationByName()
+    },
+  },
   mounted() {
     this.clearForm(this.personOrganization)
   },
   methods: {
+    searchPersonOrganizationByName() {
+      this.searchResults = []
+      const personName = this.personOrganization?.person_id?.value?.name
+      const organizationName = this.personOrganization?.organization_id?.value
+        ?.name
+      if (personName && organizationName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchPersonOrganizations,
+          variables: {
+            personName,
+            organizationName,
+          },
+          update: (data) => {
+            const items = data.allPersonOrganizations
+            if (items?.length > 0) {
+              return items.map((item) => ({
+                id: item.id,
+                name: `${personName}+${organizationName}`,
+                info: item.role,
+              }))
+            }
+            return []
+          },
+        })
+      }
+    },
     async uploadHandler() {
       if (await !this.checkForm(this.personOrganization)) {
         this.goToErrorField()

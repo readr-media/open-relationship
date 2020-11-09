@@ -29,3 +29,27 @@ query fetchPersonRelationsCount {
     count
   }
 }
+
+query searchPersonRelations($personName: String!, $relatedPersonName: String!) {
+  allPersonRelations(
+    where: {
+      person_id: {
+        name: $personName
+      },
+      related_person_id: {
+        name: $relatedPersonName
+      }
+    }
+  ) {
+    id
+    relative
+    person_id {
+      id
+      name
+    }
+    related_person_id {
+      id
+      name
+    }
+  }
+}

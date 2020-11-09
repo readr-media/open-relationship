@@ -13,12 +13,15 @@
         <span class="create-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
-        <FieldBlock
-          v-for="field in organizationRelation"
-          :key="field.label"
-          :field="field"
-          type="create"
-        />
+        <template v-for="(field, key) in organizationRelation">
+          <FieldBlock :key="field.label" :field="field" type="create" />
+          <ListSameName
+            v-if="key === 'related_organization_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -49,7 +52,9 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import ListSameName from '~/components/ListSameName'
 import { createOrganizations } from '~/apollo/queries/organization.gql'
+import { searchOrganizationRelations } from '~/apollo/queries/organization-relation.gql'
 
 export default {
   name: 'CreateOrganizationRelation',
@@ -61,6 +66,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -78,6 +84,7 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
@@ -93,6 +100,14 @@ export default {
         this.organizationRelation.organization_id.value.id &&
         this.organizationRelation.related_organization_id.value.id
       )
+    },
+  },
+  watch: {
+    'organizationRelation.organization_id.value.name'() {
+      this.searchOrganizationRelationByName()
+    },
+    'organizationRelation.related_organization_id.value.name'() {
+      this.searchOrganizationRelationByName()
     },
   },
   mounted() {
@@ -125,6 +140,33 @@ export default {
           name,
           source,
         },
+      }
+    },
+    searchOrganizationRelationByName() {
+      this.searchResults = []
+      const organizationName = this.organizationRelation?.organization_id?.value
+        ?.name
+      const relatedOrganizationName = this.organizationRelation
+        ?.related_organization_id?.value?.name
+      if (organizationName && relatedOrganizationName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchOrganizationRelations,
+          variables: {
+            organizationName,
+            relatedOrganizationName,
+          },
+          update: (data) => {
+            const items = data.allOrganizationRelations
+            if (items?.length > 0) {
+              return items.map((item) => ({
+                id: item.id,
+                name: `${organizationName}+${relatedOrganizationName}`,
+                info: item.relative,
+              }))
+            }
+            return []
+          },
+        })
       }
     },
 

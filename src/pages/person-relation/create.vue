@@ -13,12 +13,15 @@
         <span class="create-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
-        <FieldBlock
-          v-for="field in personRelation"
-          :key="field.label"
-          :field="field"
-          type="create"
-        />
+        <template v-for="(field, key) in personRelation">
+          <FieldBlock :key="field.label" :field="field" type="create" />
+          <ListSameName
+            v-if="key === 'related_person_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -49,7 +52,9 @@ import formMixin from '../../mixins/formMixin'
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
+import ListSameName from '~/components/ListSameName'
 import { createPersons } from '~/apollo/queries/person.gql'
+import { searchPersonRelations } from '~/apollo/queries/person-relation.gql'
 
 export default {
   name: 'CreatePersonRelation',
@@ -61,6 +66,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -78,6 +84,7 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
@@ -93,6 +100,14 @@ export default {
         this.personRelation.person_id.value.id &&
         this.personRelation.related_person_id.value.id
       )
+    },
+  },
+  watch: {
+    'personRelation.person_id.value.name'() {
+      this.searchPersonRelationByName()
+    },
+    'personRelation.related_person_id.value.name'() {
+      this.searchPersonRelationByName()
     },
   },
   mounted() {
@@ -125,6 +140,32 @@ export default {
           name,
           source,
         },
+      }
+    },
+    searchPersonRelationByName() {
+      this.searchResults = []
+      const personName = this.personRelation?.person_id?.value?.name
+      const relatedPersonName = this.personRelation?.related_person_id?.value
+        ?.name
+      if (personName && relatedPersonName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchPersonRelations,
+          variables: {
+            personName,
+            relatedPersonName,
+          },
+          update: (data) => {
+            const items = data.allPersonRelations
+            if (items?.length > 0) {
+              return items.map((item) => ({
+                id: item.id,
+                name: `${personName}+${relatedPersonName}`,
+                info: item.relative,
+              }))
+            }
+            return []
+          },
+        })
       }
     },
     async uploadHandler() {

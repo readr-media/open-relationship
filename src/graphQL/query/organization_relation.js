@@ -68,40 +68,5 @@ export const UPDATE_ORGANIZATION_RELATION = gql`
   }
 `
 
-export const FETCH_ORGANIZATION_RELATIONS_COUNT = gql`
-  query {
-    _allOrganizationRelationsMeta {
-      count
-    }
-  }
-`
 // $parent:String,
 // $children:String,
-
-export const FETCH_RANDOM_ORGANIZATION_RELATION = gql`
-  query getRandomOrganizationRelation($id: ID!) {
-    OrganizationRelation(where: { id: $id }) {
-      id
-      organization_id {
-        id
-        name
-      }
-      related_organization_id {
-        id
-        name
-      }
-      relative
-      start_date_year
-      start_date_month
-      start_date_day
-      end_date_year
-      end_date_month
-      end_date_day
-      source
-      tags {
-        id
-        name
-      }
-    }
-  }
-`

@@ -10,9 +10,17 @@
         id: 'autosuggest__input',
         placeholder: '輸入名稱',
       }"
+      class="autosuggest"
       @input="onInputChange"
       @selected="onSelected"
+      @blur="handleBlur"
     >
+      <span
+        v-if="selected.info"
+        slot="after-input"
+        class="selected-info"
+        v-text="`（${selected.info}）`"
+      />
       <div
         slot-scope="{ suggestion }"
         style="display: flex; align-items: center"
@@ -80,10 +88,19 @@ export default {
       ]
     },
   },
+  watch: {
+    selected(value) {
+      this.suggestions[0].data = this.suggestions[0].data.filter(
+        (item) => item.id !== value.id
+      )
+    },
+  },
 
   methods: {
     // event fired when typing
     async onInputChange(text) {
+      this.selected = {}
+      this.field.value.id = ''
       switch (this.field.inputStatus.target) {
         case 'person':
           await this.searchPersons(text)
@@ -97,7 +114,18 @@ export default {
           break
       }
     },
-
+    handleBlur() {
+      setTimeout(() => {
+        const hasSelected = this.selected?.id
+        const hasSameNameItem = this.suggestions[0].data.find(
+          (item) => item.name === this.field.value.name
+        )
+        if (!hasSelected && hasSameNameItem) {
+          this.selected = hasSameNameItem
+          this.field.value.id = hasSameNameItem.id
+        }
+      }, 500)
+    },
     // event fired when selected an item
     onSelected(item) {
       if (item) {
@@ -158,6 +186,16 @@ export default {
   }
   .autosuggest__results-item--highlighted {
     background-color: rgba(212, 212, 212, 0.2);
+  }
+
+  .autosuggest {
+    position: relative;
+    .selected-info {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: grey;
+    }
   }
 }
 </style>

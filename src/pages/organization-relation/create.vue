@@ -59,7 +59,7 @@ import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 import ListSameName from '~/components/ListSameName'
-import { createOrganizations } from '~/apollo/queries/organization.gql'
+import { createOrganizations } from '~/apollo/mutations/organization.gql'
 import { searchOrganizationRelations } from '~/apollo/queries/organization-relation.gql'
 
 export default {

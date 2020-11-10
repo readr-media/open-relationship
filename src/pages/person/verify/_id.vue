@@ -56,8 +56,8 @@ import {
   fetchPersonById,
   fetchPersonCount,
   searchPersons,
-  updatePerson,
 } from '~/apollo/queries/person.gql'
+import { updatePerson } from '~/apollo/mutations/person.gql'
 
 export default {
   name: 'VerifyPerson',

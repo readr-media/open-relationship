@@ -57,8 +57,8 @@ import {
   fetchOrganizationById,
   fetchOrganizationCount,
   searchOrganizations,
-  updateOrganization,
 } from '~/apollo/queries/organization.gql'
+import { updateOrganization } from '~/apollo/mutations/organization.gql'
 
 export default {
   name: 'VerifyOrganization',

@@ -1,0 +1,10 @@
+fragment searchResultOrganization on Organization {
+  id
+  name
+  identifiers
+  alternative
+  other_names
+  tags {
+    name
+  }
+}

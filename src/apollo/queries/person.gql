@@ -1,3 +1,5 @@
+#import "~/apollo/fragments/searchResultPerson.gql"
+
 query fetchPersonById ($id: ID!) {
   Person(where: { id: $id }) {
     id
@@ -121,20 +123,6 @@ mutation createPersons ($data: [PersonsCreateInput]) {
     data: $data
   ) {
     id
-    name
-  }
-}
-
-fragment searchResultPerson on Person {
-  id
-  name
-  gender
-  alternative
-  other_names
-  birth_date_year
-  birth_date_month
-  birth_date_day
-  tags {
     name
   }
 }

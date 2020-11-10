@@ -1,3 +1,5 @@
+#import "~/apollo/fragments/searchResultOrganization.gql"
+
 query fetchOrganizationById ($id: ID!) {
   Organization(where: { id: $id }) {
     id
@@ -104,17 +106,6 @@ mutation updateOrganization (
     }
   ) {
     id
-    name
-  }
-}
-
-fragment searchResultOrganization on Organization {
-  id
-  name
-  identifiers
-  alternative
-  other_names
-  tags {
     name
   }
 }

@@ -1,35 +1,4 @@
-/* eslint-disable camelcase */
-import { devideDate, mergeDate } from '../utils/fieldVerify'
-import { handleRelationMany } from '~/utils'
-
-export const moveFormToGqlVariable = (person) => {
-  const {
-    person_id,
-    organization_id,
-    role,
-    start_date,
-    end_date,
-    source,
-    tags,
-  } = person
-
-  return {
-    // put form data to graphql's field
-    person_id: person_id.value.id,
-    organization_id: organization_id.value.id,
-    role: role.value,
-
-    start_date_year: devideDate(start_date.value, 'year'),
-    start_date_month: devideDate(start_date.value, 'month'),
-    start_date_day: devideDate(start_date.value, 'day'),
-    end_date_year: devideDate(end_date.value, 'year'),
-    end_date_month: devideDate(end_date.value, 'month'),
-    end_date_day: devideDate(end_date.value, 'day'),
-
-    source: source.value,
-    tags: handleRelationMany(tags.value),
-  }
-}
+import { mergeDate } from '../utils/fieldVerify'
 
 export const moveGqlToForm = (personOrganization, targetPersonOrganization) => {
   personOrganization.person_id.value.id = targetPersonOrganization.person_id.id

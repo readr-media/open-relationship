@@ -50,13 +50,13 @@ import Button from '../../components/Button'
 
 import { personRelationFields } from '../../fields/personRelationFields'
 
-import { moveFormToGqlVariable } from '../../graphQL/personRelationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 import ListSameName from '~/components/ListSameName'
+import { buildGqlVariables } from '~/utils'
 import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
 import { createPersonRelation } from '~/apollo/mutations/person-relation.gql'
 import { createPersons } from '~/apollo/mutations/person.gql'
@@ -206,14 +206,15 @@ export default {
       await Promise.all([
         this.$apollo.mutate({
           mutation: createPersonRelation,
-          variables: moveFormToGqlVariable({ person: this.personRelation }),
+          variables: {
+            data: buildGqlVariables(this.personRelation),
+          },
         }),
         this.$apollo.mutate({
           mutation: createPersonRelation,
-          variables: moveFormToGqlVariable({
-            person: this.personRelation,
-            isReverse: true,
-          }),
+          variables: {
+            data: buildGqlVariables(this.personRelation, true),
+          },
         }),
       ])
       // Update collaborate form

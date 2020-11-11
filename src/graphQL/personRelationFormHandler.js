@@ -1,43 +1,4 @@
-import { devideDate, mergeDate } from '../utils/fieldVerify'
-import { handleRelationMany } from '~/utils'
-
-export const moveFormToGqlVariable = ({ person, isReverse = false }) => {
-  const {
-    // eslint-disable-next-line camelcase
-    person_id,
-    // eslint-disable-next-line camelcase
-    related_person_id,
-    relative,
-    // eslint-disable-next-line camelcase
-    reverse_relative,
-    // eslint-disable-next-line camelcase
-    start_date,
-    // eslint-disable-next-line camelcase
-    end_date,
-    source,
-    tags,
-  } = person
-
-  const personId = person_id?.value?.id
-  const relatedPersonId = related_person_id?.value?.id
-
-  return {
-    // put form data to graphql's field
-    person_id: isReverse ? relatedPersonId : personId,
-    related_person_id: isReverse ? personId : relatedPersonId,
-    relative: isReverse ? reverse_relative.value : relative.value,
-
-    start_date_year: devideDate(start_date.value, 'year'),
-    start_date_month: devideDate(start_date.value, 'month'),
-    start_date_day: devideDate(start_date.value, 'day'),
-    end_date_year: devideDate(end_date.value, 'year'),
-    end_date_month: devideDate(end_date.value, 'month'),
-    end_date_day: devideDate(end_date.value, 'day'),
-
-    source: source.value,
-    tags: handleRelationMany(tags.value),
-  }
-}
+import { mergeDate } from '../utils/fieldVerify'
 
 export const moveGqlToForm = (person, targetPerson) => {
   person.person_id.value.id = targetPerson.person_id.id

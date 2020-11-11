@@ -13,13 +13,16 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <template v-for="(field, key) in personRelation">
-          <FieldBlock :key="field.label" :field="field" type="verify" />
-          <ListSameName
-            v-if="key === 'related_person_id'"
-            :key="`${key}`"
-            :items="searchResults"
-            class="FieldBlock"
-          />
+          <!-- To refactor reverse_relative -->
+          <template v-if="key !== 'reverse_relative'">
+            <FieldBlock :key="field.label" :field="field" type="verify" />
+            <ListSameName
+              v-if="key === 'related_person_id'"
+              :key="`${key}`"
+              :items="searchResults"
+              class="FieldBlock"
+            />
+          </template>
         </template>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
@@ -41,11 +44,8 @@ import FieldBlock from '~/components/FieldBlock'
 import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 import Button from '~/components/Button'
 import { personRelationFields } from '~/fields/personRelationFields'
-import {
-  moveFormToGqlVariable,
-  moveGqlToForm,
-} from '~/graphQL/personRelationFormHandler'
-import { getRandomId } from '~/utils'
+import { moveGqlToForm } from '~/graphQL/personRelationFormHandler'
+import { buildGqlVariables, getRandomId } from '~/utils'
 import formMixin from '~/mixins/formMixin'
 
 import More from '~/components/More'
@@ -129,6 +129,8 @@ export default {
         update: (data) => {
           this.personRelationId = data.PersonRelation.id
           moveGqlToForm(this.personRelation, data.PersonRelation)
+          // To refactor reverse_relative
+          delete this.personRelation.reverse_relative
         },
       })
     },
@@ -176,7 +178,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.personRelationId,
-          ...moveFormToGqlVariable({ person: this.personRelation }),
+          data: buildGqlVariables(this.personRelation),
         },
       })
       this.clearForm(this.personRelation)

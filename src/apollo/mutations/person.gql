@@ -14,70 +14,11 @@ mutation createPersons ($data: [PersonsCreateInput]) {
   }
 }
 
-mutation updatePerson (
-  $id: ID!
-  $name: String!
-  $alternative: String
-  $other_names: String
-  $email: String
-  $gender: String
-  $birth_date_year: Int
-  $birth_date_month: Int
-  $birth_date_day: Int
-  $death_date_year: Int
-  $death_date_month: Int
-  $death_date_day: Int
-  $image: String
-  $summary: String
-  $biography: String
-  $national_identity: String
-  $contact_details: String
-  $links: String
-  $source: String
-  $tags: TagRelateToManyInput
-) {
+mutation updatePerson ($id: ID!, $data: PersonUpdateInput) {
   updatePerson(
     id: $id
-    data: {
-      name: $name
-      alternative: $alternative
-      other_names: $other_names
-      email: $email
-      gender: $gender
-      birth_date_year: $birth_date_year
-      birth_date_month: $birth_date_month
-      birth_date_day: $birth_date_day
-      death_date_year: $death_date_year
-      death_date_month: $death_date_month
-      death_date_day: $death_date_day
-      image: $image
-      summary: $summary
-      biography: $biography
-      national_identity: $national_identity
-      contact_details: $contact_details
-      links: $links
-      source: $source
-      tags: $tags
-    }
+    data: $data
   ) {
     id
-    name
-    alternative
-    other_names
-    email
-    gender
-    birth_date_year
-    birth_date_month
-    birth_date_day
-    death_date_year
-    death_date_month
-    death_date_day
-    image
-    summary
-    biography
-    national_identity
-    contact_details
-    links
-    source
   }
 }

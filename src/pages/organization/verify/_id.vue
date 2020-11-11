@@ -170,7 +170,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.organizationId,
-          ...buildGqlVariables(this.organization),
+          data: buildGqlVariables(this.organization),
         },
       })
       this.clearForm(this.organization)

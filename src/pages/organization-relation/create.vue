@@ -50,13 +50,13 @@ import Button from '../../components/Button'
 
 import { organizationRelationFields } from '../../fields/organizationRelationFields'
 
-import { moveFormToGqlVariable } from '../../graphQL/organizationRelationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 import ListSameName from '~/components/ListSameName'
+import { buildGqlVariables } from '~/utils'
 import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
 import { createOrganizationRelation } from '~/apollo/mutations/organization-relation.gql'
 import { createOrganizations } from '~/apollo/mutations/organization.gql'
@@ -216,7 +216,9 @@ export default {
       // Upload person form
       await this.$apollo.mutate({
         mutation: createOrganizationRelation,
-        variables: moveFormToGqlVariable(this.organizationRelation),
+        variables: {
+          data: buildGqlVariables(this.organizationRelation),
+        },
       })
       // Update collaborate form
       if (this.needCreateCollaborate) {

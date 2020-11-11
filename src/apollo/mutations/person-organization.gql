@@ -1,0 +1,61 @@
+mutation createPersonOrganization (
+  $person_id: ID!
+  $organization_id: ID!
+  $role: String
+  $start_date_year: Int
+  $start_date_month: Int
+  $start_date_day: Int
+  $end_date_year: Int
+  $end_date_month: Int
+  $end_date_day: Int
+  $source: String
+) {
+  createPersonOrganization(
+    data: {
+      person_id: { connect: { id: $person_id } }
+      organization_id: { connect: { id: $organization_id } }
+      role: $role
+      start_date_year: $start_date_year
+      start_date_month: $start_date_month
+      start_date_day: $start_date_day
+      end_date_year: $end_date_year
+      end_date_month: $end_date_month
+      end_date_day: $end_date_day
+      source: $source
+    }
+  ) {
+    id
+  }
+}
+
+mutation updatePersonOrganization (
+  $id: ID!
+  $person_id: ID!
+  $organization_id: ID!
+  $role: String
+  $start_date_year: Int
+  $start_date_month: Int
+  $start_date_day: Int
+  $end_date_year: Int
+  $end_date_month: Int
+  $end_date_day: Int
+  $source: String
+) {
+  updatePersonOrganization(
+    id: $id
+    data: {
+      person_id: { connect: { id: $person_id } }
+      organization_id: { connect: { id: $organization_id } }
+      role: $role
+      start_date_year: $start_date_year
+      start_date_month: $start_date_month
+      start_date_day: $start_date_day
+      end_date_year: $end_date_year
+      end_date_month: $end_date_month
+      end_date_day: $end_date_day
+      source: $source
+    }
+  ) {
+    id
+  }
+}

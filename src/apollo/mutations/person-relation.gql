@@ -1,0 +1,61 @@
+mutation createPersonRelation (
+  $person_id: ID!
+  $related_person_id: ID!
+  $relative: String
+  $start_date_year: Int
+  $start_date_month: Int
+  $start_date_day: Int
+  $end_date_year: Int
+  $end_date_month: Int
+  $end_date_day: Int
+  $source: String
+) {
+  createPersonRelation(
+    data: {
+      person_id: { connect: { id: $person_id } }
+      related_person_id: { connect: { id: $related_person_id } }
+      relative: $relative
+      start_date_year: $start_date_year
+      start_date_month: $start_date_month
+      start_date_day: $start_date_day
+      end_date_year: $end_date_year
+      end_date_month: $end_date_month
+      end_date_day: $end_date_day
+      source: $source
+    }
+  ) {
+    id
+  }
+}
+
+mutation updatePersonRelation (
+  $id: ID!
+  $person_id: ID!
+  $related_person_id: ID!
+  $relative: String
+  $start_date_year: Int
+  $start_date_month: Int
+  $start_date_day: Int
+  $end_date_year: Int
+  $end_date_month: Int
+  $end_date_day: Int
+  $source: String
+) {
+  updatePersonRelation(
+    id: $id
+    data: {
+      person_id: { connect: { id: $person_id } }
+      related_person_id: { connect: { id: $related_person_id } }
+      relative: $relative
+      start_date_year: $start_date_year
+      start_date_month: $start_date_month
+      start_date_day: $start_date_day
+      end_date_year: $end_date_year
+      end_date_month: $end_date_month
+      end_date_day: $end_date_day
+      source: $source
+    }
+  ) {
+    id
+  }
+}

@@ -42,7 +42,6 @@ import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 
 import Button from '~/components/Button'
 import { personOrganizationFields } from '~/fields/personOrganizationFields'
-import { UPDATE_PERSON_ORGANIZATION } from '~/graphQL/query/person_organization'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
@@ -59,6 +58,7 @@ import {
   fetchPersonOrganizationsCount,
   searchPersonOrganizations,
 } from '~/apollo/queries/person-organization.gql'
+import { updatePersonOrganization } from '~/apollo/mutations/person-organization.gql'
 
 export default {
   name: 'VerifyPersonOrganization',
@@ -173,7 +173,7 @@ export default {
 
     async uploadForm() {
       await this.$apollo.mutate({
-        mutation: UPDATE_PERSON_ORGANIZATION,
+        mutation: updatePersonOrganization,
         variables: {
           // put form data to graphql's field
           id: this.personOrganizationId,

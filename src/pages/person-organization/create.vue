@@ -50,8 +50,6 @@ import Button from '../../components/Button'
 
 import { personOrganizationFields } from '../../fields/personOrganizationFields'
 
-import { ADD_PERSON_ORGANIZATION } from '../../graphQL/query/person_organization'
-import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
 import { moveFormToGqlVariable } from '../../graphQL/personOrganizationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
@@ -59,8 +57,10 @@ import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
 import ListSameName from '~/components/ListSameName'
+import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
 import { createOrganization } from '~/apollo/mutations/organization.gql'
 import { createPerson } from '~/apollo/mutations/person.gql'
+import { createPersonOrganization } from '~/apollo/mutations/person-organization.gql'
 import { searchPersonOrganizations } from '~/apollo/queries/person-organization.gql'
 
 export default {
@@ -187,13 +187,13 @@ export default {
       }
       // Upload person form
       await this.$apollo.mutate({
-        mutation: ADD_PERSON_ORGANIZATION,
+        mutation: createPersonOrganization,
         variables: moveFormToGqlVariable(this.personOrganization),
       })
       // Update collaborate form
       if (this.needCreateCollaborate) {
         await this.$apollo.mutate({
-          mutation: ADD_COLLABORATE,
+          mutation: createCollaborate,
           variables: {
             name: this.collaborate.name,
             email: this.collaborate.email,

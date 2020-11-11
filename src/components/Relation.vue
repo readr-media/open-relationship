@@ -29,7 +29,7 @@
 import RelationButtonContainer from '../components/RelationButtonContainer'
 import relationListMixin from '../mixins/relationListMixin'
 
-import { FETCH_PERSON_RELATIONS_COUNT } from '../graphQL/query/person_relation'
+import { fetchPersonRelationsCount } from '~/apollo/queries/person-relation.gql'
 
 export default {
   components: {
@@ -37,7 +37,7 @@ export default {
   },
   apollo: {
     personRelationsCount: {
-      query: FETCH_PERSON_RELATIONS_COUNT,
+      query: fetchPersonRelationsCount,
       update: (data) => data._allPersonRelationsMeta.count,
       result(result) {
         const count = result.data._allPersonRelationsMeta.count

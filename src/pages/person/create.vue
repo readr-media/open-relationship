@@ -53,8 +53,6 @@ import Button from '../../components/Button'
 
 import { personFields } from '../../fields/personFields'
 
-import { ADD_PERSON } from '../../graphQL/query/person'
-import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -64,6 +62,8 @@ import ListSameName from '../../components/ListSameName'
 
 import { buildGqlVariables } from '~/utils'
 import { buildSearchItemInfo } from '~/utils/person'
+import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
+import { createPerson } from '~/apollo/mutations/person.gql'
 import { searchPersons } from '~/apollo/queries/person.gql'
 
 export default {
@@ -155,12 +155,14 @@ export default {
     async uploadForm() {
       // Upload person form
       await this.$apollo.mutate({
-        mutation: ADD_PERSON,
-        variables: buildGqlVariables(this.person),
+        mutation: createPerson,
+        variables: {
+          data: buildGqlVariables(this.person),
+        },
       })
       // Update collaborate form
       await this.$apollo.mutate({
-        mutation: ADD_COLLABORATE,
+        mutation: createCollaborate,
         variables: {
           name: this.collaborate.name,
           email: this.collaborate.email,

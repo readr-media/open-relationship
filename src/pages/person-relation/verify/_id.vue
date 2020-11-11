@@ -41,7 +41,6 @@ import FieldBlock from '~/components/FieldBlock'
 import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 import Button from '~/components/Button'
 import { personRelationFields } from '~/fields/personRelationFields'
-import { UPDATE_PERSON_RELATION } from '~/graphQL/query/person_relation'
 import {
   moveFormToGqlVariable,
   moveGqlToForm,
@@ -53,6 +52,7 @@ import More from '~/components/More'
 import Footer from '~/components/Footer'
 import OtherForms from '~/components/OtherForms'
 import ListSameName from '~/components/ListSameName'
+import { updatePersonRelation } from '~/apollo/mutations/person-relation.gql'
 import {
   fetchPersonRelationById,
   fetchPersonRelationsCount,
@@ -172,7 +172,7 @@ export default {
 
     async uploadForm() {
       await this.$apollo.mutate({
-        mutation: UPDATE_PERSON_RELATION,
+        mutation: updatePersonRelation,
         variables: {
           // put form data to graphql's field
           id: this.personRelationId,

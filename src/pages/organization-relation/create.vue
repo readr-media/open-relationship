@@ -18,6 +18,7 @@
             v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
             :key="field.label"
             :field="field"
+            :organizationRelation="organizationRelation"
             type="create"
           />
           <ListSameName

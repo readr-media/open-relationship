@@ -49,6 +49,14 @@ export default {
       type: Object,
       required: true,
     },
+    organizationRelation: {
+      type: Object,
+      default: () => ({}),
+    },
+    personRelation: {
+      type: Object,
+      default: () => ({}),
+    },
     readonly: {
       type: Boolean,
       default: false,
@@ -86,6 +94,23 @@ export default {
           }),
         },
       ]
+    },
+    // 在新增人物關係、組織關係時，建議選單中不會列出已選擇的項目
+    selectedIds() {
+      const formName = this.$route.path?.split('/')[1]
+      let ids = []
+      if (formName === 'person-relation') {
+        ids = [
+          this.personRelation.person_id?.value?.id,
+          this.personRelation.related_person_id?.value?.id,
+        ]
+      } else if (formName === 'organization-relation') {
+        ids = [
+          this.organizationRelation.organization_id?.value?.id,
+          this.organizationRelation.related_organization_id?.value?.id,
+        ]
+      }
+      return ids.filter((id) => id)
     },
   },
   watch: {

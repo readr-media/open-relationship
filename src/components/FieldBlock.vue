@@ -58,6 +58,8 @@
     >
       <RelationInput
         :field="field"
+        :organizationRelation="organizationRelation"
+        :personRelation="personRelation"
         :readonly="type === 'verify' && field.lockedDuringVerification"
         :verifyField="verifyField"
       />
@@ -119,7 +121,7 @@ export default {
     RelationInput,
     RelationManyInput,
   },
-  props: ['field', 'type'],
+  props: ['field', 'organizationRelation', 'personRelation', 'type'],
   data() {
     return {
       errorPromptId: 0,

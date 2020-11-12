@@ -29,11 +29,13 @@ export default {
           text: `${text}`,
         },
         update(data) {
-          this.suggestions[0].data = data.allPersons.map((item) => ({
-            id: item.id,
-            name: item.name,
-            info: buildPersonInfo(item),
-          }))
+          this.suggestions[0].data = data.allPersons
+            .filter((item) => !this.selectedIds.some((id) => item.id === id))
+            .map((item) => ({
+              id: item.id,
+              name: item.name,
+              info: buildPersonInfo(item),
+            }))
         },
       })
     },
@@ -58,11 +60,13 @@ export default {
           text: `${text}`,
         },
         update(data) {
-          this.suggestions[0].data = data.allOrganizations.map((item) => ({
-            id: item.id,
-            name: item.name,
-            info: buildOrganizationInfo(item),
-          }))
+          this.suggestions[0].data = data.allOrganizations
+            .filter((item) => !this.selectedIds.some((id) => item.id === id))
+            .map((item) => ({
+              id: item.id,
+              name: item.name,
+              info: buildOrganizationInfo(item),
+            }))
         },
       })
     },

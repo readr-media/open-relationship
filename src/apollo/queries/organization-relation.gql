@@ -29,3 +29,27 @@ query fetchOrganizationRelationsCount {
     count
   }
 }
+
+query searchOrganizationRelations($organizationName: String!, $relatedOrganizationName: String!) {
+  allOrganizationRelations(
+    where: {
+      organization_id: {
+        name: $organizationName
+      },
+      related_organization_id: {
+        name: $relatedOrganizationName
+      }
+    }
+  ) {
+    id
+    relative
+    organization_id {
+      id
+      name
+    }
+    related_organization_id {
+      id
+      name
+    }
+  }
+}

@@ -29,3 +29,27 @@ query fetchPersonOrganizationsCount {
     count
   }
 }
+
+query searchPersonOrganizations($personName: String!, $organizationName: String!) {
+  allPersonOrganizations(
+    where: {
+      person_id: {
+        name: $personName
+      },
+      organization_id:{
+        name: $organizationName
+      }
+    }
+  ) {
+    id
+    role
+    person_id {
+      id
+      name
+    }
+    organization_id {
+      id
+      name
+    }
+  }
+}

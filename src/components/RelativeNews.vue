@@ -6,6 +6,7 @@
         v-for="news in relativeNewsList"
         :key="news.id"
         :news="news"
+        class="RelativeNews__item"
       />
     </div>
   </div>
@@ -68,6 +69,12 @@ export default {
     font-weight: 800;
     color: rgb(0, 39, 84);
     margin-bottom: 14px;
+  }
+  &__item {
+    display: block;
+    + .RelativeNews__item {
+      margin-top: 24px;
+    }
   }
   @include media-breakpoint-up(sm) {
     width: 500px;

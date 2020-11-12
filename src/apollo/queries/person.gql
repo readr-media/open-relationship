@@ -1,3 +1,5 @@
+#import "~/apollo/fragments/searchResultPerson.gql"
+
 query fetchPersonById ($id: ID!) {
   Person(where: { id: $id }) {
     id
@@ -32,109 +34,11 @@ query fetchPersonCount {
   }
 }
 
-mutation createPerson ($data: PersonCreateInput!) {
-  createPerson(data: $data) {
-    id
-    name
-  }
-}
-
-mutation updatePerson (
-  $id: ID!
-  $name: String!
-  $alternative: String
-  $other_names: String
-  $email: String
-  $gender: String
-  $birth_date_year: Int
-  $birth_date_month: Int
-  $birth_date_day: Int
-  $death_date_year: Int
-  $death_date_month: Int
-  $death_date_day: Int
-  $image: String
-  $summary: String
-  $biography: String
-  $national_identity: String
-  $contact_details: String
-  $links: String
-  $source: String
-  $tags: TagRelateToManyInput
-) {
-  updatePerson(
-    id: $id
-    data: {
-      name: $name
-      alternative: $alternative
-      other_names: $other_names
-      email: $email
-      gender: $gender
-      birth_date_year: $birth_date_year
-      birth_date_month: $birth_date_month
-      birth_date_day: $birth_date_day
-      death_date_year: $death_date_year
-      death_date_month: $death_date_month
-      death_date_day: $death_date_day
-      image: $image
-      summary: $summary
-      biography: $biography
-      national_identity: $national_identity
-      contact_details: $contact_details
-      links: $links
-      source: $source
-      tags: $tags
-    }
-  ) {
-    id
-    name
-    alternative
-    other_names
-    email
-    gender
-    birth_date_year
-    birth_date_month
-    birth_date_day
-    death_date_year
-    death_date_month
-    death_date_day
-    image
-    summary
-    biography
-    national_identity
-    contact_details
-    links
-    source
-  }
-}
-
 query searchPersons($text: String) {
   name: allPersons(search: $text) {
     ...searchResultPerson
 	}
   alternative: allPersons (where:{ alternative_contains: $text }) {
     ...searchResultPerson
-  }
-}
-
-mutation createPersons ($data: [PersonsCreateInput]) {
-  createPersons(
-    data: $data
-  ) {
-    id
-    name
-  }
-}
-
-fragment searchResultPerson on Person {
-  id
-  name
-  gender
-  alternative
-  other_names
-  birth_date_year
-  birth_date_month
-  birth_date_day
-  tags {
-    name
   }
 }

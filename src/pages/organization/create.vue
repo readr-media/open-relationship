@@ -12,19 +12,21 @@
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
           v-for="(field, key) in organization"
+          v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
           :key="field.label"
           :field="field"
           type="create"
-          @updateTags="updateTags"
         >
           <ListSameName v-if="key === 'name'" :items="searchResults" />
         </FieldBlock>
 
-        <CollaborateFieldBlock :collaborate="collaborate" />
+        <template v-if="!haveExactlySameName">
+          <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <div class="btnContainer">
-          <Button title="送出" fitDiv="true" round="true" type="create" />
-        </div>
+          <div class="btnContainer">
+            <Button title="送出" fitDiv="true" round="true" type="create" />
+          </div>
+        </template>
       </form>
     </div>
     <OtherForms operationType="create" />
@@ -41,9 +43,6 @@ import CollaborateFieldBlock from '../../components/CollaborateFieldBlock'
 import Button from '../../components/Button'
 import { organizationFields } from '../../fields/organizationFields'
 
-import { ADD_ORGANIZATION } from '../../graphQL/query/organization'
-import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -53,6 +52,8 @@ import ListSameName from '../../components/ListSameName'
 
 import { buildGqlVariables } from '~/utils'
 import { buildSearchItemInfo } from '~/utils/organization'
+import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
+import { createOrganization } from '~/apollo/mutations/organization.gql'
 import { searchOrganizations } from '~/apollo/queries/organization.gql'
 
 export default {
@@ -86,6 +87,13 @@ export default {
       searchResults: [],
     }
   },
+  computed: {
+    haveExactlySameName() {
+      return this.searchResults.some(
+        (item) => item.name === this.organization.name.value
+      )
+    },
+  },
   watch: {
     'organization.name.value'(value) {
       this.searchResults = []
@@ -117,9 +125,6 @@ export default {
         },
       })
     },
-    updateTags(value) {
-      this.organization.tags.value = value
-    },
 
     async uploadHandler() {
       if (await !this.checkForm(this.organization)) {
@@ -132,12 +137,14 @@ export default {
     async uploadForm() {
       // Upload person form
       await this.$apollo.mutate({
-        mutation: ADD_ORGANIZATION,
-        variables: buildGqlVariables(this.organization),
+        mutation: createOrganization,
+        variables: {
+          data: buildGqlVariables(this.organization),
+        },
       })
       // Update collaborate form
       await this.$apollo.mutate({
-        mutation: ADD_COLLABORATE,
+        mutation: createCollaborate,
         variables: {
           name: this.collaborate.name,
           email: this.collaborate.email,

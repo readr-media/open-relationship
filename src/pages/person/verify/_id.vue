@@ -13,11 +13,13 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in person"
+          v-for="(field, key) in person"
           :key="field.label"
           :field="field"
           type="verify"
-        />
+        >
+          <ListSameName v-if="key === 'name'" :items="searchResults" />
+        </FieldBlock>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -26,7 +28,6 @@
         </div>
       </form>
     </div>
-    <ListSameName :items="searchResults" />
     <OtherForms operationType="verify" />
     <More />
     <Footer />
@@ -55,8 +56,8 @@ import {
   fetchPersonById,
   fetchPersonCount,
   searchPersons,
-  updatePerson,
 } from '~/apollo/queries/person.gql'
+import { updatePerson } from '~/apollo/mutations/person.gql'
 
 export default {
   name: 'VerifyPerson',
@@ -167,7 +168,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.personId,
-          ...buildGqlVariables(this.person),
+          data: buildGqlVariables(this.person),
         },
       })
       this.clearForm(this.person)

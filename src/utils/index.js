@@ -3,7 +3,12 @@ import { devideDate } from '~/utils/fieldVerify'
 
 const getRandomId = (count) => Math.floor(Math.random() * count + 1)
 
-function buildGqlVariables(data) {
+const PERSON_RELATION_REVERSE_MAPPING = {
+  person_id: 'related_person_id',
+  related_person_id: 'person_id',
+}
+
+function buildGqlVariables(data, isReverseRelation = false) {
   const variable = {}
   const cloneData = cloneDeep(data)
   const needUpdateTags =
@@ -12,13 +17,27 @@ function buildGqlVariables(data) {
   if (!needUpdateTags) {
     delete cloneData.tags
   }
-  Object.keys(cloneData).forEach((key) => {
-    if (cloneData[key].value == null || cloneData[key].value?.length === 0) {
-      delete cloneData[key]
-    } else {
-      variable[key] = convertToGqlVariablesValue(key, cloneData[key])
-    }
-  })
+  Object.keys(cloneData)
+    .filter((key) => key !== 'reverse_relative')
+    .forEach((key) => {
+      if (isReverseRelation && key === 'relative') {
+        variable.relative = cloneData.reverse_relative.value
+      } else if (
+        isReverseRelation &&
+        (key === 'person_id' || key === 'related_person_id')
+      ) {
+        variable[
+          PERSON_RELATION_REVERSE_MAPPING[key]
+        ] = convertToGqlVariablesValue(key, cloneData[key])
+      } else if (
+        cloneData[key].value == null ||
+        cloneData[key].value?.length === 0
+      ) {
+        delete cloneData[key]
+      } else {
+        variable[key] = convertToGqlVariablesValue(key, cloneData[key])
+      }
+    })
   return variable
 }
 
@@ -39,11 +58,23 @@ function convertToGqlVariablesValue(formKey, formData) {
     case 'founding_date_day':
     case 'dissolution_date_day':
       return devideDate(formData.value, 'day')
+    case 'person_id':
+    case 'organization_id':
+    case 'related_person_id':
+    case 'related_organization_id':
+      return handleRelation(formData.value)
     case 'tags':
       return handleRelationMany(formData.value)
     default:
       return formData.value
   }
+}
+
+function handleRelation(item) {
+  if (item.id) {
+    return { connect: { id: item.id } }
+  }
+  return { create: { name: item.name } }
 }
 
 function handleRelationMany(items) {

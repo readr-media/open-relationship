@@ -12,6 +12,8 @@ export const personFields = {
     verify: ['required'], // handle field-verify methods
     formState: true, // if field-erify fails, it'll turn false, and sumbit won't pass.
     correctVerify: null, // correction-verify flag,null,true or false
+    lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   alternative: {
     label: '別名',
@@ -132,8 +134,8 @@ export const personFields = {
     correctVerify: null,
   },
   tags: {
-    label: 'tag',
-    info: [],
+    label: '標籤（tag）',
+    info: ['如何分類這筆資料？例如：第十屆立法委員、2018縣市議員選舉等等'],
     value: [],
     inputStatus: { type: 'relationMany', target: 'tag' },
     verify: [],
@@ -150,5 +152,6 @@ export const personFields = {
     verify: ['required', 'urlFormat'],
     formState: true,
     correctVerify: null,
+    hideRadioBtnsForVerifying: true,
   },
 }

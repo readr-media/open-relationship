@@ -7,6 +7,8 @@ export const personOrganizationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   organization_id: {
     label: '組織名稱',
@@ -16,6 +18,8 @@ export const personOrganizationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   role: {
     label: '職位名稱',
@@ -51,8 +55,8 @@ export const personOrganizationFields = {
     formState: true,
   },
   tags: {
-    label: 'tag',
-    info: [],
+    label: '標籤（tag）',
+    info: ['如何分類這筆資料？例如：第十屆立法委員、2018縣市議員選舉等等'],
     value: [],
     inputStatus: { type: 'relationMany', target: 'tag' },
     verify: [],
@@ -68,5 +72,6 @@ export const personOrganizationFields = {
     required: true,
     verify: ['required', 'urlFormat'],
     formState: true,
+    hideRadioBtnsForVerifying: true,
   },
 }

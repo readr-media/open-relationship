@@ -1,5 +1,7 @@
 <script>
 import gql from 'graphql-tag'
+import { buildSearchItemInfo as buildPersonInfo } from '~/utils/person'
+import { buildSearchItemInfo as buildOrganizationInfo } from '~/utils/organization'
 
 export default {
   methods: {
@@ -11,6 +13,15 @@ export default {
             allPersons(search: $text) {
               id
               name
+              gender
+              alternative
+              other_names
+              birth_date_year
+              birth_date_month
+              birth_date_day
+              tags {
+                name
+              }
             }
           }
         `,
@@ -19,6 +30,12 @@ export default {
         },
         update(data) {
           this.suggestions[0].data = data.allPersons
+            .filter((item) => !this.selectedIds.some((id) => item.id === id))
+            .map((item) => ({
+              id: item.id,
+              name: item.name,
+              info: buildPersonInfo(item),
+            }))
         },
       })
     },
@@ -30,6 +47,12 @@ export default {
             allOrganizations(search: $text) {
               id
               name
+              identifiers
+              alternative
+              other_names
+              tags {
+                name
+              }
             }
           }
         `,
@@ -38,6 +61,12 @@ export default {
         },
         update(data) {
           this.suggestions[0].data = data.allOrganizations
+            .filter((item) => !this.selectedIds.some((id) => item.id === id))
+            .map((item) => ({
+              id: item.id,
+              name: item.name,
+              info: buildOrganizationInfo(item),
+            }))
         },
       })
     },

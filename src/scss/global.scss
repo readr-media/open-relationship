@@ -8,6 +8,10 @@ body {
   background-color: #fff;
 }
 
+input:read-only {
+  cursor: default;
+}
+
 .g-page {
   padding-top: $header-height;
 }

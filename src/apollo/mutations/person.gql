@@ -1,0 +1,24 @@
+mutation createPerson ($data: PersonCreateInput!) {
+  createPerson(data: $data) {
+    id
+    name
+  }
+}
+
+mutation createPersons ($data: [PersonsCreateInput]) {
+  createPersons(
+    data: $data
+  ) {
+    id
+    name
+  }
+}
+
+mutation updatePerson ($id: ID!, $data: PersonUpdateInput) {
+  updatePerson(
+    id: $id
+    data: $data
+  ) {
+    id
+  }
+}

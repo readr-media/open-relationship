@@ -20,50 +20,43 @@ export default {
 
 <style lang="scss" scoped>
 .PreviewNews {
-  width: 100%;
-  height: 100px;
   display: flex;
-  flex-direction: row;
-
-  // margin-top: 14px;
 
   &__image {
-    width: 33.3%;
-    height: 100%;
-    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    @include media-breakpoint-up(md) {
+      width: 200px;
+      height: 100px;
+    }
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
     }
   }
 
   &__text {
-    width: 66.6%;
-    padding: 0 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    color: black;
+    flex: 1;
+    margin-left: 21px;
 
     &_title {
-      font-size: 0.875rem;
-      font-weight: 800;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      font-weight: 500;
+      line-height: 1.5;
     }
 
     &_date {
-      margin-bottom: 19px;
-      opacity: 0.6;
-      font-size: 0.75px;
-    }
-  }
-
-  @include media-breakpoint-up(md) {
-    &__text {
-      &_title {
-        font-size: 1rem;
-      }
-
-      &_date {
+      margin-top: 10px;
+      color: rgba(0, 0, 0, 0.66);
+      font-size: 14px;
+      line-height: 1.86;
+      @include media-breakpoint-up(md) {
+        margin-top: 21px;
       }
     }
   }

@@ -1,0 +1,14 @@
+mutation createOrganizationRelation ($data: OrganizationRelationCreateInput!) {
+  createOrganizationRelation(data: $data) {
+    id
+  }
+}
+
+mutation updateOrganizationRelation ($id: ID!, $data: OrganizationRelationUpdateInput) {
+  updateOrganizationRelation(
+    id: $id
+    data: $data
+  ) {
+    id
+  }
+}

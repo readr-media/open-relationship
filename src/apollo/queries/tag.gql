@@ -4,14 +4,3 @@ query fetchTags ($name: String!) {
     name
   }
 }
-
-mutation createTag ($name: String!) {
-  createTag (
-    data: {
-      name: $name
-    }
-  ) {
-    id
-    name
-  }
-}

@@ -7,6 +7,8 @@ export const organizationFields = {
     required: true,
     verify: ['required'],
     formState: true,
+    lockedDuringVerification: true,
+    showWhenHasSameNameItem: true,
   },
   identifiers: {
     label: '統一編號',
@@ -104,8 +106,8 @@ export const organizationFields = {
     formState: true,
   },
   tags: {
-    label: 'tag',
-    info: [],
+    label: '標籤（tag）',
+    info: ['如何分類這筆資料？例如：第十屆立法委員、2018縣市議員選舉等等'],
     value: [],
     inputStatus: { type: 'relationMany', target: 'tag' },
     verify: [],
@@ -121,6 +123,7 @@ export const organizationFields = {
     required: true,
     verify: ['required', 'urlFormat'],
     formState: true,
+    hideRadioBtnsForVerifying: true,
   },
 
   // area: { label: "地區", type: Relationship, many: false, ref: 'Area' },

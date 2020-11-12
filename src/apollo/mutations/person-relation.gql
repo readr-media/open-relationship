@@ -1,0 +1,14 @@
+mutation createPersonRelation ($data: PersonRelationCreateInput!) {
+  createPersonRelation(data: $data) {
+    id
+  }
+}
+
+mutation updatePersonRelation ($id: ID!, $data: PersonRelationUpdateInput) {
+  updatePersonRelation(
+    id: $id
+    data: $data
+  ) {
+    id
+  }
+}

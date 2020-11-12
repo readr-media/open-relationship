@@ -13,19 +13,28 @@
         <span class="create-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
-        <FieldBlock
-          v-for="field in organizationRelation"
-          :key="field.label"
-          :field="field"
-          type="create"
-          @updateTags="updateTags"
-        />
+        <template v-for="(field, key) in organizationRelation">
+          <FieldBlock
+            v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
+            :key="field.label"
+            :field="field"
+            :organizationRelation="organizationRelation"
+            type="create"
+          />
+          <ListSameName
+            v-if="key === 'related_organization_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
+        <template v-if="!haveExactlySameName">
+          <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <CollaborateFieldBlock :collaborate="collaborate" />
-
-        <div class="btnContainer">
-          <Button title="送出" fitDiv="true" round="true" type="create" />
-        </div>
+          <div class="btnContainer">
+            <Button title="送出" fitDiv="true" round="true" type="create" />
+          </div>
+        </template>
       </form>
     </div>
     <OtherForms operationType="create" />
@@ -42,15 +51,17 @@ import Button from '../../components/Button'
 
 import { organizationRelationFields } from '../../fields/organizationRelationFields'
 
-import { ADD_ORGANIZATION_RELATION } from '../../graphQL/query/organization_relation'
-import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/organizationRelationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
-import { createOrganizations } from '~/apollo/queries/organization.gql'
+import ListSameName from '~/components/ListSameName'
+import { buildGqlVariables } from '~/utils'
+import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
+import { createOrganizationRelation } from '~/apollo/mutations/organization-relation.gql'
+import { createOrganizations } from '~/apollo/mutations/organization.gql'
+import { searchOrganizationRelations } from '~/apollo/queries/organization-relation.gql'
 
 export default {
   name: 'CreateOrganizationRelation',
@@ -62,6 +73,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -79,9 +91,13 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
+    haveExactlySameName() {
+      return this.searchResults.length > 0
+    },
     needCreateCollaborate() {
       return (
         this.collaborate.name ||
@@ -94,6 +110,14 @@ export default {
         this.organizationRelation.organization_id.value.id &&
         this.organizationRelation.related_organization_id.value.id
       )
+    },
+  },
+  watch: {
+    'organizationRelation.organization_id.value.name'() {
+      this.searchOrganizationRelationByName()
+    },
+    'organizationRelation.related_organization_id.value.name'() {
+      this.searchOrganizationRelationByName()
     },
   },
   mounted() {
@@ -128,8 +152,32 @@ export default {
         },
       }
     },
-    updateTags(value) {
-      this.organizationRelation.tags.value = value
+    searchOrganizationRelationByName() {
+      this.searchResults = []
+      const organizationName = this.organizationRelation?.organization_id?.value
+        ?.name
+      const relatedOrganizationName = this.organizationRelation
+        ?.related_organization_id?.value?.name
+      if (organizationName && relatedOrganizationName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchOrganizationRelations,
+          variables: {
+            organizationName,
+            relatedOrganizationName,
+          },
+          update: (data) => {
+            const items = data.allOrganizationRelations
+            if (items?.length > 0) {
+              return items.map((item) => ({
+                id: item.id,
+                name: `${organizationName}+${relatedOrganizationName}`,
+                info: item.relative,
+              }))
+            }
+            return []
+          },
+        })
+      }
     },
 
     async uploadHandler() {
@@ -168,13 +216,15 @@ export default {
 
       // Upload person form
       await this.$apollo.mutate({
-        mutation: ADD_ORGANIZATION_RELATION,
-        variables: moveFormToGqlVariable(this.organizationRelation),
+        mutation: createOrganizationRelation,
+        variables: {
+          data: buildGqlVariables(this.organizationRelation),
+        },
       })
       // Update collaborate form
       if (this.needCreateCollaborate) {
         await this.$apollo.mutate({
-          mutation: ADD_COLLABORATE,
+          mutation: createCollaborate,
           variables: {
             name: this.collaborate.name,
             email: this.collaborate.email,

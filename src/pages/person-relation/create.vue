@@ -13,19 +13,28 @@
         <span class="create-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
-        <FieldBlock
-          v-for="field in personRelation"
-          :key="field.label"
-          :field="field"
-          type="create"
-          @updateTags="updateTags"
-        />
+        <template v-for="(field, key) in personRelation">
+          <FieldBlock
+            v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
+            :key="field.label"
+            :field="field"
+            :personRelation="personRelation"
+            type="create"
+          />
+          <ListSameName
+            v-if="key === 'related_person_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
+        <template v-if="!haveExactlySameName">
+          <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <CollaborateFieldBlock :collaborate="collaborate" />
-
-        <div class="btnContainer">
-          <Button title="送出" fitDiv="true" round="true" type="create" />
-        </div>
+          <div class="btnContainer">
+            <Button title="送出" fitDiv="true" round="true" type="create" />
+          </div>
+        </template>
       </form>
     </div>
     <OtherForms operationType="create" />
@@ -42,15 +51,17 @@ import Button from '../../components/Button'
 
 import { personRelationFields } from '../../fields/personRelationFields'
 
-import { ADD_PERSON_RELATION } from '../../graphQL/query/person_relation'
-import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
-import { moveFormToGqlVariable } from '../../graphQL/personRelationFormHandler'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
 import Footer from '../../components/Footer'
 import OtherForms from '../../components/OtherForms'
-import { createPersons } from '~/apollo/queries/person.gql'
+import ListSameName from '~/components/ListSameName'
+import { buildGqlVariables } from '~/utils'
+import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
+import { createPersonRelation } from '~/apollo/mutations/person-relation.gql'
+import { createPersons } from '~/apollo/mutations/person.gql'
+import { searchPersonRelations } from '~/apollo/queries/person-relation.gql'
 
 export default {
   name: 'CreatePersonRelation',
@@ -62,6 +73,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   mixins: [formMixin],
   data() {
@@ -79,9 +91,13 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
+    haveExactlySameName() {
+      return this.searchResults.length > 0
+    },
     needCreateCollaborate() {
       return (
         this.collaborate.name ||
@@ -94,6 +110,14 @@ export default {
         this.personRelation.person_id.value.id &&
         this.personRelation.related_person_id.value.id
       )
+    },
+  },
+  watch: {
+    'personRelation.person_id.value.name'() {
+      this.searchPersonRelationByName()
+    },
+    'personRelation.related_person_id.value.name'() {
+      this.searchPersonRelationByName()
     },
   },
   mounted() {
@@ -128,8 +152,31 @@ export default {
         },
       }
     },
-    updateTags(value) {
-      this.personRelation.tags.value = value
+    searchPersonRelationByName() {
+      this.searchResults = []
+      const personName = this.personRelation?.person_id?.value?.name
+      const relatedPersonName = this.personRelation?.related_person_id?.value
+        ?.name
+      if (personName && relatedPersonName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchPersonRelations,
+          variables: {
+            personName,
+            relatedPersonName,
+          },
+          update: (data) => {
+            const items = data.allPersonRelations
+            if (items?.length > 0) {
+              return items.map((item) => ({
+                id: item.id,
+                name: `${personName}+${relatedPersonName}`,
+                info: item.relative,
+              }))
+            }
+            return []
+          },
+        })
+      }
     },
     async uploadHandler() {
       // if there's any form format error,scroll to it.
@@ -159,21 +206,22 @@ export default {
       // Upload person form
       await Promise.all([
         this.$apollo.mutate({
-          mutation: ADD_PERSON_RELATION,
-          variables: moveFormToGqlVariable({ person: this.personRelation }),
+          mutation: createPersonRelation,
+          variables: {
+            data: buildGqlVariables(this.personRelation),
+          },
         }),
         this.$apollo.mutate({
-          mutation: ADD_PERSON_RELATION,
-          variables: moveFormToGqlVariable({
-            person: this.personRelation,
-            isReverse: true,
-          }),
+          mutation: createPersonRelation,
+          variables: {
+            data: buildGqlVariables(this.personRelation, true),
+          },
         }),
       ])
       // Update collaborate form
       if (this.needCreateCollaborate) {
         await this.$apollo.mutate({
-          mutation: ADD_COLLABORATE,
+          mutation: createCollaborate,
           variables: {
             name: this.collaborate.name,
             email: this.collaborate.email,

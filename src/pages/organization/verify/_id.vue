@@ -13,11 +13,13 @@
       </div>
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
-          v-for="field in organization"
+          v-for="(field, key) in organization"
           :key="field.label"
           :field="field"
           type="verify"
-        />
+        >
+          <ListSameName v-if="key === 'name'" :items="searchResults" />
+        </FieldBlock>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -26,7 +28,6 @@
         </div>
       </form>
     </div>
-    <ListSameName :items="searchResults" />
     <OtherForms operationType="verify" />
     <More />
     <Footer />
@@ -56,8 +57,8 @@ import {
   fetchOrganizationById,
   fetchOrganizationCount,
   searchOrganizations,
-  updateOrganization,
 } from '~/apollo/queries/organization.gql'
+import { updateOrganization } from '~/apollo/mutations/organization.gql'
 
 export default {
   name: 'VerifyOrganization',
@@ -169,7 +170,7 @@ export default {
         variables: {
           // put form data to graphql's field
           id: this.organizationId,
-          ...buildGqlVariables(this.organization),
+          data: buildGqlVariables(this.organization),
         },
       })
       this.clearForm(this.organization)

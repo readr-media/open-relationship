@@ -1,0 +1,14 @@
+mutation createPersonOrganization ($data: PersonOrganizationCreateInput!) {
+  createPersonOrganization(data: $data) {
+    id
+  }
+}
+
+mutation updatePersonOrganization ($id: ID!, $data: PersonOrganizationUpdateInput) {
+  updatePersonOrganization(
+    id: $id
+    data: $data
+  ) {
+    id
+  }
+}

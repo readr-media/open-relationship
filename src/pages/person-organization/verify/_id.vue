@@ -12,12 +12,15 @@
         <span class="verify-star">＊</span>為必填欄位
       </div>
       <form action @submit.prevent="uploadHandler">
-        <FieldBlock
-          v-for="field in personOrganization"
-          :key="field.label"
-          :field="field"
-          type="verify"
-        />
+        <template v-for="(field, key) in personOrganization">
+          <FieldBlock :key="field.label" :field="field" type="verify" />
+          <ListSameName
+            v-if="key === 'organization_id'"
+            :key="`${key}`"
+            :items="searchResults"
+            class="FieldBlock"
+          />
+        </template>
 
         <CollaborateFieldBlock :collaborate="collaborate" />
 
@@ -39,22 +42,20 @@ import CollaborateFieldBlock from '~/components/CollaborateFieldBlock'
 
 import Button from '~/components/Button'
 import { personOrganizationFields } from '~/fields/personOrganizationFields'
-import { UPDATE_PERSON_ORGANIZATION } from '~/graphQL/query/person_organization'
-import {
-  moveFormToGqlVariable,
-  moveGqlToForm,
-} from '~/graphQL/personOrganizationFormHandler'
-import { getRandomId } from '~/utils'
+import { moveGqlToForm } from '~/graphQL/personOrganizationFormHandler'
+import { buildGqlVariables, getRandomId } from '~/utils'
 import formMixin from '~/mixins/formMixin'
 
 import More from '~/components/More'
 import Footer from '~/components/Footer'
 import OtherForms from '~/components/OtherForms'
-
+import ListSameName from '~/components/ListSameName'
 import {
   fetchPersonOrganizationById,
   fetchPersonOrganizationsCount,
+  searchPersonOrganizations,
 } from '~/apollo/queries/person-organization.gql'
+import { updatePersonOrganization } from '~/apollo/mutations/person-organization.gql'
 
 export default {
   name: 'VerifyPersonOrganization',
@@ -66,6 +67,7 @@ export default {
     More,
     Footer,
     OtherForms,
+    ListSameName,
   },
   apollo: {
     personOrganizationsCount: {
@@ -92,6 +94,7 @@ export default {
         email: '',
         feedback: '',
       },
+      searchResults: [],
     }
   },
   computed: {
@@ -100,6 +103,12 @@ export default {
     },
   },
   watch: {
+    'personOrganization.person_id.value.name'() {
+      this.searchPersonOrganizationByName()
+    },
+    'personOrganization.organization_id.value.name'() {
+      this.searchPersonOrganizationByName()
+    },
     personOrganizationsCount() {
       this.fetchPersonOrganization()
     },
@@ -122,6 +131,34 @@ export default {
         },
       })
     },
+    searchPersonOrganizationByName() {
+      this.searchResults = []
+      const personName = this.personOrganization?.person_id?.value?.name
+      const organizationName = this.personOrganization?.organization_id?.value
+        ?.name
+      if (personName && organizationName) {
+        this.$apollo.addSmartQuery('searchResults', {
+          query: searchPersonOrganizations,
+          variables: {
+            personName,
+            organizationName,
+          },
+          update: (data) => {
+            const items = data.allPersonOrganizations
+            if (items?.length > 0) {
+              return items
+                .filter((item) => item.id !== this.personOrganizationId)
+                .map((item) => ({
+                  id: item.id,
+                  name: `${personName}+${organizationName}`,
+                  info: item.role,
+                }))
+            }
+            return []
+          },
+        })
+      }
+    },
     async uploadHandler() {
       if (await !this.checkForm(this.personOrganization)) {
         this.goToErrorField()
@@ -133,11 +170,11 @@ export default {
 
     async uploadForm() {
       await this.$apollo.mutate({
-        mutation: UPDATE_PERSON_ORGANIZATION,
+        mutation: updatePersonOrganization,
         variables: {
           // put form data to graphql's field
           id: this.personOrganizationId,
-          ...moveFormToGqlVariable(this.personOrganization),
+          data: buildGqlVariables(this.personOrganization),
         },
       })
       this.clearForm(this.personOrganization)

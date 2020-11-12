@@ -15,25 +15,27 @@
       <form action @submit.prevent="uploadHandler">
         <FieldBlock
           v-for="(field, key) in person"
+          v-show="!haveExactlySameName || field.showWhenHasSameNameItem"
           :key="field.label"
           :field="field"
           type="create"
-          @updateTags="updateTags"
         >
           <ListSameName v-if="key === 'name'" :items="searchResults" />
         </FieldBlock>
 
-        <CollaborateFieldBlock :collaborate="collaborate" />
+        <template v-if="!haveExactlySameName">
+          <CollaborateFieldBlock :collaborate="collaborate" />
 
-        <div class="btnContainer">
-          <Button
-            title="送出"
-            fitDiv="true"
-            round="true"
-            type="create"
-            @click="handleClick"
-          />
-        </div>
+          <div class="btnContainer">
+            <Button
+              title="送出"
+              fitDiv="true"
+              round="true"
+              type="create"
+              @click="handleClick"
+            />
+          </div>
+        </template>
       </form>
     </div>
     <OtherForms operationType="create" />
@@ -51,8 +53,6 @@ import Button from '../../components/Button'
 
 import { personFields } from '../../fields/personFields'
 
-import { ADD_PERSON } from '../../graphQL/query/person'
-import { ADD_COLLABORATE } from '../../graphQL/query/collaborate'
 import formMixin from '../../mixins/formMixin'
 
 import More from '../../components/More'
@@ -62,6 +62,8 @@ import ListSameName from '../../components/ListSameName'
 
 import { buildGqlVariables } from '~/utils'
 import { buildSearchItemInfo } from '~/utils/person'
+import { createCollaborate } from '~/apollo/mutations/collaborate.gql'
+import { createPerson } from '~/apollo/mutations/person.gql'
 import { searchPersons } from '~/apollo/queries/person.gql'
 
 export default {
@@ -94,6 +96,13 @@ export default {
       },
       searchResults: [],
     }
+  },
+  computed: {
+    haveExactlySameName() {
+      return this.searchResults.some(
+        (item) => item.name === this.person.name.value
+      )
+    },
   },
   watch: {
     'person.name.value'(value) {
@@ -134,9 +143,6 @@ export default {
         },
       })
     },
-    updateTags(value) {
-      this.person.tags.value = value
-    },
 
     async uploadHandler() {
       if (await !this.checkForm(this.person)) {
@@ -149,12 +155,14 @@ export default {
     async uploadForm() {
       // Upload person form
       await this.$apollo.mutate({
-        mutation: ADD_PERSON,
-        variables: buildGqlVariables(this.person),
+        mutation: createPerson,
+        variables: {
+          data: buildGqlVariables(this.person),
+        },
       })
       // Update collaborate form
       await this.$apollo.mutate({
-        mutation: ADD_COLLABORATE,
+        mutation: createCollaborate,
         variables: {
           name: this.collaborate.name,
           email: this.collaborate.email,

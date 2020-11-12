@@ -216,10 +216,18 @@ export default {
   .autosuggest {
     position: relative;
     .selected-info {
-      position: absolute;
-      top: 0;
-      right: 0;
       color: grey;
+    }
+    .autosuggest__results-container {
+      position: absolute;
+      z-index: 10;
+      top: 28px;
+      left: 0;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     }
   }
 }

@@ -18,6 +18,7 @@
             :dark="true"
             :btnList="createSectionList"
             :small="true"
+            class="thanksPage__list"
           />
         </li>
         <li>
@@ -28,6 +29,7 @@
             :dark="true"
             :btnList="verifySectionList"
             :small="true"
+            class="thanksPage__list"
           />
         </li>
         <li>看看現在有哪些公開資料（ 即將開放）</li>
@@ -72,68 +74,66 @@ export default {
 
 <style lang="scss" scoped>
 #thanksPage {
-  width: 100%;
+  padding-bottom: 47px;
   min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  text-align: center;
   ul {
     list-style-position: inside;
+    li {
+      + li {
+        margin-top: 10px;
+        @include media-breakpoint-up(lg) {
+          margin-top: 20px;
+        }
+      }
+    }
   }
   &-logo {
     width: 60px;
     height: 55px;
+    margin: 20px auto 0;
 
     filter: invert(43%) sepia(100%) saturate(2%) hue-rotate(45deg)
       brightness(206%) contrast(101%);
-
-    margin-bottom: 10px;
-    // margin-top: -100px;
   }
 
   &-subtitle {
+    margin-top: 20px;
     font-size: 20px;
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 0;
   }
 
   &-content {
-    box-sizing: border-box;
-    width: 100%;
-    // height: 84px;
-    padding: 8px 11px;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto 0;
+    text-align: left;
     line-height: 1.75;
-    letter-spacing: normal;
-    text-align: start;
     color: #ffffff;
+    @include media-breakpoint-up(lg) {
+      max-width: 800px;
+    }
   }
 
   &-prompt {
     margin-top: 50px;
-    // width: 800px;
-    height: 84px;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 1.75;
-    letter-spacing: normal;
-    text-align: center;
     color: #ffffff;
-
     cursor: pointer;
   }
 
   .smallEnter {
     display: none;
+  }
+  .thanksPage__list::v-deep {
+    > * {
+      margin: 10px 0 0;
+      @include media-breakpoint-up(lg) {
+        flex: 1;
+        margin: 0 5px 0;
+      }
+    }
   }
   @include media-breakpoint-up(lg) {
     .smallEnter {
@@ -142,9 +142,6 @@ export default {
     #thanksPage-subtitle {
       font-size: 30px;
       margin-bottom: 40px;
-    }
-    #thanksPage-content {
-      width: 800px;
     }
   }
 }

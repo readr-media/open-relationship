@@ -106,6 +106,7 @@ export default {
       this.isComposing = false
     },
     handleKeydownEnter() {
+      this.text = this.text.toLowerCase()
       if (this.text && !this.isComposing) {
         const hasSelected = this.items.find(
           (selected) => selected.name === this.text

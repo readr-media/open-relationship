@@ -72,5 +72,6 @@ export const organizationRelationFields = {
     required: true,
     verify: ['required', 'urlFormat'],
     formState: true,
+    hideRadioBtnsForVerifying: true,
   },
 }

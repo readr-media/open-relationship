@@ -152,5 +152,6 @@ export const personFields = {
     verify: ['required', 'urlFormat'],
     formState: true,
     correctVerify: null,
+    hideRadioBtnsForVerifying: true,
   },
 }

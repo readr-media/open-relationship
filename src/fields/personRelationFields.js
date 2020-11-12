@@ -89,5 +89,6 @@ export const personRelationFields = {
     required: true,
     verify: ['required', 'urlFormat'],
     formState: true,
+    hideRadioBtnsForVerifying: true,
   },
 }

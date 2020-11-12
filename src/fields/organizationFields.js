@@ -123,6 +123,7 @@ export const organizationFields = {
     required: true,
     verify: ['required', 'urlFormat'],
     formState: true,
+    hideRadioBtnsForVerifying: true,
   },
 
   // area: { label: "地區", type: Relationship, many: false, ref: 'Area' },

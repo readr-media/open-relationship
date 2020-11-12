@@ -91,10 +91,7 @@
     </div>
 
     <!-- handle verify section -->
-    <div
-      v-if="type == 'verify' && !field.lockedDuringVerification"
-      class="FieldBlock-verify"
-    >
+    <div v-if="enableRadioBtnsForVerifying" class="FieldBlock-verify">
       <div class="FieldBlock-verify-radioBlock">
         <input v-model="field.correctVerify" type="radio" :value="true" /><label
           >資料正確</label
@@ -129,6 +126,17 @@ export default {
 
       verifyStatus: 'pass',
     }
+  },
+  computed: {
+    enableRadioBtnsForVerifying() {
+      const isFieldEmpty = !this.field.value || this.field.value?.length === 0
+      return (
+        this.type === 'verify' &&
+        !isFieldEmpty &&
+        !this.field.lockedDuringVerification &&
+        !this.field.hideRadioBtnsForVerifying
+      )
+    },
   },
 
   mounted() {

@@ -104,6 +104,11 @@ export default {
     }
   },
   computed: {
+    needUploadToGoogleSheet() {
+      return Object.values(this.organizationRelation).some(
+        (field) => 'correctVerify' in field && field.correctVerify !== null
+      )
+    },
     organizationRelationIdSpecific() {
       return Number(this.$route.params.id) && this.$route.params.id
     },
@@ -167,12 +172,11 @@ export default {
         })
       }
     },
-    async uploadHandler() {
-      if (await !this.checkForm(this.organizationRelation)) {
+    uploadHandler() {
+      if (!this.checkForm(this.organizationRelation)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.organizationRelation, 'organizationRelation')
       this.uploadForm()
     },
 
@@ -185,6 +189,12 @@ export default {
           data: buildGqlVariables(this.organizationRelation),
         },
       })
+      if (this.needUploadToGoogleSheet) {
+        this.uploadFormToGoogle(
+          this.organizationRelation,
+          'organizationRelation'
+        )
+      }
       this.clearForm(this.organizationRelation)
       this.$router.push('/thanks')
     },

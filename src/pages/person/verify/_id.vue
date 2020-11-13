@@ -101,6 +101,11 @@ export default {
     }
   },
   computed: {
+    needUploadToGoogleSheet() {
+      return Object.values(this.person).some(
+        (field) => 'correctVerify' in field && field.correctVerify !== null
+      )
+    },
     personIdSpecific() {
       return Number(this.$route.params.id) && this.$route.params.id
     },
@@ -153,12 +158,11 @@ export default {
         },
       })
     },
-    async uploadHandler() {
-      if (await !this.checkForm(this.person)) {
+    uploadHandler() {
+      if (!this.checkForm(this.person)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.person, 'person')
       this.uploadForm()
     },
 
@@ -171,6 +175,9 @@ export default {
           data: buildGqlVariables(this.person),
         },
       })
+      if (this.needUploadToGoogleSheet) {
+        this.uploadFormToGoogle(this.person, 'person')
+      }
       this.clearForm(this.person)
       this.$router.push('/thanks')
     },

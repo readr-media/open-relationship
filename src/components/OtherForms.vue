@@ -15,7 +15,8 @@
       的文章，看看它有沒有在未來即將推出的項目中；如果沒有，歡迎來信
       <a :href="LINKS.MAIL" target="_blank" rel="noopener noreferrer"
         >readr@readr.tw</a
-      >或是<a
+      >
+      或是<a
         :href="LINKS.FACEBOOK_PAGE"
         target="_blank"
         rel="noopener noreferrer"

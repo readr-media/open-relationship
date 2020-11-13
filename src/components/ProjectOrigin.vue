@@ -14,7 +14,11 @@
       <p>
         註：《公務人員法》載明二親等為應迴避之親屬關係範圍，因此本計畫將親戚關係也納入資料蒐集的範圍。
       </p>
-      <a href="https://" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://www.readr.tw/post/2508"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         （看完整計畫緣起）
       </a>
     </div>

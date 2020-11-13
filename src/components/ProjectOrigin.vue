@@ -9,7 +9,7 @@
           target="_blank"
           rel="noopener noreferrer"
           >Open Data Standards for Persons, Posts and Organizations to track
-          Popolo</a
+          PEPs, Popolo</a
         >），該計畫非常簡單，就是使用一樣的資料格式，匯集散落在不同地方的公開資料。我們想將這樣的計畫帶進臺灣！
       </p>
       <p>

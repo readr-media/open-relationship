@@ -29,7 +29,7 @@ export default {
         {
           id: 1,
           title: '2020 總統候選人之事實查核計畫 - 讀＋READr',
-          date: new Date().toDateString(),
+          date: '2020-01-09',
           image: news1,
           url: 'https://www.readr.tw/project/fact-check-2020',
         },
@@ -37,14 +37,14 @@ export default {
           id: 2,
           title:
             '數讀政治獻金 3.0：翻開立委（12年份）的金主投資名冊 - 讀＋READr',
-          date: new Date().toDateString(),
+          date: '2020-07-23',
           image: news2,
           url: 'https://www.readr.tw/project/political-contribution',
         },
         {
           id: 3,
           title: '看板追追追——2020選舉看板紀錄 - 讀＋READr',
-          date: new Date().toDateString(),
+          date: '2019-11-28',
           image: news3,
           url: 'https://www.readr.tw/project/election-board',
         },

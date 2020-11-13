@@ -44,25 +44,6 @@ export default {
     },
   },
   mixins: [relationListMixin],
-  methods: {
-    checkFormsHaveItems(data) {
-      if (data?._allPersonsMeta?.count <= 0) {
-        this.verifySectionList[0].enable = false
-      }
-      if (data?._allOrganizationsMeta?.count <= 0) {
-        this.verifySectionList[1].enable = false
-      }
-      if (data?._allPersonRelationsMeta?.count <= 0) {
-        this.verifySectionList[2].enable = false
-      }
-      if (data?._allOrganizationRelationsMeta?.count <= 0) {
-        this.verifySectionList[3].enable = false
-      }
-      if (data?._allPersonOrganizationsMeta?.count <= 0) {
-        this.verifySectionList[4].enable = false
-      }
-    },
-  },
 }
 </script>
 

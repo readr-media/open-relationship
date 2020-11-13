@@ -45,11 +45,22 @@
 import RelationButtonContainer from '../../components/RelationButtonContainer'
 import relationListMixin from '../../mixins/relationListMixin'
 
+import { fetchAllFormsCount } from '~/apollo/queries/common.gql'
+
 export default {
   components: {
     RelationButtonContainer,
   },
   mixins: [relationListMixin],
+  apollo: {
+    allFormsCount: {
+      query: fetchAllFormsCount,
+      update: (data) => data,
+      result(result) {
+        this.checkFormsHaveItems(result.data)
+      },
+    },
+  },
   data() {
     return {
       seconds: 8,

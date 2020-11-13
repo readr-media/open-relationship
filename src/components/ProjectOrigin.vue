@@ -22,6 +22,7 @@
         href="https://www.readr.tw/post/2508"
         target="_blank"
         rel="noopener noreferrer"
+        @click="sendGaClickEvent"
       >
         （看完整計畫緣起）
       </a>
@@ -32,6 +33,15 @@
 <script>
 export default {
   name: 'ProjectOrigin',
+  methods: {
+    sendGaClickEvent() {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: '點擊 看完整計畫緣起',
+      })
+    },
+  },
 }
 </script>
 

@@ -3,10 +3,11 @@
     <div class="RelativeNews__title"><div>相關報導</div></div>
     <div class="RelativeNews__container">
       <PreviewNews
-        v-for="news in relativeNewsList"
+        v-for="(news, index) in relativeNewsList"
         :key="news.id"
         :news="news"
         class="RelativeNews__item"
+        @click="sendGaClickEvent(index)"
       />
     </div>
   </div>
@@ -49,6 +50,15 @@ export default {
         },
       ],
     }
+  },
+  methods: {
+    sendGaClickEvent(index) {
+      this.$ga.event({
+        eventCategory: 'projects',
+        eventAction: 'click',
+        eventLabel: `相關報導 ${index + 1}`,
+      })
+    },
   },
 }
 </script>

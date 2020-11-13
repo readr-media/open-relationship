@@ -1,0 +1,17 @@
+query fetchAllFormsCount{
+  _allPersonsMeta {
+    count
+  }
+  _allOrganizationsMeta {
+    count
+  }
+  _allPersonRelationsMeta {
+    count
+  }
+  _allOrganizationRelationsMeta {
+    count
+  }
+  _allPersonOrganizationsMeta {
+    count
+  }
+}

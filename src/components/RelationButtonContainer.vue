@@ -20,14 +20,7 @@ export default {
   components: {
     RelationButton,
   },
-  props: [
-    'type',
-    'filterId',
-    'dark',
-    'btnList',
-    'small',
-    'verifyPersonRelationsIsEnable',
-  ],
+  props: ['type', 'filterId', 'dark', 'btnList', 'small'],
   data() {
     return {
       showBtnList: [],
@@ -41,9 +34,6 @@ export default {
 
   methods: {
     getButtonEnable(createItem) {
-      if (this.type === 'verify' && createItem.title === '驗證人物關係') {
-        return this.verifyPersonRelationsIsEnable && createItem.enable
-      }
       return createItem.enable
     },
     relationBtnFilter(btnList) {

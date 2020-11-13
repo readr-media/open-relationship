@@ -19,7 +19,6 @@
       :btnList="verifySectionList"
       :small="true"
       :style="{ marginBottom: '80px' }"
-      :verifyPersonRelationsIsEnable="verifyPersonRelationsIsEnable"
     />
     <div class="continue">陸續開放更多協作表單</div>
   </div>
@@ -29,29 +28,40 @@
 import RelationButtonContainer from '../components/RelationButtonContainer'
 import relationListMixin from '../mixins/relationListMixin'
 
-import { fetchPersonRelationsCount } from '~/apollo/queries/person-relation.gql'
+import { fetchAllFormsCount } from '~/apollo/queries/common.gql'
 
 export default {
   components: {
     RelationButtonContainer,
   },
   apollo: {
-    personRelationsCount: {
-      query: fetchPersonRelationsCount,
-      update: (data) => data._allPersonRelationsMeta.count,
+    allFormsCount: {
+      query: fetchAllFormsCount,
+      update: (data) => data,
       result(result) {
-        const count = result.data._allPersonRelationsMeta.count
-        if (count > 0) {
-          this.verifyPersonRelationsIsEnable = true
-        }
+        this.checkFormsHaveItems(result.data)
       },
     },
   },
   mixins: [relationListMixin],
-  data() {
-    return {
-      verifyPersonRelationsIsEnable: false,
-    }
+  methods: {
+    checkFormsHaveItems(data) {
+      if (data?._allPersonsMeta?.count <= 0) {
+        this.verifySectionList[0].enable = false
+      }
+      if (data?._allOrganizationsMeta?.count <= 0) {
+        this.verifySectionList[1].enable = false
+      }
+      if (data?._allPersonRelationsMeta?.count <= 0) {
+        this.verifySectionList[2].enable = false
+      }
+      if (data?._allOrganizationRelationsMeta?.count <= 0) {
+        this.verifySectionList[3].enable = false
+      }
+      if (data?._allPersonOrganizationsMeta?.count <= 0) {
+        this.verifySectionList[4].enable = false
+      }
+    },
   },
 }
 </script>

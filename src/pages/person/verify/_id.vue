@@ -25,6 +25,9 @@
 
         <div class="btnContainer">
           <Button title="送出" fitDiv="true" round="true" type="verify" />
+          <p v-if="hasSubmitError" class="g-submit-error">
+            糟糕！遇到了問題，請稍後再試或聯繫我們
+          </p>
         </div>
       </form>
     </div>
@@ -81,6 +84,7 @@ export default {
 
   data() {
     return {
+      hasSubmitError: false,
       personId: this.$route.params.id,
       // eslint-disable-next-line vue/no-reserved-keys
       hero: {
@@ -101,6 +105,11 @@ export default {
     }
   },
   computed: {
+    needUploadToGoogleSheet() {
+      return Object.values(this.person).some(
+        (field) => 'correctVerify' in field && field.correctVerify !== null
+      )
+    },
     personIdSpecific() {
       return Number(this.$route.params.id) && this.$route.params.id
     },
@@ -153,26 +162,32 @@ export default {
         },
       })
     },
-    async uploadHandler() {
-      if (await !this.checkForm(this.person)) {
+    uploadHandler() {
+      if (!this.checkForm(this.person)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.person, 'person')
       this.uploadForm()
     },
 
     async uploadForm() {
-      await this.$apollo.mutate({
-        mutation: updatePerson,
-        variables: {
-          // put form data to graphql's field
-          id: this.personId,
-          data: buildGqlVariables(this.person),
-        },
-      })
-      this.clearForm(this.person)
-      this.$router.push('/thanks')
+      try {
+        await this.$apollo.mutate({
+          mutation: updatePerson,
+          variables: {
+            // put form data to graphql's field
+            id: this.personId,
+            data: buildGqlVariables(this.person),
+          },
+        })
+        if (this.needUploadToGoogleSheet) {
+          this.uploadFormToGoogle(this.person, 'person')
+        }
+        this.clearForm(this.person)
+        this.$router.push('/thanks')
+      } catch (error) {
+        this.hasSubmitError = true
+      }
     },
   },
 }

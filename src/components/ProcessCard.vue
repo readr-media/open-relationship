@@ -19,7 +19,7 @@
         :href="btn.to"
         :target="btn.target || '_self'"
         :rel="getLinkRel(btn)"
-        @click="handleClick(btn.target)"
+        @click="handleClick(btn.btnStatus, btn.gaLabel)"
       >
         <Button :btnStatus="btn.btnStatus" :title="btn.title" fitDiv="true" />
       </a>
@@ -65,12 +65,12 @@ export default {
     getLinkRel(target) {
       return target === '_blank' ? 'noopener noreferrer' : ''
     },
-    handleClick(btnStatus) {
+    handleClick(btnStatus, eventLabel) {
       if (btnStatus === 'active') {
         this.$ga.event({
           eventCategory: 'projects',
           eventAction: 'click',
-          eventLabel: `我要參與 ${this.title}`,
+          eventLabel: `我要參與 ${eventLabel || this.title}`,
         })
       }
     },

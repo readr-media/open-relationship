@@ -44,6 +44,7 @@ export default {
               to: 'https://forms.gle/9XuMLUCQ6h56Fq668',
               btnStatus: 'active',
               target: '_blank',
+              gaLabel: '新增大量資料',
             },
           ],
         },

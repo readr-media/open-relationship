@@ -186,6 +186,21 @@ module.exports = {
             property: 'og:url',
             content: SITE_URL,
           },
+          {
+            hid: 'og:type',
+            property: 'og:type',
+            content: 'website',
+          },
+          {
+            hid: 'fb:app_id',
+            property: 'fb:app_id',
+            content: '175313259598308',
+          },
+          {
+            hid: 'fb:pages',
+            property: 'fb:pages',
+            content: '1855418728011324',
+          },
         ],
         link: [
           {

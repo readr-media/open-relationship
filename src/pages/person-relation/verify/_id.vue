@@ -29,6 +29,9 @@
 
         <div class="btnContainer">
           <Button title="送出" fitDiv="true" round="true" type="verify" />
+          <p v-if="hasSubmitError" class="g-submit-error">
+            糟糕！遇到了問題，請稍後再試或聯繫我們
+          </p>
         </div>
       </form>
     </div>
@@ -81,6 +84,7 @@ export default {
 
   data() {
     return {
+      hasSubmitError: false,
       personRelationId: this.$route.params.id,
       hero: {
         title: '驗證人物關係資料表單',
@@ -100,6 +104,11 @@ export default {
     }
   },
   computed: {
+    needUploadToGoogleSheet() {
+      return Object.values(this.personRelation).some(
+        (field) => 'correctVerify' in field && field.correctVerify !== null
+      )
+    },
     personRelationIdSpecific() {
       return Number(this.$route.params.id) && this.$route.params.id
     },
@@ -163,26 +172,32 @@ export default {
       }
     },
 
-    async uploadHandler() {
-      if (await !this.checkForm(this.personRelation)) {
+    uploadHandler() {
+      if (!this.checkForm(this.personRelation)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.personRelation, 'personRelation')
       this.uploadForm()
     },
 
     async uploadForm() {
-      await this.$apollo.mutate({
-        mutation: updatePersonRelation,
-        variables: {
-          // put form data to graphql's field
-          id: this.personRelationId,
-          data: buildGqlVariables(this.personRelation),
-        },
-      })
-      this.clearForm(this.personRelation)
-      this.$router.push('/thanks')
+      try {
+        await this.$apollo.mutate({
+          mutation: updatePersonRelation,
+          variables: {
+            // put form data to graphql's field
+            id: this.personRelationId,
+            data: buildGqlVariables(this.personRelation),
+          },
+        })
+        if (this.needUploadToGoogleSheet) {
+          this.uploadFormToGoogle(this.personRelation, 'personRelation')
+        }
+        this.clearForm(this.personRelation)
+        this.$router.push('/thanks')
+      } catch (error) {
+        this.hasSubmitError = true
+      }
     },
   },
 }

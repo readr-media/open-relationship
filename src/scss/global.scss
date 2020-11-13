@@ -46,3 +46,8 @@ input:read-only {
 .g-color-verify {
   color: $color-verify
 }
+
+.g-submit-error {
+  color: red;
+  text-align: right;
+}

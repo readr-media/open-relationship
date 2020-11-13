@@ -20,7 +20,7 @@
       <div :class="{ active: shareIconsIsActive }" class="header__share-icons">
         <a
           class="icon facebook"
-          :href="`https://www.facebook.com/share.php?u=${url}`"
+          href="https://www.facebook.com/share.php?u=https://whoareyou.readr.tw/"
           target="_blank"
           rel="noopener noreferrer"
           @click="handleClick('share to fb')"
@@ -30,7 +30,7 @@
         <a
           class="icon line"
           :href="`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(
-            url
+            'https://whoareyou.readr.tw/ '
           )}`"
           target="_blank"
           rel="noopener noreferrer"
@@ -49,11 +49,12 @@ export default {
   data() {
     return {
       shareIconsIsActive: false,
-      url: undefined,
     }
   },
-  mounted() {
-    this.url = window.location.href
+  watch: {
+    '$route.path'() {
+      this.shareIconsIsActive = false
+    },
   },
   methods: {
     handleClick(eventLabel) {

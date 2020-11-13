@@ -25,6 +25,9 @@
 
         <div class="btnContainer">
           <Button title="送出" fitDiv="true" round="true" type="verify" />
+          <p v-if="hasSubmitError" class="g-submit-error">
+            糟糕！遇到了問題，請稍後再試或聯繫我們
+          </p>
         </div>
       </form>
     </div>
@@ -81,6 +84,7 @@ export default {
   mixins: [formMixin],
   data() {
     return {
+      hasSubmitError: false,
       organizationId: this.$route.params.id,
       hero: {
         title: '驗證組織資料表單',
@@ -99,6 +103,11 @@ export default {
     }
   },
   computed: {
+    needUploadToGoogleSheet() {
+      return Object.values(this.organization).some(
+        (field) => 'correctVerify' in field && field.correctVerify !== null
+      )
+    },
     organizationIdSpecific() {
       return Number(this.$route.params.id) && this.$route.params.id
     },
@@ -154,27 +163,33 @@ export default {
       })
     },
 
-    async uploadHandler() {
-      if (await !this.checkForm(this.organization)) {
+    uploadHandler() {
+      if (!this.checkForm(this.organization)) {
         this.goToErrorField()
         return
       }
-      this.uploadFormToGoogle(this.organization, 'organization')
       this.uploadForm()
     },
 
     async uploadForm() {
-      // Post update data to keystone
-      await this.$apollo.mutate({
-        mutation: updateOrganization,
-        variables: {
-          // put form data to graphql's field
-          id: this.organizationId,
-          data: buildGqlVariables(this.organization),
-        },
-      })
-      this.clearForm(this.organization)
-      this.$router.push('/thanks')
+      try {
+        // Post update data to keystone
+        await this.$apollo.mutate({
+          mutation: updateOrganization,
+          variables: {
+            // put form data to graphql's field
+            id: this.organizationId,
+            data: buildGqlVariables(this.organization),
+          },
+        })
+        if (this.needUploadToGoogleSheet) {
+          this.uploadFormToGoogle(this.organization, 'organization')
+        }
+        this.clearForm(this.organization)
+        this.$router.push('/thanks')
+      } catch (error) {
+        this.hasSubmitError = true
+      }
     },
   },
 }

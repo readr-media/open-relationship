@@ -32,6 +32,9 @@
 
           <div class="btnContainer">
             <Button title="送出" fitDiv="true" round="true" type="create" />
+            <p v-if="hasSubmitError" class="g-submit-error">
+              糟糕！遇到了問題，請稍後再試或聯繫我們
+            </p>
           </div>
         </template>
       </form>
@@ -78,6 +81,7 @@ export default {
   mixins: [formMixin],
   data() {
     return {
+      hasSubmitError: false,
       hero: {
         title: '新增人物組織關係資料表單',
         content: '臺灣政商人物關係資料庫計畫',
@@ -159,52 +163,56 @@ export default {
     },
 
     async uploadForm() {
-      if (this.needCreatePerson) {
-        const resultCreatePerson = await this.$apollo.mutate({
-          mutation: createPerson,
-          variables: {
-            data: {
-              name: this.personOrganization.person_id.value.name,
-              source: this.personOrganization.source.value,
+      try {
+        if (this.needCreatePerson) {
+          const resultCreatePerson = await this.$apollo.mutate({
+            mutation: createPerson,
+            variables: {
+              data: {
+                name: this.personOrganization.person_id.value.name,
+                source: this.personOrganization.source.value,
+              },
             },
-          },
-        })
-        this.personOrganization.person_id.value.id =
-          resultCreatePerson.data.createPerson.id
-      }
-      if (this.needCreateOrganization) {
-        const resultCreateOrganization = await this.$apollo.mutate({
-          mutation: createOrganization,
-          variables: {
-            data: {
-              name: this.personOrganization.organization_id.value.name,
-              source: this.personOrganization.source.value,
+          })
+          this.personOrganization.person_id.value.id =
+            resultCreatePerson.data.createPerson.id
+        }
+        if (this.needCreateOrganization) {
+          const resultCreateOrganization = await this.$apollo.mutate({
+            mutation: createOrganization,
+            variables: {
+              data: {
+                name: this.personOrganization.organization_id.value.name,
+                source: this.personOrganization.source.value,
+              },
             },
-          },
-        })
-        this.personOrganization.organization_id.value.id =
-          resultCreateOrganization.data.createOrganization.id
-      }
-      // Upload person form
-      await this.$apollo.mutate({
-        mutation: createPersonOrganization,
-        variables: {
-          data: buildGqlVariables(this.personOrganization),
-        },
-      })
-      // Update collaborate form
-      if (this.needCreateCollaborate) {
+          })
+          this.personOrganization.organization_id.value.id =
+            resultCreateOrganization.data.createOrganization.id
+        }
+        // Upload person form
         await this.$apollo.mutate({
-          mutation: createCollaborate,
+          mutation: createPersonOrganization,
           variables: {
-            name: this.collaborate.name,
-            email: this.collaborate.email,
-            feedback: this.collaborate.feedback,
+            data: buildGqlVariables(this.personOrganization),
           },
         })
+        // Update collaborate form
+        if (this.needCreateCollaborate) {
+          await this.$apollo.mutate({
+            mutation: createCollaborate,
+            variables: {
+              name: this.collaborate.name,
+              email: this.collaborate.email,
+              feedback: this.collaborate.feedback,
+            },
+          })
+        }
+        this.clearForm(this.personOrganization)
+        this.$router.push('/thanks')
+      } catch (error) {
+        this.hasSubmitError = true
       }
-      this.clearForm(this.personOrganization)
-      this.$router.push('/thanks')
     },
   },
 }

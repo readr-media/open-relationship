@@ -26,6 +26,9 @@
 
         <div class="btnContainer">
           <Button title="送出" fitDiv="true" round="true" type="verify" />
+          <p v-if="hasSubmitError" class="g-submit-error">
+            糟糕！遇到了問題，請稍後再試或聯繫我們
+          </p>
         </div>
       </form>
     </div>
@@ -79,6 +82,7 @@ export default {
 
   data() {
     return {
+      hasSubmitError: false,
       personOrganizationId: this.$route.params.id,
       hero: {
         title: '驗證人物組織關係資料表單',
@@ -173,19 +177,23 @@ export default {
     },
 
     async uploadForm() {
-      await this.$apollo.mutate({
-        mutation: updatePersonOrganization,
-        variables: {
-          // put form data to graphql's field
-          id: this.personOrganizationId,
-          data: buildGqlVariables(this.personOrganization),
-        },
-      })
-      if (this.needUploadToGoogleSheet) {
-        this.uploadFormToGoogle(this.personOrganization, 'personOrganization')
+      try {
+        await this.$apollo.mutate({
+          mutation: updatePersonOrganization,
+          variables: {
+            // put form data to graphql's field
+            id: this.personOrganizationId,
+            data: buildGqlVariables(this.personOrganization),
+          },
+        })
+        if (this.needUploadToGoogleSheet) {
+          this.uploadFormToGoogle(this.personOrganization, 'personOrganization')
+        }
+        this.clearForm(this.personOrganization)
+        this.$router.push('/thanks')
+      } catch (error) {
+        this.hasSubmitError = true
       }
-      this.clearForm(this.personOrganization)
-      this.$router.push('/thanks')
     },
   },
 }

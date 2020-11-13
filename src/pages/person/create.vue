@@ -34,6 +34,9 @@
               type="create"
               @click="handleClick"
             />
+            <p v-if="hasSubmitError" class="g-submit-error">
+              糟糕！遇到了問題，請稍後再試或聯繫我們
+            </p>
           </div>
         </template>
       </form>
@@ -81,6 +84,7 @@ export default {
   mixins: [formMixin],
   data() {
     return {
+      hasSubmitError: false,
       hero: {
         title: '新增人物資料表單',
         content: '臺灣政商人物關係資料庫計畫',
@@ -153,24 +157,28 @@ export default {
     },
 
     async uploadForm() {
-      // Upload person form
-      await this.$apollo.mutate({
-        mutation: createPerson,
-        variables: {
-          data: buildGqlVariables(this.person),
-        },
-      })
-      // Update collaborate form
-      await this.$apollo.mutate({
-        mutation: createCollaborate,
-        variables: {
-          name: this.collaborate.name,
-          email: this.collaborate.email,
-          feedback: this.collaborate.feedback,
-        },
-      })
-      this.clearForm(this.person)
-      this.$router.push('/thanks')
+      try {
+        // Upload person form
+        await this.$apollo.mutate({
+          mutation: createPerson,
+          variables: {
+            data: buildGqlVariables(this.person),
+          },
+        })
+        // Update collaborate form
+        await this.$apollo.mutate({
+          mutation: createCollaborate,
+          variables: {
+            name: this.collaborate.name,
+            email: this.collaborate.email,
+            feedback: this.collaborate.feedback,
+          },
+        })
+        this.clearForm(this.person)
+        this.$router.push('/thanks')
+      } catch (error) {
+        this.hasSubmitError = true
+      }
     },
   },
 }

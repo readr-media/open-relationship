@@ -8,6 +8,13 @@ const PERSON_RELATION_REVERSE_MAPPING = {
   related_person_id: 'person_id',
 }
 
+const FIELDS_NEED_SPLIT = [
+  'birth_date',
+  'death_date',
+  'founding_date',
+  'dissolution_date',
+]
+
 function buildGqlVariables(data, isReverseRelation = false) {
   const variable = {}
   const cloneData = cloneDeep(data)
@@ -34,6 +41,10 @@ function buildGqlVariables(data, isReverseRelation = false) {
         cloneData[key].value?.length === 0
       ) {
         delete cloneData[key]
+      } else if (FIELDS_NEED_SPLIT.some((field) => field === key)) {
+        variable[`${key}_year`] = devideDate(cloneData[key].value, 'year')
+        variable[`${key}_month`] = devideDate(cloneData[key].value, 'month')
+        variable[`${key}_day`] = devideDate(cloneData[key].value, 'day')
       } else {
         variable[key] = convertToGqlVariablesValue(key, cloneData[key])
       }
@@ -43,21 +54,6 @@ function buildGqlVariables(data, isReverseRelation = false) {
 
 function convertToGqlVariablesValue(formKey, formData) {
   switch (formKey) {
-    case 'birth_date_year':
-    case 'death_date_year':
-    case 'founding_date_year':
-    case 'dissolution_date_year':
-      return devideDate(formData.value, 'year')
-    case 'birth_date_month':
-    case 'death_date_month':
-    case 'founding_date_month':
-    case 'dissolution_date_month':
-      return devideDate(formData.value, 'month')
-    case 'birth_date_day':
-    case 'death_date_day':
-    case 'founding_date_day':
-    case 'dissolution_date_day':
-      return devideDate(formData.value, 'day')
     case 'person_id':
     case 'organization_id':
     case 'related_person_id':
